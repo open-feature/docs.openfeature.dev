@@ -1,0 +1,101 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Using the Evaluation API
+
+## Setting a Provider
+
+Before you can start evaluating flags, you must set a provider. The provider is the translation layer between the evaluation API and the flag system you use.
+
+<Tabs>
+<TabItem value="js" label="Typescript">
+
+```ts
+import { openFeature } from '@openfeature/nodejs-sdk';
+
+openFeature.setProvider(new YourProviderOfChoice());
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+import dev.openfeature.javasdk.OpenFeatureAPI;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProvider(new YourProviderOfChoice());
+```
+
+</TabItem>
+</Tabs>
+
+## Creating a client
+
+The OpenFeature client is a lightweight abstraction used to evaluate feature flags.
+If your application is small, you may use a single client for your whole application. In larger applications it may be helpful to create multiple clients,
+each with different configuration to fit the needs of different sub-modules. Clients may also be created dynamically, per each HTTP request, for instance.
+
+<Tabs>
+<TabItem value="js" label="Typescript">
+
+```ts
+const client = openFeature.getClient('my-app');
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+Client client = api.getClient("my-app");
+```
+
+</TabItem>
+</Tabs>
+
+## Flag Evaluation
+
+### Basic Evaluation
+
+The client can be used to do basic flag evluation, which simple returns flag values of a particular type. The default value must also be specified.
+In the case of any error during flag evaluation, the default value will be returned, so give consideration to your default values!
+
+<Tabs>
+<TabItem value="js" label="Typescript">
+
+```ts
+// get a bool value
+const boolValue = client.getBooleanValue("boolFlag", false);
+
+// get a string value
+const stringValue = client.getStringValue("stringFlag", "default");
+
+// get an numeric value
+const numberValue = client.getNumberValue("intFlag", 1);
+
+// get an object value
+const object client.getObjectValue<MyObject>("objectFlag", {});
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+// get a boolean value
+Boolean boolValue = client.getBooleanValue("boolFlag", false);
+
+// get a string value
+String stringValue = client.getStringValue("stringFlag", "default");
+
+// get an integer value
+String intValue = client.getIntegerValue("intFlag", 1);
+
+// get an object value
+MyObject objectValue = client.getObjectValue<MyObject>("objectFlag", MyObjectInstance);
+```
+
+</TabItem>
+</Tabs>

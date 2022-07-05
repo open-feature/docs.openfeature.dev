@@ -1,27 +1,35 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.css';
+import { faBolt, faGears, faMugHot, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CodeBlock from '@theme/CodeBlock';
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import clsx from 'clsx';
+import React from 'react';
+import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  iconDefinition?: IconDefinition;
   description: JSX.Element;
 };
 
-const FeatureList: FeatureItem[] = [
+const featureList: FeatureItem[] = [
   {
     title: 'Simple API',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    iconDefinition: faMugHot,
     description: (
       <Tabs>
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}
             <CodeBlock className="language-ts">{`
+import {
+  openFeature
+} from '@openfeature/nodejs-sdk'
+
+const client = openfeature.getClient('my-client);
+
 const value = client
   .getBooleanValue('new-look', false );
             `}</CodeBlock>
@@ -30,6 +38,11 @@ const value = client
         <TabItem value="java" label="Java">
           {/* prettier-ignore */}
           <CodeBlock className="language-java">{`
+import dev.openfeature.javasdk.OpenFeatureAPI;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+Client client = api.getClient();
+
 Boolean value = client
   .getBooleanValue("new-look", false);
           `}</CodeBlock>
@@ -37,6 +50,12 @@ Boolean value = client
         <TabItem value="go" label="Go">
           {/* prettier-ignore */}
           <CodeBlock className="language-go">{`
+import (
+	"github.com/open-feature/golang-sdk"
+)
+
+client := openfeature.GetClient("my-client")
+
 value, err := client
   .GetBooleanValue("new-look", true, nil)
           `}</CodeBlock>
@@ -45,8 +64,8 @@ value, err := client
     ),
   },
   {
-    title: 'Easy integration',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Flexible integration',
+    iconDefinition: faGears,
     description: (
       <Tabs>
         <TabItem value="ts" label="TypeScript">
@@ -105,7 +124,7 @@ func (p MyFlagProvider) GetBooleanEvaluation(
   },
   {
     title: 'Powerful extensions',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    iconDefinition: faBolt,
     description: (
       <Tabs>
         <TabItem value="ts" label="TypeScript">
@@ -177,11 +196,11 @@ func (h MyHook) After(
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, iconDefinition, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <FontAwesomeIcon size={'3x'} icon={iconDefinition} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
@@ -196,7 +215,7 @@ export default function HomepageFeatures(): JSX.Element {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
+          {featureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
         </div>
