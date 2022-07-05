@@ -28,3 +28,8 @@
   --ifm-color-primary-lightest: #757575;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.prism-code {
+  font-size: 12px;
+  text-align: left;
+}
