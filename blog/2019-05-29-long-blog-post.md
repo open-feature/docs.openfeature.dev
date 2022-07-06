@@ -1,8 +1,9 @@
 ---
 slug: long-blog-post
 title: Long Blog Post
-authors: endi
+authors: toddbaert
 tags: [hello, docusaurus]
+unlisted: true # this post is hidden in PROD
 ---
 
 This is the summary of a very long blog post,
