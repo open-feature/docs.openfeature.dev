@@ -61,9 +61,27 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'reference/intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
+          },
+          {
+            type: 'doc',
+            docId: 'getting-started/overview',
+            position: 'left',
+            label: 'Getting Started',
+          },
+          {
+            type: 'doc',
+            docId: 'tutorials/overview',
+            position: 'left',
+            label: 'Tutorials',
+          },
+          {
+            type: 'doc',
+            docId: 'explanations/overview',
+            position: 'left',
+            label: 'Explanations',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -77,11 +95,23 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Sections',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Docs',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Getting Started',
+                to: '/getting-started/overview',
+              },
+              {
+                label: 'Tutorials',
+                to: '/tutorials/overview',
+              },
+              {
+                label: 'Explanations',
+                to: '/explanations/intro',
               },
             ],
           },
