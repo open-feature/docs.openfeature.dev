@@ -63,8 +63,11 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
+          {to: '/getting-started', label: 'Getting Started', position: 'left'},
+          {to: '/tutorials', label: 'Tutorials', position: 'left'},
+          {to: '/explanations', label: 'Explanations', position: 'left'},
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/open-feature',
@@ -77,11 +80,23 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Sections',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Docs',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Getting Started',
+                to: '/getting-started/overview',
+              },
+              {
+                label: 'Tutorials',
+                to: '/tutorials/overview',
+              },
+              {
+                label: 'Explanations',
+                to: '/explanations/intro',
               },
             ],
           },
