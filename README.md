@@ -1,6 +1,6 @@
 # OpenFeature Documentation
 
-This repository provides the documentation for OpenFeature. 
+This repository provides the documentation for OpenFeature; including the SDK, flagd and the operator.
 
 ### Documentation Structure
 
@@ -9,7 +9,7 @@ We are following a slgithly modified version of the [diataxis framework](https:/
 - Docs: Reference material for using OpenFeature e.g. the specific commands and code
 - Getting Started: Guide on using OpenFeature 
 - Tutorials: Use Cases and specific implementations 
-- Explanations: Extensive explanations on the different components 
+- Explanations: Extensive explanations of the different components 
 
 ## Contributing
 
