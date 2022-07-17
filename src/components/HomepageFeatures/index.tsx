@@ -60,6 +60,16 @@ value, err := client
   .GetBooleanValue("new-look", true, nil)
           `}</CodeBlock>
         </TabItem>
+        <TabItem value="csharp" label="C#">
+          {/* prettier-ignore */}
+          <CodeBlock className="language-csharp">{`
+using OpenFeature.SDK;
+
+var client = OpenFeature.Instance.GetClient("my-client");
+
+var value = await client.GetBooleanValue("new-look", false);
+          `}</CodeBlock>
+        </TabItem>
       </Tabs>
     ),
   },
@@ -117,6 +127,24 @@ func (p MyFlagProvider) GetBooleanEvaluation(
     // your implementation
 }
 //...
+          `}</CodeBlock>
+        </TabItem>
+        <TabItem value="csharp" label="C#">
+          {/* prettier-ignore */}
+          <CodeBlock className="language-csharp">{`
+public class MyFlagProvider : IFeatureProvider
+{
+  //...
+  public Task<ResolutionDetails<bool>> ResolveBooleanValue(
+    string flagKey,
+    bool defaultValue,
+    EvaluationContext? context = null,
+    FlagEvaluationOptions? config = null)
+  {
+      // your implementation
+  }
+  //...
+}
           `}</CodeBlock>
         </TabItem>
       </Tabs>
@@ -189,6 +217,30 @@ func (h MyHook) After(
     // do something after flag evaluation
 }
 //...
+          `}</CodeBlock>
+        </TabItem>
+        <TabItem value="csharp" label="C#">
+          {/* prettier-ignore */}
+          <CodeBlock className="language-csharp">{`
+public class MyHook : Hook
+{
+  //...
+  public override Task<EvaluationContext> Before<T>(
+    HookContext<T> context,
+    IReadOnlyDictionary<string, object> hints = null)
+  {
+    // do something before flag evaluation
+  }
+
+  public override Task After<T>(
+    HookContext<T> context,
+    FlagEvaluationDetails<T> details,
+    IReadOnlyDictionary<string, object> hints = null)
+  {
+    // do something after flag evaluation
+  }
+  //...
+}
           `}</CodeBlock>
         </TabItem>
       </Tabs>
