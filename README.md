@@ -4,7 +4,7 @@ This repository provides the documentation for OpenFeature; including the SDK, f
 
 ### Documentation Structure
 
-We are following a slgithly modified version of the [diataxis framework](https://diataxis.fr/) for our documentation:
+We are following a slightly modified version of the [diataxis framework](https://diataxis.fr/) for our documentation:
 
 - Docs: Reference material for using OpenFeature e.g. the specific commands and code
 - Getting Started: Guide on using OpenFeature 
