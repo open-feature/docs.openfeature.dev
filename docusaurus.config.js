@@ -10,7 +10,7 @@ const config = {
   tagline: 'An open standard for feature flags',
   url: 'https://docs.openfeature.dev',
   baseUrl: '/',
-  onBrokenLinks: 'error',
+  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon-light.svg',
 
@@ -99,19 +99,19 @@ const config = {
             items: [
               {
                 label: 'Docs',
-                to: '/docs/intro',
+                to: 'docs/reference/intro',
               },
               {
                 label: 'Getting Started',
-                to: '/getting-started/overview',
+                to: 'docs/getting-started/overview',
               },
               {
                 label: 'Tutorials',
-                to: '/tutorials/overview',
+                to: 'docs/tutorials/overview',
               },
               {
                 label: 'Explanations',
-                to: '/explanations/intro',
+                to: 'docs/explanations/overview',
               },
             ],
           },
