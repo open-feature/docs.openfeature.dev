@@ -19,7 +19,7 @@ const featureList: FeatureItem[] = [
     title: 'Simple API',
     iconDefinition: faMugHot,
     description: (
-      <Tabs>
+      <Tabs groupId="code">
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}
@@ -67,7 +67,7 @@ value, err := client
     title: 'Flexible integration',
     iconDefinition: faGears,
     description: (
-      <Tabs>
+      <Tabs groupId="code">
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}
@@ -126,7 +126,7 @@ func (p MyFlagProvider) GetBooleanEvaluation(
     title: 'Powerful extensions',
     iconDefinition: faBolt,
     description: (
-      <Tabs>
+      <Tabs groupId="code">
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}
