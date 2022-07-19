@@ -19,7 +19,7 @@ const featureList: FeatureItem[] = [
     title: 'Simple API',
     iconDefinition: faMugHot,
     description: (
-      <Tabs>
+      <Tabs groupId="code">
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}
@@ -77,7 +77,7 @@ var value = await client.GetBooleanValue("new-look", false);
     title: 'Flexible integration',
     iconDefinition: faGears,
     description: (
-      <Tabs>
+      <Tabs groupId="code">
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}
@@ -154,7 +154,7 @@ public class MyFlagProvider : IFeatureProvider
     title: 'Powerful extensions',
     iconDefinition: faBolt,
     description: (
-      <Tabs>
+      <Tabs groupId="code">
         <TabItem value="ts" label="TypeScript">
           <div>
             {/* prettier-ignore */}

@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 Before you can start evaluating flags, you must set a provider. The provider is the translation layer between the evaluation API and the flag system you use.
 
-<Tabs>
+<Tabs groupId="code">
 <TabItem value="js" label="Typescript">
 
 ```ts
@@ -48,7 +48,7 @@ The OpenFeature client is a lightweight abstraction used to evaluate feature fla
 If your application is small, you may use a single client for your whole application. In larger applications it may be helpful to create multiple clients,
 each with different configuration to fit the needs of different sub-modules. Clients may also be created dynamically, per each HTTP request, for instance.
 
-<Tabs>
+<Tabs groupId="code">
 <TabItem value="js" label="Typescript">
 
 ```ts
@@ -79,7 +79,7 @@ var client = OpenFeature.GetClient("my-app");
 The client can be used to do basic flag evluation, which simple returns flag values of a particular type. The default value must also be specified.
 In the case of any error during flag evaluation, the default value will be returned, so give consideration to your default values!
 
-<Tabs>
+<Tabs groupId="code">
 <TabItem value="js" label="Typescript">
 
 ```ts
