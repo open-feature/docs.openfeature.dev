@@ -31,6 +31,15 @@ api.setProvider(new YourProviderOfChoice());
 ```
 
 </TabItem>
+<TabItem value="csharp" label="C#">
+
+```csharp
+using OpenFeature.SDK;
+
+OpenFeature.Instance.SetProvider(new YourProviderOfChoice());
+```
+
+</TabItem>
 </Tabs>
 
 ## Creating a client
@@ -51,6 +60,13 @@ const client = openFeature.getClient('my-app');
 
 ```java
 Client client = api.getClient("my-app");
+```
+
+</TabItem>
+<TabItem value="csharp" label="C#">
+
+```csharp
+var client = OpenFeature.GetClient("my-app");
 ```
 
 </TabItem>
@@ -95,6 +111,23 @@ String intValue = client.getIntegerValue("intFlag", 1);
 
 // get an object value
 MyObject objectValue = client.getObjectValue<MyObject>("objectFlag", MyObjectInstance);
+```
+
+</TabItem>
+<TabItem value="csharp" label="C#">
+
+```csharp
+// get a boolean value
+var boolValue = client.GetBooleanValue("boolFlag", false);
+
+// get a string value
+var stringValue = client.GetStringValue("stringFlag", "default");
+
+// get an integer value
+var intValue = client.GetIntegerValue("intFlag", 1);
+
+// get an object value
+var objectValue = client.GetObjectValue("objectFlag", MyObjectInstance);
 ```
 
 </TabItem>
