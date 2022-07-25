@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Evaluation API
 
-The Evaluation API is the primary component of OpenFeature that _application authors_ interact with. The Evaluation API allows developers to evaluate feature flags to alter control flow and application characteristics. The evluation API
+The Evaluation API is the primary component of OpenFeature that _application authors_ interact with. The Evaluation API allows developers to evaluate feature flags to alter control flow and application characteristics.
 
 ## Setting a Provider
 
@@ -80,7 +80,7 @@ var client = OpenFeature.Instance.GetClient("my-app");
 
 ### Basic Evaluation
 
-The client can be used to do basic flag evluation, which simple returns flag values of a particular type. The default value must also be specified.
+The client can be used to do basic flag evaluation, which simple returns flag values of a particular type. The default value must also be specified.
 In the case of any error during flag evaluation, the default value will be returned, so give consideration to your default values!
 
 <Tabs groupId="code">
@@ -149,7 +149,7 @@ In addition to [basic evaluation](#basic-evaluation), the _detailed evaluation_ 
 | value                | the flag value                                       |
 | error code           | a string denoting the nature of error, if applicable |
 | reason (optional\*)  | a string explaining why the flag value was returned  |
-| variant (optional\*) | the variant assocaited with the return flag value    |
+| variant (optional\*) | the variant associated with the return flag value    |
 
 \*Not supported by all providers
 
