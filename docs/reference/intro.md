@@ -21,7 +21,7 @@ OpenFeature seeks to provide a simple, consistent, and powerful API for develope
 
 ### Evaluation API
 
-The _evaluation API_ is the aspect of OpenFeature that the _application author_ interacts with. It allows developers to evaluate feature flags, and use the resulting values to impact control flow or application characteristics. The evaluation API provides a framework that allows for customization of behavior and integration with various tools.
+The [_evaluation API_](./evaluation-api/) is the aspect of OpenFeature that the _application author_ interacts with. It allows developers to evaluate feature flags, and use the resulting values to impact control flow or application characteristics. The evaluation API provides a framework that allows for customization of behavior and integration with various tools.
 
 ### Hooks
 

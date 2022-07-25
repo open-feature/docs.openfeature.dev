@@ -19,7 +19,7 @@ const sidebars = {
       label: 'Docs',
       link: {type: 'doc', id: 'reference/intro'},
       collapsible: false,
-      items: ['reference/evaluation-api/using-the-evaluation-api', 'reference/using-open-feature-with-your-flag-system/implement-a-provider'],
+      items: ['reference/evaluation-api/evaluation-api', 'reference/using-open-feature-with-your-flag-system/implement-a-provider'],
     },
   ],
   'getting-started': [
