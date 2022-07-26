@@ -25,7 +25,7 @@ The [_evaluation API_](./evaluation-api/) is the aspect of OpenFeature that the 
 
 ### Hooks
 
-_Hooks_ are a mechanism that allow for the addition of arbitrary behavior at well-defined points of the _flag evaluation life-cycle_. Use cases include validation of the resolve flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
+[_Hooks_](./hooks/) are a mechanism that allow for the addition of arbitrary behavior at well-defined points of the _flag evaluation life-cycle_. Use cases include validation of the resolved flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
 
 ### Evaluation Context
 
