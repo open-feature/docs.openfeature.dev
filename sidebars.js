@@ -17,16 +17,20 @@ const sidebars = {
     {
       type: 'category',
       label: 'Docs',
-      link: {type: 'doc', id: 'reference/intro'},
+      link: { type: 'doc', id: 'reference/intro' },
       collapsible: false,
-      items: ['reference/evaluation-api/evaluation-api', 'reference/using-open-feature-with-your-flag-system/implement-a-provider'],
+      items: [
+        'reference/evaluation-api/evaluation-api',
+        'reference/using-open-feature-with-your-flag-system/implement-a-provider',
+        'reference/hooks/hooks'
+      ],
     },
   ],
   'getting-started': [
     {
       type: 'category',
       label: 'Getting Started',
-      link: {type: 'doc', id: 'getting-started/overview'},
+      link: { type: 'doc', id: 'getting-started/overview' },
       collapsible: false,
       items: [],
     },
@@ -35,7 +39,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Tutorials',
-      link: {type: 'doc', id: 'tutorials/overview'},
+      link: { type: 'doc', id: 'tutorials/overview' },
       collapsible: false,
       items: [],
     },
@@ -44,12 +48,11 @@ const sidebars = {
     {
       type: 'category',
       label: 'Explanations',
-      link: {type: 'doc', id: 'explanations/overview'},
+      link: { type: 'doc', id: 'explanations/overview' },
       collapsible: false,
       items: ['explanations/operator'],
     },
   ],
 };
-
 
 module.exports = sidebars;
