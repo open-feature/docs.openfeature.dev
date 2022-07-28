@@ -1,0 +1,59 @@
+---
+sidebar_position: 1
+id: evaluation-context
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Evaluation Context
+
+The _evaluation context_ is a container for arbitrary contextual data that can be used as a basis for dynamic evaluation. Static data such as the host or an identifier for the application can be configured globally. Dynamic evaluation context, such as the IP address of the client in a web application, can be implicitly propagated or explicitly passed to during flag evaluation, and can be merged with static values. Many flag management systems support the definitions of targeting rules which allow for
+
+## Providing Evaluation Context
+
+<!-- TODO: add doc about evaluation context merging (global, client) once it's spec'd -->
+
+Values relevant for flag evaluation can be included in the evaluation context.
+
+<Tabs groupId="code">
+<TabItem value="js" label="Typescript">
+
+```ts
+// add a value to the invocation context
+const context: EvaluationContext = {
+  myKey: 'myValue',
+};
+const boolValue = await client.getBooleanValue('boolFlag', false, context);
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+// add a value to the invocation context
+EvaluationContext context = new EvaluationContext();
+context.addStringAttribute("myKey", "myValue")
+Boolean boolValue = client.getBooleanValue("boolFlag", false, context);
+```
+
+</TabItem>
+<TabItem value="csharp" label="C#">
+
+```csharp
+// add a value to the invocation context
+var context = new EvaluationContext();
+context.Add("myKey", "myValue");
+var boolValue = await client.GetBooleanValue("boolFlag", false, context);
+```
+
+</TabItem>
+</Tabs>
+
+## Targeting Key
+
+Many feature flag management systems require an identifier for the subject of flag evaluation. For many feature flag systems this is required in order to perform fractional evaluation or percentage-based rollouts deterministically. In the case of web applications or mobile apps, the subject is frequently an end user, but in other cases it could be a service or client application. The `evaluation context` includes an optional `targeting key` field for this purpose. The targeting key should contain a string uniquely identifying the subject (i.e.: a UUID, a hash of some user attribute such as an email, or a the hostname of an application or service). Some providers <!--TODO: add provider link -->may require this field to be set to function correctly.
+
+## Personally Identifiable Information (PII) Considerations
+
+Be thoughtful in your inclusion of personal data in the `evaluation context`. Such data is useful for targeting and dynamic evaluation, but you should consider how the provider <!--TODO: add provider link -->in use may handle or persist this data. Hooks (specifically hooks implementing the _before_ stage) can be useful to restrict, filter or anonymize data in the `evaluation context`.
