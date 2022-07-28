@@ -51,13 +51,17 @@ Boolean value = client
           {/* prettier-ignore */}
           <CodeBlock className="language-go">{`
 import (
-	"github.com/open-feature/golang-sdk"
+	"github.com/open-feature/golang-sdk/pkg/openfeature"
 )
 
-client := openfeature.GetClient("my-client")
+client := openfeature.NewClient("my-client")
 
-value, err := client
-  .GetBooleanValue("new-look", true, nil)
+value, err := client.
+  BooleanValue(
+    "new-look", true,
+    openfeature.EvaluationContext{},
+    openfeature.EvaluationOptions{},
+  )
           `}</CodeBlock>
         </TabItem>
         <TabItem value="csharp" label="C#">
@@ -119,11 +123,12 @@ class MyFlagProvider implements Provider {
           <CodeBlock className="language-go">{`
 type MyFlagProvider struct {}
 //...
-func (p MyFlagProvider) GetBooleanEvaluation(
+func (p MyFlagProvider) BooleanEvaluation(
   flag string,
   defaultValue bool,
-  evalCtx EvaluationContext,
-  options ...EvaluationOption) BoolResolutionDetail {
+  evalCtx openfeature.EvaluationContext,
+  options openfeature.EvaluationOptions,
+) BoolResolutionDetail {
     // your implementation
 }
 //...
@@ -204,16 +209,17 @@ class MyHook implements Hook {
 type MyHook struct {}
 //...
 func (h MyHook) Before(
-  ctx HookContext,
-  details FlagEvaluationDetails,
-  hints interface{}) error {
+  ctx openfeature.HookContext,
+  hints openfeature.HookHints,
+) (*EvaluationContext, error) {
     // do something before flag evaluation
 }
 
 func (h MyHook) After(
-  ctx HookContext,
-  details FlagEvaluationDetails,
-  hints interface{}) (EvaluationContext, error) {
+  ctx openfeature.HookContext,
+  details openfeature.EvaluationDetails,
+  hints openfeature.HookHints,
+) error {
     // do something after flag evaluation
 }
 //...
