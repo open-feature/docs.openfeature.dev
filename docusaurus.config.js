@@ -3,6 +3,8 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const externalContentPlugin = require('./src/plugins/external-content');
+const updateSubmodulePlugin = require('./src/plugins/update-git-submodule');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -29,9 +31,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/open-feature/docs.openfeature.dev/edit/main/',
+          remarkPlugins: [require('mdx-mermaid')],
+          editUrl: (params) => {
+            if (params.docPath.startsWith('specification/')) {
+              return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
+            }
+            return `https://github.com/open-feature/docs.openfeature.dev/edit/main/${params.docPath}`;
+          },
         },
         blog: {
           showReadingTime: true,
@@ -40,12 +46,26 @@ const config = {
           editUrl: 'https://github.com/open-feature/docs.openfeature.dev/edit/main/',
         },
         theme: {
-          customCss: [require.resolve('./src/css/custom.css'), require.resolve('@fortawesome/fontawesome-svg-core/styles.css')],
+          customCss: [
+            require.resolve('./src/css/custom.css'),
+            require.resolve('@fortawesome/fontawesome-svg-core/styles.css'),
+          ],
         },
       }),
     ],
   ],
 
+  plugins: [
+    updateSubmodulePlugin,
+    [
+      externalContentPlugin,
+      {
+        name: 'spec',
+        sourcePath: 'specification/specification',
+        destinationPath: 'specification',
+      },
+    ],
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -71,6 +91,12 @@ const config = {
           },
           {
             type: 'doc',
+            docId: 'specification/intro',
+            position: 'left',
+            label: 'Specification',
+          },
+          {
+            type: 'doc',
             docId: 'tutorials/overview',
             position: 'left',
             label: 'Tutorials',
@@ -81,7 +107,7 @@ const config = {
             position: 'left',
             label: 'Explanations',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/open-feature',
             label: 'GitHub',
@@ -102,6 +128,10 @@ const config = {
               {
                 label: 'Getting Started',
                 to: 'docs/getting-started/overview',
+              },
+              {
+                label: 'Specification',
+                to: 'docs/specification',
               },
               {
                 label: 'Tutorials',
@@ -141,7 +171,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['typescript', 'go', 'java', 'csharp']
+        additionalLanguages: ['typescript', 'go', 'java', 'csharp'],
       },
     }),
 };
