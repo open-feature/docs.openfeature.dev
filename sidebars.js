@@ -23,6 +23,7 @@ const sidebars = {
         'reference/evaluation-api/evaluation-api',
         'reference/using-open-feature-with-your-flag-system/implement-a-provider',
         'reference/hooks/hooks',
+        'reference/evaluation-context/evaluation-context'
       ],
     },
   ],
