@@ -1,6 +1,7 @@
 const fse = require('fs-extra');
 const path = require('path');
 
+let externalContentMoved = false;
 /**
  * The external content Docusaurus plugin moves files as a prebuild
  * step.
@@ -22,7 +23,6 @@ const path = require('path');
  */
 module.exports = async function externalContent(context, options) {
   const { name, sourcePath, destinationPath, clearDestinationBeforeCopy = true } = options;
-
   if (typeof name !== 'string') {
     throw new Error("'name' must he passed as a string in the options");
   } else if (typeof sourcePath !== 'string') {
@@ -30,16 +30,20 @@ module.exports = async function externalContent(context, options) {
   } else if (typeof destinationPath !== 'string') {
     throw new Error("'destinationPath' must he passed as a string in the options");
   }
-  console.log(`Copying external content for '${name}'.`);
-  const src = path.join(context.siteDir, 'external-content', sourcePath);
-  const dest = path.join(context.siteDir, 'docs', destinationPath);
 
-  if (clearDestinationBeforeCopy) {
-    await fse.emptyDir(dest);
+  if (!externalContentMoved) {
+    console.log(`Copying external content for '${name}'.`);
+    const src = path.join(context.siteDir, 'external-content', sourcePath);
+    const dest = path.join(context.siteDir, 'docs', destinationPath);
+
+    if (clearDestinationBeforeCopy) {
+      await fse.emptyDir(dest);
+    }
+
+    await fse.copy(src, dest);
+
+    externalContentMoved = true;
   }
-
-  await fse.copy(src, dest);
-
   return {
     name: `external-content-${name}`,
   };
