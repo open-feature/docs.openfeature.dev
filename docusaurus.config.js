@@ -84,12 +84,12 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {
-            type: 'doc',
-            docId: 'getting-started/overview',
-            position: 'left',
-            label: 'Getting Started',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'getting-started/overview',
+          //   position: 'left',
+          //   label: 'Getting Started',
+          // },
           {
             type: 'doc',
             docId: 'specification/intro',
@@ -102,12 +102,12 @@ const config = {
             position: 'left',
             label: 'Tutorials',
           },
-          {
-            type: 'doc',
-            docId: 'explanations/overview',
-            position: 'left',
-            label: 'Explanations',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'explanations/overview',
+          //   position: 'left',
+          //   label: 'Explanations',
+          // },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/open-feature',
@@ -127,10 +127,10 @@ const config = {
                 label: 'Docs',
                 to: 'docs/reference/intro',
               },
-              {
-                label: 'Getting Started',
-                to: 'docs/getting-started/overview',
-              },
+              // {
+              //   label: 'Getting Started',
+              //   to: 'docs/getting-started/overview',
+              // },
               {
                 label: 'Specification',
                 to: 'docs/specification',
@@ -139,10 +139,10 @@ const config = {
                 label: 'Tutorials',
                 to: 'docs/tutorials/overview',
               },
-              {
-                label: 'Explanations',
-                to: 'docs/explanations/overview',
-              },
+              // {
+              //   label: 'Explanations',
+              //   to: 'docs/explanations/overview',
+              // },
             ],
           },
           {
