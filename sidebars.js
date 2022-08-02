@@ -21,9 +21,9 @@ const sidebars = {
       collapsible: false,
       items: [
         'reference/evaluation-api/evaluation-api',
-        'reference/using-open-feature-with-your-flag-system/implement-a-provider',
+        'reference/provider/provider',
         'reference/hooks/hooks',
-        'reference/evaluation-context/evaluation-context'
+        'reference/evaluation-context/evaluation-context',
       ],
     },
   ],
