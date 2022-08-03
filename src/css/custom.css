@@ -6,27 +6,12 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #252525;
-  --ifm-color-primary-dark: #303030;
-  --ifm-color-primary-darker: #353535;
-  --ifm-color-primary-darkest: #404040;
-  --ifm-color-primary-light: #454545;
-  --ifm-color-primary-lighter: #505050;
-  --ifm-color-primary-lightest: #555555;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary: #008fff;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #454545;
-  --ifm-color-primary-dark: #505050;
-  --ifm-color-primary-darker: #555555;
-  --ifm-color-primary-darkest: #606060;
-  --ifm-color-primary-light: #656565;
-  --ifm-color-primary-lighter: #707070;
-  --ifm-color-primary-lightest: #757575;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #44adff;
 }
 
 .prism-code {

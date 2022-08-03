@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
 const externalContentPlugin = require('./src/plugins/external-content');
 const updateSubmodulePlugin = require('./src/plugins/update-git-submodule');
 
@@ -69,6 +68,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/opengraph.jpg',
       navbar: {
         title: '',
         logo: {
@@ -166,11 +166,10 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} OpenFeature | Documentation Distributed under CC BY 4.0 | All Rights Reserved. Built with Docusaurus.`,
+        copyright: `© ${new Date().getFullYear()} OpenFeature | Documentation Distributed under CC BY 4.0 | All Rights Reserved`,
       },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
         additionalLanguages: ['typescript', 'go', 'java', 'csharp'],
       },
     }),
