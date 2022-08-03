@@ -64,6 +64,7 @@ const config = {
         destinationPath: 'specification',
       },
     ],
+    require.resolve('@cmfcmf/docusaurus-search-local'),
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -83,12 +84,12 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {
-            type: 'doc',
-            docId: 'getting-started/overview',
-            position: 'left',
-            label: 'Getting Started',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'getting-started/overview',
+          //   position: 'left',
+          //   label: 'Getting Started',
+          // },
           {
             type: 'doc',
             docId: 'specification/intro',
@@ -101,17 +102,18 @@ const config = {
             position: 'left',
             label: 'Tutorials',
           },
-          {
-            type: 'doc',
-            docId: 'explanations/overview',
-            position: 'left',
-            label: 'Explanations',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'explanations/overview',
+          //   position: 'left',
+          //   label: 'Explanations',
+          // },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/open-feature',
-            label: 'GitHub',
             position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub organization',
           },
         ],
       },
@@ -125,10 +127,10 @@ const config = {
                 label: 'Docs',
                 to: 'docs/reference/intro',
               },
-              {
-                label: 'Getting Started',
-                to: 'docs/getting-started/overview',
-              },
+              // {
+              //   label: 'Getting Started',
+              //   to: 'docs/getting-started/overview',
+              // },
               {
                 label: 'Specification',
                 to: 'docs/specification',
@@ -137,10 +139,10 @@ const config = {
                 label: 'Tutorials',
                 to: 'docs/tutorials/overview',
               },
-              {
-                label: 'Explanations',
-                to: 'docs/explanations/overview',
-              },
+              // {
+              //   label: 'Explanations',
+              //   to: 'docs/explanations/overview',
+              // },
             ],
           },
           {
@@ -162,6 +164,13 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/open-feature',
+              },
+              {
+                html: `
+                <a href="https://www.netlify.com" target="_blank" rel="noreferrer noopener" aria-label="Deploys by Netlify">
+                  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" width="114" height="51" />
+                </a>
+              `,
               },
             ],
           },
