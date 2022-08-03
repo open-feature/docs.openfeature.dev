@@ -6,8 +6,6 @@ title: Introduction
 
 # What is OpenFeature?
 
-OpenFeature is a vendor-neutral, open-source standard API and SDK for feature flagging.
-
 OpenFeature is an open standard for feature flagging, created to support a robust feature flag ecosystem using cloud native technologies.
 
 ## What are feature flags?
