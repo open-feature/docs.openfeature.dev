@@ -7,9 +7,9 @@ This repository provides the documentation for OpenFeature; including the SDK, f
 We are following a slightly modified version of the [diataxis framework](https://diataxis.fr/) for our documentation:
 
 - Docs: Reference material for using OpenFeature e.g. the specific commands and code
-- Getting Started: Guide on using OpenFeature 
-- Tutorials: Use Cases and specific implementations 
-- Explanations: Extensive explanations of the different components 
+- Getting Started: Guide on using OpenFeature
+- Tutorials: Use Cases and specific implementations
+- Explanations: Extensive explanations of the different components
 
 ## Contributing
 
@@ -42,16 +42,4 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+The documentation is hosted by Netlify and deployments are automatically triggered after a successful merge to main.
