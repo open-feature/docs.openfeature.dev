@@ -43,3 +43,8 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 The documentation is hosted by Netlify and deployments are automatically triggered after a successful merge to main.
+
+## Licenses
+
+- Documentation: [CC-BY-4.0](LICENSE)
+- Code: [Apache-2.0](LICENSE-CODE)
