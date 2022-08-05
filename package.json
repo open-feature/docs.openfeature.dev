@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint ./",
     "docusaurus": "docusaurus",
+    "prestart": "git submodule update --init --recursive",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
