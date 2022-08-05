@@ -40,12 +40,12 @@ The [evaluation API](./concepts/01-evaluation-api.mdx) is the part of the OpenFe
 
 ### Evaluation Context
 
-The _evaluation context_ is a container for arbitrary contextual data that can be used as a basis for dynamic evaluation. Static data such as the host or an identifier for the application can be configured globally. Dynamic evaluation context, such as the IP address of the client in a web application, can be implicitly propagated or explicitly passed to during flag evaluation, and can be merged with static values.
+The [evaluation context](./concepts/03-evaluation-context.mdx) is a container for arbitrary contextual data that can be used as a basis for dynamic evaluation. Static data such as the host or an identifier for the application can be configured globally. Dynamic evaluation context, such as the IP address of the client in a web application, can be implicitly propagated or explicitly passed to during flag evaluation, and can be merged with static values.
 
 ### Providers
 
-_Providers_ are the "translation layer" between the evaluation API and the flag management system in use. Providers are responsible for mapping the arguments supplied to the evaluation API to their equivalent representation in the associated flag management system. Providers might wrap a vendor SDK, call a bespoke flag evaluation REST API, or even parse some locally stored file to resolve flag values.
+[Providers](./concepts/02-provider.mdx) are the "translation layer" between the evaluation API and the flag management system in use. Providers are responsible for mapping the arguments supplied to the evaluation API to their equivalent representation in the associated flag management system. Providers might wrap a vendor SDK, call a bespoke flag evaluation REST API, or even parse some locally stored file to resolve flag values.
 
 ### Hooks
 
-_Hooks_ are a mechanism that allow for the addition of arbitrary behavior at various points in the _flag evaluation life-cycle_. Hooks let you extend the OpenFeature SDK, adding functionality such as validating a resolved flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
+[Hooks](./concepts/04-hooks.mdx) are a mechanism that allow for the addition of arbitrary behavior at various points in the _flag evaluation life-cycle_. Hooks let you extend the OpenFeature SDK, adding functionality such as validating a resolved flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
