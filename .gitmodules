@@ -1,0 +1,3 @@
+[submodule "external-content/specification"]
+	path = external-content/specification
+	url = https://github.com/open-feature/spec

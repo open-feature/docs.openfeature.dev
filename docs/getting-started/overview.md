@@ -3,7 +3,7 @@ sidebar_position: 1
 id: overview
 ---
 
-# Getting Started with Open Feature
+# Getting Started with OpenFeature
 
 ## OpenFeature SDK
 
@@ -13,6 +13,6 @@ TODO
 
 TODO
 
-## Open Feature Operator
+## OpenFeature Operator
 
 TODO

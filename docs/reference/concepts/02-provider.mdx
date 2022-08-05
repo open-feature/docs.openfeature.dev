@@ -1,0 +1,185 @@
+---
+sidebar_position: 1
+id: provider
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+# Providers
+
+_Providers_ are responsible for performing flag evaluation. They provide an abstraction between the underlying flag management system and the OpenFeature SDK. Providers can wrap a vendor SDK, call a bespoke flag evaluation REST API, or even parse some locally stored file to resolve flag values. This allows the underlying flag evaluation logic to be changed without requiring a major code refactor.
+
+An [application integrator](../../specification/glossary#application-integrator) can register one provider at a time. Registering an additional provider will override any previously configured providers. If no provider is set, OpenFeature will [no-op](<https://en.wikipedia.org/wiki/NOP_(code)>) and return the default value passed to the evaluation API.
+
+Providers are set through the [evaluation API](./evaluation-api#setting-a-provider). They're globally registered and a change affects both new and existing OpenFeature clients.
+
+<ThemedImage
+  alt="Provider Overview"
+  sources={{
+    light: useBaseUrl('/img/provider-overview-light.svg'),
+    dark: useBaseUrl('/img/provider-overview-dark.svg'),
+  }}
+/>
+
+_An example of an OpenFeature provider using a feature flag vendor._
+
+## Implementing Providers
+
+### Getting started
+
+To develop a provider, start by confirming that an OpenFeature SDK is available in the language you're interested in. Next, you need to create a new project and include the OpenFeature SDK as a dependency. This can be a new repository or included in an [existing contrib repository](https://github.com/open-feature?q=contrib&type=all&language=&sort=) available under the OpenFeature organization. Finally, you’ll then need to write the provider itself. In most languages, this can be accomplished by implementing the provider interface exported by the OpenFeature SDK.
+
+### Naming recommendations
+
+The following naming recommendations can be used to ensure consistency between providers developed among the community.
+
+#### Repository name
+
+If you're creating a new repository, it's recommended to use one the following naming conventions:
+
+- `openfeature-provider-<language name>`
+- `<vender/tool name>-openfeature-provider-<language name>`
+
+:::note
+
+It is **not** required that a provider is open source, but highly recommended.
+
+:::
+
+#### Artifact name
+
+The name of the artifact will vary based on the package manager. Ultimately, it's up to the publisher to decide what name makes the most sense. However, the following items should be used in the package name:
+
+- OpenFeature (can also be stylized as openfeature or open-feature)
+- Vender/tool name
+- The word `provider` should be included in the name
+
+An example of what it could look like in NPM: `@openfeature/flagd-provider`
+
+### Examples
+
+<Tabs groupId="code">
+<TabItem value="js" label="Typescript">
+
+```ts
+import { Provider, ResolutionDetails } from '@open';
+
+export class MyFeatureProvider implements Provider {
+  readonly metadata = {
+    name: 'My Feature Provider',
+  } as const;
+
+  resolveBooleanEvaluation(flagKey: string, defaultValue: boolean): Promise<ResolutionDetails<boolean>> {
+    // code to resolve boolean details
+  }
+
+  resolveStringEvaluation(flagKey: string, defaultValue: string): Promise<ResolutionDetails<string>> {
+    // code to resolve string details
+  }
+
+  resolveNumberEvaluation(flagKey: string, defaultValue: number): Promise<ResolutionDetails<number>> {
+    // code to resolve number details
+  }
+
+  resolveObjectEvaluation<T extends object>(flagKey: string, defaultValue: T): Promise<ResolutionDetails<T>> {
+    // code to resolve object details
+  }
+}
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+package dev.openfeature.javasdk;
+
+import lombok.Getter;
+
+public class MyFeatureProvider implements FeatureProvider {
+    @Getter
+    private final String name = "My Feature Provider";
+
+    @Override
+    public Metadata getMetadata() {
+        return new Metadata() {
+            @Override
+            public String getName() {
+                return name;
+            }
+        };
+    }
+
+    @Override
+    public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+      // code to resolve boolean details
+    }
+
+    @Override
+    public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+      // code to resolve string details
+    }
+
+    @Override
+    public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+      // code to resolve number details
+    }
+
+    @Override
+    public <T> ProviderEvaluation<T> getObjectEvaluation(String key, T defaultValue, EvaluationContext invocationContext, FlagEvaluationOptions options) {
+      // code to resolve object details
+    }
+}
+```
+
+</TabItem>
+<TabItem value="csharp" label="C#">
+
+```csharp
+using OpenFeature.SDK;
+using OpenFeature.SDK.Model;
+
+public class MyFeatureProvider : IFeatureProvider
+{
+    public static string Name => "My Feature Provider";
+
+    public Metadata GetMetadata()
+    {
+        return new Metadata(Name);
+    }
+
+    public Task<ResolutionDetails<bool>> ResolveBooleanValue(string flagKey, bool defaultValue,
+        EvaluationContext context = null,
+        FlagEvaluationOptions config = null)
+    {
+        // code to resolve boolean details
+    }
+
+    public Task<ResolutionDetails<string>> ResolveStringValue(string flagKey, string defaultValue,
+        EvaluationContext context = null,
+        FlagEvaluationOptions config = null)
+    {
+        // code to resolve string details
+    }
+
+    public Task<ResolutionDetails<int>> ResolveNumberValue(string flagKey, int defaultValue,
+        EvaluationContext context = null,
+        FlagEvaluationOptions config = null)
+    {
+        // code to resolve number details
+    }
+
+    public Task<ResolutionDetails<T>> ResolveStructureValue<T>(string flagKey, T defaultValue,
+        EvaluationContext context = null,
+        FlagEvaluationOptions config = null)
+    {
+        // code to resolve object details
+    }
+}
+```
+
+</TabItem>
+
+</Tabs>

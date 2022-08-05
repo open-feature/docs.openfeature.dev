@@ -5,4 +5,4 @@ id: overview
 
 # Overview
 
-This section provides further details on the components of Open Feature, design decisions and explanations.
+This section provides further details on the components of OpenFeature, design decisions and explanations.
