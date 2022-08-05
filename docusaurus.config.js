@@ -3,7 +3,6 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
 const externalContentPlugin = require('./src/plugins/external-content');
-const updateSubmodulePlugin = require('./src/plugins/update-git-submodule');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -55,7 +54,6 @@ const config = {
   ],
 
   plugins: [
-    updateSubmodulePlugin,
     [
       externalContentPlugin,
       {
