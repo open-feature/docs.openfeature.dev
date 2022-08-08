@@ -46,6 +46,7 @@ Client client = api.getClient();
 Boolean value = client
   .getBooleanValue("new-look", false);
           `}</CodeBlock>
+          <a href="https://javadoc.io/doc/dev.openfeature/javasdk">Detailed documentation</a>
         </TabItem>
         <TabItem value="go" label="Go">
           {/* prettier-ignore */}
