@@ -137,7 +137,7 @@ func (p MyFlagProvider) BooleanEvaluation(
         <TabItem value="csharp" label="C#">
           {/* prettier-ignore */}
           <CodeBlock className="language-csharp">{`
-public class MyFlagProvider : IFeatureProvider
+public class MyFlagProvider : FeatureProvider
 {
   //...
   public Task<ResolutionDetails<bool>> ResolveBooleanValue(

@@ -131,6 +131,9 @@ var stringValue = await client.GetStringValue("stringFlag", "default");
 // get an integer value
 var intValue = await client.GetIntegerValue("intFlag", 1);
 
+// get an double value
+var doubleValue = await client.GetDoubleValue("doubleFlag", 1);
+
 // get an object value
 var objectValue = await client.GetObjectValue("objectFlag", MyObjectInstance);
 ```
@@ -199,7 +202,10 @@ var boolDetails = await client.GetBooleanDetails("boolFlag", false);
 var stringDetails = await client.GetStringDetails("stringFlag", "default");
 
 // get details of int evaluation
-var intDetails = await client.GetNumberDetails("intFlag", 1);
+var intDetails = await client.GetIntegerDetails("intFlag", 1);
+
+// get details of double evaluation
+var doubleDetails = await client.GetDoubleDetails("doubleFlag", 1);
 
 // get details of object evaluation
 var objectDetails = await client.GetObjectDetails("objectFlag", myObjectDefaultInstance);
