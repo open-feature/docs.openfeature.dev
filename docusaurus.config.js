@@ -34,7 +34,7 @@ const config = {
             if (params.docPath.startsWith('specification/')) {
               return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
             }
-            return `https://github.com/open-feature/docs.openfeature.dev/edit/main/${params.docPath}`;
+            return `https://github.com/open-feature/docs.openfeature.dev/edit/main/docs/${params.docPath}`;
           },
         },
         blog: {
