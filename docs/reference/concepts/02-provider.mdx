@@ -141,7 +141,7 @@ public class MyFeatureProvider implements FeatureProvider {
 using OpenFeature.SDK;
 using OpenFeature.SDK.Model;
 
-public class MyFeatureProvider : IFeatureProvider
+public class MyFeatureProvider : FeatureProvider
 {
     public static string Name => "My Feature Provider";
 
@@ -164,11 +164,18 @@ public class MyFeatureProvider : IFeatureProvider
         // code to resolve string details
     }
 
-    public Task<ResolutionDetails<int>> ResolveNumberValue(string flagKey, int defaultValue,
+    public Task<ResolutionDetails<int>> ResolveIntegerValue(string flagKey, int defaultValue,
         EvaluationContext context = null,
         FlagEvaluationOptions config = null)
     {
-        // code to resolve number details
+        // code to resolve integer details
+    }
+
+    public Task<ResolutionDetails<double>> ResolveDoubleValue(string flagKey, double defaultValue,
+        EvaluationContext context = null,
+        FlagEvaluationOptions config = null)
+    {
+        // code to resolve integer details
     }
 
     public Task<ResolutionDetails<T>> ResolveStructureValue<T>(string flagKey, T defaultValue,
