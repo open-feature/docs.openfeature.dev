@@ -14,22 +14,26 @@ In the most basic case, you can think of a feature flag as an if/else statement 
 
 This capability serves a variety of purposes. You can reduce the need for long-running feature branches. You can hide work-in-progress functionality from end users, while still exposing it for internal testing. You can perform canary releases - rolling out a new feature to an initially small subset of users. You can perform A/B testing. You can safely degrade parts of a production system that are experiencing an outage. You can restrict access to specific product functionality - an admin page, for example, or premium features that are only exposed to paid subscribers.
 
-Feature flags are *dynamic*; they are evaluated at runtime. Many of the use cases just described also require feature flags to be *context-aware* - a flagging decision must take into account things like which user is making a web request. What's more, the configuration behind flagging decisions also needs to be dynamic to support use cases like canary releases where you gradually roll a feature out to more users without having to redeploy or restart anything.
+Feature flags are _dynamic_; they are evaluated at runtime. Many of the use cases just described also require feature flags to be _context-aware_ - a flagging decision must take into account things like which user is making a web request. What's more, the configuration behind flagging decisions also needs to be dynamic to support use cases like canary releases where you gradually roll a feature out to more users without having to redeploy or restart anything.
 
 Given all these requirements (along with others such as an admin UI, audit trails, environment management, and more) it's clear that full use of feature flags requires a feature flagging system - typically a stand-alone feature-flagging service along with a client library which interacts with that service.
 
 <figure>
-<img src={require('@site/static/img/docs/reference/ff-service.png').default}/>
-<figcaption><i>A typical feature-flagging system</i></figcaption>
+  <img src={require('@site/static/img/docs/reference/ff-service.png').default} />
+  <figcaption>
+    <i>A typical feature-flagging system</i>
+  </figcaption>
 </figure>
 
 ## What is OpenFeature?
 
-OpenFeature provides a shared, standardized feature flagging client - an *SDK* - which can be plugged into various 3rd-party feature flagging *providers*. Whether you're using an open-source system or a commercial product, whether it's self-hosted or cloud-hosted, OpenFeature provides a consistent, unified API for developers to use feature flagging in their applications. 
+OpenFeature provides a shared, standardized feature flagging client - an _SDK_ - which can be plugged into various 3rd-party feature flagging _providers_. Whether you're using an open-source system or a commercial product, whether it's self-hosted or cloud-hosted, OpenFeature provides a consistent, unified API for developers to use feature flagging in their applications.
 
 <figure>
-<img src={require('@site/static/img/docs/reference/of-architecture.png').default}/>
-<figcaption><i>OpenFeature integrated with a hypothetical "Flags-R-us" flag management system</i></figcaption>
+  <img src={require('@site/static/img/docs/reference/of-architecture.png').default} />
+  <figcaption>
+    <i>OpenFeature integrated with a hypothetical "Flags-R-us" flag management system</i>
+  </figcaption>
 </figure>
 
 To accomplish this, the OpenFeature SDK defines a number of flexible abstractions.
