@@ -16,6 +16,7 @@ export class SDKComponentCard extends React.Component<SDKComponentCardData> {
     const iconDef = this.props.iconDefinition ? this.props.iconDefinition : faCode;
     return (
       <a
+        target="_blank"
         href={this.props.href}
         style={{ position: 'relative' }}
         className={clsx('card padding--lg', styles.cardContainer)}
@@ -23,7 +24,7 @@ export class SDKComponentCard extends React.Component<SDKComponentCardData> {
         <div style={{ height: 0, position: 'absolute', right: 20, top: 20 }}>
           {this.props.href.startsWith('http') ? '🔗' : ''}
         </div>
-        <FontAwesomeIcon size={'3x'} icon={iconDef} />
+        <FontAwesomeIcon className={clsx(styles.svg)} size={'3x'} icon={iconDef} />
         <h1 className={clsx('text--truncate', styles.cardTitle)}>{this.props.title}</h1>
         <h2 className={clsx(styles.cardDescription)}>{this.props.description}</h2>
       </a>
