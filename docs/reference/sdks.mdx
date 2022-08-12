@@ -1,0 +1,42 @@
+---
+sidebar_position: 2
+id: sdks
+title: SDKs
+---
+
+# SDKs
+
+SDKs for the evaluation of feature flags and the development of OpenFeature compatible components.
+
+## Server SDKs
+
+import { SDKComponentTable } from '@site/src/components/custom';
+import { faJava, faNodeJs, faGolang } from '@fortawesome/free-brands-svg-icons';
+
+<SDKComponentTable
+  items={[
+    {
+      href: 'https://github.com/open-feature/java-sdk',
+      iconDefinition: faJava,
+      title: 'Java',
+      description: 'OpenFeature SDK for Java',
+    },
+    {
+      href: 'https://github.com/open-feature/node-sdk',
+      iconDefinition: faNodeJs,
+      title: 'Node.JS',
+      description: 'OpenFeature SDK for Node.JS',
+    },
+    {
+      href: 'https://github.com/open-feature/dotnet-sdk',
+      title: '.NET',
+      description: 'OpenFeature SDK for .NET',
+    },
+    {
+      href: 'https://github.com/open-feature/golang-sdk',
+      iconDefinition: faGolang,
+      title: 'Go',
+      description: 'OpenFeature SDK for Golang',
+    },
+  ]}
+/>
