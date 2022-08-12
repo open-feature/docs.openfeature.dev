@@ -1,2 +1,3 @@
-export * from './SDKComponentCard';
-export * from './SDKComponentTable';
+export * from './OpenFeatureComponentCard';
+export * from './OpenFeatureComponentTable';
+export * from './SdkTable';

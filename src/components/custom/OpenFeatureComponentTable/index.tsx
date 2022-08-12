@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
-import { SDKComponentCard, SDKComponentCardData } from '../SDKComponentCard/';
+import { OpenFeatureComponentCard, OpenFeatureComponentCardData } from '../OpenFeatureComponentCard/';
 
-export class SDKComponentTable extends React.Component<{
-  items: SDKComponentCardData[];
+export class OpenFeatureComponentTable extends React.Component<{
+  items: OpenFeatureComponentCardData[];
 }> {
   override render() {
     return (
@@ -11,7 +11,7 @@ export class SDKComponentTable extends React.Component<{
         {this.props.items.map((item) => {
           return (
             <article className="col col--5 margin-bottom--lg">
-              <SDKComponentCard {...item} />
+              <OpenFeatureComponentCard {...item} />
             </article>
           );
         })}
