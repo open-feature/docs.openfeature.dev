@@ -20,6 +20,7 @@ type FontAwesomeCardData = {
 type SvgCardData = {
   darkThemeSvgImgSrc: string;
   lightThemeSvgImgSrc: string;
+  altText: string;
 };
 
 export type OpenFeatureComponentCardData = CardData & (SvgCardData | FontAwesomeCardData);
@@ -48,7 +49,7 @@ export class OpenFeatureComponentCard extends React.Component<OpenFeatureCompone
             className={clsx(styles.svg)}
             width={45}
             height={45}
-            alt="C#"
+            alt={props.altText}
             sources={{
               light: props.lightThemeSvgImgSrc,
               dark: props.darkThemeSvgImgSrc,

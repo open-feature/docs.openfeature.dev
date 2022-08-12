@@ -26,6 +26,7 @@ export class SdkTable extends React.Component {
             description: 'OpenFeature SDK for .NET',
             darkThemeSvgImgSrc: '/img/csharp-white.svg',
             lightThemeSvgImgSrc: '/img/csharp-black.svg',
+            altText: 'C#',
           },
           {
             href: 'https://github.com/open-feature/golang-sdk',
