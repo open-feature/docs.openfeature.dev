@@ -1,6 +1,7 @@
 import { faGolang, faJava, faNodeJs } from '@fortawesome/free-brands-svg-icons';
 import React from 'react';
 import { OpenFeatureComponentTable } from '../OpenFeatureComponentTable/';
+import { cSharpSvg } from './c-sharp-svg';
 
 // high level component for SDK table rendering, so we can avoid putting too much TS in .mdx files.
 export class SdkTable extends React.Component {
@@ -24,9 +25,7 @@ export class SdkTable extends React.Component {
             href: 'https://github.com/open-feature/dotnet-sdk',
             title: '.NET',
             description: 'OpenFeature SDK for .NET',
-            darkThemeSvgImgSrc: '/img/csharp-white.svg',
-            lightThemeSvgImgSrc: '/img/csharp-black.svg',
-            altText: 'C#',
+            svg: cSharpSvg,
           },
           {
             href: 'https://github.com/open-feature/golang-sdk',

@@ -30,3 +30,17 @@
 .cardDescription {
   font-size: 0.8rem;
 }
+
+.svgIcon svg {
+  width: 45px;
+  height: 45px;
+}
+
+.svgIcon {
+  fill: var(--ifm-color-emphasis-800);
+  margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
+}
+
+.svgIcon:hover {
+  fill: var(--ifm-color-emphasis-700);
+}

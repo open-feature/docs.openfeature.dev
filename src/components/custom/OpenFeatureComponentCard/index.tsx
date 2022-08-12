@@ -2,7 +2,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { IconDefinition as BrandsIconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { faCode, IconDefinition as FreeIconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ThemedImage from '@theme/ThemedImage';
 import clsx from 'clsx';
 import React from 'react';
 import styles from './styles.module.css';
@@ -18,9 +17,10 @@ type FontAwesomeCardData = {
 };
 
 type SvgCardData = {
-  darkThemeSvgImgSrc: string;
-  lightThemeSvgImgSrc: string;
-  altText: string;
+  /**
+   * A colorless (no fill, no stroke) svg to embed
+   */
+  svg: string;
 };
 
 export type OpenFeatureComponentCardData = CardData & (SvgCardData | FontAwesomeCardData);
@@ -45,16 +45,7 @@ export class OpenFeatureComponentCard extends React.Component<OpenFeatureCompone
         {props.iconDefinition ? (
           <FontAwesomeIcon className={clsx(styles.svg)} size={'3x'} icon={iconDef} />
         ) : (
-          <ThemedImage
-            className={clsx(styles.svg)}
-            width={45}
-            height={45}
-            alt={props.altText}
-            sources={{
-              light: props.lightThemeSvgImgSrc,
-              dark: props.darkThemeSvgImgSrc,
-            }}
-          />
+          <div dangerouslySetInnerHTML={{ __html: props.svg }} className={clsx(styles.svgIcon)}></div>
         )}
         <h1 className={clsx('text--truncate', styles.cardTitle)}>{this.props.title}</h1>
         <h2 className={clsx(styles.cardDescription)}>{this.props.description}</h2>
