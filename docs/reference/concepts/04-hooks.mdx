@@ -15,7 +15,7 @@ _Hooks_ are a mechanism that allow for the addition of arbitrary behavior at wel
 Hooks can be attached globally (on the OpenFeature API object), at the client, or at the flag invocation level.
 
 <Tabs groupId="code">
-<TabItem value="js" label="Typescript">
+<TabItem value="js" label="TypeScript">
 
 ```ts
 // add a hook globally, to run on all evaluations
@@ -114,7 +114,7 @@ Hooks added at the same level (API, client, or invocation) are evaluated in the 
 Create a hook by implementing **at least** one of the flag evaluation life-cycle stages.
 
 <Tabs groupId="code">
-<TabItem value="js" label="Typescript">
+<TabItem value="js" label="TypeScript">
 
 ```ts
 export class MyHook implements Hook {

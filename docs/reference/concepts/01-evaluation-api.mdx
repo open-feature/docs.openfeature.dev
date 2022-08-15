@@ -12,12 +12,10 @@ The Evaluation API is the primary component of OpenFeature that _application aut
 
 ## Setting a Provider
 
-<!--- TODO: add link to provider doc when available -->
-
-Before you can start evaluating flags, you must set a _provider_. The provider is the translation layer between the evaluation API and the flag system you use.
+Before you can start evaluating flags, you must set a [_provider_](./provider). The provider is the translation layer between the evaluation API and the flag system you use.
 
 <Tabs groupId="code">
-<TabItem value="js" label="Typescript">
+<TabItem value="js" label="TypeScript">
 
 ```ts
 import { openFeature } from '@openfeature/nodejs-sdk';
@@ -54,7 +52,7 @@ If your application is small, you may use a single client for your whole applica
 each with different configuration to fit the needs of different sub-modules. Clients may also be created dynamically, per each HTTP request, for instance.
 
 <Tabs groupId="code">
-<TabItem value="js" label="Typescript">
+<TabItem value="js" label="TypeScript">
 
 ```ts
 const client = openFeature.getClient('my-app');
@@ -85,7 +83,7 @@ The client can be used to do basic flag evaluation, which simple returns flag va
 In the case of any error during flag evaluation, the default value will be returned, so give consideration to your default values!
 
 <Tabs groupId="code">
-<TabItem value="js" label="Typescript">
+<TabItem value="js" label="TypeScript">
 
 ```ts
 // get a bool value
@@ -112,7 +110,10 @@ Boolean boolValue = client.getBooleanValue("boolFlag", false);
 String stringValue = client.getStringValue("stringFlag", "default");
 
 // get an integer value
-String intValue = client.getIntegerValue("intFlag", 1);
+Integer intValue = client.getIntegerValue("intFlag", 1);
+
+// get a double value
+Double doubleValue = client.getDoubleValue("doubleFlag", 0.9);
 
 // get an object value
 MyObject objectValue = client.getObjectValue<MyObject>("objectFlag", MyObjectInstance);
@@ -158,7 +159,7 @@ In addition to [basic evaluation](#basic-evaluation), the _detailed evaluation_ 
 \*Not supported by all providers
 
 <Tabs groupId="code">
-<TabItem value="js" label="Typescript">
+<TabItem value="js" label="TypeScript">
 
 ```ts
 // get details of boolean evaluation
@@ -185,7 +186,10 @@ Boolean boolValue = client.getBooleanDetails("boolFlag", false);
 String stringValue = client.getStringDetails("stringFlag", "default");
 
 // get details of integer evaluation
-String intValue = client.getIntegerDetails("intFlag", 1);
+Integer intValue = client.getIntegerDetails("intFlag", 1);
+
+// get details of double evaluation
+Double doubleValue = client.getDoubleDetails("doubleFlag", .9);
 
 // get details of object evaluation
 MyObject objectValue = client.getObjectDetails<MyObject>("objectFlag", myObjectDefaultInstance);
