@@ -124,7 +124,12 @@ public class MyFeatureProvider implements FeatureProvider {
 
     @Override
     public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
-      // code to resolve number details
+      // code to resolve integer details
+    }
+
+    @Override
+    public ProviderEvaluation<Double> getDoubleEvaluation(String key, Double defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+      // code to resolve double details
     }
 
     @Override
@@ -175,7 +180,7 @@ public class MyFeatureProvider : FeatureProvider
         EvaluationContext context = null,
         FlagEvaluationOptions config = null)
     {
-        // code to resolve integer details
+        // code to resolve double details
     }
 
     public Task<ResolutionDetails<T>> ResolveStructureValue<T>(string flagKey, T defaultValue,
