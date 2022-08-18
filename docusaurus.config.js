@@ -82,12 +82,6 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          // {
-          //   type: 'doc',
-          //   docId: 'getting-started/overview',
-          //   position: 'left',
-          //   label: 'Getting Started',
-          // },
           {
             type: 'doc',
             docId: 'specification/intro',
@@ -100,12 +94,6 @@ const config = {
             position: 'left',
             label: 'Tutorials',
           },
-          // {
-          //   type: 'doc',
-          //   docId: 'explanations/overview',
-          //   position: 'left',
-          //   label: 'Explanations',
-          // },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/open-feature',
@@ -125,10 +113,6 @@ const config = {
                 label: 'Docs',
                 to: 'docs/reference/intro',
               },
-              // {
-              //   label: 'Getting Started',
-              //   to: 'docs/getting-started/overview',
-              // },
               {
                 label: 'Specification',
                 to: 'docs/specification',
@@ -137,10 +121,6 @@ const config = {
                 label: 'Tutorials',
                 to: 'docs/tutorials/overview',
               },
-              // {
-              //   label: 'Explanations',
-              //   to: 'docs/explanations/overview',
-              // },
             ],
           },
           {
@@ -150,6 +130,18 @@ const config = {
                 label: 'Twitter',
                 href: 'https://twitter.com/openfeature',
               },
+              {
+                label: 'LinkedIn',
+                href: 'https://www.linkedin.com/company/openfeature/',
+              },
+              {
+                label: 'Website',
+                href: 'https://openfeature.dev/'
+              },
+              {
+                label: 'Community',
+                href: 'https://github.com/open-feature/community/'
+              }
             ],
           },
           {
@@ -173,7 +165,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} OpenFeature | Documentation Distributed under CC BY 4.0 | All Rights Reserved`,
+        copyright: `© ${new Date().getFullYear()} OpenFeature is a Cloud Native Computing Foundation sandbox project | Documentation Distributed under CC BY 4.0 | All Rights Reserved`,
       },
       prism: {
         theme: lightCodeTheme,
