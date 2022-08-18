@@ -48,6 +48,19 @@ var boolValue = await client.GetBooleanValue("boolFlag", false, context);
 ```
 
 </TabItem>
+<TabItem value="go" label="Go">
+
+```go
+// add a value to the invocation context
+ctx := openfeature.EvaluationContext{
+    Attributes: map[string]interface{}{
+        "myKey": "myValue",
+    },
+}
+boolValue, err := client.BooleanValue("boolFlag", false, ctx, openfeature.EvaluationOptions{})
+```
+
+</TabItem>
 </Tabs>
 
 ## Targeting Key
