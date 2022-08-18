@@ -193,5 +193,50 @@ public class MyFeatureProvider : FeatureProvider
 ```
 
 </TabItem>
+<TabItem value="go" label="Go">
+
+```go
+package provider
+
+// MyFeatureProvider implements the FeatureProvider interface and provides functions for evaluating flags
+type MyFeatureProvider struct{}
+
+// Metadata returns the metadata of the provider
+func (e MyFeatureProvider) Metadata() Metadata {
+	return Metadata{Name: "MyFeatureProvider"}
+}
+
+// BooleanEvaluation returns a boolean flag
+func (e MyFeatureProvider) BooleanEvaluation(flag string, defaultValue bool, evalCtx EvaluationContext, options EvaluationOptions) BoolResolutionDetail {
+	// code to evaluate boolean
+}
+
+// StringEvaluation returns a string flag
+func (e MyFeatureProvider) StringEvaluation(flag string, defaultValue string, evalCtx EvaluationContext, options EvaluationOptions) StringResolutionDetail {
+	// code to evaluate string
+}
+
+// FloatEvaluation returns a float flag
+func (e MyFeatureProvider) FloatEvaluation(flag string, defaultValue float64, evalCtx EvaluationContext, options EvaluationOptions) FloatResolutionDetail {
+	// code to evaluate float
+}
+
+// IntEvaluation returns an int flag
+func (e MyFeatureProvider) IntEvaluation(flag string, defaultValue int64, evalCtx EvaluationContext, options EvaluationOptions) IntResolutionDetail {
+	// code to evaluate int
+}
+
+// ObjectEvaluation returns an object flag
+func (e MyFeatureProvider) ObjectEvaluation(flag string, defaultValue interface{}, evalCtx EvaluationContext, options EvaluationOptions) ResolutionDetail {
+	// code to evaluate object
+}
+
+// Hooks returns hooks
+func (e MyFeatureProvider) Hooks() []Hook {
+	// code to retrieve hooks
+}
+```
+
+</TabItem>
 
 </Tabs>
