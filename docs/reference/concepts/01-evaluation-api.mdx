@@ -43,6 +43,13 @@ OpenFeature.Instance.SetProvider(new YourProviderOfChoice());
 ```
 
 </TabItem>
+<TabItem value="go" label="Go">
+
+```go
+openfeature.SetProvider(MyFeatureProvider{})
+```
+
+</TabItem>
 </Tabs>
 
 ## Creating a client
@@ -70,6 +77,13 @@ Client client = api.getClient("my-app");
 
 ```csharp
 var client = OpenFeature.Instance.GetClient("my-app");
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```go
+client := openfeature.NewClient("my-app")
 ```
 
 </TabItem>
@@ -137,6 +151,26 @@ var doubleValue = await client.GetDoubleValue("doubleFlag", 1);
 
 // get an object value
 var objectValue = await client.GetObjectValue("objectFlag", MyObjectInstance);
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```go
+// get a boolean value
+boolValue, err := client.BooleanValue("boolFlag", false, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get a string value
+stringValue, err := client.StringValue("stringFlag", "default", openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get an integer value
+intValue, err := client.IntValue("intFlag", 1, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get a float value
+floatValue, err := client.FloatValue("floatFlag", 3.14, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get an object value
+objectValue, err := client.ObjectValue("objectFlag", myObject, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
 ```
 
 </TabItem>
@@ -213,6 +247,26 @@ var doubleDetails = await client.GetDoubleDetails("doubleFlag", 1);
 
 // get details of object evaluation
 var objectDetails = await client.GetObjectDetails("objectFlag", myObjectDefaultInstance);
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```go
+// get details of boolean evaluation
+boolDetails, err := client.BooleanValueDetails("boolFlag", false, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get details of string evaluation
+stringDetails, err := client.StringValueDetails("stringFlag", "default", openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get details of integer evaluation
+intDetails, err := client.IntValueDetails("intFlag", 1, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get details of float evaluation
+floatDetails, err := client.FloatValueDetails("floatFlag", 3.14, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
+
+// get details of object evaluation
+objectDetails, err := client.ObjectValueDetails("objectFlag", myObject, openfeature.EvaluationContext{}, openfeature.EvaluationOptions{})
 ```
 
 </TabItem>
