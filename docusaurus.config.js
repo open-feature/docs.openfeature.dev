@@ -135,11 +135,7 @@ const config = {
                 href: 'https://www.linkedin.com/company/openfeature/',
               },
               {
-                label: 'Website',
-                href: 'https://openfeature.dev/'
-              },
-              {
-                label: 'Community',
+                label: 'Join the Community',
                 href: 'https://github.com/open-feature/community/'
               }
             ],
@@ -154,6 +150,10 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/open-feature',
+              },
+              {
+                label: 'Website',
+                href: 'https://openfeature.dev/'
               },
               {
                 html: `
