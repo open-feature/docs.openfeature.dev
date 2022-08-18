@@ -36,3 +36,12 @@
   font-size: 11px;
   text-align: left;
 }
+
+/* center the footer items' content */
+.footer__item {
+  text-align: center;
+}
+
+.footer__title {
+  text-align: center;
+}
