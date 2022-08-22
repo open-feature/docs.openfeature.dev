@@ -1,5 +1,15 @@
 .svg {
-  width: fit-content;
+  width: 45px;
+  margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
+}
+
+.svgIcon svg {
+  width: 45px;
+  height: 45px;
+}
+
+.svgIcon {
+  fill: var(--ifm-color-emphasis-800);
   margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
 }
 
@@ -29,16 +39,6 @@
 
 .cardDescription {
   font-size: 0.8rem;
-}
-
-.svgIcon svg {
-  width: 45px;
-  height: 45px;
-}
-
-.svgIcon {
-  fill: var(--ifm-color-emphasis-800);
-  margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
 }
 
 a:hover .svgIcon {
