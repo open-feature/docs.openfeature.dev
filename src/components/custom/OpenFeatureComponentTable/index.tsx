@@ -8,13 +8,15 @@ export class OpenFeatureComponentTable extends React.Component<{
   override render() {
     return (
       <section className={clsx('row')}>
-        {this.props.items.map((item) => {
-          return (
-            <article className="col col--5 margin-bottom--lg">
-              <OpenFeatureComponentCard {...item} />
-            </article>
-          );
-        })}
+        {this.props.items
+          .sort((a, b) => a.title.localeCompare(b.title))
+          .map((item) => {
+            return (
+              <article className="col col--5 margin-bottom--lg">
+                <OpenFeatureComponentCard {...item} />
+              </article>
+            );
+          })}
       </section>
     );
   }
