@@ -3,7 +3,7 @@ import { IconDefinition as BrandsIconDefinition } from '@fortawesome/free-brands
 import { faCode, IconDefinition as FreeIconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
-import React from 'react';
+import React, { ComponentType, SVGProps } from 'react';
 import styles from './styles.module.css';
 
 type CardData = {
@@ -20,7 +20,7 @@ type SvgCardData = {
   /**
    * A colorless (no fill, no stroke) svg to embed
    */
-  svg: string;
+  svg: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
 export type OpenFeatureComponentCardData = CardData & (SvgCardData | FontAwesomeCardData);
@@ -29,8 +29,12 @@ export class OpenFeatureComponentCard extends React.Component<OpenFeatureCompone
   override render() {
     const props = this.props as CardData & Partial<SvgCardData & FontAwesomeCardData>;
     let iconDef: IconProp;
+    let SvgComponent: ComponentType<SVGProps<SVGSVGElement>>;
+
     if (props.iconDefinition) {
       iconDef = (props.iconDefinition ? props.iconDefinition : faCode) as IconProp;
+    } else {
+      SvgComponent = props.svg;
     }
     return (
       <a
@@ -45,7 +49,9 @@ export class OpenFeatureComponentCard extends React.Component<OpenFeatureCompone
         {props.iconDefinition ? (
           <FontAwesomeIcon className={clsx(styles.svg)} size={'3x'} icon={iconDef} />
         ) : (
-          <div dangerouslySetInnerHTML={{ __html: props.svg }} className={clsx(styles.svgIcon)}></div>
+          <div className={clsx(styles.svgIcon)}>
+            <SvgComponent />
+          </div>
         )}
         <h1 className={clsx('text--truncate', styles.cardTitle)}>{this.props.title}</h1>
         <h2 className={clsx(styles.cardDescription)}>{this.props.description}</h2>
