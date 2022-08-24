@@ -18,6 +18,22 @@ We welcome your contribution to the OpenFeature documentation. Please make sure 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 Please refer to the docusaurus documentation to learn how to format the documentation.
 
+## Style Guide
+
+### Diagrams
+
+When adding a diagram to the documentation, it's recommended to use one of the following tools:
+
+#### Mermaid
+
+[Mermaid](https://mermaid-js.github.io/) is uses a Markdown-inspired text definitions to create diagrams. These diagrams are natively supported in GitHub and Docusaurus.
+
+#### Excalidraw
+
+[Excalidraw](https://excalidraw.com/) is a virtual whiteboard for sketching hand-drawn like diagrams. When saving an Excalidraw image, make sure to use the "embed scene" option. That will allow others to edit the image in the future.
+
+![Excalidraw Embed Scene](./static/img/excalidraw-embed-scene.png)
+
 ### Installation
 
 ```sh
