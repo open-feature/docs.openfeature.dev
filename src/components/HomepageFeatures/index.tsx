@@ -28,10 +28,10 @@ import {
   openFeature
 } from '@openfeature/nodejs-sdk'
 
-const client = openfeature.getClient('my-client);
+const client = openfeature.getClient('my-client');
 
 const value = client
-  .getBooleanValue('new-look', false );
+  .getBooleanValue('new-look', false);
             `}</CodeBlock>
           </div>
         </TabItem>
