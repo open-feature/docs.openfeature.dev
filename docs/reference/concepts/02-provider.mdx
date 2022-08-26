@@ -5,8 +5,6 @@ id: provider
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Providers
 
@@ -16,15 +14,12 @@ An [application integrator](../../specification/glossary#application-integrator)
 
 Providers are set through the [evaluation API](./evaluation-api#setting-a-provider). They're globally registered and a change affects both new and existing OpenFeature clients.
 
-<ThemedImage
-  alt="Provider Overview"
-  sources={{
-    light: useBaseUrl('/img/provider-overview-light.svg'),
-    dark: useBaseUrl('/img/provider-overview-dark.svg'),
-  }}
-/>
-
-_An example of an OpenFeature provider using a feature flag vendor._
+<figure>
+  <img src={require('@site/static/img/docs/reference/of-architecture.png').default} />
+  <figcaption>
+    <i>An example of an OpenFeature provider for a fictional Flags-R-us service.</i>
+  </figcaption>
+</figure>
 
 ## Implementing Providers
 
