@@ -1,0 +1,125 @@
+# Creating a Hook for the golang-sdk
+
+## Hooks
+
+A [Hook](https://docs.openfeature.dev/docs/specification/sections/hooks) taps into one or more of the flag evaluation's
+lifecycle events (before/after/error/finally) to perform the same action at that point for every evaluation.
+
+## Objective
+
+<i>Create and integrate a spec compliant hook that validates that the result of a flag evaluation is a hex color.</i>
+
+## Repository setup
+
+`Hooks` written for the [`golang-sdk`](https://github.com/open-feature/golang-sdk) are all maintained in the
+[`golang-sdk-contrib`](https://github.com/open-feature/golang-sdk-contrib.git) repository, containing both `hooks` and `providers`.
+The following commands can be used to setup the `golang-sdk-contrib` repository,
+this clones the repository and sets up your hook specific go module under `/hooks/MY-NEW-HOOK-NAME`
+adding a `go.mod` and `README.md` file. The module will then be referenced in the top level `go.work` file.
+```
+git clone https://github.com/open-feature/golang-sdk-contrib.git
+cd golang-sdk-contrib
+make HOOK=MY-NEW-HOOK-NAME new-hook
+make workspace-init
+```
+
+## Creating the hook
+
+In order for the `Hook` to be compatible with the OpenFeature `golang-sdk`, it will need to comply to the OpenFeature spec.
+For the `golang-sdk` this means that it will need to conform to the following interface:
+
+```go
+type Hook interface {
+	Before(hookContext HookContext, hookHints HookHints) (*EvaluationContext, error)
+	After(hookContext HookContext, flagEvaluationDetails EvaluationDetails, hookHints HookHints) error
+	Error(hookContext HookContext, err error, hookHints HookHints)
+	Finally(hookContext HookContext, hookHints HookHints)
+}
+```
+
+In order to conform to the interface we are forced to implement all of these functions, despite only wanting to tap into
+the `After` lifecycle event. Let's leave the other functions empty to achieve this:
+
+```go
+// Hook validates the flag evaluation details After flag resolution
+type Hook struct {
+	Validator validator
+}
+
+func (h Hook) Before(hookContext of.HookContext, hookHints of.HookHints) (*of.EvaluationContext, error) {
+	return nil, nil
+}
+
+func (h Hook) After(hookContext of.HookContext, flagEvaluationDetails of.EvaluationDetails, hookHints of.HookHints) error {
+	err := h.Validator.IsValid(flagEvaluationDetails)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (h Hook) Error(hookContext of.HookContext, err error, hookHints of.HookHints) {}
+
+func (h Hook) Finally(hookContext of.HookContext, hookHints of.HookHints) {}
+```
+
+Notice the `Validator` field of type `validator` in the `Hook` struct. This is defined as such:
+
+```go
+type validator interface {
+	IsValid(flagEvaluationDetails of.EvaluationDetails) error
+}
+```
+
+This allows us to supply <i>any</i> validator that implements this function signature, you can either create your own validator
+or use one of the [existing validators](https://github.com/open-feature/golang-sdk-contrib/hooks/validator).
+This tutorial uses the existing [hex validator](https://github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/hex/hex.go).
+
+## Integrating the hook
+
+Import the [OpenFeature SDK](https://github.com/open-feature/golang-sdk) and the [validator hook](https://github.com/open-feature/golang-sdk-contrib/hooks/validator).
+```go
+package main
+
+import (
+    "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/hex"
+    "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/validator"
+    "github.com/open-feature/golang-sdk/pkg/openfeature"
+)
+```
+
+Create an instance of the `validator hook` struct using the hex validator:
+
+```go
+func main() {
+	v := validator.Hook{Validator: hex.Validator{}}
+}
+```
+
+Register the `NoopProvider`, this simply returns the given default value on flag evaluation:
+
+```go
+openfeature.SetProvider(openfeature.NoopProvider{})
+```
+
+Create the client, call the flag evaluation using the `validator hook` at the point of invocation:
+
+```go
+client := openfeature.NewClient("foo")
+evalOptions := openfeature.NewEvaluationOptions([]openfeature.Hook{v}, openfeature.HookHints{})
+
+_, err := client.
+    StringValueDetails("blue", "invalidhex", openfeature.EvaluationContext{}, evalOptions)
+if err != nil {
+    fmt.Println("err:", err)
+}
+```
+
+Check that the flag evaluation returns an error as `invalidhex` is not a valid hex color
+
+```shell
+go run main.go
+err: execute after hook: invalid format
+```
+
