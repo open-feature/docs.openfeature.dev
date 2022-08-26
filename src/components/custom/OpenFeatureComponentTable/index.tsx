@@ -10,6 +10,8 @@ export class OpenFeatureComponentTable extends React.Component<{
       <section className={clsx('row')}>
         {this.props.items
           .sort((a, b) => a.title.localeCompare(b.title))
+          // webkit and chrome both do sort a bit differently in terms of counting all the elements, need ot check both a and b...lol
+          .sort((a, b) => a.showLast ? 1 : b.showLast ? -1 : 0) 
           .map((item) => {
             return (
               <article className="col col--5 margin-bottom--lg">
