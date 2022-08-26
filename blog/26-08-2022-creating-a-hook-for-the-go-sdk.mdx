@@ -1,4 +1,10 @@
-# Creating a Hook for the golang-sdk
+---
+slug: creating-a-hook-for-the-go-sdk
+title: Creating a Hook for the golang-sdk
+authors: [skyerus]
+tags: [golang, blog, tutorial, golang-sdk, hooks]
+unlisted: false
+---
 
 ## Hooks
 
@@ -8,6 +14,10 @@ lifecycle events (before/after/error/finally) to perform the same action at that
 ## Objective
 
 <i>Create and integrate a spec compliant hook that validates that the result of a flag evaluation is a hex color.</i>
+
+## Prerequisites
+
+- Golang 1.17
 
 ## Repository setup
 
@@ -78,7 +88,13 @@ This tutorial uses the existing [hex validator](https://github.com/open-feature/
 
 ## Integrating the hook
 
-Import the [OpenFeature SDK](https://github.com/open-feature/golang-sdk) and the [validator hook](https://github.com/open-feature/golang-sdk-contrib/hooks/validator).
+1. Install dependencies
+```shell
+go get github.com/open-feature/golang-sdk
+go get github.com/open-feature/golang-sdk-contrib/hooks/validator
+```
+
+2. Import the dependencies
 ```go
 package main
 
@@ -89,37 +105,38 @@ import (
 )
 ```
 
-Create an instance of the `validator hook` struct using the hex validator:
-
+3. Create an instance of the `validator hook` struct using the hex validator
 ```go
 func main() {
 	v := validator.Hook{Validator: hex.Validator{}}
 }
 ```
 
-Register the `NoopProvider`, this simply returns the given default value on flag evaluation:
-
+4. Register the `NoopProvider`, this simply returns the given default value on flag evaluation.
+This step is optional, the sdk uses the `NoopProvider` by default but we're explicitly setting it for completeness
 ```go
 openfeature.SetProvider(openfeature.NoopProvider{})
 ```
 
-Create the client, call the flag evaluation using the `validator hook` at the point of invocation:
+5. Create the client, call the flag evaluation using the `validator hook` at the point of invocation
 
 ```go
 client := openfeature.NewClient("foo")
 evalOptions := openfeature.NewEvaluationOptions([]openfeature.Hook{v}, openfeature.HookHints{})
 
-_, err := client.
+result, err := client.
     StringValueDetails("blue", "invalidhex", openfeature.EvaluationContext{}, evalOptions)
 if err != nil {
     fmt.Println("err:", err)
 }
+fmt.Println("result:", result)
 ```
 
-Check that the flag evaluation returns an error as `invalidhex` is not a valid hex color
+6. Check that the flag evaluation returns an error as `invalidhex` is not a valid hex color
 
 ```shell
 go run main.go
 err: execute after hook: invalid format
+result {blue 1 {invalidhex   }}
 ```
-
+Note that despite getting an error we still get a result.
