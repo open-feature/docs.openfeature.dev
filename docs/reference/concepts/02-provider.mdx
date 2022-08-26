@@ -5,8 +5,6 @@ id: provider
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Providers
 
@@ -16,15 +14,12 @@ An [application integrator](../../specification/glossary#application-integrator)
 
 Providers are set through the [evaluation API](./evaluation-api#setting-a-provider). They're globally registered and a change affects both new and existing OpenFeature clients.
 
-<ThemedImage
-  alt="Provider Overview"
-  sources={{
-    light: useBaseUrl('/img/provider-overview-light.svg'),
-    dark: useBaseUrl('/img/provider-overview-dark.svg'),
-  }}
-/>
-
-_An example of an OpenFeature provider using a feature flag vendor._
+<figure>
+  <img src={require('@site/static/img/docs/reference/of-architecture.png').default} />
+  <figcaption>
+    <i>An example of an OpenFeature provider for a fictional Flags-R-us service.</i>
+  </figcaption>
+</figure>
 
 ## Implementing Providers
 
@@ -45,7 +40,7 @@ If you're creating a new repository, it's recommended to use one the following n
 
 :::note
 
-It is **not** required that a provider is open source, but highly recommended.
+It is **not** required that a provider is open source, but it's highly recommended.
 
 :::
 
@@ -65,26 +60,42 @@ An example of what it could look like in NPM: `@openfeature/flagd-provider`
 <TabItem value="js" label="TypeScript">
 
 ```ts
-import { Provider, ResolutionDetails } from '@open';
+import { Provider, ResolutionDetails, EvaluationContext } from '@openfeature/nodejs-sdk';
 
 export class MyFeatureProvider implements Provider {
   readonly metadata = {
     name: 'My Feature Provider',
   } as const;
 
-  resolveBooleanEvaluation(flagKey: string, defaultValue: boolean): Promise<ResolutionDetails<boolean>> {
+  resolveBooleanEvaluation(
+    flagKey: string,
+    defaultValue: boolean,
+    context: EvaluationContext
+  ): Promise<ResolutionDetails<boolean>> {
     // code to resolve boolean details
   }
 
-  resolveStringEvaluation(flagKey: string, defaultValue: string): Promise<ResolutionDetails<string>> {
+  resolveStringEvaluation(
+    flagKey: string,
+    defaultValue: string,
+    context: EvaluationContext
+  ): Promise<ResolutionDetails<string>> {
     // code to resolve string details
   }
 
-  resolveNumberEvaluation(flagKey: string, defaultValue: number): Promise<ResolutionDetails<number>> {
+  resolveNumberEvaluation(
+    flagKey: string,
+    defaultValue: number,
+    context: EvaluationContext
+  ): Promise<ResolutionDetails<number>> {
     // code to resolve number details
   }
 
-  resolveObjectEvaluation<T extends object>(flagKey: string, defaultValue: T): Promise<ResolutionDetails<T>> {
+  resolveObjectEvaluation<T extends object>(
+    flagKey: string,
+    defaultValue: T,
+    context: EvaluationContext
+  ): Promise<ResolutionDetails<T>> {
     // code to resolve object details
   }
 }
@@ -113,27 +124,27 @@ public class MyFeatureProvider implements FeatureProvider {
     }
 
     @Override
-    public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<Boolean> getBooleanEvaluation(String key, Boolean defaultValue, EvaluationContext ctx) {
       // code to resolve boolean details
     }
 
     @Override
-    public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<String> getStringEvaluation(String key, String defaultValue, EvaluationContext ctx) {
       // code to resolve string details
     }
 
     @Override
-    public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<Integer> getIntegerEvaluation(String key, Integer defaultValue, EvaluationContext ctx) {
       // code to resolve integer details
     }
 
     @Override
-    public ProviderEvaluation<Double> getDoubleEvaluation(String key, Double defaultValue, EvaluationContext ctx, FlagEvaluationOptions options) {
+    public ProviderEvaluation<Double> getDoubleEvaluation(String key, Double defaultValue, EvaluationContext ctx) {
       // code to resolve double details
     }
 
     @Override
-    public <T> ProviderEvaluation<T> getObjectEvaluation(String key, T defaultValue, EvaluationContext invocationContext, FlagEvaluationOptions options) {
+    public <T> ProviderEvaluation<T> getObjectEvaluation(String key, T defaultValue, EvaluationContext invocationContext) {
       // code to resolve object details
     }
 }
@@ -156,36 +167,31 @@ public class MyFeatureProvider : FeatureProvider
     }
 
     public Task<ResolutionDetails<bool>> ResolveBooleanValue(string flagKey, bool defaultValue,
-        EvaluationContext context = null,
-        FlagEvaluationOptions config = null)
+        EvaluationContext context = null)
     {
         // code to resolve boolean details
     }
 
     public Task<ResolutionDetails<string>> ResolveStringValue(string flagKey, string defaultValue,
-        EvaluationContext context = null,
-        FlagEvaluationOptions config = null)
+        EvaluationContext context = null)
     {
         // code to resolve string details
     }
 
     public Task<ResolutionDetails<int>> ResolveIntegerValue(string flagKey, int defaultValue,
-        EvaluationContext context = null,
-        FlagEvaluationOptions config = null)
+        EvaluationContext context = null)
     {
         // code to resolve integer details
     }
 
     public Task<ResolutionDetails<double>> ResolveDoubleValue(string flagKey, double defaultValue,
-        EvaluationContext context = null,
-        FlagEvaluationOptions config = null)
+        EvaluationContext context = null)
     {
         // code to resolve double details
     }
 
     public Task<ResolutionDetails<T>> ResolveStructureValue<T>(string flagKey, T defaultValue,
-        EvaluationContext context = null,
-        FlagEvaluationOptions config = null)
+        EvaluationContext context = null)
     {
         // code to resolve object details
     }
@@ -207,27 +213,27 @@ func (e MyFeatureProvider) Metadata() Metadata {
 }
 
 // BooleanEvaluation returns a boolean flag
-func (e MyFeatureProvider) BooleanEvaluation(flag string, defaultValue bool, evalCtx EvaluationContext, options EvaluationOptions) BoolResolutionDetail {
+func (e MyFeatureProvider) BooleanEvaluation(flag string, defaultValue bool, evalCtx EvaluationContext) BoolResolutionDetail {
 	// code to evaluate boolean
 }
 
 // StringEvaluation returns a string flag
-func (e MyFeatureProvider) StringEvaluation(flag string, defaultValue string, evalCtx EvaluationContext, options EvaluationOptions) StringResolutionDetail {
+func (e MyFeatureProvider) StringEvaluation(flag string, defaultValue string, evalCtx EvaluationContext) StringResolutionDetail {
 	// code to evaluate string
 }
 
 // FloatEvaluation returns a float flag
-func (e MyFeatureProvider) FloatEvaluation(flag string, defaultValue float64, evalCtx EvaluationContext, options EvaluationOptions) FloatResolutionDetail {
+func (e MyFeatureProvider) FloatEvaluation(flag string, defaultValue float64, evalCtx EvaluationContext) FloatResolutionDetail {
 	// code to evaluate float
 }
 
 // IntEvaluation returns an int flag
-func (e MyFeatureProvider) IntEvaluation(flag string, defaultValue int64, evalCtx EvaluationContext, options EvaluationOptions) IntResolutionDetail {
+func (e MyFeatureProvider) IntEvaluation(flag string, defaultValue int64, evalCtx EvaluationContext) IntResolutionDetail {
 	// code to evaluate int
 }
 
 // ObjectEvaluation returns an object flag
-func (e MyFeatureProvider) ObjectEvaluation(flag string, defaultValue interface{}, evalCtx EvaluationContext, options EvaluationOptions) ResolutionDetail {
+func (e MyFeatureProvider) ObjectEvaluation(flag string, defaultValue interface{}, evalCtx EvaluationContext) ResolutionDetail {
 	// code to evaluate object
 }
 
