@@ -14,14 +14,15 @@ The core of any flag `Provider` is the evaluation logic used to provide the flag
 Flags are configured using the structs described below, and are stored as environment variables:
 ```go
 type StoredFlag struct {
-	DefaultVariant string             `json:"defaultVariant"`
-	Variants       map[string]Variant `json:"variant"`
+	DefaultVariant string    `json:"defaultVariant"`
+	Variants       []Variant `json:"variant"`
 }
 
 type Variant struct {
 	Criteria     []Criteria  `json:"criteria"`
 	TargetingKey string      `json:"targetingKey"`
 	Value        interface{} `json:"value"`
+	Name         string      `json:"name"`
 }
 
 type Criteria struct {
@@ -33,8 +34,9 @@ example JSON:
 ```json
 {
     "defaultVariant":"not-yellow",
-    "variants": {
-        "yellow": {
+    "variants": [
+        {
+			"name": "yellow-with-key",
             "targetingKey":"user",
             "criteria": [
                 {
@@ -43,12 +45,23 @@ example JSON:
             ],
             "value":true
         },
-        "not-yellow": {
-            "targetingKey":"user",
+		{
+			"name": "yellow",
+            "targetingKey":"",
+            "criteria": [
+                {
+                    "color":"yellow"
+                }
+            ],
+            "value":true
+        },
+        {
+			"name": "not-yellow",
+            "targetingKey":"",
             "criteria": [],
             "value":false
         }
-    }
+	]
 }
 ```
 Each flag value contains an array of `Variants`, each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `EvaluationContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
@@ -69,8 +82,12 @@ const (
 )
 
 func (f *StoredFlag) Evaluate(evalCtx openfeature.EvaluationContext) (string, string, interface{}, error) {
-	for name, variant := range f.Variants {
-		if variant.TargetingKey != evalCtx.TargetingKey {
+	var defaultVariant *Variant
+	for _, variant := range f.Variants {
+		if variant.Name == f.DefaultVariant {
+			defaultVariant = &variant
+		}
+		if variant.TargetingKey != "" && variant.TargetingKey != evalCtx.TargetingKey {
 			continue
 		}
 		match := true
@@ -82,14 +99,13 @@ func (f *StoredFlag) Evaluate(evalCtx openfeature.EvaluationContext) (string, st
 			}
 		}
 		if match {
-			return name, ReasonTargetingMatch, variant.Value, nil
+			return variant.Name, ReasonTargetingMatch, variant.Value, nil
 		}
 	}
-	defaultVariant, ok := f.Variants[f.DefaultVariant]
-	if !ok {
+	if defaultVariant == nil {
 		return "", ReasonError, nil, errors.New(ErrorParse)
 	}
-	return f.DefaultVariant, ReasonStatic, defaultVariant.Value, nil
+	return defaultVariant.Name, ReasonStatic, defaultVariant.Value, nil
 }
 ```
 The above function demonstrates how this basic evaluator will work in this example, of course in other providers these can be far more complex, and the logic does not need to sit within the application.  
@@ -238,8 +254,20 @@ import (
 func init() {
 	flagDefinition := fromEnv.StoredFlag{
 		DefaultVariant: "not-yellow",
-		Variants: map[string]fromEnv.Variant{
-			"yellow": {
+		Variants: []fromEnv.Variant{
+			{
+				Name: "yellow-with-targeting",
+				TargetingKey: "user",
+				Value:        true,
+				Criteria: []fromEnv.Criteria{
+					{
+						Key:   "color",
+						Value: "yellow",
+					},
+				},
+			},
+			{
+				Name: "yellow",
 				TargetingKey: "",
 				Value:        true,
 				Criteria: []fromEnv.Criteria{
@@ -249,7 +277,8 @@ func init() {
 					},
 				},
 			},
-			"not-yellow": {
+			{
+				Name: "not-yellow",
 				TargetingKey: "",
 				Value:        false,
 				Criteria: []fromEnv.Criteria{
@@ -286,6 +315,19 @@ func main() {
 	)
 	printResponse(res.ResolutionDetail, err)
 
+	fmt.Println("I am yellow with targeting!")
+	res, err := client.BooleanValueDetails(
+		"AM_I_YELLOW",
+		false,
+		openfeature.EvaluationContext{
+			Attributes: map[string]interface{}{
+				"color": "yellow",
+			},
+			TargetingKey: "user",
+		}
+	)
+	printResponse(res.ResolutionDetail, err)
+
 	fmt.Println("I am asking for a string!")
 	res, err = client.StringValueDetails(
 		"AM_I_YELLOW",
@@ -317,6 +359,11 @@ Console output:
 I am yellow!
 value: true
 variant: yellow
+reason: TARGETING_MATCH
+--------
+I am yellow with targeting!
+value: true
+variant: yellow-with-targeting
 reason: TARGETING_MATCH
 --------
 I am asking for a string!
