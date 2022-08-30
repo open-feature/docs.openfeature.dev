@@ -17,7 +17,7 @@ lifecycle events (before/after/error/finally) to perform the same action at that
 
 ## Prerequisites
 
-- Golang 1.17
+- Golang 1.17+
 
 ## Repository setup
 
@@ -84,7 +84,7 @@ type validator interface {
 
 This allows us to supply <i>any</i> validator that implements this function signature, you can either create your own validator
 or use one of the [existing validators](https://github.com/open-feature/golang-sdk-contrib/hooks/validator).
-This tutorial uses the existing [hex validator](https://github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/hex/hex.go).
+This tutorial uses the existing [hex regex validator](https://github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/regex/hex.go).
 
 ## Integrating the hook
 
@@ -99,16 +99,22 @@ go get github.com/open-feature/golang-sdk-contrib/hooks/validator
 package main
 
 import (
-    "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/hex"
+    "fmt"
+    "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/regex"
     "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/validator"
     "github.com/open-feature/golang-sdk/pkg/openfeature"
+    "log"
 )
 ```
 
-3. Create an instance of the `validator hook` struct using the hex validator
+3. Create an instance of the `validator hook` struct using the regex hex validator
 ```go
 func main() {
-	v := validator.Hook{Validator: hex.Validator{}}
+	hexValidator, err := regex.Hex()
+    if err != nil {
+        log.Fatal(err)
+    }
+    v := validator.Hook{Validator: hexValidator}
 }
 ```
 
@@ -136,7 +142,7 @@ fmt.Println("result:", result)
 
 ```shell
 go run main.go
-err: execute after hook: invalid format
+err: execute after hook: regex doesn't match on flag value
 result {blue 1 {invalidhex   }}
 ```
 Note that despite getting an error we still get a result.
