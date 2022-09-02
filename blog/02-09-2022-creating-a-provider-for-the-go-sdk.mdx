@@ -10,7 +10,7 @@
 
 ## Providers
 
-A [Provider](https://docs.openfeature.dev/docs/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as a local JSON evaluator, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](https://docs.openfeature.dev/docs/specification/).  
+A [Provider](https://docs.openfeature.dev/docs/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as an interface for a key value store, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](https://docs.openfeature.dev/docs/specification/).  
 In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.  
 
 
@@ -72,7 +72,7 @@ example JSON:
 	]
 }
 ```
-Each flag value contains an array of `Variants`, each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `EvaluationContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
+Each flag value contains an array of [`Variants`](https://docs.openfeature.dev/docs/specification/glossary#variant), each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `EvaluationContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
 The response also includes the the variant name, the reason for the resulting value (such as `ERROR`, `STATIC` or `TARGETING_MATCH`) and any associated error (such as `PARSE_ERROR`). 
 These values form the type naive `ResolutionDetails` structure, which is then wrapped in a type specific parent for each response type, such as `BoolResolutionDetail`. This will be discussed in the [Creating a Compliant Provider](#creating-a-compliant-provider) section.
 
