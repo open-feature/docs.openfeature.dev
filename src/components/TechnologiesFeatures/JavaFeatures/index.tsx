@@ -1,7 +1,7 @@
 import { faJava } from '@fortawesome/free-brands-svg-icons';
 import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
-
+import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 
 export class JavaFeatures
  extends React.Component {
@@ -25,7 +25,14 @@ export class JavaFeatures
         `,
         codeBlockLanguage: 'xml'
       }}
-      providers={[]}
+      providers={[
+        {
+          title: 'flagd Provider',
+          description: 'A provider for flagd',
+          href: 'https://github.com/open-feature/java-sdk-contrib/tree/main/providers/flagd',
+          svg: FlagdSvg
+        }
+      ]}
       hooks={[]}
       />;
   }
