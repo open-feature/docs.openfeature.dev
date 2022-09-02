@@ -1,18 +1,3 @@
-.svg {
-  width: 45px;
-  margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
-}
-
-.svgIcon svg {
-  width: 45px;
-  height: 45px;
-}
-
-.svgIcon {
-  fill: var(--ifm-color-emphasis-800);
-  margin: var(--ifm-heading-margin-top) 0 var(--ifm-heading-margin-bottom) 0;
-}
-
 .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
@@ -41,6 +26,6 @@
   font-size: 0.8rem;
 }
 
-a:hover .svgIcon {
+a:hover .svgOrIcon {
   fill: var(--ifm-color-emphasis-700);
 }
