@@ -1,15 +1,13 @@
-name: Register Provider
+name: 🧩 Document Provider
 description: Add your provider to the OpenFeature documentation so others can discover and use it.
 title: "[Provider]: "
 labels:
   - provider
-# assignees:
-#   - open-feature/maintainers
 body:
   - type: dropdown
     attributes:
       label: SDK
-      description: What SDK does work with?
+      description: What SDK does this work with?
       multiple: false
       options:
         - Java
@@ -20,33 +18,17 @@ body:
         - Other (Not available in the list)
     validations:
       required: true
-  - type: dropdown
+  - type: input
     attributes:
       label: Vendor/Tool
       description: What vendor or tool does this provider integrate with?
-      multiple: false
-      options:
-        - ConfigCat
-        - DevCycle
-        - Flagship
-        - Flagsmith
-        - Flipt
-        - GO Feature Flag
-        - GrowthBook
-        - Harness
-        - LaunchDarkly
-        - PostHog
-        - RemoteFlags
-        - Split
-        - Storytel
-        - Unleash
-        - Other (Not available in the list)
+      placeholder: Flags-R-us
     validations:
       required: true
   - type: dropdown
     attributes:
       label: Maintainer
-      description: Who is primarily responsible for maintenance?
+      description: Is this vendor or community maintained?
       multiple: false
       options:
         - Vendor
@@ -54,23 +36,27 @@ body:
         - Other (Not available in the list)
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: Artifacts
+      description: Links to any published artifacts.
+      placeholder: |
+        npm: https://www.npmjs.com/package/@openfeature/example-provider
+    validations:
+      required: true
   - type: input
     attributes:
       label: Repository
       description: A link to the repository that contains the provider's code.
       placeholder: https://github.com/open-feature/example-provider
-  - type: textarea
-    attributes:
-      label: Artifacts
-      description: Links to any published artifact.
-      placeholder: |
-        npm: https://www.npmjs.com/package/@openfeature/example-provider
+    validations:
+      required: false
   - type: textarea
     attributes:
       label: Anything else?
       description: |
         Links? References? Anything that will give us more ways to promote your provider!
 
-        Tip: A black/white svg logo is helpful when a new vendor/tool.
+        Tip: A monochrome svg logo is helpful when a new vendor or tool.
     validations:
       required: false
