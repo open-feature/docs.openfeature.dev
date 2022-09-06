@@ -18,6 +18,6 @@ body:
   - type: textarea
     attributes:
       label: Steps to reproduce
-      description: Describe as best you can the problem. Please provide us scenario file, logs or anything you have that can help us to understand.
+      description: Describe as best you can the problem. Please provide us a scenario file, logs or anything you have that can help us to understand.
     validations:
       required: false
