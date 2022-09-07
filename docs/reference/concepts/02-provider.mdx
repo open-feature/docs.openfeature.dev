@@ -283,7 +283,7 @@ No. You should document the version of the OpenFeature specification your provid
 
 Targeting keys are not required by the Evaluation API. If your backend requires one, you have a couple options:
 
-- Log and indicate an error in your provider (this will result in the default value being returned).
+- Indicate an error in your provider (this will result in the default value being returned).
 - Generate one automatically.
 
 #### How should I handle error conditions?
@@ -295,7 +295,7 @@ If an error condition is encountered in your provider, an error should be [indic
 If your backend system doesn't support a particular flag type, you can:
 
 - Do a conversion from a type the system supports (for example, store JSON objects in a string, or booleans as `0`/`1`), and document this pattern.
-- Log and indicate an error in your provider (this will result in the default value being returned).
+- Indicate an error in your provider (this will result in the default value being returned).
 
 #### How can people find my provider?
 
