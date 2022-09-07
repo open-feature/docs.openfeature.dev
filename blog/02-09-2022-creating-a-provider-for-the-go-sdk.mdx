@@ -1,0 +1,383 @@
+---
+ slug: creating-a-provider-for-the-go-sdk
+ title: Creating a Provider for the golang-sdk
+ authors: [jamesmilligan]
+ tags: [golang, blog, tutorial, golang-sdk, providers]
+ draft: false
+---
+
+# Creating a Provider For The golang-sdk
+
+## Providers
+
+A [Provider](https://docs.openfeature.dev/docs/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as an interface for a key value store, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](https://docs.openfeature.dev/docs/specification/).  
+In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.  
+
+
+The following section describes how the flag evaluator portion of this project has been constructed, to skip to the `Provider` specific implementations, [click here](#creating-a-compliant-provider).  
+
+## Creating the flag evaluator
+
+The core of any flag `Provider` is the evaluation logic used to provide the flag values from the provided metadata (referred to as the [Evaluation Context](https://docs.openfeature.dev/docs/specification/sections/evaluation-context)). For this example I have put together a very simple json evaluator. 
+Flags are configured using the structs described below, and are stored as environment variables:
+```go
+type StoredFlag struct {
+	DefaultVariant string    `json:"defaultVariant"`
+	Variants       []Variant `json:"variant"`
+}
+
+type Variant struct {
+	Criteria     []Criteria  `json:"criteria"`
+	TargetingKey string      `json:"targetingKey"`
+	Value        interface{} `json:"value"`
+	Name         string      `json:"name"`
+}
+
+type Criteria struct {
+	Key   string      `json:"key"`
+	Value interface{} `json:"value"`
+}
+```
+example JSON:
+```json
+{
+    "defaultVariant":"not-yellow",
+    "variants": [
+        {
+			"name": "yellow-with-key",
+            "targetingKey":"user",
+            "criteria": [
+                {
+                    "color":"yellow"
+                }
+            ],
+            "value":true
+        },
+		{
+			"name": "yellow",
+            "targetingKey":"",
+            "criteria": [
+                {
+                    "color":"yellow"
+                }
+            ],
+            "value":true
+        },
+        {
+			"name": "not-yellow",
+            "targetingKey":"",
+            "criteria": [],
+            "value":false
+        }
+	]
+}
+```
+Each flag value contains an array of [`Variants`](https://docs.openfeature.dev/docs/specification/glossary#variant), each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `EvaluationContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
+The response also includes the the variant name, the reason for the resulting value (such as `ERROR`, `STATIC` or `TARGETING_MATCH`) and any associated error (such as `PARSE_ERROR`). 
+These values form the type naive `ResolutionDetails` structure, which is then wrapped in a type specific parent for each response type, such as `BoolResolutionDetail`. This will be discussed in the [Creating a Compliant Provider](#creating-a-compliant-provider) section.
+
+```go
+import (
+	"errors"
+	"github.com/open-feature/golang-sdk/pkg/openfeature"
+)
+
+const (
+	ReasonError          = "ERROR"
+	ReasonStatic         = "STATIC"
+	ReasonTargetingMatch = "TARGETING_MATCH"
+	ErrorParse        	 = "PARSE_ERROR"
+)
+
+func (f *StoredFlag) Evaluate(evalCtx openfeature.EvaluationContext) (string, string, interface{}, error) {
+	var defaultVariant *Variant
+	for _, variant := range f.Variants {
+		if variant.Name == f.DefaultVariant {
+			defaultVariant = &variant
+		}
+		if variant.TargetingKey != "" && variant.TargetingKey != evalCtx.TargetingKey {
+			continue
+		}
+		match := true
+		for _, criteria := range variant.Criteria {
+			val, ok := evalCtx.Attributes[criteria.Key]
+			if !ok || val != criteria.Value {
+				match = false
+				break
+			}
+		}
+		if match {
+			return variant.Name, ReasonTargetingMatch, variant.Value, nil
+		}
+	}
+	if defaultVariant == nil {
+		return "", ReasonError, nil, errors.New(ErrorParse)
+	}
+	return defaultVariant.Name, ReasonStatic, defaultVariant.Value, nil
+}
+```
+The above function demonstrates how this basic evaluator will work in this example, of course in other providers these can be far more complex, and the logic does not need to sit within the application.  
+This JSON evaluator can then be paired with a simple function for reading and parsing the `StoredFlag` values from environment variables (as seen in the example below), leaving only the integration with the `golang-sdk` to go. (and some testing!)  
+```go
+func FetchStoredFlag(key string) (StoredFlag, error) {
+	v := StoredFlag{}
+	if val := os.Getenv(key); val != "" {
+		if err := json.Unmarshal([]byte(val), &v); err != nil {
+			return v, errors.New(ErrorParse)
+		}
+		return v, nil
+	}
+	return v, errors.New(ErrorFlagNotFound)
+}
+``` 
+
+## Creating a Compliant Provider  
+
+### Repository Setup  
+`Providers` written for the [`golang-sdk`](https://github.com/open-feature/golang-sdk) are all maintained in the [`golang-sdk-contrib`](https://github.com/open-feature/golang-sdk-contrib.git) repository, containing both `hooks` and `providers`.  
+The following commands can be used to setup the `golang-sdk-conrib` repository, they will clone the repository and set up your provider specific go module under `/providers/MY-NEW-PROVIDER-NAME` adding a `go.mod` and `README.md` file. Your module will them be referenced in the top level `go.work` file.
+```
+git clone https://github.com/open-feature/golang-sdk-contrib.git
+cd golang-sdk-contrib
+make PROVIDER=MY-NEW-PROVIDER-NAME new-provider
+make workspace-init
+```
+
+### Creating Your Provider
+In order for your feature flag `Provider` to be compatible with the OpenFeature `golang-sdk` , it will need to comply with the OpenFeature spec. For the `golang-sdk` this means that it will need to fit to the following interface:
+
+```go
+type FeatureProvider interface {
+	Metadata() Metadata
+	BooleanEvaluation(flagKey string, defaultValue bool, evalCtx EvaluationContext) BoolResolutionDetail
+	StringEvaluation(flagKey string, defaultValue string, evalCtx EvaluationContext) StringResolutionDetail
+	FloatEvaluation(flagKey string, defaultValue float64, evalCtx EvaluationContext) FloatResolutionDetail
+	IntEvaluation(flagKey string, defaultValue int64, evalCtx EvaluationContext) IntResolutionDetail
+	ObjectEvaluation(flagKey string, defaultValue interface{}, evalCtx EvaluationContext) ResolutionDetail
+	Hooks() []Hook
+}
+```
+Argument  | Description
+------------- | -------------
+`flagKey`  | A string key representing the flag configuration that should be used in this evaluation.
+`defaultValue`  | The default response to be returned in the `ResolutionDetail` in the case of an error
+`evalCtx`  | The `EvaluationContext` provides ambient information for the purposes of flag evaluation. Effectively acting as `metadata` for a request
+`ResolutionDetail`  | The response object from a flag evaluation, it contains the following fields: Value (`interface{}`), Variant (`string`), Reason (`string`), ErrorCode (`string`)
+`XxxResolutionDetail`  | The type specific wrapper for the `ResolutionDetail` struct. Contains two attributes: Value (type specific), ResolutionDetail (`ResolutionDetail`)
+
+We can use our previously defined logic to build the `Evaluation` methods with ease, in the below example the core logic has been refactored into a separate function (`resolveFlag()`) to reduce code repetition, returning the `ResolutionDetail` structure directly. This means that the only type specific code required is a type cast the returned `interface{}` value, and for the type specific `ResolutionDetail` to be returned, e.g. `BoolResolutionDetail`.
+```go
+type Provider struct {
+	EnvFetch EnvFetch
+}
+
+const (
+	ReasonError       = "ERROR"
+    ErrorTypeMismatch = "ERROR_TYPE_MISMATCH"
+)
+
+func (p *Provider) resolveFlag(flagKey string, defaultValue interface{}, evalCtx openfeature.EvaluationContext) openfeature.ResolutionDetail {
+	// fetch the stored flag from environment variables
+	res, err := p.EnvFetch.FetchStoredFlag(flagKey)
+	if err != nil {
+		return openfeature.ResolutionDetail{
+			Reason:    ReasonError,
+			Value:     defaultValue,
+			ErrorCode: err.Error(),
+		}
+	}
+	// evaluate the stored flag to return the variant, reason, value and error
+	variant, reason, value, err := res.Evaluate(evalCtx)
+	if err != nil {
+		return openfeature.ResolutionDetail{
+			Reason:    ReasonError,
+			Value:     defaultValue,
+			ErrorCode: err.Error(),
+		}
+	}
+	// return the type naive ResolutionDetail structure
+	return openfeature.ResolutionDetail{
+		Reason:  reason,
+		Variant: variant,
+		Value:   value,
+	}
+}
+
+func (p *Provider) BooleanEvaluation(flagKey string, defaultValue bool, evalCtx openfeature.EvaluationContext) openfeature.BoolResolutionDetail {
+	res := p.resolveFlag(flagKey, defaultValue, evalCtx)
+	// ensure the returned value is a bool
+	v, ok := res.Value.(bool)
+	if !ok {
+		return openfeature.BoolResolutionDetail{
+			Value: defaultValue,
+			ResolutionDetail: openfeature.ResolutionDetail{
+				Reason:    ReasonError,
+				Value:     defaultValue,
+				ErrorCode: ErrorTypeMismatch,
+			},
+		}
+	}
+	// wrap the ResolutionDetail in a type specific parent
+	return openfeature.BoolResolutionDetail{
+		Value:            v,
+		ResolutionDetail: res,
+	}
+}
+```
+Based upon this `BooleanEvaluation` method, the remaining `Evaluation` methods are simple to populate, leaving only 2 more methods, `Metadata` and `Hooks`.
+
+the `Metadata()` method is very simple to implement, it simply needs to return a [`Metadata` object](https://docs.openfeature.dev/docs/specification/sections/providers#requirement-21), currently this object only requires one field - `Name`
+```go
+func (p *Provider) Metadata() openfeature.Metadata {
+	return openfeature.Metadata{
+		Name: "environment-flag-evaluator",
+	}
+}
+```
+
+The `Hooks()` method gives the `golang-sdk` access to `Provider` hooks, this sits outside the scope of this tutorial, so for now we will just return an empty slice of hooks. [Link to spec.](https://docs.openfeature.dev/docs/specification/sections/providers#requirement-210)
+```go
+func (p *Provider) Hooks() []openfeature.Hook {
+	return []openfeature.Hook{}
+}
+```
+
+Now that the `Provider` conforms to the OpenFeature spec, it can be registered to the OpenFeature `golang-sdk` and used for flag evaluation.  
+
+## Example usage
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+
+	fromEnv "github.com/open-feature/golang-sdk-contrib/providers/from-env/pkg"
+	"github.com/open-feature/golang-sdk/pkg/openfeature"
+)
+
+// init function sets a bool flag environment variable called AM_I_YELLOW
+func init() {
+	flagDefinition := fromEnv.StoredFlag{
+		DefaultVariant: "not-yellow",
+		Variants: []fromEnv.Variant{
+			{
+				Name: "yellow-with-targeting",
+				TargetingKey: "user",
+				Value:        true,
+				Criteria: []fromEnv.Criteria{
+					{
+						Key:   "color",
+						Value: "yellow",
+					},
+				},
+			},
+			{
+				Name: "yellow",
+				TargetingKey: "",
+				Value:        true,
+				Criteria: []fromEnv.Criteria{
+					{
+						Key:   "color",
+						Value: "yellow",
+					},
+				},
+			},
+			{
+				Name: "not-yellow",
+				TargetingKey: "",
+				Value:        false,
+				Criteria: []fromEnv.Criteria{
+					{
+						Key:   "color",
+						Value: "not yellow",
+					},
+				},
+			},
+		},
+	}
+	flagM, _ := json.Marshal(flagDefinition)
+	os.Setenv("AM_I_YELLOW", string(flagM))
+}
+
+func main() {
+	// create instance of the new provider
+	provider := fromEnv.Provider{}
+	// register the provider against the golang-sdk
+	openfeature.SetProvider(&provider)
+	// create a client from via the go-sdk
+	client := openfeature.NewClient("am-i-yellow-client")
+
+	// we are now able to evaluate our stored flags, providing different EvaluationContexts to manipulate the response
+	fmt.Println("I am yellow!")
+	res, err := client.BooleanValueDetails(
+		"AM_I_YELLOW",
+		false,
+		openfeature.EvaluationContext{
+			Attributes: map[string]interface{}{
+				"color": "yellow",
+			},
+		}
+	)
+	printResponse(res.ResolutionDetail, err)
+
+	fmt.Println("I am yellow with targeting!")
+	res, err := client.BooleanValueDetails(
+		"AM_I_YELLOW",
+		false,
+		openfeature.EvaluationContext{
+			Attributes: map[string]interface{}{
+				"color": "yellow",
+			},
+			TargetingKey: "user",
+		}
+	)
+	printResponse(res.ResolutionDetail, err)
+
+	fmt.Println("I am asking for a string!")
+	res, err = client.StringValueDetails(
+		"AM_I_YELLOW",
+		"i am a default value",
+		openfeature.EvaluationContext{
+			Attributes: map[string]interface{}{
+				"color": "not yellow",
+			},
+		}
+	)
+	printResponse(res.ResolutionDetail, err)
+}
+
+// simple response printing function
+func printResponse(res openfeature.ResolutionDetail, err error) {
+	fmt.Printf("value: %v\n", res.Value)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	} else {
+		fmt.Printf("variant: %v\n", res.Variant)
+		fmt.Printf("reason: %v\n", res.Reason)
+	}
+	fmt.Println("--------")
+}
+
+```
+Console output:
+```
+I am yellow!
+value: true
+variant: yellow
+reason: TARGETING_MATCH
+--------
+I am yellow with targeting!
+value: true
+variant: yellow-with-targeting
+reason: TARGETING_MATCH
+--------
+I am asking for a string!
+value: i am a default value
+error: evaluate the flag: TYPE_MISMATCH
+--------
+```
+
+The provider used in this example can be found [here](https://github.com/open-feature/golang-sdk-contrib/tree/main/providers/from-env)
