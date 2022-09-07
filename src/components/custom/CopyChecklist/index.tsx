@@ -18,11 +18,10 @@ export class CopyChecklist extends React.Component<{
   constructor(props: { items: string[]; } | Readonly<{ items: string[]; }>){
     super(props);
     this.md = new Remarkable();
+    this.md.renderer = new RemarkableReactRenderer();
   }
 
   override render() {
-    this.md.renderer = new RemarkableReactRenderer();
-
     return (
       <CopyToClipboard text={this.generateMd(this.props.items)}>
         <div style={{ position: 'relative' }}>
