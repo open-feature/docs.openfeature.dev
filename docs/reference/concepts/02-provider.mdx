@@ -286,6 +286,8 @@ Targeting keys are not required by the Evaluation API. If your backend requires 
 - Indicate an error in your provider (this will result in the default value being returned).
 - Generate one automatically.
 
+Be sure to document this behavior.
+
 #### How should I handle error conditions?
 
 If an error condition is encountered in your provider, an error should be [indicated](/docs/specification/sections/providers#flag-value-resolution) by throwing or returning an error, as language idioms dictate. The SDK will ensure the default value is returned and expose the relevant error data.
