@@ -5,6 +5,8 @@ id: provider
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { CopyChecklist } from '@site/src/components/custom/CopyChecklist';
+
 
 # Providers
 
@@ -246,3 +248,65 @@ func (e MyFeatureProvider) Hooks() []Hook {
 </TabItem>
 
 </Tabs>
+
+### Checklist
+
+Here is a checklist of important considerations when implementing a provider.
+
+#### Functional requirements
+
+<CopyChecklist items={[
+  'All resolution methods are implemented (see `Provider` / `FeatureProvider` interface in applicable SDK).',
+  'Relevant configuration options for the underlying backend are exposed (typically using the provider constructor).',
+  'Flag-keys are transformed appropriately for the underlying backend (OpenFeature defines no restrictions in valid flag keys).',
+  'Context is transformed appropriately for the underlying backend.',
+  'Provider is named according to the [naming conventions](https://docs.openfeature.dev/docs/reference/concepts/provider#naming-recommendations)'
+]} />
+
+#### Non-functional requirements
+
+<CopyChecklist items={[
+  'Documentation for installation, all behavior (options, context transformation, flag-key transformation).',
+  'Provider is adequately tested.',
+  'Provider is added to [the documentation site](https://github.com/open-feature/docs.openfeature.dev/issues/new?assignees=&labels=provider&template=document-provider.yaml&title=%5BProvider%5D%3A+).',
+  'Provider releases follow [semantic versioning](https://semver.org/).',
+  'Document the version of the OpenFeature specification to which your provider complies.'
+]} />
+
+### FAQ
+
+#### Does my provider's version need to match the spec version to which it complies?
+
+No. You should document the version of the OpenFeature specification your provider complies to, and otherwise use [semantic versioning](https://semver.org/) in your artifact numbers.
+
+#### My backend needs a targeting key (or other user identifier), how can I ensure one exists?
+
+Targeting keys are not required by the Evaluation API. If your backend requires one, you have a couple options:
+
+- Indicate an error in your provider (this will result in the default value being returned).
+- Generate one automatically.
+
+Be sure to document this behavior.
+
+#### How should I handle error conditions?
+
+If an error condition is encountered in your provider, an error should be [indicated](/docs/specification/sections/providers#flag-value-resolution) by throwing or returning an error, as language idioms dictate. The SDK will ensure the default value is returned and expose the relevant error data.
+
+#### My flag system doesn't support flags of a particular type. What should I do?
+
+If your backend system doesn't support a particular flag type, you can:
+
+- Do a conversion from a type the system supports (for example, store JSON objects in a string, or booleans as `0`/`1`), and document this pattern.
+- Indicate an error in your provider (this will result in the default value being returned).
+
+#### How can people find my provider?
+
+Please add your provider to the [documentation](https://github.com/open-feature/docs.openfeature.dev/issues/new?assignees=&labels=provider&template=document-provider.yaml&title=%5BProvider%5D%3A+) so people can find it!
+
+#### Where should I put my provider source code?
+
+If you are a vendor and you want to maintain full control over your provider, you should host the provider in your organization's SCM. If you would like your provider to be maintained as a community project, please take a look at our various [contrib repositories](https://github.com/orgs/open-feature/repositories?q=contrib&type=all&language=&sort=). We encourage you to make your code open source, but obviously it's your decision.
+
+#### Where should I publish my provider artifact?
+
+You should publish your provider on the appropriate package management repository for your language, keeping in mind the [naming conventions](https://docs.openfeature.dev/docs/reference/concepts/provider#naming-recommendations). Our [contrib repositories](https://github.com/orgs/open-feature/repositories?q=contrib&type=all&language=&sort=) publish all their artifacts as part of their release processes.
