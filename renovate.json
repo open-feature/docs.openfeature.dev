@@ -1,9 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:base",
+    "schedule:earlyMondays"
   ],
   "semanticCommits": "enabled",
+  "labels": [
+    "renovate"
+  ],
   "packageRules": [
     {
       "matchPackagePatterns": [
@@ -29,6 +33,18 @@
         "@types/"
       ],
       "groupName": "Types"
+    },
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "automerge": true
     }
   ]
 }
