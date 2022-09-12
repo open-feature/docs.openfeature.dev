@@ -3,6 +3,7 @@ import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import OtelNoFill from '@site/static/img/otel-no-fill.svg';
+import SplitSvg from '@site/static/img/split-no-fill.svg';
 
 export class JavascriptFeatures
  extends React.Component {
@@ -26,7 +27,13 @@ export class JavascriptFeatures
           description: 'A provider for flagd',
           href: 'https://github.com/open-feature/node-sdk-contrib/tree/main/libs/providers/flagd',
           svg: FlagdSvg
-        }
+        },
+        {
+          title: 'Split Provider',
+          description: 'The official Split provider for OpenFeature',
+          href: 'https://github.com/splitio/split-openfeature-provider-nodejs',
+          svg: SplitSvg,
+          }
       ]}
       hooks={[
         {
