@@ -1,12 +1,12 @@
 ---
  slug: creating-a-provider-for-the-go-sdk
- title: Creating a Provider for the golang-sdk
+ title: Creating a Provider for the go-sdk
  authors: [jamesmilligan]
- tags: [golang, blog, tutorial, golang-sdk, providers]
+ tags: [golang, blog, tutorial, go-sdk, providers]
  draft: false
 ---
 
-# Creating a Provider For The golang-sdk
+# Creating a Provider For The go-sdk
 
 ## Providers
 
@@ -79,7 +79,7 @@ These values form the type naive `ResolutionDetails` structure, which is then wr
 ```go
 import (
 	"errors"
-	"github.com/open-feature/golang-sdk/pkg/openfeature"
+	"github.com/open-feature/go-sdk/pkg/openfeature"
 )
 
 const (
@@ -117,7 +117,7 @@ func (f *StoredFlag) Evaluate(evalCtx openfeature.EvaluationContext) (string, st
 }
 ```
 The above function demonstrates how this basic evaluator will work in this example, of course in other providers these can be far more complex, and the logic does not need to sit within the application.  
-This JSON evaluator can then be paired with a simple function for reading and parsing the `StoredFlag` values from environment variables (as seen in the example below), leaving only the integration with the `golang-sdk` to go. (and some testing!)  
+This JSON evaluator can then be paired with a simple function for reading and parsing the `StoredFlag` values from environment variables (as seen in the example below), leaving only the integration with the `go-sdk` to go. (and some testing!)  
 ```go
 func FetchStoredFlag(key string) (StoredFlag, error) {
 	v := StoredFlag{}
@@ -134,17 +134,17 @@ func FetchStoredFlag(key string) (StoredFlag, error) {
 ## Creating a Compliant Provider  
 
 ### Repository Setup  
-`Providers` written for the [`golang-sdk`](https://github.com/open-feature/golang-sdk) are all maintained in the [`golang-sdk-contrib`](https://github.com/open-feature/golang-sdk-contrib.git) repository, containing both `hooks` and `providers`.  
-The following commands can be used to setup the `golang-sdk-conrib` repository, they will clone the repository and set up your provider specific go module under `/providers/MY-NEW-PROVIDER-NAME` adding a `go.mod` and `README.md` file. Your module will them be referenced in the top level `go.work` file.
+`Providers` written for the [`go-sdk`](https://github.com/open-feature/go-sdk) are all maintained in the [`go-sdk-contrib`](https://github.com/open-feature/go-sdk-contrib.git) repository, containing both `hooks` and `providers`.  
+The following commands can be used to setup the `go-sdk-conrib` repository, they will clone the repository and set up your provider specific go module under `/providers/MY-NEW-PROVIDER-NAME` adding a `go.mod` and `README.md` file. Your module will them be referenced in the top level `go.work` file.
 ```
-git clone https://github.com/open-feature/golang-sdk-contrib.git
-cd golang-sdk-contrib
+git clone https://github.com/open-feature/go-sdk-contrib.git
+cd go-sdk-contrib
 make PROVIDER=MY-NEW-PROVIDER-NAME new-provider
 make workspace-init
 ```
 
 ### Creating Your Provider
-In order for your feature flag `Provider` to be compatible with the OpenFeature `golang-sdk` , it will need to comply with the OpenFeature spec. For the `golang-sdk` this means that it will need to fit to the following interface:
+In order for your feature flag `Provider` to be compatible with the OpenFeature `go-sdk` , it will need to comply with the OpenFeature spec. For the `go-sdk` this means that it will need to fit to the following interface:
 
 ```go
 type FeatureProvider interface {
@@ -235,14 +235,14 @@ func (p *Provider) Metadata() openfeature.Metadata {
 }
 ```
 
-The `Hooks()` method gives the `golang-sdk` access to `Provider` hooks, this sits outside the scope of this tutorial, so for now we will just return an empty slice of hooks. [Link to spec.](https://docs.openfeature.dev/docs/specification/sections/providers#requirement-210)
+The `Hooks()` method gives the `go-sdk` access to `Provider` hooks, this sits outside the scope of this tutorial, so for now we will just return an empty slice of hooks. [Link to spec.](https://docs.openfeature.dev/docs/specification/sections/providers#requirement-210)
 ```go
 func (p *Provider) Hooks() []openfeature.Hook {
 	return []openfeature.Hook{}
 }
 ```
 
-Now that the `Provider` conforms to the OpenFeature spec, it can be registered to the OpenFeature `golang-sdk` and used for flag evaluation.  
+Now that the `Provider` conforms to the OpenFeature spec, it can be registered to the OpenFeature `go-sdk` and used for flag evaluation.  
 
 ## Example usage
 
@@ -254,8 +254,8 @@ import (
 	"fmt"
 	"os"
 
-	fromEnv "github.com/open-feature/golang-sdk-contrib/providers/from-env/pkg"
-	"github.com/open-feature/golang-sdk/pkg/openfeature"
+	fromEnv "github.com/open-feature/go-sdk-contrib/providers/from-env/pkg"
+	"github.com/open-feature/go-sdk/pkg/openfeature"
 )
 
 // init function sets a bool flag environment variable called AM_I_YELLOW
@@ -305,7 +305,7 @@ func init() {
 func main() {
 	// create instance of the new provider
 	provider := fromEnv.Provider{}
-	// register the provider against the golang-sdk
+	// register the provider against the go-sdk
 	openfeature.SetProvider(&provider)
 	// create a client from via the go-sdk
 	client := openfeature.NewClient("am-i-yellow-client")
@@ -380,4 +380,4 @@ error: evaluate the flag: TYPE_MISMATCH
 --------
 ```
 
-The provider used in this example can be found [here](https://github.com/open-feature/golang-sdk-contrib/tree/main/providers/from-env)
+The provider used in this example can be found [here](https://github.com/open-feature/go-sdk-contrib/tree/main/providers/from-env)

@@ -1,8 +1,8 @@
 ---
 slug: creating-a-hook-for-the-go-sdk
-title: Creating a Hook for the golang-sdk
+title: Creating a Hook for the go-sdk
 authors: [skyerus]
-tags: [golang, blog, tutorial, golang-sdk, hooks]
+tags: [golang, blog, tutorial, go-sdk, hooks]
 unlisted: false
 ---
 
@@ -21,22 +21,22 @@ lifecycle events (before/after/error/finally) to perform the same action at that
 
 ## Repository setup
 
-`Hooks` written for the [`golang-sdk`](https://github.com/open-feature/golang-sdk) are all maintained in the
-[`golang-sdk-contrib`](https://github.com/open-feature/golang-sdk-contrib.git) repository, containing both `hooks` and `providers`.
-The following commands can be used to setup the `golang-sdk-contrib` repository,
+`Hooks` written for the [`go-sdk`](https://github.com/open-feature/go-sdk) are all maintained in the
+[`go-sdk-contrib`](https://github.com/open-feature/go-sdk-contrib.git) repository, containing both `hooks` and `providers`.
+The following commands can be used to setup the `go-sdk-contrib` repository,
 this clones the repository and sets up your hook specific go module under `/hooks/MY-NEW-HOOK-NAME`
 adding a `go.mod` and `README.md` file. The module will then be referenced in the top level `go.work` file.
 ```
-git clone https://github.com/open-feature/golang-sdk-contrib.git
-cd golang-sdk-contrib
+git clone https://github.com/open-feature/go-sdk-contrib.git
+cd go-sdk-contrib
 make HOOK=MY-NEW-HOOK-NAME new-hook
 make workspace-init
 ```
 
 ## Creating the hook
 
-In order for the `Hook` to be compatible with the OpenFeature `golang-sdk`, it will need to comply to the OpenFeature spec.
-For the `golang-sdk` this means that it will need to conform to the following interface:
+In order for the `Hook` to be compatible with the OpenFeature `go-sdk`, it will need to comply to the OpenFeature spec.
+For the `go-sdk` this means that it will need to conform to the following interface:
 
 ```go
 type Hook interface {
@@ -83,15 +83,15 @@ type validator interface {
 ```
 
 This allows us to supply <i>any</i> validator that implements this function signature, you can either create your own validator
-or use one of the [existing validators](https://github.com/open-feature/golang-sdk-contrib/hooks/validator).
-This tutorial uses the existing [hex regex validator](https://github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/regex/hex.go).
+or use one of the [existing validators](https://github.com/open-feature/go-sdk-contrib/hooks/validator).
+This tutorial uses the existing [hex regex validator](https://github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex/hex.go).
 
 ## Integrating the hook
 
 1. Install dependencies
 ```shell
-go get github.com/open-feature/golang-sdk
-go get github.com/open-feature/golang-sdk-contrib/hooks/validator
+go get github.com/open-feature/go-sdk
+go get github.com/open-feature/go-sdk-contrib/hooks/validator
 ```
 
 2. Import the dependencies
@@ -100,9 +100,9 @@ package main
 
 import (
     "fmt"
-    "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/regex"
-    "github.com/open-feature/golang-sdk-contrib/hooks/validator/pkg/validator"
-    "github.com/open-feature/golang-sdk/pkg/openfeature"
+    "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex"
+    "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/validator"
+    "github.com/open-feature/go-sdk/pkg/openfeature"
     "log"
 )
 ```
