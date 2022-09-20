@@ -110,8 +110,7 @@ class MyFlagProvider implements Provider {
   public ProviderEvaluation<Boolean> getBooleanEvaluation(
     String flagKey,
     Boolean defaultValue,
-    EvaluationContext ctx,
-    FlagEvaluationOptions options) {
+    EvaluationContext ctx) {
       // your implementation
   }
   //...
@@ -127,7 +126,6 @@ func (p MyFlagProvider) BooleanEvaluation(
   flag string,
   defaultValue bool,
   evalCtx openfeature.EvaluationContext,
-  options openfeature.EvaluationOptions,
 ) BoolResolutionDetail {
     // your implementation
 }
@@ -143,8 +141,7 @@ public class MyFlagProvider : FeatureProvider
   public Task<ResolutionDetails<bool>> ResolveBooleanValue(
     string flagKey,
     bool defaultValue,
-    EvaluationContext? context = null,
-    FlagEvaluationOptions? config = null)
+    EvaluationContext? context = null)
   {
       // your implementation
   }
