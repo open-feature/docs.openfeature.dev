@@ -18,9 +18,9 @@ Before you can start evaluating flags, you must set a [_provider_](./provider). 
 <TabItem value="js" label="TypeScript">
 
 ```ts
-import { openFeature } from '@openfeature/nodejs-sdk';
+import { OpenFeature } from '@openfeature/js-sdk';
 
-openFeature.setProvider(new YourProviderOfChoice());
+OpenFeature.setProvider(new YourProviderOfChoice());
 ```
 
 </TabItem>
@@ -62,7 +62,7 @@ each with different configuration to fit the needs of different sub-modules. Cli
 <TabItem value="js" label="TypeScript">
 
 ```ts
-const client = openFeature.getClient('my-app');
+const client = OpenFeature.getClient('my-app');
 ```
 
 </TabItem>

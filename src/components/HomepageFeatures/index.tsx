@@ -25,10 +25,10 @@ const featureList: FeatureItem[] = [
             {/* prettier-ignore */}
             <CodeBlock className="language-ts">{`
 import {
-  openFeature
-} from '@openfeature/nodejs-sdk'
+  OpenFeature
+} from '@openfeature/js-sdk'
 
-const client = openfeature.getClient('my-client');
+const client = OpenFeature.getClient('my-client');
 
 const value = client
   .getBooleanValue('new-look', false);
@@ -52,7 +52,7 @@ Boolean value = client
           {/* prettier-ignore */}
           <CodeBlock className="language-go">{`
 import (
-	"github.com/open-feature/golang-sdk/pkg/openfeature"
+	"github.com/open-feature/go-sdk/pkg/openfeature"
 )
 
 client := openfeature.NewClient("my-client")
@@ -93,7 +93,6 @@ class MyFlagProvider implements Provider {
     flagKey: string,
     defaultValue: boolean,
     context: Context,
-    options: FlagEvaluationOptions | undefined
   ): Promise<ResolutionDetails<boolean>> {
     // your implementation
   }
@@ -111,8 +110,7 @@ class MyFlagProvider implements Provider {
   public ProviderEvaluation<Boolean> getBooleanEvaluation(
     String flagKey,
     Boolean defaultValue,
-    EvaluationContext ctx,
-    FlagEvaluationOptions options) {
+    EvaluationContext ctx) {
       // your implementation
   }
   //...
@@ -128,7 +126,6 @@ func (p MyFlagProvider) BooleanEvaluation(
   flag string,
   defaultValue bool,
   evalCtx openfeature.EvaluationContext,
-  options openfeature.EvaluationOptions,
 ) BoolResolutionDetail {
     // your implementation
 }
@@ -144,8 +141,7 @@ public class MyFlagProvider : FeatureProvider
   public Task<ResolutionDetails<bool>> ResolveBooleanValue(
     string flagKey,
     bool defaultValue,
-    EvaluationContext? context = null,
-    FlagEvaluationOptions? config = null)
+    EvaluationContext? context = null)
   {
       // your implementation
   }
@@ -173,8 +169,8 @@ class MyHook implements Hook {
   }
 
   after(
-    hookContext: Readonly<HookContext<boolean>>,
-    evaluationDetails: EvaluationDetails<boolean>,
+    hookContext: Readonly<HookContext<FlagValue>>,
+    evaluationDetails: EvaluationDetails<FlagValue>,
     hookHints?: HookHints
   ) {
     // do something after flag evaluation
