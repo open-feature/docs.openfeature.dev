@@ -135,7 +135,7 @@ func FetchStoredFlag(key string) (StoredFlag, error) {
 
 ### Repository Setup  
 `Providers` written for the [`go-sdk`](https://github.com/open-feature/go-sdk) are all maintained in the [`go-sdk-contrib`](https://github.com/open-feature/go-sdk-contrib.git) repository, containing both `hooks` and `providers`.  
-The following commands can be used to setup the `go-sdk-conrib` repository, they will clone the repository and set up your provider specific go module under `/providers/MY-NEW-PROVIDER-NAME` adding a `go.mod` and `README.md` file. Your module will them be referenced in the top level `go.work` file.
+The following commands can be used to setup the `go-sdk-contrib` repository, they will clone the repository and set up your provider specific go module under `/providers/MY-NEW-PROVIDER-NAME` adding a `go.mod` and `README.md` file. Your module will them be referenced in the top level `go.work` file.
 ```
 git clone https://github.com/open-feature/go-sdk-contrib.git
 cd go-sdk-contrib
