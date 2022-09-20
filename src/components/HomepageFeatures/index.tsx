@@ -52,7 +52,7 @@ Boolean value = client
           {/* prettier-ignore */}
           <CodeBlock className="language-go">{`
 import (
-	"github.com/open-feature/golang-sdk/pkg/openfeature"
+	"github.com/open-feature/go-sdk/pkg/openfeature"
 )
 
 client := openfeature.NewClient("my-client")
