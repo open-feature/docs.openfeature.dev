@@ -28,7 +28,7 @@ export class TechnologiesTable extends React.Component {
             svg: CSharpNoFillSvg,
           },
           {
-            href: '/docs/reference/technologies/golang',
+            href: '/docs/reference/technologies/go',
             iconDefinition: faGolang,
             title: 'Go',
             description: 'SDK and components for Go',
