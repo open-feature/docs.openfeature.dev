@@ -4,7 +4,7 @@ import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 
 
-export class GolangFeatures
+export class GoFeatures
  extends React.Component {
   override render() {
     return <OpenFeatureTechnologiesPage 
