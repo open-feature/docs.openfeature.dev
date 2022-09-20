@@ -25,10 +25,10 @@ const featureList: FeatureItem[] = [
             {/* prettier-ignore */}
             <CodeBlock className="language-ts">{`
 import {
-  openFeature
-} from '@openfeature/nodejs-sdk'
+  OpenFeature
+} from '@openfeature/js-sdk'
 
-const client = openfeature.getClient('my-client');
+const client = OpenFeature.getClient('my-client');
 
 const value = client
   .getBooleanValue('new-look', false);
@@ -93,7 +93,6 @@ class MyFlagProvider implements Provider {
     flagKey: string,
     defaultValue: boolean,
     context: Context,
-    options: FlagEvaluationOptions | undefined
   ): Promise<ResolutionDetails<boolean>> {
     // your implementation
   }
@@ -173,8 +172,8 @@ class MyHook implements Hook {
   }
 
   after(
-    hookContext: Readonly<HookContext<boolean>>,
-    evaluationDetails: EvaluationDetails<boolean>,
+    hookContext: Readonly<HookContext<FlagValue>>,
+    evaluationDetails: EvaluationDetails<FlagValue>,
     hookHints?: HookHints
   ) {
     // do something after flag evaluation
