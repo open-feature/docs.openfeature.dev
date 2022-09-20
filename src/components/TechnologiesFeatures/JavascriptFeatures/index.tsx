@@ -13,19 +13,19 @@ export class JavascriptFeatures
       iconDefinition={ faSquareJs }
       sdkRepoLink={{
         title: 'Github repository',
-        href: 'https://github.com/open-feature/node-sdk'
+        href: 'https://github.com/open-feature/js-sdk'
       }}
       artifact={{
         title: 'NPM',
-        href: 'https://www.npmjs.com/package/@openfeature/nodejs-sdk',
-        instruction: 'npm install @openfeature/nodejs-sdk',
+        href: 'https://www.npmjs.com/package/@openfeature/js-sdk',
+        instruction: 'npm install @openfeature/js-sdk',
         codeBlockLanguage: 'bash'
       }}
       providers={[
         {
           title: 'flagd Provider',
           description: 'A provider for flagd',
-          href: 'https://github.com/open-feature/node-sdk-contrib/tree/main/libs/providers/flagd',
+          href: 'https://github.com/open-feature/js-sdk-contrib/tree/main/libs/providers/flagd',
           svg: FlagdSvg
         },
         {
@@ -39,7 +39,7 @@ export class JavascriptFeatures
         {
           title: 'OpenTelemetry Hook',
           description: 'A hook for OpenTelemetry integration',
-          href: 'https://github.com/open-feature/node-sdk-contrib/tree/main/libs/hooks/open-telemetry',
+          href: 'https://github.com/open-feature/js-sdk-contrib/tree/main/libs/hooks/open-telemetry',
           svg: OtelNoFill
         }
       ]}
