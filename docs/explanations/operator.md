@@ -9,5 +9,5 @@ The open-feature-operator is a Kubernetes native operator that allows you to exp
 
 **Links**
 
-- [Design Discussion](https://github.com/open-feature/research/issues/1)
+- [Design Discussion](https://github.com/open-feature/ofep/issues/1)
 - [Repository](https://github.com/open-feature/open-feature-operator)
