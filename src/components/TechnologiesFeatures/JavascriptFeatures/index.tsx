@@ -31,7 +31,7 @@ export class JavascriptFeatures
         {
           title: 'Split Provider',
           description: 'The official Split provider for OpenFeature',
-          href: 'https://github.com/splitio/split-openfeature-provider-nodejs',
+          href: 'https://github.com/splitio/split-openfeature-provider-js',
           svg: SplitSvg,
           }
       ]}
