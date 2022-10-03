@@ -68,7 +68,7 @@ value, err := client.
         <TabItem value="csharp" label="C#">
           {/* prettier-ignore */}
           <CodeBlock className="language-csharp">{`
-using OpenFeature.SDK;
+using OpenFeatureSDK;
 
 var client = OpenFeature.Instance.GetClient("my-client");
 

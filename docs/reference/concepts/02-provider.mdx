@@ -145,7 +145,7 @@ public class MyFeatureProvider implements FeatureProvider {
     }
 
     @Override
-    public <T> ProviderEvaluation<T> getObjectEvaluation(String key, T defaultValue, EvaluationContext invocationContext) {
+    public ProviderEvaluation<Value> getObjectEvaluation(String key, Value defaultValue, EvaluationContext invocationContext) {
       // code to resolve object details
     }
 }
@@ -155,8 +155,8 @@ public class MyFeatureProvider implements FeatureProvider {
 <TabItem value="csharp" label="C#">
 
 ```csharp
-using OpenFeature.SDK;
-using OpenFeature.SDK.Model;
+using OpenFeatureSDK;
+using OpenFeatureSDK.Model;
 
 public class MyFeatureProvider : FeatureProvider
 {
