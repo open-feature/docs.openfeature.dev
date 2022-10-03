@@ -72,7 +72,7 @@ example JSON:
 	]
 }
 ```
-Each flag value contains an array of [`Variants`](https://docs.openfeature.dev/docs/specification/glossary#variant), each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `EvaluationContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
+Each flag value contains an array of [`Variants`](https://docs.openfeature.dev/docs/specification/glossary#variant), each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `FlattenedContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
 The response also includes the the variant name, the reason for the resulting value (such as `ERROR`, `STATIC` or `TARGETING_MATCH`) and any associated error (such as `PARSE_ERROR`). 
 These values form the type naive `ResolutionDetails` structure, which is then wrapped in a type specific parent for each response type, such as `BoolResolutionDetail`. This will be discussed in the [Creating a Compliant Provider](#creating-a-compliant-provider) section.
 
@@ -89,18 +89,18 @@ const (
 	ErrorParse        	 = "PARSE_ERROR"
 )
 
-func (f *StoredFlag) Evaluate(evalCtx openfeature.EvaluationContext) (string, string, interface{}, error) {
+func (f *StoredFlag) Evaluate(evalCtx openfeature.FlattenedContext) (string, string, interface{}, error) {
 	var defaultVariant *Variant
 	for _, variant := range f.Variants {
 		if variant.Name == f.DefaultVariant {
 			defaultVariant = &variant
 		}
-		if variant.TargetingKey != "" && variant.TargetingKey != evalCtx.TargetingKey {
+		if variant.TargetingKey != "" && variant.TargetingKey != evalCtx["targetingKey"] {
 			continue
 		}
 		match := true
 		for _, criteria := range variant.Criteria {
-			val, ok := evalCtx.Attributes[criteria.Key]
+			val, ok := evalCtx[criteria.Key]
 			if !ok || val != criteria.Value {
 				match = false
 				break
@@ -149,11 +149,11 @@ In order for your feature flag `Provider` to be compatible with the OpenFeature 
 ```go
 type FeatureProvider interface {
 	Metadata() Metadata
-	BooleanEvaluation(flagKey string, defaultValue bool, evalCtx EvaluationContext) BoolResolutionDetail
-	StringEvaluation(flagKey string, defaultValue string, evalCtx EvaluationContext) StringResolutionDetail
-	FloatEvaluation(flagKey string, defaultValue float64, evalCtx EvaluationContext) FloatResolutionDetail
-	IntEvaluation(flagKey string, defaultValue int64, evalCtx EvaluationContext) IntResolutionDetail
-	ObjectEvaluation(flagKey string, defaultValue interface{}, evalCtx EvaluationContext) ResolutionDetail
+	BooleanEvaluation(flagKey string, defaultValue bool, evalCtx FlattenedContext) BoolResolutionDetail
+	StringEvaluation(flagKey string, defaultValue string, evalCtx FlattenedContext) StringResolutionDetail
+	FloatEvaluation(flagKey string, defaultValue float64, evalCtx FlattenedContext) FloatResolutionDetail
+	IntEvaluation(flagKey string, defaultValue int64, evalCtx FlattenedContext) IntResolutionDetail
+	ObjectEvaluation(flagKey string, defaultValue interface{}, evalCtx FlattenedContext) ResolutionDetail
 	Hooks() []Hook
 }
 ```
@@ -161,7 +161,7 @@ Argument  | Description
 ------------- | -------------
 `flagKey`  | A string key representing the flag configuration that should be used in this evaluation.
 `defaultValue`  | The default response to be returned in the `ResolutionDetail` in the case of an error
-`evalCtx`  | The `EvaluationContext` provides ambient information for the purposes of flag evaluation. Effectively acting as `metadata` for a request
+`evalCtx`  | The underlying type of `FlattenedContext` is `map[string]interface{}`, this provides ambient information for the purposes of flag evaluation. Effectively acting as `metadata` for a request
 `ResolutionDetail`  | The response object from a flag evaluation, it contains the following fields: Value (`interface{}`), Variant (`string`), Reason (`string`), ErrorCode (`string`)
 `XxxResolutionDetail`  | The type specific wrapper for the `ResolutionDetail` struct. Contains two attributes: Value (type specific), ResolutionDetail (`ResolutionDetail`)
 
@@ -176,7 +176,7 @@ const (
     ErrorTypeMismatch = "ERROR_TYPE_MISMATCH"
 )
 
-func (p *Provider) resolveFlag(flagKey string, defaultValue interface{}, evalCtx openfeature.EvaluationContext) openfeature.ResolutionDetail {
+func (p *Provider) resolveFlag(flagKey string, defaultValue interface{}, evalCtx openfeature.FlattenedContext) openfeature.ResolutionDetail {
 	// fetch the stored flag from environment variables
 	res, err := p.EnvFetch.FetchStoredFlag(flagKey)
 	if err != nil {
@@ -203,7 +203,7 @@ func (p *Provider) resolveFlag(flagKey string, defaultValue interface{}, evalCtx
 	}
 }
 
-func (p *Provider) BooleanEvaluation(flagKey string, defaultValue bool, evalCtx openfeature.EvaluationContext) openfeature.BoolResolutionDetail {
+func (p *Provider) BooleanEvaluation(flagKey string, defaultValue bool, evalCtx openfeature.FlattenedContext) openfeature.BoolResolutionDetail {
 	res := p.resolveFlag(flagKey, defaultValue, evalCtx)
 	// ensure the returned value is a bool
 	v, ok := res.Value.(bool)
@@ -250,6 +250,7 @@ Now that the `Provider` conforms to the OpenFeature spec, it can be registered t
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -310,41 +311,44 @@ func main() {
 	// create a client from via the go-sdk
 	client := openfeature.NewClient("am-i-yellow-client")
 
-	// we are now able to evaluate our stored flags, providing different EvaluationContexts to manipulate the response
+	// we are now able to evaluate our stored flags, providing different FlattenedContexts to manipulate the response
 	fmt.Println("I am yellow!")
 	res, err := client.BooleanValueDetails(
+		context.Background(),
 		"AM_I_YELLOW",
 		false,
-		openfeature.EvaluationContext{
+		openfeature.FlattenedContext{
 			Attributes: map[string]interface{}{
 				"color": "yellow",
 			},
-		}
+		},
 	)
 	printResponse(res.ResolutionDetail, err)
 
 	fmt.Println("I am yellow with targeting!")
 	res, err := client.BooleanValueDetails(
+        context.Background(),
 		"AM_I_YELLOW",
 		false,
-		openfeature.EvaluationContext{
+		openfeature.FlattenedContext{
 			Attributes: map[string]interface{}{
 				"color": "yellow",
 			},
 			TargetingKey: "user",
-		}
+		},
 	)
 	printResponse(res.ResolutionDetail, err)
 
 	fmt.Println("I am asking for a string!")
 	res, err = client.StringValueDetails(
+        context.Background(),
 		"AM_I_YELLOW",
 		"i am a default value",
-		openfeature.EvaluationContext{
+		openfeature.FlattenedContext{
 			Attributes: map[string]interface{}{
 				"color": "not yellow",
 			},
-		}
+		},
 	)
 	printResponse(res.ResolutionDetail, err)
 }
