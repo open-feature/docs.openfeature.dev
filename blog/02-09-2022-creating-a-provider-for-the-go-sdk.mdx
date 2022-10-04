@@ -78,18 +78,13 @@ These values form the type naive `ResolutionDetails` structure, which is then wr
 
 ```go
 import (
+	"encoding/json"
 	"errors"
 	"github.com/open-feature/go-sdk/pkg/openfeature"
+	"os"
 )
 
-const (
-	ReasonError          = "ERROR"
-	ReasonStatic         = "STATIC"
-	ReasonTargetingMatch = "TARGETING_MATCH"
-	ErrorParse        	 = "PARSE_ERROR"
-)
-
-func (f *StoredFlag) Evaluate(evalCtx openfeature.FlattenedContext) (string, string, interface{}, error) {
+func (f *StoredFlag) Evaluate(evalCtx map[string]interface{}) (string, openfeature.Reason, interface{}, error) {
 	var defaultVariant *Variant
 	for _, variant := range f.Variants {
 		if variant.Name == f.DefaultVariant {
@@ -107,13 +102,13 @@ func (f *StoredFlag) Evaluate(evalCtx openfeature.FlattenedContext) (string, str
 			}
 		}
 		if match {
-			return variant.Name, ReasonTargetingMatch, variant.Value, nil
+			return variant.Name, openfeature.TargetingMatchReason, variant.Value, nil
 		}
 	}
 	if defaultVariant == nil {
-		return "", ReasonError, nil, errors.New(ErrorParse)
+		return "", openfeature.ErrorReason, nil, openfeature.NewParseErrorResolutionError("")
 	}
-	return defaultVariant.Name, ReasonStatic, defaultVariant.Value, nil
+	return defaultVariant.Name, openfeature.DefaultReason, defaultVariant.Value, nil
 }
 ```
 The above function demonstrates how this basic evaluator will work in this example, of course in other providers these can be far more complex, and the logic does not need to sit within the application.  
@@ -123,11 +118,11 @@ func FetchStoredFlag(key string) (StoredFlag, error) {
 	v := StoredFlag{}
 	if val := os.Getenv(key); val != "" {
 		if err := json.Unmarshal([]byte(val), &v); err != nil {
-			return v, errors.New(ErrorParse)
+			return v, openfeature.NewParseErrorResolutionError(err.Error())
 		}
 		return v, nil
 	}
-	return v, errors.New(ErrorFlagNotFound)
+	return v, openfeature.NewFlagNotFoundResolutionError("")
 }
 ``` 
 
@@ -153,53 +148,64 @@ type FeatureProvider interface {
 	StringEvaluation(flagKey string, defaultValue string, evalCtx FlattenedContext) StringResolutionDetail
 	FloatEvaluation(flagKey string, defaultValue float64, evalCtx FlattenedContext) FloatResolutionDetail
 	IntEvaluation(flagKey string, defaultValue int64, evalCtx FlattenedContext) IntResolutionDetail
-	ObjectEvaluation(flagKey string, defaultValue interface{}, evalCtx FlattenedContext) ResolutionDetail
+	ObjectEvaluation(flagKey string, defaultValue interface{}, evalCtx FlattenedContext) InterfaceResolutionDetail
 	Hooks() []Hook
 }
 ```
 Argument  | Description
 ------------- | -------------
-`flagKey`  | A string key representing the flag configuration that should be used in this evaluation.
-`defaultValue`  | The default response to be returned in the `ResolutionDetail` in the case of an error
+`flagKey`  | A string key representing the flag configuration used in this evaluation
+`defaultValue`  | The default response to be returned in the case of an error
 `evalCtx`  | The underlying type of `FlattenedContext` is `map[string]interface{}`, this provides ambient information for the purposes of flag evaluation. Effectively acting as `metadata` for a request
-`ResolutionDetail`  | The response object from a flag evaluation, it contains the following fields: Value (`interface{}`), Variant (`string`), Reason (`string`), ErrorCode (`string`)
-`XxxResolutionDetail`  | The type specific wrapper for the `ResolutionDetail` struct. Contains two attributes: Value (type specific), ResolutionDetail (`ResolutionDetail`)
+`ProviderResolutionDetail`  | The provider response object from a flag evaluation, it contains the following fields: Variant (`string`), Reason (`openfeature.Reason`), ResolutionError (`openfeature.ResolutionError`)
+`XxxResolutionDetail`  | The type specific wrapper for the `ProviderResolutionDetail` struct. Contains two attributes: Value (type specific), ProviderResolutionDetail (`ProviderResolutionDetail`)
 
 We can use our previously defined logic to build the `Evaluation` methods with ease, in the below example the core logic has been refactored into a separate function (`resolveFlag()`) to reduce code repetition, returning the `ResolutionDetail` structure directly. This means that the only type specific code required is a type cast the returned `interface{}` value, and for the type specific `ResolutionDetail` to be returned, e.g. `BoolResolutionDetail`.
 ```go
 type Provider struct {
-	EnvFetch EnvFetch
+	EnvFetch func(key string) (StoredFlag, error)
 }
 
-const (
-	ReasonError       = "ERROR"
-    ErrorTypeMismatch = "ERROR_TYPE_MISMATCH"
-)
-
-func (p *Provider) resolveFlag(flagKey string, defaultValue interface{}, evalCtx openfeature.FlattenedContext) openfeature.ResolutionDetail {
+func (p *Provider) resolveFlag(flagKey string, defaultValue interface{}, evalCtx openfeature.FlattenedContext) openfeature.InterfaceResolutionDetail {
 	// fetch the stored flag from environment variables
-	res, err := p.EnvFetch.FetchStoredFlag(flagKey)
+	res, err := p.EnvFetch(flagKey)
 	if err != nil {
-		return openfeature.ResolutionDetail{
-			Reason:    ReasonError,
-			Value:     defaultValue,
-			ErrorCode: err.Error(),
+		var e openfeature.ResolutionError
+		if !errors.As(err, &e) {
+			e = openfeature.NewGeneralResolutionError(err.Error())
+		}
+
+		return openfeature.InterfaceResolutionDetail{
+			Value: defaultValue,
+			ProviderResolutionDetail: openfeature.ProviderResolutionDetail{
+				ResolutionError: e,
+				Reason:          openfeature.ErrorReason,
+			},
 		}
 	}
 	// evaluate the stored flag to return the variant, reason, value and error
 	variant, reason, value, err := res.Evaluate(evalCtx)
 	if err != nil {
-		return openfeature.ResolutionDetail{
-			Reason:    ReasonError,
-			Value:     defaultValue,
-			ErrorCode: err.Error(),
+		var e openfeature.ResolutionError
+		if !errors.As(err, &e) {
+			e = openfeature.NewGeneralResolutionError(err.Error())
+		}
+		return openfeature.InterfaceResolutionDetail{
+			Value: defaultValue,
+			ProviderResolutionDetail: openfeature.ProviderResolutionDetail{
+				ResolutionError: e,
+				Reason:          openfeature.ErrorReason,
+			},
 		}
 	}
+
 	// return the type naive ResolutionDetail structure
-	return openfeature.ResolutionDetail{
-		Reason:  reason,
-		Variant: variant,
-		Value:   value,
+	return openfeature.InterfaceResolutionDetail{
+		Value: value,
+		ProviderResolutionDetail: openfeature.ProviderResolutionDetail{
+			Variant: variant,
+			Reason:  reason,
+		},
 	}
 }
 
@@ -210,17 +216,16 @@ func (p *Provider) BooleanEvaluation(flagKey string, defaultValue bool, evalCtx 
 	if !ok {
 		return openfeature.BoolResolutionDetail{
 			Value: defaultValue,
-			ResolutionDetail: openfeature.ResolutionDetail{
-				Reason:    ReasonError,
-				Value:     defaultValue,
-				ErrorCode: ErrorTypeMismatch,
+			ProviderResolutionDetail: openfeature.ProviderResolutionDetail{
+				ResolutionError: openfeature.NewTypeMismatchResolutionError(""),
+				Reason:          openfeature.ErrorReason,
 			},
 		}
 	}
 	// wrap the ResolutionDetail in a type specific parent
 	return openfeature.BoolResolutionDetail{
-		Value:            v,
-		ResolutionDetail: res,
+		Value:                    v,
+		ProviderResolutionDetail: res.ProviderResolutionDetail,
 	}
 }
 ```
@@ -305,7 +310,7 @@ func init() {
 
 func main() {
 	// create instance of the new provider
-	provider := fromEnv.Provider{}
+	provider := fromEnv.FromEnvProvider{}
 	// register the provider against the go-sdk
 	openfeature.SetProvider(&provider)
 	// create a client from via the go-sdk
@@ -313,54 +318,54 @@ func main() {
 
 	// we are now able to evaluate our stored flags, providing different FlattenedContexts to manipulate the response
 	fmt.Println("I am yellow!")
-	res, err := client.BooleanValueDetails(
+    boolRes, err := client.BooleanValueDetails(
 		context.Background(),
 		"AM_I_YELLOW",
 		false,
-		openfeature.FlattenedContext{
+		openfeature.EvaluationContext{
 			Attributes: map[string]interface{}{
 				"color": "yellow",
 			},
 		},
 	)
-	printResponse(res.ResolutionDetail, err)
+	printResponse(boolRes.Value, boolRes.ResolutionDetail, err)
 
 	fmt.Println("I am yellow with targeting!")
-	res, err := client.BooleanValueDetails(
+	boolRes, err = client.BooleanValueDetails(
         context.Background(),
 		"AM_I_YELLOW",
 		false,
-		openfeature.FlattenedContext{
+		openfeature.EvaluationContext{
 			Attributes: map[string]interface{}{
 				"color": "yellow",
 			},
 			TargetingKey: "user",
 		},
 	)
-	printResponse(res.ResolutionDetail, err)
+	printResponse(boolRes.Value, boolRes.ResolutionDetail, err)
 
 	fmt.Println("I am asking for a string!")
-	res, err = client.StringValueDetails(
+	strRes, err := client.StringValueDetails(
         context.Background(),
 		"AM_I_YELLOW",
 		"i am a default value",
-		openfeature.FlattenedContext{
+		openfeature.EvaluationContext{
 			Attributes: map[string]interface{}{
 				"color": "not yellow",
 			},
 		},
 	)
-	printResponse(res.ResolutionDetail, err)
+	printResponse(strRes.Value, strRes.ResolutionDetail, err)
 }
 
 // simple response printing function
-func printResponse(res openfeature.ResolutionDetail, err error) {
-	fmt.Printf("value: %v\n", res.Value)
+func printResponse(value interface{}, resDetail openfeature.ResolutionDetail, err error) {
+	fmt.Printf("value: %v\n", value)
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 	} else {
-		fmt.Printf("variant: %v\n", res.Variant)
-		fmt.Printf("reason: %v\n", res.Reason)
+		fmt.Printf("variant: %v\n", resDetail.Variant)
+		fmt.Printf("reason: %v\n", resDetail.Reason)
 	}
 	fmt.Println("--------")
 }
