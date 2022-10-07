@@ -85,9 +85,7 @@ openfeature.SetLogger(l)
 ```go
 c := openfeature.NewClient("log")
 
-evalCtx := openfeature.EvaluationContext{
-    TargetingKey: "foo",
-}
+evalCtx := openfeature.NewEvaluationContext("foo", nil)
 
 c.BooleanValue(context.Background(), "bar", false, evalCtx)
 ```
