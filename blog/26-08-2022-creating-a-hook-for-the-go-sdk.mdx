@@ -41,7 +41,7 @@ For the `go-sdk` this means that it will need to conform to the following interf
 ```go
 type Hook interface {
 	Before(hookContext HookContext, hookHints HookHints) (*EvaluationContext, error)
-	After(hookContext HookContext, flagEvaluationDetails EvaluationDetails, hookHints HookHints) error
+	After(hookContext HookContext, flagEvaluationDetails InterfaceEvaluationDetails, hookHints HookHints) error
 	Error(hookContext HookContext, err error, hookHints HookHints)
 	Finally(hookContext HookContext, hookHints HookHints)
 }
@@ -60,7 +60,7 @@ func (h Hook) Before(hookContext of.HookContext, hookHints of.HookHints) (*of.Ev
 	return nil, nil
 }
 
-func (h Hook) After(hookContext of.HookContext, flagEvaluationDetails of.EvaluationDetails, hookHints of.HookHints) error {
+func (h Hook) After(hookContext of.HookContext, flagEvaluationDetails of.InterfaceEvaluationDetails, hookHints of.HookHints) error {
 	err := h.Validator.IsValid(flagEvaluationDetails)
 	if err != nil {
 		return err
@@ -78,7 +78,7 @@ Notice the `Validator` field of type `validator` in the `Hook` struct. This is d
 
 ```go
 type validator interface {
-	IsValid(flagEvaluationDetails of.EvaluationDetails) error
+	IsValid(flagEvaluationDetails of.InterfaceEvaluationDetails) error
 }
 ```
 
@@ -99,6 +99,7 @@ go get github.com/open-feature/go-sdk-contrib/hooks/validator
 package main
 
 import (
+	"context"
     "fmt"
     "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex"
     "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/validator"
@@ -128,10 +129,15 @@ openfeature.SetProvider(openfeature.NoopProvider{})
 
 ```go
 client := openfeature.NewClient("foo")
-evalOptions := openfeature.NewEvaluationOptions([]openfeature.Hook{v}, openfeature.HookHints{})
 
 result, err := client.
-    StringValueDetails("blue", "invalidhex", openfeature.EvaluationContext{}, evalOptions)
+    StringValueDetails(
+		context.Background(),
+		"blue",
+		"invalidhex",
+		openfeature.EvaluationContext{},
+        openfeature.WithHooks(v),
+	)
 if err != nil {
     fmt.Println("err:", err)
 }

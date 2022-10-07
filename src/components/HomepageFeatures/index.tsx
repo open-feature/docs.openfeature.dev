@@ -52,6 +52,7 @@ Boolean value = client
           {/* prettier-ignore */}
           <CodeBlock className="language-go">{`
 import (
+    "context"
 	"github.com/open-feature/go-sdk/pkg/openfeature"
 )
 
@@ -59,9 +60,8 @@ client := openfeature.NewClient("my-client")
 
 value, err := client.
   BooleanValue(
-    "new-look", true,
+    context.Background(), "new-look", true,
     openfeature.EvaluationContext{},
-    openfeature.EvaluationOptions{},
   )
           `}</CodeBlock>
         </TabItem>

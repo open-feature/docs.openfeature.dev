@@ -47,6 +47,7 @@ import (
 	"github.com/open-feature/go-sdk/pkg/openfeature"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"context"
 	"log"
 )
 
@@ -88,7 +89,7 @@ evalCtx := openfeature.EvaluationContext{
     TargetingKey: "foo",
 }
 
-c.BooleanValue("bar", false, evalCtx, openfeature.EvaluationOptions{})
+c.BooleanValue(context.Background(), "bar", false, evalCtx)
 ```
 
 5. Check the result of `go run main.go`
