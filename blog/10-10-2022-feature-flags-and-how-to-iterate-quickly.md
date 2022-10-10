@@ -1,3 +1,11 @@
+---
+slug: feature-flag-how-to-iterate-quickly
+title: Feature Flags and How to Iterate Quickly
+authors: [thomaspoignant]
+tags: [blog]
+unlisted: false
+---
+
 # Feature Flags and How to Iterate Quickly
 ## Why your first PR for a large feature should be its feature flag
 
