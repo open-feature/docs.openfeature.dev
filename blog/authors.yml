@@ -33,3 +33,10 @@ petehodgson:
    title: Software delivery consultant, OpenFeature contributor
    url: https://thepete.net
    image_url: https://github.com/moredip.png
+   
+
+thomaspoignant:
+   name: Thomas Poignant
+   title: Creator of GO Feature Flag, OpenFeature contributor
+   url: https://github.com/thomaspoignant
+   image_url: https://github.com/thomaspoignant.png
