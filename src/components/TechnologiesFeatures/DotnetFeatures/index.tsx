@@ -1,6 +1,7 @@
 import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 import CSharpNoFillSvg from '@site/static/img/c-sharp-no-fill.svg';
+import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
 
 export class DotnetFeatures
  extends React.Component {
@@ -18,7 +19,14 @@ export class DotnetFeatures
         instruction: 'dotnet add package OpenFeature',
         codeBlockLanguage: 'powershell'
       }}
-      providers={[]}
+      providers={[
+        {
+          title: 'LaunchDarkly Provider',
+          description: 'The official LaunchDarkly provider for OpenFeature',
+          href: 'https://github.com/launchdarkly/openfeature-dotnet-server',
+          svg: LaunchDarklySvg,
+        },
+      ]}
       hooks={[]}
       />;
   }
