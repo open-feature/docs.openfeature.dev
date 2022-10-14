@@ -74,27 +74,30 @@ var boolValue = await client.GetBooleanValue("boolFlag", false, context);
 ```go
 
 // add a value to the global context
-SetEvaluationContext(EvaluationContext{
-  Attributes: map[string]interface{}{
-    "myGlobalKey":  "myGlobalValue",
-  },
-})
+openfeature.SetEvaluationContext(openfeature.NewEvaluationContext(
+	"",
+	map[string]interface{}{
+		"myGlobalKey":  "myGlobalValue",
+	},
+))
 
 // add a value to the client context
-client := NewClient("my-app")
-client.SetEvaluationContext(EvaluationContext{
-  Attributes: map[string]interface{}{
-    "myClientKey":  "myClientValue",
-  },
-})
+client := openfeature.NewClient("my-app")
+client.SetEvaluationContext(openfeature.NewEvaluationContext(
+	"", 
+	map[string]interface{}{
+		"myGlobalKey":  "myGlobalValue",
+	},
+))
 
 // add a value to the invocation context
-ctx := openfeature.EvaluationContext{
-    Attributes: map[string]interface{}{
-        "myInvocationKey": "myInvocationValue",
-    },
-}
-boolValue, err := client.BooleanValue("boolFlag", false, ctx)
+evalCtx := openfeature.NewEvaluationContext(
+	"",
+	map[string]interface{}{
+		"myInvocationKey": "myInvocationValue",
+	},
+)
+boolValue, err := client.BooleanValue("boolFlag", false, evalCtx)
 ```
 
 </TabItem>

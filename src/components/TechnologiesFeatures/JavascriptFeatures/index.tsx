@@ -5,6 +5,7 @@ import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import OtelNoFill from '@site/static/img/otel-no-fill.svg';
 import SplitSvg from '@site/static/img/split-no-fill.svg';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
+import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
 
 export class JavascriptFeatures extends React.Component {
   override render() {
@@ -34,6 +35,12 @@ export class JavascriptFeatures extends React.Component {
             description: 'A provider for flagd',
             href: 'https://github.com/open-feature/js-sdk-contrib/tree/main/libs/providers/flagd',
             svg: FlagdSvg,
+          },
+          {
+            title: 'LaunchDarkly Provider',
+            description: 'The official LaunchDarkly provider for OpenFeature',
+            href: 'https://github.com/launchdarkly/openfeature-node-server',
+            svg: LaunchDarklySvg,
           },
           {
             title: 'Split Provider',

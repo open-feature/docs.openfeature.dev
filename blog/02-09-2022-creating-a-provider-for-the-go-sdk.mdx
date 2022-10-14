@@ -322,11 +322,12 @@ func main() {
 		context.Background(),
 		"AM_I_YELLOW",
 		false,
-		openfeature.EvaluationContext{
-			Attributes: map[string]interface{}{
+		openfeature.NewEvaluationContext(
+			"",
+			map[string]interface{}{
 				"color": "yellow",
 			},
-		},
+		),
 	)
 	printResponse(boolRes.Value, boolRes.ResolutionDetail, err)
 
@@ -335,12 +336,12 @@ func main() {
         context.Background(),
 		"AM_I_YELLOW",
 		false,
-		openfeature.EvaluationContext{
-			Attributes: map[string]interface{}{
+		openfeature.NewEvaluationContext(
+			"user",
+			map[string]interface{}{
 				"color": "yellow",
 			},
-			TargetingKey: "user",
-		},
+		),
 	)
 	printResponse(boolRes.Value, boolRes.ResolutionDetail, err)
 
@@ -349,11 +350,12 @@ func main() {
         context.Background(),
 		"AM_I_YELLOW",
 		"i am a default value",
-		openfeature.EvaluationContext{
-			Attributes: map[string]interface{}{
+		openfeature.NewEvaluationContext(
+			"",
+			map[string]interface{}{
 				"color": "not yellow",
 			},
-		},
+		),
 	)
 	printResponse(strRes.Value, strRes.ResolutionDetail, err)
 }
