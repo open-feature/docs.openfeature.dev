@@ -4,6 +4,7 @@ import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologie
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import OtelNoFill from '@site/static/img/otel-no-fill.svg';
 import SplitSvg from '@site/static/img/split-no-fill.svg';
+import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
 
 export class JavascriptFeatures
  extends React.Component {
@@ -29,11 +30,17 @@ export class JavascriptFeatures
           svg: FlagdSvg
         },
         {
+          title: 'LaunchDarkly Provider',
+          description: 'The official LaunchDarkly provider for OpenFeature',
+          href: 'https://github.com/launchdarkly/openfeature-node-server',
+          svg: LaunchDarklySvg,
+        },
+        {
           title: 'Split Provider',
           description: 'The official Split provider for OpenFeature',
           href: 'https://github.com/splitio/split-openfeature-provider-js',
           svg: SplitSvg,
-          }
+        }
       ]}
       hooks={[
         {
