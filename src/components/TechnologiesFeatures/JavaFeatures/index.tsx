@@ -3,6 +3,7 @@ import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 import SplitSvg from '@site/static/img/split-no-fill.svg';
+import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
 
 export class JavaFeatures extends React.Component {
   override render() {
@@ -27,6 +28,12 @@ export class JavaFeatures extends React.Component {
           codeBlockLanguage: 'xml',
         }}
         providers={[
+          {
+            title: 'Cloudbees Provider',
+            description: 'The official Cloudbees provider for OpenFeature',
+            href: 'https://github.com/rollout/cloudbees-openfeature-provider-java',
+            svg: CloudbeesSvg,
+          },
           {
             title: 'flagd Provider',
             description: 'A provider for flagd',
