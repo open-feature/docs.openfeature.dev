@@ -3,6 +3,7 @@ import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
+import SplitSvg from '@site/static/img/split-no-fill.svg';
 
 export class GoFeatures extends React.Component {
   override render() {
@@ -32,6 +33,12 @@ export class GoFeatures extends React.Component {
             description: 'A provider for flagd',
             href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/providers/flagd',
             svg: FlagdSvg,
+          },
+          {
+            title: 'Split Provider',
+            description: 'The official Split provider for OpenFeature',
+            href: 'https://github.com/splitio/split-openfeature-provider-go',
+            svg: SplitSvg,
           },
         ]}
         hooks={[]}
