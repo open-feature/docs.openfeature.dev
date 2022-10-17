@@ -130,7 +130,7 @@ Integer intValue = client.getIntegerValue("intFlag", 1);
 Double doubleValue = client.getDoubleValue("doubleFlag", 0.9);
 
 // get an object value
-MyObject objectValue = client.getObjectValue<MyObject>("objectFlag", MyObjectInstance);
+Value objectValue = client.getObjectValue("objectFlag", MyObjectInstance);
 ```
 
 </TabItem>
@@ -213,19 +213,19 @@ const objectDetails = await client.getObjectDetails<MyObject>('objectFlag', {});
 
 ```java
 // get details of boolean evaluation
-Boolean boolValue = client.getBooleanDetails("boolFlag", false);
+FlagEvaluationDetails<Boolean> boolDetails = client.getBooleanDetails("boolFlag", false);
 
 // get details of string evaluation
-String stringValue = client.getStringDetails("stringFlag", "default");
+FlagEvaluationDetails<String> stringDetails = client.getStringDetails("stringFlag", "default");
 
 // get details of integer evaluation
-Integer intValue = client.getIntegerDetails("intFlag", 1);
+FlagEvaluationDetails<Integer> intDetails = client.getIntegerDetails("intFlag", 1);
 
 // get details of double evaluation
-Double doubleValue = client.getDoubleDetails("doubleFlag", .9);
+FlagEvaluationDetails<Doulbe> doubleDetails = client.getDoubleDetails("doubleFlag", .9);
 
 // get details of object evaluation
-MyObject objectValue = client.getObjectDetails<MyObject>("objectFlag", myObjectDefaultInstance);
+FlagEvaluationDetails<Value> objectDetails = client.getObjectDetails<MyObject>("objectFlag", myObjectDefaultInstance);
 ```
 
 </TabItem>
