@@ -108,11 +108,14 @@ export class MyFeatureProvider implements Provider {
 ```java
 package dev.openfeature.javasdk;
 
-import lombok.Getter;
-
 public class MyFeatureProvider implements FeatureProvider {
-    @Getter
+
     private final String name = "My Feature Provider";
+
+    @Override
+    public String getName() {
+      return this.name;
+    }
 
     @Override
     public Metadata getMetadata() {
