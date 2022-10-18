@@ -38,14 +38,14 @@ const boolValue = await client.getBooleanValue('boolFlag', false, context);
 ```java
 // add a value to the global context
 OpenFeatureAPI api = OpenFeatureAPI.getInstance();
-api.setEvaluationContext(new EvaluationContext().add("myGlobalKey", "myGlobalValue"));
+api.setEvaluationContext(new MutableContext().add("myGlobalKey", "myGlobalValue"));
 
 // add a value to the client context
 Client client = api.getClient();
-client.setEvaluationContext(new EvaluationContext().add("myClientKey", "myClientValue"));
+client.setEvaluationContext(new MutableContext().add("myClientKey", "myClientValue"));
 
 // add a value to the invocation context
-EvaluationContext context = new EvaluationContext();
+EvaluationContext context = new MutableContext();
 context.addStringAttribute("myInvocationKey", "myInvocationValue")
 Boolean boolValue = client.getBooleanValue("boolFlag", false, context);
 ```

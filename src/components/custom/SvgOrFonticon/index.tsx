@@ -2,7 +2,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { IconDefinition as BrandsIconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { faCode, IconDefinition as FreeIconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import clsx from 'clsx';
 import React, { ComponentType, SVGProps } from 'react';
 import styles from './styles.module.css';
 
