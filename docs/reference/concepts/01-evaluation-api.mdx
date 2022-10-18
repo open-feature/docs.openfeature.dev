@@ -37,9 +37,9 @@ api.setProvider(new YourProviderOfChoice());
 <TabItem value="csharp" label="C#">
 
 ```csharp
-using OpenFeature.SDK;
+using OpenFeature;
 
-OpenFeature.Instance.SetProvider(new YourProviderOfChoice());
+Api.Instance.SetProvider(new YourProviderOfChoice());
 ```
 
 </TabItem>
@@ -76,7 +76,7 @@ Client client = api.getClient("my-app");
 <TabItem value="csharp" label="C#">
 
 ```csharp
-var client = OpenFeature.Instance.GetClient("my-app");
+var client = Api.Instance.GetClient("my-app");
 ```
 
 </TabItem>

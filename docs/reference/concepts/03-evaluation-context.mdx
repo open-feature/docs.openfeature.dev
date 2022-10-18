@@ -55,16 +55,18 @@ Boolean boolValue = client.getBooleanValue("boolFlag", false, context);
 
 ```csharp
 // add a value to the global context
-OpenFeature api = OpenFeature.Instance;
-api.SetContext(new EvaluationContext().Add("myGlobalKey", "myGlobalValue"));
+Api api = Api.Instance;
+api.SetContext(new EvaluationContextBuilder().Set("myGlobalKey", "myGlobalValue").Build());
 
 // add a value to the client context
 FeatureClient client = api.GetClient();
-api.SetContext(new EvaluationContext().Add("myClientKey", "myClientValue"));
+api.SetContext(new EvaluationContextBuilder().Set("myClientKey", "myClientValue").Build());
 
 // add a value to the invocation context
-var context = new EvaluationContext();
-context.Add("myInvocationKey", "myInvocationValue");
+var context = new EvaluationContext()
+	.Set("myInvocationKey", "myInvocationValue")
+	.Build();
+
 var boolValue = await client.GetBooleanValue("boolFlag", false, context);
 ```
 
