@@ -27,6 +27,7 @@ export class GoFeatures extends React.Component {
             description: 'The official Cloudbees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-go',
             svg: CloudbeesSvg,
+            vendorOfficial: true
           },
           {
             title: 'flagd Provider',
@@ -39,6 +40,7 @@ export class GoFeatures extends React.Component {
             description: 'The official Split provider for OpenFeature',
             href: 'https://github.com/splitio/split-openfeature-provider-go',
             svg: SplitSvg,
+            vendorOfficial: true
           },
         ]}
         hooks={[]}

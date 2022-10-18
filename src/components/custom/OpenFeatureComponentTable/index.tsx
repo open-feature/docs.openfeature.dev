@@ -14,7 +14,7 @@ export class OpenFeatureComponentTable extends React.Component<{
           .sort((a, b) => a.showLast ? 1 : b.showLast ? -1 : 0) 
           .map((item) => {
             return (
-              <article className="col col--5 margin-bottom--lg">
+              <article key={item.title} className="col col--5 margin-bottom--lg">
                 <OpenFeatureComponentCard {...item} />
               </article>
             );

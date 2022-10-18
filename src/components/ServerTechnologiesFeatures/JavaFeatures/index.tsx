@@ -34,6 +34,7 @@ export class JavaFeatures extends React.Component {
             description: 'The official Cloudbees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-java',
             svg: CloudbeesSvg,
+            vendorOfficial: true
           },
           {
             title: 'flagd Provider',
@@ -46,6 +47,7 @@ export class JavaFeatures extends React.Component {
             description: 'The official Split provider for OpenFeature',
             href: 'https://github.com/splitio/split-openfeature-provider-java',
             svg: SplitSvg,
+            vendorOfficial: true
           },
           {
             title: 'GO Feature Flag Provider',

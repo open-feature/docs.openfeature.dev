@@ -78,6 +78,8 @@ export class OpenFeatureTechnologiesPage extends React.Component<TechnologyData>
         </p>
 
         <OpenFeatureComponentTable items={props.providers} />
+        {/* <OpenFeatureComponentTable items={props.providers.filter(p => p.title)} /> */}
+
 
         <h3>Hooks</h3>
         <p>

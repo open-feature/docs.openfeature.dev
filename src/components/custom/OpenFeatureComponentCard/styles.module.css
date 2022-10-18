@@ -26,6 +26,11 @@
   font-size: 0.8rem;
 }
 
+.vendorOfficialContainer {
+  display: flex;
+  justify-content: right;
+}
+
 a:hover .svgOrIcon {
   fill: var(--ifm-color-emphasis-700);
 }
