@@ -10,7 +10,7 @@ type CardData = {
   title: string;
   description: string;
   /**
-   * Cards with "official:true" will have a badge indicating they are vendor maintained and supported.
+   * Cards with "vendorOfficial:true" will have a badge indicating they are vendor maintained and supported.
    * This should only be used for providers/hooks released and maintained by vendors, not in OpenFeature contrib repositories.
    */
   vendorOfficial?: boolean;
