@@ -21,7 +21,7 @@ In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature
 ### Let's see the code!
 
 <!-- TODO: add/remove this based on PR feedback -->
-Should we include this? or is it too much?
+ATTN REVIEWIERS: Should we include some code snippets here? or is it too much?
 
 ### Show me the commands!
 
