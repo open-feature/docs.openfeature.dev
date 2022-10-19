@@ -6,7 +6,7 @@ title: Cloud native flags with the OpenFeature Operator
 
 # Cloud native feature-flagging with the OpenFeature Operator
 
-In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy". Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere. It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes). The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads. It parses Kubernetes spec files and adds flagd and associated objects to the relevant workloads based on annotations and custom resource definitions it understands.
+In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy". Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere. It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes). The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads. It parses Kubernetes spec files and adds flagd and associated objects to the workloads based on annotations and custom resource definitions it understands.
 
 ## Let's do it!
 
@@ -76,6 +76,8 @@ Now that the operator is ready to go, we can deploy our workload:
 kubectl apply -f end-to-end.yaml && \
 kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo'
 ```
+
+Now you should see our fictional app at http://localhost:30000
 
 If you're using `k9s` or some other means of visualization, your cluster should look something like this:
 
