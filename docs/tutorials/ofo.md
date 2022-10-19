@@ -6,21 +6,22 @@ title: Cloud native flags with the OpenFeature Operator
 
 # Cloud native feature-flagging with the OpenFeature Operator
 
-In the following tutorial, we'll see how to leverage flagd and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy". Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere. It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes). The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads. It parses Kubernetes spec files and adds flagd and other object to the relevant workloads based on annotations and custom resource definitions it understands.
+In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy". Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere. It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes). The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads. It parses Kubernetes spec files and adds flagd and associated objects to the relevant workloads based on annotations and custom resource definitions it understands.
 
 ## Let's do it!
 
 ### Prerequisites
 
-- If you don't have access to an existing K8s cluster, we recommend you install [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) for this tutorial. kind is is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience.
+- If you don't have access to an existing K8s cluster, we recommend you install [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) for this tutorial. _kind_ is is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience.
   - If using kind, you'll also need this cluster spec file: [kind-cluster.yaml](@site/static/samples/kind-cluster.yaml), which defines a 3-node cluster with an forwarded containerPort
-- the file definting our demo deployment, service, and CRD: [end-to-end.yaml](https://github.com/open-feature/playground/blob/main/config/k8s/end-to-end.yaml) (more on this later).
+- the file defining our demo deployment, service, and CRD: [end-to-end.yaml](https://raw.githubusercontent.com/open-feature/playground/main/config/k8s/end-to-end.yaml) (more on this later).
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- k9s (optional, if you'd like to inspect your cluster visually)
+- [k9s](https://k9scli.io/) (optional, if you'd like to inspect your cluster visually)
 
 ### Let's see the code!
 
-<!-- TODO: add quick overview of relevant SDK code in the playground -->
+<!-- TODO: add/remove this based on PR feedback -->
+Should we include this? or is it too much?
 
 ### Show me the commands!
 
@@ -91,16 +92,16 @@ Let's get started learning how OpenFeature is helping Fib3r manage this landing 
 
 The company has been in the process of changing the name of our app, but legal hasn't quite finished the process yet.
 Here, we've defined a simple feature flag that can be use to update the name instantly without redeploying our application.
-Change the "defaultVariant" of the feature flag "new-welcome-message" to "on" in the `featureFlagSpec`, then redeploy the change with:
+Change the `"defaultVariant"` of the feature flag `new-welcome-message"` to `"on"` in the `featureFlagSpec`, then redeploy the change with:
 
 ```shell
 kubectl apply -f end-to-end.yaml
 ```
 
 Great! Now let's help the design team experiment with new color palette. Let's change our landing page's color.
-Change the "defaultVariant" of the "hex-color" and use `kubectl` to apply the change again.
+Change the `"defaultVariant"` of the `"hex-color"` and use `kubectl` to apply the change again.
 
-Flag evaluations can take into account contextual information about the user, application, or action. The "fib-algo" flag returns a different result if our email ends with `"@faas.com"`. Let's run the fibonacci calculator once as a customer (without being logged in). Then login (use any email ending in `...@faas.com`) and observe the impact. This effect is driven by the rule defined in the `featureFlagSpec`. Feel free to experiment with your own flag values and rules!
+Flag evaluations can take into account contextual information about the user, application, or action. The `"fib-algo"` flag returns a different result if our email ends with `"@faas.com"`. Let's run the fibonacci calculator once as a customer (without being logged in). Then login (use any email ending in `...@faas.com`) and observe the impact. This effect is driven by the rule defined in the `featureFlagSpec`. Feel free to experiment with your own flag values and rules!
 
 ### Cleaning up
 
