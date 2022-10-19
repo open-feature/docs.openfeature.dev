@@ -26,12 +26,14 @@ export class DotnetFeatures extends React.Component {
             description: 'The official Cloudbees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-dotnet',
             svg: CloudbeesSvg,
+            vendorOfficial: true
           },
           {
             title: 'LaunchDarkly Provider',
             description: 'The official LaunchDarkly provider for OpenFeature',
             href: 'https://github.com/launchdarkly/openfeature-dotnet-server',
             svg: LaunchDarklySvg,
+            vendorOfficial: true
           },
         ]}
         hooks={[]}

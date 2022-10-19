@@ -30,6 +30,7 @@ export class JavascriptFeatures extends React.Component {
             description: 'The official Cloudbees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-node',
             svg: CloudbeesSvg,
+            vendorOfficial: true
           },
           {
             title: 'flagd Provider',
@@ -42,12 +43,14 @@ export class JavascriptFeatures extends React.Component {
             description: 'The official LaunchDarkly provider for OpenFeature',
             href: 'https://github.com/launchdarkly/openfeature-node-server',
             svg: LaunchDarklySvg,
+            vendorOfficial: true
           },
           {
             title: 'Split Provider',
             description: 'The official Split provider for OpenFeature',
             href: 'https://github.com/splitio/split-openfeature-provider-js',
             svg: SplitSvg,
+            vendorOfficial: true
           },
           {
             title: 'GO Feature Flag Provider',
