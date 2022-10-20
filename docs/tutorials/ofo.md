@@ -25,7 +25,16 @@ ATTN REVIEWIERS: Should we include some code snippets here? or is it too much?
 
 ### Show me the commands!
 
-#### Build our cluster with kind
+#### Building our cluster
+
+##### Using MicroK8s or K3s
+
+// Install instructions
+
+##### Using Kind
+
+// Install instructions
+
 
 OK, let's get our cluster up and running! If you already have a K8s cluster, you can skip to [Install cert-manager](#install-cert-manager).
 
