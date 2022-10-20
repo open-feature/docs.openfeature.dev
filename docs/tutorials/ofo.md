@@ -107,7 +107,7 @@ Now you should see our fictional app at http://localhost:30000
 For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`). The resource type is `FeatureFlagconfiguration and is called `end-to-end` within the `default` namespace.
 You can modify the flag values in the `featureFlagSpec` and reapply the CRD to see the changes.
 This file also contains service and deployment definitions, but these need not be modified as part of this demo.
-You may be interested the `openfeature.dev*` annotations though, which the OpenFeature operator uses to detect which workloads require flagd.
+You may be interested in the `openfeature.dev*` annotations though, which the OpenFeature operator uses to detect which workloads require flagd.
 
 Let's get started learning how OpenFeature is helping Fib3r manage this landing page!
 
