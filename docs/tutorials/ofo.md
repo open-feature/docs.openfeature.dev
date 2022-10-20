@@ -13,7 +13,7 @@ In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature
 ### Prerequisites
 
 - If you don't have access to an existing K8s cluster, you have a few options:
-  - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience. If using kind, this tutorial provides a 3-node cluster definition with an forwarded containerPort for you (more on that later).
+  - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience. If using kind, this tutorial provides a 3-node cluster definition with a forwarded containerPort for you (more on that later).
   - [MicroK8s](https://microk8s.io/) and [K3s](https://k3s.io/) are easily installable Kubernetes clusters you can use locally. The benefit of these is that they are the basically identical to a production environment. Configuration of `MicroK8s` and `K3s` is out of the scope of this tutorial.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [k9s](https://k9scli.io/) (optional, if you'd like to inspect your cluster visually)
@@ -104,7 +104,7 @@ kubectl port-forward svc/open-feature-demo-service -n default 30000:30000
 
 Now you should see our fictional app at http://localhost:30000
 
-For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`). The resource type is `FeatureFlagconfiguration and is called `end-to-end` within the `default` namespace.
+For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`). The resource type is `FeatureFlagconfiguration` and is called `end-to-end` within the `default` namespace.
 You can modify the flag values in the `featureFlagSpec` and reapply the CRD to see the changes.
 This file also contains service and deployment definitions, but these need not be modified as part of this demo.
 You may be interested in the `openfeature.dev*` annotations though, which the OpenFeature operator uses to detect which workloads require flagd.
