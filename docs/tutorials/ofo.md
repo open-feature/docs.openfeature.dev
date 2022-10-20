@@ -12,33 +12,34 @@ In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature
 
 ### Prerequisites
 
-- If you don't have access to an existing K8s cluster, we recommend you install [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) for this tutorial. _kind_ is is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience.
-  - If using kind, you'll also need this cluster spec file: [kind-cluster.yaml](@site/static/samples/kind-cluster.yaml), which defines a 3-node cluster with an forwarded containerPort
-- the file defining our demo deployment, service, and CRD: [end-to-end.yaml](https://raw.githubusercontent.com/open-feature/playground/main/config/k8s/end-to-end.yaml) (more on this later).
+- If you don't have access to an existing K8s cluster, you have a few options:
+  - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience. If using kind, this tutorial provides a 3-node cluster definition with an forwarded containerPort for you (more on that later).
+  - [MicroK8s](https://microk8s.io/) and [K3s](https://k3s.io/) are easily installable Kubernetes clusters you can use locally. The benefit of these is that they are the basically identical to a production environment. Configuration of `MicroK8s` and `K3s` is out of the scope of this tutorial.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [k9s](https://k9scli.io/) (optional, if you'd like to inspect your cluster visually)
 
-### Let's see the code!
-
-<!-- TODO: add/remove this based on PR feedback -->
-ATTN REVIEWIERS: Should we include some code snippets here? or is it too much?
-
 ### Show me the commands!
+
+#### Downloading assets
+
+Download the file defining our demo deployment, service, and CRD, `end-to-end.yaml`:
+```shell
+curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/playground/main/config/k8s/end-to-end.yaml > end-to-end.yaml
+```
 
 #### Building our cluster
 
-##### Using MicroK8s or K3s
-
-// Install instructions
+OK, let's get our cluster up and running! If you already have a K8s cluster, you can skip to [Install cert-manager](#install-cert-manager).
 
 ##### Using Kind
 
-// Install instructions
+Download the cluster definition file, `kind-cluster.yaml`:
+<!-- TODO: update this before merge to point to asset in main -->
+```shell
+curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/docs.openfeature.dev/8e293516af66658f616bbfecc17fe84d93a9b83b/static/samples/kind-cluster.yaml > kind-cluster.yaml
+```
 
-
-OK, let's get our cluster up and running! If you already have a K8s cluster, you can skip to [Install cert-manager](#install-cert-manager).
-
-First, create our cluster using the `kind-cluster.yaml` file:
+Then, create our cluster using the `kind-cluster.yaml` file:
 ```shell
 kind create cluster --config kind-cluster.yaml
 ```
@@ -86,13 +87,22 @@ kubectl apply -f end-to-end.yaml && \
 kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo'
 ```
 
-Now you should see our fictional app at http://localhost:30000
-
 If you're using `k9s` or some other means of visualization, your cluster should look something like this:
 
 ![k9s](@site/static/img/tutorials/k9s.png)
 
+#### Forward the service
+
+If you're using using the supplied `kind` config, you can skip to [Experiment with OpenFeature](#experiment-with-openfeature), this port is already forwarded.
+
+Forward the service port:
+```shell
+kubectl port-forward svc/open-feature-demo-service -n default 30000:30000
+```
+
 ### Experiment with OpenFeature
+
+Now you should see our fictional app at http://localhost:30000
 
 For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`). The resource type is `FeatureFlagconfiguration and is called `end-to-end` within the `default` namespace.
 You can modify the flag values in the `featureFlagSpec` and reapply the CRD to see the changes.
