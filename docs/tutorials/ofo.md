@@ -83,7 +83,7 @@ kubectl wait --timeout=60s --for condition=Available=True deploy --all -n 'open-
 Now that the operator is ready to go, we can deploy our workload:
 
 ```shell
-kubectl apply -f end-to-end.yaml && \
+kubectl -n open-feature-operator-system apply -f end-to-end.yaml && \
 kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo'
 ```
 
