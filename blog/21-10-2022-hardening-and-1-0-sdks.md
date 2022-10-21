@@ -30,6 +30,6 @@ In addition to those mentioned above, experimental features available in the 1.0
 ## What's next?
 
 Our goal in the upcoming months will be to harden our existing experimental features. Additionally, we'll work to develop and standardize new capabilities, including: client-side feature flagging, improved cloud native tooling, and implicit transaction-scoped data propagation of contextual attributes.
-Furthermore, we're working on SDKs for additional languages, including PHP, Python, and Ruby.
+Furthermore, we're working on SDKs for additional languages, including [PHP](https://github.com/open-feature/php-sdk), [Python](https://github.com/open-feature/python-sdk), and [Ruby](https://github.com/open-feature/ruby-sdk).
 
 If you're interested in contributing or learning more about OpenFeature, please join our expanding and friendly community. Visit our [GitHub](https://github.com/open-feature), join the [OpenFeature slack channel](https://cloud-native.slack.com/archives/C0344AANLA1) on the CNCF Slack instance, or hop into our [bi-weekly community meeting](https://github.com/open-feature/community#meetings-and-events).
