@@ -84,7 +84,7 @@ Now that the operator is ready to go, we can deploy our workload:
 
 ```shell
 kubectl -n open-feature-operator-system apply -f end-to-end.yaml && \
-kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo'
+kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo' -n 'open-feature-operator-system'
 ```
 
 If you're using `k9s` or some other means of visualization, your cluster should look something like this:
