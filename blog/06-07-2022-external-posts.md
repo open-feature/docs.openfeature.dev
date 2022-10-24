@@ -2,6 +2,7 @@
 slug: external-posts
 title: Collection of external articles
 authors: [AnaisUrlichs]
+date: 2022-06-07
 tags: [announcements, blog, collection]
 unlisted: false
 ---
