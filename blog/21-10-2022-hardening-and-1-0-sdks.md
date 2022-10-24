@@ -14,8 +14,8 @@ Now, we're pleased to announce a new milestone: OpenFeature has released 1.0 ver
 
 The release includes stable versions the following features:
 
-- The Evaluation API, providing application authors with consistent, vendor neutral, feature flag evaluation.
-- Provider interfaces for flexible integration with a variety of feature flag systems.
+- the Evaluation API, providing application authors with consistent, vendor neutral, feature flag evaluation
+- provider interfaces for flexible integration with a variety of feature flag systems
 
 The specification documents associated with these features have been marked as `hardening`, meaning breaking changes are no longer allowed and usage of these features are encouraged in production environments.
 The release of these SDKs and the stabilization of the specification represent a culmination of efforts by a dedicated group of vendors, practitioners and subject matter experts.
@@ -24,8 +24,9 @@ It's our hope that the efforts to stabilize the OpenFeature specification and SD
 
 In addition to those mentioned above, experimental features available in the 1.0 SDKs include:
 
-- Hooks, for adding arbitrary behavior to feature flag evaluation, ideal for telemetry integration, validation, and logging.
-- The Evaluation Context interfaces, used as the basis for dynamic flag evaluation.
+- hooks, for adding arbitrary behavior to feature flag evaluation, ideal for telemetry integration, validation, and logging
+- the Evaluation Context interfaces, used as the basis for dynamic flag evaluation
+- implicit context propagation (JavaScript SDK only)
 
 ## What's next?
 
