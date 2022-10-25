@@ -115,7 +115,7 @@ Many providers serialize the evaluation context as part of their operation. Be c
 
 ## Targeting Key
 
-Many feature flag management systems require an identifier for the subject of flag evaluation. For many feature flag systems this is required in order to perform fractional evaluation or percentage-based rollouts deterministically. In the case of web applications or mobile apps, the subject is frequently an end user, but in other cases it could be a service or client application. The `evaluation context` includes an optional `targeting key` field for this purpose. The targeting key should contain a string uniquely identifying the subject (i.e.: a UUID, a hash of some user attribute such as an email, or a the hostname of an application or service). Some [providers](/docs/reference/concepts/provider) may require this field to be set to function correctly.
+Many feature flag management systems require an identifier for the subject of flag evaluation. For many feature flag systems this is required in order to perform fractional evaluation or percentage-based rollouts deterministically. In the case of web applications or mobile apps, the subject is frequently an end user, but in other cases it could be a service or client application. The `evaluation context` includes an optional `targeting key` field for this purpose. The targeting key should contain a string uniquely identifying the subject (i.e.: a UUID, a hash of some user attribute such as an email, or the hostname of an application or service). Some [providers](/docs/reference/concepts/provider) may require this field to be set to function correctly.
 
 ## Personally Identifiable Information (PII) Considerations
 
