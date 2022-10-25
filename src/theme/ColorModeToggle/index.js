@@ -2,9 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import {translate} from '@docusaurus/Translate';
-import IconLightMode from '@site/static/img/favicon-light.svg';
-import IconDarkMode from '@site/static/img/favicon-dark.svg';
-import styles from './styles.module.css';
+import styles from "./styles.module.scss";
 function ColorModeToggle({className, value, onChange}) {
   const isBrowser = useIsBrowser();
   const title = translate(
@@ -41,11 +39,13 @@ function ColorModeToggle({className, value, onChange}) {
         disabled={!isBrowser}
         title={title}
         aria-label={title}>
-          {
-              value === 'dark' ?
-                  <IconDarkMode/>:
-                  <IconLightMode/>
-          }
+          <div className={clsx(styles.toggleLogo, value === "dark" && styles.isDarkMode)}>
+              <div className={styles.toggleIcon}>
+                  <div className={styles.track}>
+                      <div />
+                  </div>
+              </div>
+          </div>
       </button>
     </div>
   );
