@@ -1,7 +1,7 @@
 ---
 slug: "hardening-and-1-0-sdks"
 title: "Specification hardening and 1.0 SDKs"
-date: 2022-10-21
+date: 2022-10-24
 authors: [toddbaert]
 description: "OpenFeature is ready for primetime: stabilizing the specification and 1.0 SDK releases"
 keywords: [release, "1.0", sdk, openFeature, java, go, ".net", dotnet, js, javascript, specification, spec]
