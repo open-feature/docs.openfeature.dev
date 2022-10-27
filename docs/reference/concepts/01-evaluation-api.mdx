@@ -93,7 +93,7 @@ client := openfeature.NewClient("my-app")
 
 ### Basic Evaluation
 
-The client can be used to do basic flag evaluation, which simple returns flag values of a particular type. The default value must also be specified.
+The client can be used to do basic flag evaluation, which simply returns flag values of a particular type. The default value must also be specified.
 In the case of any error during flag evaluation, the default value will be returned, so give consideration to your default values!
 
 <Tabs groupId="code">
@@ -178,7 +178,7 @@ objectValue, err := client.ObjectValue(context.Background(), "objectFlag", myObj
 
 ### Detailed Evaluation
 
-In addition to [basic evaluation](#basic-evaluation), the _detailed evaluation_ methods are available. These return the value, as well as additional metadata about the flag evaluation in the _Evaluation Details_ structure.
+In addition to [basic evaluation](#basic-evaluation), _detailed evaluation_ methods are available. These return the value, as well as additional metadata about the flag evaluation in the _Evaluation Details_ structure.
 
 #### Evaluation Details Structure Fields
 
