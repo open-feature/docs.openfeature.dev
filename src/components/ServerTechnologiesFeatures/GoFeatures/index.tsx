@@ -55,7 +55,7 @@ export class GoFeatures extends React.Component {
           {
             title: 'Validation Hook',
             description: 'A hook which validates the result of flag evaluations',
-            href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/hooks/open-telemetry',
+            href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/hooks/validator',
             svg: CheckCircle
           }
         ]}
