@@ -73,6 +73,7 @@ const config = {
         destinationPath: 'specification',
       },
     ],
+    'docusaurus-plugin-sass',
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
