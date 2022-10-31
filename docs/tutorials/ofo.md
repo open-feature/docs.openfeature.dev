@@ -36,7 +36,7 @@ OK, let's get our cluster up and running! If you already have a K8s cluster, you
 Download the cluster definition file, `kind-cluster.yaml`:
 <!-- TODO: update this before merge to point to asset in main -->
 ```shell
-curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/docs.openfeature.dev/8e293516af66658f616bbfecc17fe84d93a9b83b/static/samples/kind-cluster.yaml > kind-cluster.yaml
+curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/docs.openfeature.dev/main/static/samples/kind-cluster.yaml > kind-cluster.yaml
 ```
 
 Then, create our cluster using the `kind-cluster.yaml` file:
@@ -63,18 +63,11 @@ Next, we need to create a namespace for the operator and our workload:
 kubectl create namespace open-feature-operator-system
 ```
 
-#### Install OpenFeature operator certificate
-
-Now let's install the Openfeature operator certificate: 
-```shell
-kubectl apply -f https://github.com/open-feature/open-feature-operator/releases/download/v0.2.5/certificate.yaml
-```
-
 #### Install OpenFeature operator
 
 And finally, let's install the operator itself:
 ```shell
-kubectl apply -f https://github.com/open-feature/open-feature-operator/releases/download/v0.2.5/release.yaml && \
+kubectl apply -f https://github.com/open-feature/open-feature-operator/releases/download/v0.2.16/release.yaml && \
 kubectl wait --timeout=60s --for condition=Available=True deploy --all -n 'open-feature-operator-system'
 ```
 
