@@ -21,7 +21,7 @@ export class WebFeatures extends React.Component {
         }}
         providers={[
           {
-            title: 'Cloudbees Provider',
+            title: 'CloudBees Provider',
             description: 'The official CloudBees browser provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-browser',
             svg: CloudbeesSvg,

@@ -25,8 +25,8 @@ export class GoFeatures extends React.Component {
         }}
         providers={[
           {
-            title: 'Cloudbees Provider',
-            description: 'The official Cloudbees provider for OpenFeature',
+            title: 'CloudBees Provider',
+            description: 'The official CloudBees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-go',
             svg: CloudbeesSvg,
             vendorOfficial: true
