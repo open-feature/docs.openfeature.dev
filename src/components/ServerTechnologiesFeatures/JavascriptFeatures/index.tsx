@@ -1,12 +1,13 @@
+import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
+import CloudbeesNoFillSvg from '@site/static/img/cloudbees-no-fill.svg';
 import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
+import GoFeatureFlagNoFillSvg from '@site/static/img/goff-no-fill.svg';
+import LaunchDarklyNoFillSvg from '@site/static/img/launchdarkly-no-fill.svg';
+import OtelNoFillSvg from '@site/static/img/otel-no-fill.svg';
+import PostHogNoFillSvg from '@site/static/img/post-hog-no-fill.svg';
+import SplitNoFillSvg from '@site/static/img/split-no-fill.svg';
 import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
-import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
-import OtelNoFill from '@site/static/img/otel-no-fill.svg';
-import SplitSvg from '@site/static/img/split-no-fill.svg';
-import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
-import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
-import GoFeatureFlagSvg from '@site/static/img/goff-no-fill.svg';
 
 export class JavascriptFeatures extends React.Component {
   override render() {
@@ -29,7 +30,7 @@ export class JavascriptFeatures extends React.Component {
             title: 'CloudBees Provider',
             description: 'The official CloudBees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-node',
-            svg: CloudbeesSvg,
+            svg: CloudbeesNoFillSvg,
             vendorOfficial: true
           },
           {
@@ -42,21 +43,27 @@ export class JavascriptFeatures extends React.Component {
             title: 'LaunchDarkly Provider',
             description: 'The official LaunchDarkly provider for OpenFeature',
             href: 'https://github.com/launchdarkly/openfeature-node-server',
-            svg: LaunchDarklySvg,
+            svg: LaunchDarklyNoFillSvg,
             vendorOfficial: true
           },
           {
             title: 'Split Provider',
             description: 'The official Split provider for OpenFeature',
             href: 'https://github.com/splitio/split-openfeature-provider-js',
-            svg: SplitSvg,
+            svg: SplitNoFillSvg,
             vendorOfficial: true
           },
           {
             title: 'GO Feature Flag Provider',
             description: 'A provider for GO Feature Flag',
             href: 'https://github.com/open-feature/js-sdk-contrib/tree/main/libs/providers/go-feature-flag',
-            svg: GoFeatureFlagSvg,
+            svg: GoFeatureFlagNoFillSvg,
+          },
+          {
+            title: 'PostHog Provider',
+            description: 'A provider for the PostHog suite',
+            href: 'https://www.npmjs.com/package/@tapico/node-openfeature-posthog',
+            svg: PostHogNoFillSvg,
           },
         ]}
         hooks={[
@@ -64,7 +71,7 @@ export class JavascriptFeatures extends React.Component {
             title: 'OpenTelemetry Hook',
             description: 'A hook for OpenTelemetry integration',
             href: 'https://github.com/open-feature/js-sdk-contrib/tree/main/libs/hooks/open-telemetry',
-            svg: OtelNoFill,
+            svg: OtelNoFillSvg,
           },
         ]}
       />
