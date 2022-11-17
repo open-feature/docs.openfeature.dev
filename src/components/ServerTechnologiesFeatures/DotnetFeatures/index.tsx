@@ -3,6 +3,7 @@ import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologie
 import CSharpNoFillSvg from '@site/static/img/c-sharp-no-fill.svg';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
 import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
+import SplitSvg from '@site/static/img/split-no-fill.svg';
 
 export class DotnetFeatures extends React.Component {
   override render() {
@@ -33,6 +34,13 @@ export class DotnetFeatures extends React.Component {
             description: 'The official LaunchDarkly provider for OpenFeature',
             href: 'https://github.com/launchdarkly/openfeature-dotnet-server',
             svg: LaunchDarklySvg,
+            vendorOfficial: true
+          },
+          {
+            title: 'Split Provider',
+            description: 'The official Split provider for OpenFeature',
+            href: 'https://github.com/splitio/split-openfeature-provider-dotnet',
+            svg: SplitSvg,
             vendorOfficial: true
           },
         ]}
