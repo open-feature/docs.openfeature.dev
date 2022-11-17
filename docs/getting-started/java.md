@@ -40,7 +40,7 @@ Below examples show dependencies for Maven and Gradle and contains the latest
 versions at the time of writing this walk-through.
 
 <Tabs groupId="dependency">
-<TabItem value="maven" label="Apache Maven">
+<TabItem value="maven" label="Maven">
 
 ```xml
 <dependency>
@@ -56,7 +56,7 @@ versions at the time of writing this walk-through.
 ```
 
 </TabItem>
-<TabItem value="groovy" label="Gradle Groovy DSL">
+<TabItem value="gradle" label="Gradle">
 
 ```groovy
 implementation 'dev.openfeature:sdk:1.0.0'
@@ -77,7 +77,8 @@ define a simple bean configuration class `OpenFeatureBeans`. This definition all
 singleton to desired Spring components.
 
 ```java
-package demo;
+package com.demo;
+
 import dev.openfeature.contrib.providers.flagd.FlagdProvider;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import org.springframework.context.annotation.Bean;
@@ -101,7 +102,8 @@ public class OpenFeatureBeans {
 Next, we can add our REST endpoint definition with dependency injection for `OpenFeatureAPI` instance,
 
 ```java
-package demo;
+package com.demo;
+
 import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,10 +139,22 @@ At this point, we are ready to run the initial version of our application.
 
 Let's compile and run the application.
 
+<Tabs groupId="running">
+<TabItem value="maven" label="Maven">
+
+```shell
+mvn clean install
+java -jar target/demo-0.0.1-SNAPSHOT.jar
+```
+</TabItem>
+<TabItem value="gradle" label="Gradle">
+
 ```shell
 ./gradlew clean build
-java -jar build/libs/javaDemo-0.0.1-SNAPSHOT.jar
+java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 ```
+</TabItem>
+</Tabs>
 
 > Note that you may have a different `.jar` name based on your build configurations.
 
@@ -190,9 +204,23 @@ docker run -p 8013:8013 -v $(pwd)/:/etc/flagd/ -it ghcr.io/open-feature/flagd:la
 
 Let's rerun our Java Sprint Boot application,
 
+<Tabs groupId="running">
+<TabItem value="maven" label="Maven">
+
 ```shell
-java -jar build/libs/javaDemo-0.0.1-SNAPSHOT.jar
+mvn clean install
+java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
+</TabItem>
+<TabItem value="gradle" label="Gradle">
+
+```shell
+./gradlew clean build
+java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
+```
+</TabItem>
+</Tabs>
+
 
 > Note that you may have a different `.jar` name based on your build configurations.
 
