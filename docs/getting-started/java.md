@@ -146,8 +146,8 @@ java -jar build/libs/javaDemo-0.0.1-SNAPSHOT.jar
 
 Now you can visit the url [http://localhost:8080/hello](http://localhost:8080/hello) and observe the message **Hello.!**.
 
-At this point, we are falling back to default response as flagd SDK cannot connect to any feature flag provider. Next, let's 
-configure and run flagd provider.
+At this point, we are falling back to the default response. By default, OpenFeature will return the default value when
+there are no providers configured or running. In our code, we used flagd provider, yet we did not configure and run it. 
 
 ### Step 5: Configure and run FlagD
 
