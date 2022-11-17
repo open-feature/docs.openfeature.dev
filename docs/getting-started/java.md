@@ -5,7 +5,7 @@ import TabItem from '@theme/TabItem';
 
 ## Introduction
 
-This walk-through teaches you the basics of using OpenFeature in Java on top of Spring Boot Web application.
+This walk-through teaches you the basics of using OpenFeature in Java on top of a Spring Boot Web application.
 
 You'll learn how to:
 
@@ -28,16 +28,20 @@ This walk-through assumes that:
 To get started, visit [Spring Initializer](https://start.spring.io/). This website allows you to download a pre-configured
 Spring boot application. 
 
-For our use case, add **Spring Web** from dependencies section and set project metadata to your desired values.
-Download the application using **GENERATE** button. Extract the archive and open it in your favourite editor.
+For our use case, add **Spring Web** from the dependencies section and set the following **project metadata** values,
+
+- Group: com
+- Artifact: demo
+
+Select a Java version matching your installation and download the application using the **GENERATE** button.
+Extract the archive and open it in your favorite editor.
 
 ### Step 2: Add dependencies
 
 Based on the selected build system for Spring Boot application, add OpenFeature Java SDK and flagd provider dependencies
 to existing dependency management configuration. 
 
-Below examples show dependencies for Maven and Gradle and contains the latest 
-versions at the time of writing this walk-through.
+Given below are dependencies for Maven and Gradle with the latest dependency versions at the time of writing this walk-through.
 
 <Tabs groupId="dependency">
 <TabItem value="maven" label="Maven">
@@ -67,19 +71,13 @@ implementation 'dev.openfeature.contrib.providers:flagd:0.5.1'
 
 ### Step 3: Add code
 
-Our simple web server contains a single endpoint `/hello`. Let's add required codes to get this up and running with
-recommended best practices. 
+The `OpenFeatureAPI` class is the main access point to OpenFeature SDK. This class is designed to act as a singleton. Let's define
+a simple bean configuration class called `OpenFeatureBeans`, that allows us to inject the `OpenFeatureAPI` singleton into desired Spring components.
 
-Please note that you may have your own package names and package naming in sample codes will require alterations.
-
-`OpenFeatureAPI` is the main access point to OpenFeature SDK. This object is designed to act as a singleton. Hence, let's 
-define a simple bean configuration class `OpenFeatureBeans`. This definition allows us to dependency inject `OpenFeatureAPI` 
-singleton to desired Spring components.
-
+Create the Java class `OpenFeatureBeans.java` inside the package `com.demo` and add the following code,
 ```java
 package com.demo;
 
-import dev.openfeature.contrib.providers.flagd.FlagdProvider;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -90,17 +88,15 @@ public class OpenFeatureBeans {
     @Bean
     public OpenFeatureAPI OpenFeatureAPI() {
         final OpenFeatureAPI openFeatureAPI = OpenFeatureAPI.getInstance();
-        
-        // Use flagd as the OpenFeature provider and use default configurations
-        openFeatureAPI.setProvider(new FlagdProvider());
 
         return openFeatureAPI;
     }
 }
 ```
 
-Next, we can add our REST endpoint definition with dependency injection for `OpenFeatureAPI` instance,
+Then we can add the REST endpoint definition of `/hello` endpoint, along with dependency injection for `OpenFeatureAPI` instance.
 
+Create the Java class `RestHello.java` inside the package `com.demo` and add the following code,
 ```java
 package com.demo;
 
@@ -125,10 +121,10 @@ public class RestHello {
 
         // Evaluate welcome-message feature flag
         if (client.getBooleanValue("welcome-message", false)) {
-            return "Hello, welcome to website.!";
+            return "Hello, welcome to website!";
         }
 
-        return "Hello.!";
+        return "Hello!";
     }
 }
 ```
@@ -156,14 +152,16 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 </TabItem>
 </Tabs>
 
-> Note that you may have a different `.jar` name based on your build configurations.
-
-Now you can visit the url [http://localhost:8080/hello](http://localhost:8080/hello) and observe the message **Hello.!**.
+Now you can visit the url [http://localhost:8080/hello](http://localhost:8080/hello) and observe the message **Hello!**.
 
 At this point, we are falling back to the default response. By default, OpenFeature will return the default value when
-there are no providers configured or running. In our code, we used flagd provider, yet we did not configure and run it. 
+there are no provider configured or running. In the next step, you will learn how to configure and add a provider.
 
-### Step 5: Configure and run FlagD
+### Step 5: Add a provider to OpenFeature
+
+Providers are an important concept in OpenFeature because they are responsible for the flag evaluation itself.
+As we saw in the previous step, OpenFeature without a provider always returns the default value. If we want to actually perform feature
+flagging, we'll need to register a provider.
 
 Create a new file named `flags.json` and add the following JSON. Notice that there's a flag called `welcome-message` which matches the flag
 key defined in [step 3](#step-3-add-code). The `welcome-message` flag has `on` and `off` variants that return `true` and `false` respectively.
@@ -185,14 +183,7 @@ In this case, the defaultVariant is `off`, therefore the value `false` would be 
   }
 }
 ```
-
-> NOTE: This configuration is specific for flagd and vary across other providers.
-
-Next, pull the latest flagd image,
-
-```shell
-docker pull ghcr.io/open-feature/flagd:latest
-```
+> NOTE: This configuration is specific for flagd and varies across providers.
 
 With the flagd configuration and image in place, start flagd service with the following docker command.
 
@@ -200,9 +191,34 @@ With the flagd configuration and image in place, start flagd service with the fo
 docker run -p 8013:8013 -v $(pwd)/:/etc/flagd/ -it ghcr.io/open-feature/flagd:latest start --uri /etc/flagd/flags.json
 ```
 
-### Step 7: Rerun application
+Finally, let's add the required code change to `OpenFeatureBeans.java` class,
 
-Let's rerun our Java Sprint Boot application,
+```diff
+package com.demo;
+
++ import dev.openfeature.contrib.providers.flagd.FlagdProvider;
+import dev.openfeature.sdk.OpenFeatureAPI;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class OpenFeatureBeans {
+
+    @Bean
+    public OpenFeatureAPI OpenFeatureAPI() {
+        final OpenFeatureAPI openFeatureAPI = OpenFeatureAPI.getInstance();
+        
++        // Use flagd as the OpenFeature provider and use default configurations
++        openFeatureAPI.setProvider(new FlagdProvider());
+
+        return openFeatureAPI;
+    }
+}
+```
+
+### Step 7: Rerun the application
+
+Let's rerun our Java Spring Boot application,
 
 <Tabs groupId="running">
 <TabItem value="maven" label="Maven">
@@ -221,8 +237,6 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 </TabItem>
 </Tabs>
 
-
-> Note that you may have a different `.jar` name based on your build configurations.
 
 Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) and you will see the same value.
 
@@ -245,10 +259,10 @@ Now let's change the feature flag in our `flags.json`, making `defaultVariant` t
 }
 ```
 
-Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) and you will be greeted with `Hello, welcome to website.!`
+Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) and you will be greeted with `Hello, welcome to website!`
 
 ## Conclusion
 
-This walk-through introduced you to the OpenFeature Java SDK and how it can be easily integrate into well known frameworks
+This walk-through introduced you to the OpenFeature Java SDK and how it can be easily integrated into well-known frameworks
 such as Spring Boot. It covered how a provider can be configured to perform the flag evaluation and introduced basic feature 
-flagging concepts. It also showcased how feature flags can be updated at runtime, without requiring a coding change and a redeployment.
+flagging concepts. It also showcased how feature flags can be updated at runtime, without requiring a code change and a redeployment.
