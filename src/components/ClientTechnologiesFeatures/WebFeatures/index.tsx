@@ -27,6 +27,13 @@ export class WebFeatures extends React.Component {
             svg: CloudbeesSvg,
             vendorOfficial: true
           },
+          {
+            title: 'Split Provider',
+            description: 'The official Split browser provider for OpenFeature',
+            href: 'https://github.com/splitio/split-openfeature-provider-js',
+            svg: SplitSvg,
+            vendorOfficial: true
+          },
         ]}
         hooks={[]}
       />
