@@ -76,8 +76,8 @@ kubectl wait --timeout=60s --for condition=Available=True deploy --all -n 'open-
 Now that the operator is ready to go, we can deploy our workload:
 
 ```shell
-kubectl -n open-feature-operator-system apply -f end-to-end.yaml && \
-kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo' -n 'open-feature-operator-system'
+kubectl -n default apply -f end-to-end.yaml && \
+kubectl wait --timeout=60s deployment --for condition=Available=True -l 'app=open-feature-demo' -n 'default'
 ```
 
 If you're using `k9s` or some other means of visualization, your cluster should look something like this:
@@ -86,7 +86,7 @@ If you're using `k9s` or some other means of visualization, your cluster should 
 
 #### Forward the service
 
-If you're using using the supplied `kind` config, you can skip to [Experiment with OpenFeature](#experiment-with-openfeature), this port is already forwarded.
+If you're using the supplied `kind` config, you can skip to [Experiment with OpenFeature](#experiment-with-openfeature), this port is already forwarded.
 
 Forward the service port:
 ```shell
@@ -109,7 +109,7 @@ Here, we've defined a simple feature flag that can be use to update the name ins
 Change the `"defaultVariant"` of the feature flag `new-welcome-message"` to `"on"` in the `featureFlagSpec`, then redeploy the change with:
 
 ```shell
-kubectl apply -f end-to-end.yaml
+kubectl apply -n default -f end-to-end.yaml
 ```
 
 Great! Now let's help the design team experiment with new color palette. Let's change our landing page's color.
