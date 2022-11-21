@@ -185,7 +185,7 @@ In this case, the defaultVariant is `off`, therefore the value `false` would be 
 ```
 > NOTE: This configuration is specific for flagd and varies across providers.
 
-With the flagd configuration and image in place, start flagd service with the following docker command.
+With the flagd configuration in place, start flagd service with the following docker command.
 
 ```sh
 docker run -p 8013:8013 -v $(pwd)/:/etc/flagd/ -it ghcr.io/open-feature/flagd:latest start --uri /etc/flagd/flags.json
