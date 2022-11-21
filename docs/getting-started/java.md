@@ -191,7 +191,7 @@ With the flagd configuration in place, start flagd service with the following do
 docker run -p 8013:8013 -v $(pwd)/:/etc/flagd/ -it ghcr.io/open-feature/flagd:latest start --uri /etc/flagd/flags.json
 ```
 
-Finally, let's add the required code change to `OpenFeatureBeans.java` class,
+Finally, let's add the required code change to `OpenFeatureBeans.java` class.
 
 ```diff
 package com.demo;
