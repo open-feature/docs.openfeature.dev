@@ -96,7 +96,7 @@ public class OpenFeatureBeans {
 
 Then we can add the REST endpoint definition of `/hello` endpoint, along with dependency injection for `OpenFeatureAPI` instance.
 
-Create the Java class `RestHello.java` inside the package `com.demo` and add the following code,
+Create the Java class `RestHello.java` inside the package `com.demo` and add the following code.
 ```java
 package com.demo;
 
