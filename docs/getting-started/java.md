@@ -218,7 +218,7 @@ public class OpenFeatureBeans {
 
 ### Step 7: Rerun the application
 
-Let's rerun our Java Spring Boot application,
+Let's rerun our Java Spring Boot application.
 
 <Tabs groupId="running">
 <TabItem value="maven" label="Maven">
