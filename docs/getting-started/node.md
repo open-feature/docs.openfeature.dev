@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This walk-through teaches you the basics of using OpenFeature in JavaScript. You'll learn how to:
+This walk-through teaches you the basics of using OpenFeature with JavaScript in Node.js. You'll learn how to:
 
-- Install the JS SDK
+- Install the JavaScript SDK
 - Install and configure a provider
 - Perform basic feature flagging
 
@@ -52,7 +52,7 @@ app.listen(port, () => {
 
 ### Step 3: Add the OpenFeature SDK
 
-Using NPM, install the OpenFeature SDK using the following command.
+Let's install the OpenFeature SDK using the following command.
 
 ```sh
 npm install @openfeature/js-sdk
@@ -63,8 +63,6 @@ Update `index.ts` to import the SDK.
 ```diff
 import express from "express";
 + import { OpenFeature } from "@openfeature/js-sdk";
-
-const app = express();
 ```
 
 Once you've imported `OpenFeature`, a new client can be created.
@@ -73,8 +71,6 @@ Once you've imported `OpenFeature`, a new client can be created.
 const port = 8080;
 
 + const client = OpenFeature.getClient();
-
-app.get("/", (_, res) => {
 ```
 
 The client can now be used to get a feature flag value. In this case, we'll get a `boolean` value using the `welcome-message` [flag key][flag-key].
@@ -103,7 +99,7 @@ Let's start the app and see it in action. Run the following command to start the
 npx ts-node index.ts
 ```
 
-Open your favorite browser and navigate to http://localhost:8080. If all goes as planned, you should see "Express + TypeScript Server" in glorious monochrome.
+Open your favorite browser and navigate to [http://localhost:8080](http://localhost:8080). If all goes as planned, you should see "Express + TypeScript Server" in glorious monochrome.
 
 "Why I'm I seeing that value?", you may ask. Well, it's because a provider hasn't been configured yet. By default, OpenFeature will return the default value in that situation. In the next step, you'll learn how to add a provider.
 
@@ -128,8 +124,6 @@ Now, update `index.ts` to import the `flagd provider`.
 ```diff
 import { OpenFeature } from "@openfeature/js-sdk";
 + import { FlagdProvider } from "@openfeature/flagd-provider";
-
-const app: Express = express();
 ```
 
 Finally, we need to register the provider with OpenFeature.
@@ -163,7 +157,7 @@ Create a new file named `flags.json` and add the following JSON. Notice that the
 }
 ```
 
-> NOTE: This configuration is specific for FlagD and vary across providers.
+> NOTE: This configuration is specific for FlagD and varies across providers.
 
 With the flag configuration in place, start FlagD with the following command.
 
@@ -179,7 +173,7 @@ Now that everything is in place, let's start the app again.
 npx ts-node index.ts
 ```
 
-Open your favorite browser and navigating to http://localhost:8080 should show the same value as before. This difference is now the feature flag value can be changed at runtime! Go ahead, update the `flag.json` by changing the defaultVariant value to `on`.
+Open your favorite browser and navigating to [http://localhost:8080](http://localhost:8080) should show the same value as before. This difference is now the feature flag value can be changed at runtime! Go ahead, update the `flag.json` by changing the defaultVariant value to `on`.
 
 ```diff
 {
@@ -211,5 +205,4 @@ This walk-through introduced you to the OpenFeature JS SDK. It covered how a pro
 [error-code]: https://docs.openfeature.dev/docs/specification/types#error-code
 [provider-overview]: https://docs.openfeature.dev/docs/reference/concepts/provider/
 [js-providers]: https://docs.openfeature.dev/docs/reference/technologies/server/javascript/
-[flagd-config]: https://github.com/open-feature/flagd/wiki/Feature-Flag-Configurations
-[typedoc]: https://open-feature.github.io/js-sdk/
+[flagd-config]: https://github.com/open-feature/flagd/wiki/Feature-Flag-Configurations/
