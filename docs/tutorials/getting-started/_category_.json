@@ -1,0 +1,11 @@
+{
+  "position": 2,
+  "label": "Getting Started",
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Getting started with the OpenFeature SDK and flagd",
+    "description": "OpenFeature seeks to provide a simple, consistent, and powerful API for developers to use feature flagging in their applications. To accomplish this, the OpenFeature SDK defines a number of flexible abstractions."
+  }
+}
