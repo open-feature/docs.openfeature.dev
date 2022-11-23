@@ -5,12 +5,12 @@ import TabItem from '@theme/TabItem';
 
 ## Introduction
 
-This walk-through teaches you the basics of using OpenFeature in Java on top of a Spring Boot Web application.
+This walk-through teaches you the basics of using OpenFeature in Java in the context of a Spring Boot Web application.
 
 You'll learn how to:
 
-- Integrate OpenFeature Java SDK
-- Install and configure an OpenFeature provider
+- Integrate the OpenFeature Java SDK
+- Install and configure the OpenFeature provider
 - Perform basic feature flagging
 
 ## Requirements
@@ -64,7 +64,7 @@ Given below are dependencies for Maven and Gradle with the latest dependency ver
 
 ```groovy
 implementation 'dev.openfeature:sdk:1.0.0'
-implementation 'dev.openfeature.contrib.providers:flagd:0.5.1'
+implementation 'dev.openfeature.contrib.providers:flagd:0.5.2'
 ```
 </TabItem>
 </Tabs>
@@ -121,7 +121,7 @@ public class RestHello {
 
         // Evaluate welcome-message feature flag
         if (client.getBooleanValue("welcome-message", false)) {
-            return "Hello, welcome to website!";
+            return "Hello, welcome to this OpenFeature-enabled website!";
         }
 
         return "Hello!";
@@ -259,7 +259,7 @@ Now let's change the feature flag in our `flags.json`, making `defaultVariant` t
 }
 ```
 
-Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) and you will be greeted with `Hello, welcome to website!`
+Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) and you will be greeted with `Hello, welcome to this OpenFeature-enabled website!`
 
 ## Conclusion
 
