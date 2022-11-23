@@ -55,7 +55,7 @@ Given below are dependencies for Maven and Gradle with the latest dependency ver
 <dependency>
     <groupId>dev.openfeature.contrib.providers</groupId>
     <artifactId>flagd</artifactId>
-    <version>0.5.1</version>
+    <version>0.5.2</version>
 </dependency>
 ```
 
