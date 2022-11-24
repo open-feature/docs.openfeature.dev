@@ -16,7 +16,7 @@ export class DotnetFeatures extends React.Component {
           href: 'https://github.com/open-feature/dotnet-sdk',
         }}
         artifact={{
-          title: 'Github repository',
+          title: 'NuGet package',
           href: 'https://www.nuget.org/packages/OpenFeature',
           instruction: 'dotnet add package OpenFeature',
           codeBlockLanguage: 'powershell',
