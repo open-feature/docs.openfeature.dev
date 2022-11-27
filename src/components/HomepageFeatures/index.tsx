@@ -75,6 +75,17 @@ var client = Api.Instance.GetClient("my-client");
 var value = await client.GetBooleanValue("new-look", false);
           `}</CodeBlock>
         </TabItem>
+        <TabItem value="php" label="PHP">
+          {/* prettier-ignore */}
+          <CodeBlock className="language-php">{`
+use OpenFeature\\OpenFeatureAPI;
+
+$api = OpenFeatureAPI::getInstance();
+$client = $api->getClient("my-client");
+
+$value = $client->getBooleanValue('new-look', true);
+          `}</CodeBlock>
+        </TabItem>
       </Tabs>
     ),
   },
@@ -142,6 +153,24 @@ public class MyFlagProvider : FeatureProvider
     string flagKey,
     bool defaultValue,
     EvaluationContext? context = null)
+  {
+      // your implementation
+  }
+  //...
+}
+          `}</CodeBlock>
+        </TabItem>
+        <TabItem value="php" label="PHP">
+          {/* prettier-ignore */}
+          <CodeBlock className="language-php">{`
+class MyFlagProvider implements Provider
+{
+  //...
+  public function resolveBooleanValue(
+    string $flagKey,
+    bool $defaultValue,
+    ?EvaluationContext $context = null,
+  ): ResolutionDetails
   {
       // your implementation
   }
@@ -239,6 +268,32 @@ public class MyHook : Hook
     HookContext<T> context,
     FlagEvaluationDetails<T> details,
     IReadOnlyDictionary<string, object> hints = null)
+  {
+    // do something after flag evaluation
+  }
+  //...
+}
+          `}</CodeBlock>
+        </TabItem>
+        <TabItem value="php" label="PHP">
+          {/* prettier-ignore */}
+          <CodeBlock className="language-php">{`
+class MyHook implements Hook
+{
+  //...
+  public function before(
+    HookContext $context,
+    HookHints $hints,
+  ): ?EvaluationContext
+  {
+    // do something before flag evaluation
+  }
+
+  public function after(
+    HookContext $context,
+    ResolutionDetails $details,
+    HookHints $hints,
+  ): void
   {
     // do something after flag evaluation
   }

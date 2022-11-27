@@ -1,4 +1,4 @@
-import { faGolang, faJava, faSquareJs } from '@fortawesome/free-brands-svg-icons';
+import { faGolang, faJava, faPhp, faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import CSharpNoFillSvg from '@site/static/img/c-sharp-no-fill.svg';
 import React from 'react';
 import { OpenFeatureComponentTable } from '../custom/OpenFeatureComponentTable';
@@ -32,6 +32,12 @@ export class ServerTechnologiesTable extends React.Component {
             iconDefinition: faGolang,
             title: 'Go',
             description: 'SDK and components for Go',
+          },
+          {
+            href: '/docs/reference/technologies/server/php',
+            iconDefinition: faPhp,
+            title: 'PHP',
+            description: 'SDK and components for PHP',
           },
         ]}
       />

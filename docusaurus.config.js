@@ -180,7 +180,7 @@ const config = {
       },
       prism: {
         theme: lightCodeTheme,
-        additionalLanguages: ['typescript', 'go', 'java', 'csharp', 'powershell'],
+        additionalLanguages: ['typescript', 'go', 'java', 'csharp', 'powershell', 'php'],
       },
     }),
 };
