@@ -1,5 +1,6 @@
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
+import SplitSvg from '@site/static/img/split-no-fill.svg';
 import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 
