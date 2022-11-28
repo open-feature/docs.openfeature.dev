@@ -1,8 +1,17 @@
-# Get Started with the OpenFeature JavaScript SDK on Node.js
+---
+title: JavaScript SDK and Express
+description: Getting Started with the OpenFeature JavaScript SDK on Express
+---
+
+import FlagdContent from '@site/src/components/custom/tutorial/flagd-content.mdx';
+import FlagdChangeContent from '@site/src/components/custom/tutorial/flagd-change-content.mdx';
+import WhyDefaultContent from '@site/src/components/custom/tutorial/why-default-content.mdx';
+
+# Getting Started with the OpenFeature JavaScript SDK on Express.js
 
 ## Introduction
 
-This walk-through teaches you the basics of using OpenFeature with JavaScript in Node.js. You'll learn how to:
+This walk-through teaches you the basics of using OpenFeature with JavaScript using Express. You'll learn how to:
 
 - Install the JavaScript SDK
 - Install and configure a provider
@@ -12,7 +21,7 @@ This walk-through teaches you the basics of using OpenFeature with JavaScript in
 
 This walk-through assumes that:
 
-- You have a basic understanding of JavaScript and Node.js. If not, please review the [Introduction to Node.js][learn-nodejs] tutorial maintained by the Node.js team.
+- You have a basic understanding of JavaScript, Node.js and Express. If not, please review the [Introduction to Node.js][learn-nodejs] and the [Express documentation][learn-expressjs].
 - You have Node 16 or later. The latest version of Node can be found [here][nodejs-download].
 - You have Docker installed and running on the host system. The latest version of Docker can be found [here][docker-download].
 
@@ -101,19 +110,17 @@ npx ts-node index.ts
 
 Open your favorite browser and navigate to [http://localhost:8080](http://localhost:8080). If all goes as planned, you should see "Express + TypeScript Server" in glorious monochrome.
 
-"Why I'm I seeing that value?", you may ask. Well, it's because a provider hasn't been configured yet. By default, OpenFeature will return the default value in that situation. In the next step, you'll learn how to add a provider.
+<WhyDefaultContent/>
 
 > NOTE: You should stop the app by using the keyboard short `ctrl + c` or `⌘ + c` before moving on to the next step.
 
-### Step 5: Add a provider to OpenFeature
+### Step 5: Configure a provider (flagd)
 
-[Providers][provider-overview] are an important concept in OpenFeature because they're responsible for the flag evaluation itself. As we saw in the previous step, OpenFeature without a provider always returns the default value. If we want to actually perform feature flagging, we'll need to register a provider.
+<FlagdContent/>
 
-There are [many providers available][js-providers] for popular feature flag management platforms and open source projects. You can also build your own provider if your favorite tool isn't supported yet.
+Now let's make the required code changes in our application.
 
-In this example, we'll use the `flagd provider` because it's a simple, self-contained feature flagging tool that's built and maintained by the OpenFeature team.
-
-Using NPM, install the `flagd provider` using the following command:
+Using NPM, install the `flagd provider` with the following command:
 
 ```sh
 npm install @openfeature/flagd-provider
@@ -135,37 +142,7 @@ const port = 8080;
 const client = OpenFeature.getClient();
 ```
 
-### Step 6: Configure FlagD
-
-Now that the application is ready, FlagD needs to be setup.
-
-Create a new file named `flags.json` and add the following JSON. Notice that there's a flag called `welcome-message` which matches the flag key defined in [step 4](#step-4-add-the-openfeature-sdk). The `welcome-message` flag has `on` and `off` variants that return `true` and `false` respectively. The state property controls whether the feature flag is active or not. Finally, the defaultVariant property controls the variant that should be returned. In this case, the defaultVariant is `off`, therefore the value `false` would be returned.
-
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/open-feature/schemas/main/json/flagd-definitions.json",
-  "flags": {
-    "welcome-message": {
-      "variants": {
-        "on": true,
-        "off": false
-      },
-      "state": "ENABLED",
-      "defaultVariant": "off"
-    }
-  }
-}
-```
-
-> NOTE: This configuration is specific for FlagD and varies across providers.
-
-With the flag configuration in place, start FlagD with the following command.
-
-```sh
-docker run -p 8013:8013 -v $(pwd)/:/etc/flagd/ -it ghcr.io/open-feature/flagd:latest start --uri /etc/flagd/flags.json
-```
-
-### Step 7: Rerun the application
+### Step 6: Rerun the application
 
 Now that everything is in place, let's start the app again.
 
@@ -173,24 +150,9 @@ Now that everything is in place, let's start the app again.
 npx ts-node index.ts
 ```
 
-Open your favorite browser and navigating to [http://localhost:8080](http://localhost:8080) should show the same value as before. This difference is now the feature flag value can be changed at runtime! Go ahead, update the `flag.json` by changing the defaultVariant value to `on`.
+Open your favorite browser and navigate to [http://localhost:8080](http://localhost:8080) should show the same value as before. This difference is now the feature flag value can be changed at runtime!
 
-```diff
-{
-  "$schema": "https://raw.githubusercontent.com/open-feature/schemas/main/json/flagd-definitions.json",
-  "flags": {
-    "welcome-message": {
-      "variants": {
-        "on": true,
-        "off": false
-      },
-      "state": "ENABLED",
--      "defaultVariant": "off"
-+      "defaultVariant": "on"
-    }
-  }
-}
-```
+<FlagdChangeContent/>
 
 Save the changes to `flag.json` and refresh the browser tab. You should now be greeted with `Express + TypeScript + OpenFeature Server`.
 
@@ -199,6 +161,7 @@ Save the changes to `flag.json` and refresh the browser tab. You should now be g
 This walk-through introduced you to the OpenFeature JS SDK. It covered how a provider can be configured to perform the flag evaluation and introduced basic feature flagging concepts. It also showcased how feature flags can be updated at runtime, without requiring a redeployment.
 
 [learn-nodejs]: https://nodejs.dev/en/learn/
+[learn-expressjs]: https://expressjs.com/
 [nodejs-download]: https://nodejs.org/en/download/
 [docker-download]: https://docs.docker.com/engine/install/
 [flag-key]: https://docs.openfeature.dev/docs/specification/glossary#flag-key

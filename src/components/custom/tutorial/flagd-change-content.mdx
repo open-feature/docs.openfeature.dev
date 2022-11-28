@@ -1,0 +1,18 @@
+Let's change the feature flag in our `flags.json`, making `defaultVariant` to `on`
+
+```diff
+{
+  "$schema": "https://raw.githubusercontent.com/open-feature/schemas/main/json/flagd-definitions.json",
+  "flags": {
+    "welcome-message": {
+      "variants": {
+        "on": true,
+        "off": false
+      },
+      "state": "ENABLED",
+-      "defaultVariant": "off"
++      "defaultVariant": "on"
+    }
+  }
+}
+```
