@@ -3,3 +3,4 @@ export * from './JavascriptFeatures';
 export * from './JavaFeatures';
 export * from './GoFeatures';
 export * from './DotnetFeatures';
+export * from './PhpFeatures';
