@@ -1,5 +1,6 @@
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
+import SplitSvg from '@site/static/img/split-no-fill.svg';
 import React from 'react';
 import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologiesPage';
 
@@ -25,7 +26,14 @@ export class WebFeatures extends React.Component {
             description: 'The official CloudBees browser provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-browser',
             svg: CloudbeesSvg,
-            vendorOfficial: true
+            vendorOfficial: true,
+          },
+          {
+            title: 'Split Provider',
+            description: 'The official Split browser provider for OpenFeature',
+            href: 'https://github.com/splitio/split-openfeature-provider-js',
+            svg: SplitSvg,
+            vendorOfficial: true,
           },
         ]}
         hooks={[]}
