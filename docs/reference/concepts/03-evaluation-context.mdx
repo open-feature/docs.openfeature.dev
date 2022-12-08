@@ -60,7 +60,7 @@ api.SetContext(new EvaluationContextBuilder().Set("myGlobalKey", "myGlobalValue"
 
 // add a value to the client context
 FeatureClient client = api.GetClient();
-api.SetContext(new EvaluationContextBuilder().Set("myClientKey", "myClientValue").Build());
+client.SetContext(new EvaluationContextBuilder().Set("myClientKey", "myClientValue").Build());
 
 // add a value to the invocation context
 var context = new EvaluationContext()
