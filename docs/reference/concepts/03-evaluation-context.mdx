@@ -19,11 +19,11 @@ Values relevant for flag evaluation can be included in the evaluation context at
 
 ```ts
 // add a value to the global context
-OpenFeature.context = { myGlobalKey: 'myGlobalValue' }
+OpenFeature.setContext({ myGlobalKey: 'myGlobalValue' });
 
 // add a value to the client context
 const client = OpenFeature.getClient();
-client.context = { myClientKey: 'myClientValue' }
+client.setContext({ myClientKey: 'myClientValue' });
 
 // add a value to the invocation context
 const context: EvaluationContext = {
