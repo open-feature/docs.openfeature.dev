@@ -6,6 +6,8 @@ description: Getting Started with the OpenFeature JavaScript SDK on Express
 import FlagdContent from '@site/src/components/custom/tutorial/flagd-content.mdx';
 import FlagdChangeContent from '@site/src/components/custom/tutorial/flagd-change-content.mdx';
 import WhyDefaultContent from '@site/src/components/custom/tutorial/why-default-content.mdx';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Getting Started with the OpenFeature JavaScript SDK on Express
 
@@ -31,16 +33,57 @@ This walk-through assumes that:
 
 To get started, create a new folder, bootstrap the project, and install the dependencies. This can be done by running the following commands.
 
+<Tabs groupId="js-tutorial">
+<TabItem value="js" label="JavaScript">
+
 ```sh
 mkdir openfeature-js-intro
 cd openfeature-js-intro
+npm init -y
+npm install express
+```
+
+</TabItem>
+
+<TabItem value="ts" label="TypeScript">
+
+```sh
+mkdir openfeature-ts-intro
+cd openfeature-ts-intro
 npm init -y
 npm install express
 npm i -D typescript @types/express @types/node ts-node
 npx tsc --init
 ```
 
+</TabItem>
+</Tabs>
+
 ### Step 2: Create an Express app
+
+<Tabs groupId="js-tutorial">
+<TabItem value="js" label="JavaScript">
+
+Create a new file named `index.js` and include the following code.
+
+```js
+const express = require('express');
+
+const app = express();
+const port = 8080;
+
+app.get('/', (_, res) => {
+  res.send('Express + TypeScript Server');
+});
+
+app.listen(port, () => {
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+});
+```
+
+</TabItem>
+
+<TabItem value="ts" label="TypeScript">
 
 Create a new file named `index.ts` and include the following code.
 
@@ -59,6 +102,9 @@ app.listen(port, () => {
 });
 ```
 
+</TabItem>
+</Tabs>
+
 ### Step 3: Add the OpenFeature SDK
 
 Let's install the OpenFeature SDK using the following command.
@@ -67,12 +113,29 @@ Let's install the OpenFeature SDK using the following command.
 npm install @openfeature/js-sdk
 ```
 
+<Tabs groupId="js-tutorial">
+<TabItem value="js" label="JavaScript">
+
+Update `index.js` to import the SDK.
+
+```diff
+const express = require('express');
++ const { OpenFeature } = require('@openfeature/js-sdk');
+```
+
+</TabItem>
+
+<TabItem value="ts" label="TypeScript">
+
 Update `index.ts` to import the SDK.
 
 ```diff
 import express from "express";
 + import { OpenFeature } from "@openfeature/js-sdk";
 ```
+
+</TabItem>
+</Tabs>
 
 Once you've imported `OpenFeature`, a new client can be created.
 
@@ -104,19 +167,33 @@ The second argument is the fallback value, which is returned if there's abnormal
 
 Let's start the app and see it in action. Run the following command to start the server.
 
+<Tabs groupId="js-tutorial">
+<TabItem value="js" label="JavaScript">
+
+```sh
+node index.js
+```
+
+</TabItem>
+
+<TabItem value="ts" label="TypeScript">
+
 ```sh
 npx ts-node index.ts
 ```
 
+</TabItem>
+</Tabs>
+
 Open your favorite browser and navigate to [http://localhost:8080](http://localhost:8080). If all goes as planned, you should see "Express + TypeScript Server" in glorious monochrome.
 
-<WhyDefaultContent/>
+<WhyDefaultContent />
 
 > NOTE: You should stop the app by using the keyboard short `ctrl + c` or `⌘ + c` before moving on to the next step.
 
 ### Step 5: Configure a provider (flagd)
 
-<FlagdContent/>
+<FlagdContent />
 
 Now let's make the required code changes in our application.
 
@@ -126,12 +203,29 @@ Using NPM, install the `flagd provider` with the following command:
 npm install @openfeature/flagd-provider
 ```
 
+<Tabs groupId="js-tutorial">
+<TabItem value="js" label="JavaScript">
+
+Now, update `index.js` to import the `flagd provider`.
+
+```diff
+const { OpenFeature } = require('@openfeature/js-sdk');
++ const { FlagdProvider } = require('@openfeature/flagd-provider');
+```
+
+</TabItem>
+
+<TabItem value="ts" label="TypeScript">
+
 Now, update `index.ts` to import the `flagd provider`.
 
 ```diff
 import { OpenFeature } from "@openfeature/js-sdk";
 + import { FlagdProvider } from "@openfeature/flagd-provider";
 ```
+
+</TabItem>
+</Tabs>
 
 Finally, we need to register the provider with OpenFeature.
 
@@ -146,13 +240,27 @@ const client = OpenFeature.getClient();
 
 Now that everything is in place, let's start the app again.
 
+<Tabs groupId="js-tutorial">
+<TabItem value="js" label="JavaScript">
+
+```sh
+node index.js
+```
+
+</TabItem>
+
+<TabItem value="ts" label="TypeScript">
+
 ```sh
 npx ts-node index.ts
 ```
 
+</TabItem>
+</Tabs>
+
 Open your favorite browser and navigate to [http://localhost:8080](http://localhost:8080) should show the same value as before. This difference is now the feature flag value can be changed at runtime!
 
-<FlagdChangeContent/>
+<FlagdChangeContent />
 
 Save the changes to `flag.json` and refresh the browser tab. You should now be greeted with `Express + TypeScript + OpenFeature Server`.
 
