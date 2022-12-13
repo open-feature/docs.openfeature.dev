@@ -309,19 +309,19 @@ objectDetails, err := client.ObjectValueDetails(context.Background(), "objectFla
 
 ```php
 // get details of a boolean evaluation
-$boolValue = $client.getBooleanDetails("boolFlag", false, null, null);
+$boolDetails = $client.getBooleanDetails("boolFlag", false, null, null);
 
 // get details of a string evaluation
-$stringValue = $client.getStringDetails("stringFlag", "default", null, null);
+$stringDetails = $client.getStringDetails("stringFlag", "default", null, null);
 
 // get details of an integer evaluation
-$intValue = $client.getIntegerDetails("intFlag", 1, null, null);
+$intDetails = $client.getIntegerDetails("intFlag", 1, null, null);
 
 // get details of a float evaluation
-$floatValue = $client.getFloatDetails("floatFlag", 0.9, null, null);
+$floatDetails = $client.getFloatDetails("floatFlag", 0.9, null, null);
 
 // get details of an object evaluation
-$objectValue = $client.getObjectDetails("objectFlag", $myObjectInstance, null, null);
+$objectDetails = $client.getObjectDetails("objectFlag", $myObjectInstance, null, null);
 ```
 
 </TabItem>
