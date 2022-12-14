@@ -108,16 +108,16 @@ boolValue, err := client.BooleanValue("boolFlag", false, evalCtx)
 ```php
 // add a value to the global context
 $api = OpenFeatureAPI.getInstance();
-$api.setEvaluationContext(new EvaluationContext("targetingKey", ["myGlobalKey" => "myGlobalValue"]));
+$api->setEvaluationContext(new EvaluationContext("targetingKey", ["myGlobalKey" => "myGlobalValue"]));
 
 // add a value to the client context
-$client = $api.getClient();
-$client.setEvaluationContext(new EvaluationContext("targetingKey", ["myClientKey" => "myClientValue"]));
+$client = $api->getClient();
+$client->setEvaluationContext(new EvaluationContext("targetingKey", ["myClientKey" => "myClientValue"]));
 
 // add a value to the invocation context
 $context = new EvaluationContext("targetingKey", ["myInvocationKey" => "myInvocationValue"]);
 
-$boolValue = $client.getBooleanValue("boolFlag", false, $context);
+$boolValue = $client->getBooleanValue("boolFlag", false, $context);
 ```
 
 </TabItem>

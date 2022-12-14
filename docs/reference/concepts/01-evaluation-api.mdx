@@ -55,7 +55,7 @@ openfeature.SetProvider(MyFeatureProvider{})
 ```php
 use OpenFeature\OpenFeatureAPI;
 
-OpenFeatureAPI.getInstance().setProvider(new YourProviderOfChoice());
+OpenFeatureAPI::getInstance()->setProvider(new YourProviderOfChoice());
 ```
 
 </TabItem>
@@ -99,7 +99,7 @@ client := openfeature.NewClient("my-app")
 <TabItem value="php" label="PHP">
 
 ```php
-$client = OpenFeatureAPI.getInstance().getClient("my-app");
+$client = OpenFeatureAPI::getInstance()->getClient("my-app");
 ```
 
 </TabItem>
@@ -194,19 +194,19 @@ objectValue, err := client.ObjectValue(context.Background(), "objectFlag", myObj
 
 ```php
 // get a boolean value
-$boolValue = $client.getBooleanValue("boolFlag", false, null, null);
+$boolValue = $client->getBooleanValue("boolFlag", false, null, null);
 
 // get a string value
-$stringValue = $client.getStringValue("stringFlag", "default", null, null);
+$stringValue = $client->getStringValue("stringFlag", "default", null, null);
 
 // get an integer value
-$intValue = $client.getIntegerValue("intFlag", 1, null, null);
+$intValue = $client->getIntegerValue("intFlag", 1, null, null);
 
 // get a float value
-$floatValue = $client.getFloatValue("floatFlag", 0.9, null, null);
+$floatValue = $client->getFloatValue("floatFlag", 0.9, null, null);
 
 // get an object value
-$objectValue = $client.getObjectValue("objectFlag", $myObjectInstance, null, null);
+$objectValue = $client->getObjectValue("objectFlag", $myObjectInstance, null, null);
 ```
 
 </TabItem>
@@ -309,19 +309,19 @@ objectDetails, err := client.ObjectValueDetails(context.Background(), "objectFla
 
 ```php
 // get details of a boolean evaluation
-$boolDetails = $client.getBooleanDetails("boolFlag", false, null, null);
+$boolDetails = $client->getBooleanDetails("boolFlag", false, null, null);
 
 // get details of a string evaluation
-$stringDetails = $client.getStringDetails("stringFlag", "default", null, null);
+$stringDetails = $client->getStringDetails("stringFlag", "default", null, null);
 
 // get details of an integer evaluation
-$intDetails = $client.getIntegerDetails("intFlag", 1, null, null);
+$intDetails = $client->getIntegerDetails("intFlag", 1, null, null);
 
 // get details of a float evaluation
-$floatDetails = $client.getFloatDetails("floatFlag", 0.9, null, null);
+$floatDetails = $client->getFloatDetails("floatFlag", 0.9, null, null);
 
 // get details of an object evaluation
-$objectDetails = $client.getObjectDetails("objectFlag", $myObjectInstance, null, null);
+$objectDetails = $client->getObjectDetails("objectFlag", $myObjectInstance, null, null);
 ```
 
 </TabItem>
