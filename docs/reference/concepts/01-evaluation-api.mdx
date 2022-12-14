@@ -50,6 +50,15 @@ openfeature.SetProvider(MyFeatureProvider{})
 ```
 
 </TabItem>
+<TabItem value="php" label="PHP">
+
+```php
+use OpenFeature\OpenFeatureAPI;
+
+OpenFeatureAPI.getInstance().setProvider(new YourProviderOfChoice());
+```
+
+</TabItem>
 </Tabs>
 
 ## Creating a client
@@ -84,6 +93,13 @@ var client = Api.Instance.GetClient("my-app");
 
 ```go
 client := openfeature.NewClient("my-app")
+```
+
+</TabItem>
+<TabItem value="php" label="PHP">
+
+```php
+$client = OpenFeatureAPI.getInstance().getClient("my-app");
 ```
 
 </TabItem>
@@ -171,6 +187,26 @@ floatValue, err := client.FloatValue(context.Background(), "floatFlag", 3.14, op
 
 // get an object value
 objectValue, err := client.ObjectValue(context.Background(), "objectFlag", myObject, openfeature.EvaluationContext{})
+```
+
+</TabItem>
+<TabItem value="php" label="PHP">
+
+```php
+// get a boolean value
+$boolValue = $client.getBooleanValue("boolFlag", false, null, null);
+
+// get a string value
+$stringValue = $client.getStringValue("stringFlag", "default", null, null);
+
+// get an integer value
+$intValue = $client.getIntegerValue("intFlag", 1, null, null);
+
+// get a float value
+$floatValue = $client.getFloatValue("floatFlag", 0.9, null, null);
+
+// get an object value
+$objectValue = $client.getObjectValue("objectFlag", $myObjectInstance, null, null);
 ```
 
 </TabItem>
@@ -266,6 +302,26 @@ floatDetails, err := client.FloatValueDetails(context.Background(), "floatFlag",
 
 // get details of object evaluation
 objectDetails, err := client.ObjectValueDetails(context.Background(), "objectFlag", myObject, openfeature.EvaluationContext{})
+```
+
+</TabItem>
+<TabItem value="php" label="PHP">
+
+```php
+// get details of a boolean evaluation
+$boolDetails = $client.getBooleanDetails("boolFlag", false, null, null);
+
+// get details of a string evaluation
+$stringDetails = $client.getStringDetails("stringFlag", "default", null, null);
+
+// get details of an integer evaluation
+$intDetails = $client.getIntegerDetails("intFlag", 1, null, null);
+
+// get details of a float evaluation
+$floatDetails = $client.getFloatDetails("floatFlag", 0.9, null, null);
+
+// get details of an object evaluation
+$objectDetails = $client.getObjectDetails("objectFlag", $myObjectInstance, null, null);
 ```
 
 </TabItem>
