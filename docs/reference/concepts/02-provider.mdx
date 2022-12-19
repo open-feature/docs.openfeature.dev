@@ -249,6 +249,55 @@ func (e MyFeatureProvider) Hooks() []Hook {
 ```
 
 </TabItem>
+<TabItem value="php" label="PHP">
+
+```php
+namespace OpenFeature\Dev\MyFeature;
+
+use OpenFeature\interfaces\hooks\HooksAwareTrait;
+use OpenFeature\interfaces\provider\Provider;
+use Psr\Log\LoggerAwareTrait;
+
+class MyFeatureProvider implements Provider
+{
+    use HooksAwareTrait;
+    use LoggerAwareTrait;
+
+    public const NAME = 'MyFeatureProvider';
+
+    public function getMetadata(): MetadataInterface
+    {
+        return new Metadata(self::NAME);
+    }
+
+    public function resolveBooleanValue(string $flagKey, bool $defaultValue, ?EvaluationContext $context = null): ResolutionDetails
+    {
+        // code to evaluate boolean
+    }
+
+    public function resolveStringValue(string $flagKey, string $defaultValue, ?EvaluationContext $context = null): ResolutionDetails
+    {
+        // code to evaluate string
+    }
+
+    public function resolveIntegerValue(string $flagKey, int $defaultValue, ?EvaluationContext $context = null): ResolutionDetails
+    {
+        // code to evaluate integer
+    }
+
+    public function resolveFloatValue(string $flagKey, float $defaultValue, ?EvaluationContext $context = null): ResolutionDetails
+    {
+        // code to evaluate float
+    }
+
+    public function resolveObjectValue(string $flagKey, $defaultValue, ?EvaluationContext $context = null): ResolutionDetails
+    {
+        // code to evaluate object
+    }
+}
+```
+
+</TabItem>
 
 </Tabs>
 
