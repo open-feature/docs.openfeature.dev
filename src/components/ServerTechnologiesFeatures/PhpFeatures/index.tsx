@@ -29,19 +29,19 @@ composer require open-feature/sdk
           {
             title: 'CloudBees Provider',
             description: 'A provider for CloudBees',
-            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/src/CloudBees',
+            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/providers/CloudBees',
             svg: CloudbeesSvg,
           },
           {
             title: 'flagd Provider',
             description: 'A provider for flagd',
-            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/src/Flagd',
+            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/providers/Flagd',
             svg: FlagdSvg,
           },
           {
             title: 'Split Provider',
             description: 'A provider for Split',
-            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/src/Split',
+            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/providers/Split',
             svg: SplitSvg,
           },
         ]}
