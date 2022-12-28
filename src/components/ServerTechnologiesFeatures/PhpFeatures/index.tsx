@@ -4,6 +4,8 @@ import { OpenFeatureTechnologiesPage } from '../../custom/OpenFeatureTechnologie
 import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 import SplitSvg from '@site/static/img/split-no-fill.svg';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
+import OTelSvg from '@site/static/img/otel-no-fill.svg';
+import DatadogSvg from '@site/static/img/datadog-no-fill.svg';
 
 export class PhpFeatures extends React.Component {
   override render() {
@@ -43,7 +45,20 @@ composer require open-feature/sdk
             svg: SplitSvg,
           },
         ]}
-        hooks={[]}
+        hooks={[
+          {
+            title: 'OpenTelemetry',
+            description: 'Hook for OpenTelemetry',
+            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/hooks/OpenTelemetry',
+            svg: OTelSvg,
+          },
+          {
+            title: 'Datadog',
+            description: 'Hook for Datadog',
+            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/hooks/DDTrace',
+            svg: DatadogSvg,
+          },
+        ]}
       />
     );
   }
