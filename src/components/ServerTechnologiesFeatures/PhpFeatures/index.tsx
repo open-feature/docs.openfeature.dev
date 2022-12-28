@@ -48,13 +48,13 @@ composer require open-feature/sdk
         hooks={[
           {
             title: 'OpenTelemetry',
-            description: 'Hook for OpenTelemetry',
+            description: 'A hook for OpenTelemetry integration',
             href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/hooks/OpenTelemetry',
             svg: OTelSvg,
           },
           {
             title: 'Datadog',
-            description: 'Hook for Datadog',
+            description: 'A hook for Datadog integration with dd-trace',
             href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/hooks/DDTrace',
             svg: DatadogSvg,
           },
