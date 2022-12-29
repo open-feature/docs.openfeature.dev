@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint ./",
+    "lint": "wireit",
     "docusaurus": "docusaurus",
-    "prestart": "git submodule update --init --recursive",
-    "start": "docusaurus start",
+    "submodules": "wireit",
+    "start": "wireit",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -52,7 +52,8 @@
     "eslint-plugin-jest": "27.1.7",
     "fs-extra": "11.1.0",
     "prettier": "2.8.1",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "wireit": "^0.9.2"
   },
   "browserslist": {
     "production": [
@@ -65,5 +66,25 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "wireit": {
+    "start": {
+      "command": "docusaurus start",
+      "service": true,
+      "dependencies": [
+        "submodules"
+      ]
+    },
+    "submodules": {
+      "command": "git submodule update --init --recursive"
+    },
+    "lint": {
+      "command": "eslint --color --cache --cache-location .eslintcache .",
+      "files": [
+        "**/*.ts",
+        ".eslintignore"
+      ],
+      "output": []
+    }
   }
 }
