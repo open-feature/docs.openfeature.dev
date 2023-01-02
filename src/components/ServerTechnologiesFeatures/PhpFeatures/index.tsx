@@ -6,6 +6,7 @@ import SplitSvg from '@site/static/img/split-no-fill.svg';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
 import OTelSvg from '@site/static/img/otel-no-fill.svg';
 import DatadogSvg from '@site/static/img/datadog-no-fill.svg';
+import CheckCircle from '@site/static/img/check-circle-no-fill.svg';
 
 export class PhpFeatures extends React.Component {
   override render() {
@@ -57,6 +58,12 @@ composer require open-feature/sdk
             description: 'A hook for Datadog integration with dd-trace',
             href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/hooks/DDTrace',
             svg: DatadogSvg,
+          },
+          {
+            title: 'Validator Hook',
+            description: 'A hook which validates the result of flag evaluations',
+            href: 'https://github.com/open-feature/php-sdk-contrib/tree/main/hooks/Validators',
+            svg: CheckCircle,
           },
         ]}
       />
