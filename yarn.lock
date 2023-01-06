@@ -6028,6 +6028,11 @@ json5@^2.1.2, json5@^2.2.1:
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.1.tgz"
   integrity sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==
 
+jsonc-parser@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.2.0.tgz#31ff3f4c2b9793f89c67212627c51c6394f88e76"
+  integrity sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==
+
 jsonfile@^6.0.1:
   version "6.1.0"
   resolved "https://registry.npmjs.org/jsonfile/-/jsonfile-6.1.0.tgz"
@@ -7225,6 +7230,15 @@ prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
+proper-lockfile@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/proper-lockfile/-/proper-lockfile-4.1.2.tgz#c8b9de2af6b2f1601067f98e01ac66baa223141f"
+  integrity sha512-TjNPblN4BwAWMXU8s9AEz4JmQxnD1NNL7bNOY/AKUzyamc379FWASUhc/K1pL2noVb+XmZKLL68cjzLsiOAMaA==
+  dependencies:
+    graceful-fs "^4.2.4"
+    retry "^0.12.0"
+    signal-exit "^3.0.2"
+
 property-information@^5.0.0, property-information@^5.3.0:
   version "5.6.0"
   resolved "https://registry.npmjs.org/property-information/-/property-information-5.6.0.tgz"
@@ -7744,6 +7758,11 @@ responselike@^1.0.2:
   integrity sha512-/Fpe5guzJk1gPqdJLJR5u7eG/gNY4nImjbRDaVWVMRhne55TCmj2i9Q+54PBRfatRC8v/rIiv9BN0pMd9OV5EQ==
   dependencies:
     lowercase-keys "^1.0.0"
+
+retry@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
+  integrity sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==
 
 retry@^0.13.1:
   version "0.13.1"
@@ -9009,6 +9028,17 @@ wildcard@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/wildcard/-/wildcard-2.0.0.tgz"
   integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
+
+wireit@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/wireit/-/wireit-0.9.2.tgz#4df0bb655ac91291b5023b1f3ac4722dafd81501"
+  integrity sha512-TtXR80HRHmkZeoZTt+8rM0GuR2ZvzKSpoXMFL2SIWXiYgUSkFS50LOHnYw285T9rFCmb/xaLobyQs2I2cacZCw==
+  dependencies:
+    braces "^3.0.2"
+    chokidar "^3.5.3"
+    fast-glob "^3.2.11"
+    jsonc-parser "^3.0.0"
+    proper-lockfile "^4.1.2"
 
 word-wrap@^1.2.3:
   version "1.2.3"
