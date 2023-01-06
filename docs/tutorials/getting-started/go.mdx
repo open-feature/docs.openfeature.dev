@@ -43,14 +43,7 @@ go mod init GoStart
 
 Let's initialize the application with logic to expose a minimal Go Gin web endpoint.
 
-First, add Go Gin dependency with the following commands.
-
-```shell
-go get github.com/gin-gonic/gin
-go mod tidy
-```
-
-Next, create the file `main.go` and include the following code.
+First, create the file `main.go` and include the following code.
 
 ```go
 package main
@@ -77,14 +70,14 @@ func main() {
 }
 ```
 
-### Step 3: Add the OpenFeature SDK
-
-Let's add the OpenFeature SDK using the following commands.
+To add Go Gin dependency to the application, run the following commands.
 
 ```shell
-go get github.com/open-feature/go-sdk/pkg/openfeature
+get github.com/gin-gonic/gin
 go mod tidy
 ```
+
+### Step 3: Add the OpenFeature SDK
 
 Next, let's add logic to customize the response message based on the `boolean` [flag key][flag-key] `welcome-message`.
 
@@ -130,6 +123,13 @@ package main
         engine.Run()
 ```
 
+To add OpenFeature SDK dependency to the application, run the following commands.
+
+```shell
+go get github.com/open-feature/go-sdk/pkg/openfeature
+go mod tidy
+```
+
 ### Step 4: Run the initial application
 
 Let's start the application and see it in action.
@@ -148,15 +148,6 @@ Now you can visit the url [http://localhost:8080/hello](http://localhost:8080/he
 
 Now let's make the required code changes in our application.
 
-First, let's add `flagd provider` dependency with following commands.
-
-```shell
-go get github.com/open-feature/go-sdk-contrib/providers/flagd
-go mod tidy
-```
-
-Then, let's add the required code change.
-
 ```diff
  import (
         "context"
@@ -167,11 +158,18 @@ Then, let's add the required code change.
  )
 
  func main() {
-+       // Use flagd as the OpenFeature provider and disable caching
-+       openfeature.SetProvider(flagd.NewProvider(flagd.WithoutCache()))
++       // Use flagd as the OpenFeature provider
++       openfeature.SetProvider(flagd.NewProvider())
 +
         // Initialize OpenFeature client
         client := openfeature.NewClient("GoStartApp")
+```
+
+Then, let's add `flagd provider` dependency with following commands.
+
+```shell
+go get github.com/open-feature/go-sdk-contrib/providers/flagd
+go mod tidy
 ```
 
 Final code of the `main.go` file is given below,
@@ -191,8 +189,8 @@ const defaultMessage = "Hello!"
 const newWelcomeMessage = "Hello, welcome to this OpenFeature-enabled website!"
 
 func main() {
-	// Use flagd as the OpenFeature provider and disable caching
-	openfeature.SetProvider(flagd.NewProvider(flagd.WithoutCache()))
+	// Use flagd as the OpenFeature provider
+	openfeature.SetProvider(flagd.NewProvider())
 
 	// Initialize OpenFeature client
 	client := openfeature.NewClient("GoStartApp")
@@ -242,4 +240,4 @@ such as Go Gin. It covered how a provider can be configured to perform the flag 
 flagging concepts. It also showcased how feature flags can be updated at runtime, without requiring a code change and a redeployment.
 
 
-[flag-key]: https://docs.openfeature.dev/docs/specification/glossary#flag-key
+[flag-key]  https://docs.openfeature.dev/docs/specification/glossary#flag-key
