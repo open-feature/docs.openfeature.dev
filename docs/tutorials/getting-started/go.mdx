@@ -34,9 +34,9 @@ This walk-through assumes that:
 To get started, let's create a new folder and initialize the project. This can be done by running following commands.
 
 ```shell
-mkdir GoStart
-cd GoStart
-go mod init GoStart
+mkdir gostart
+cd gostart
+go mod init gostart
 ```
 
 ### Step 2: Set up the application
@@ -73,7 +73,7 @@ func main() {
 To add Go Gin dependency to the application, run the following commands.
 
 ```shell
-get github.com/gin-gonic/gin
+go get github.com/gin-gonic/gin
 go mod tidy
 ```
 
@@ -146,7 +146,7 @@ Now you can visit the url [http://localhost:8080/hello](http://localhost:8080/he
 
 <FlagdContent/>
 
-Now let's make the required code changes in our application.
+Now, let's make the required code changes in our application.
 
 ```diff
  import (
@@ -172,7 +172,7 @@ go get github.com/open-feature/go-sdk-contrib/providers/flagd
 go mod tidy
 ```
 
-Final code of the `main.go` file is given below,
+The complete `main.go` file is given below:
 
 ```go
 package main
