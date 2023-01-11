@@ -3,41 +3,51 @@
 		 "browser":true,
 		 "es2021":true
 	},
-	"extends":[
-		 "eslint:recommended",
-		 "plugin:@typescript-eslint/recommended",
-		 "prettier"
+	"overrides": [
+		{
+		  "files": ["*.mdx"],
+		  "extends": "plugin:mdx/recommended"
+		},
+		{
+			"files": ["*.ts", "*.tsx"],
+			"parser":"@typescript-eslint/parser",
+			"parserOptions":{
+				 "ecmaVersion":"latest",
+				 "sourceType":"module"
+			}, 
+			"extends":[
+				"eslint:recommended",
+				"plugin:@typescript-eslint/recommended",
+				"prettier"
+			],
+			"rules":{
+				"linebreak-style":[
+					   "error",
+					   "unix"
+				],
+				"quotes":[
+					   "error",
+					   "single"
+				],
+				"semi":[
+					   "error",
+					   "always"
+				],
+				"check-file/filename-naming-convention":[
+				   "error",
+				   {
+					   "*.spec.{js,ts}":"*",
+					   "**/jest.config.ts":"*",
+						"*.{js,ts,tsx,jsx}":"KEBAB_CASE"
+				   }
+				]
+		   	}
+		}
 	],
-	"parser":"@typescript-eslint/parser",
-	"parserOptions":{
-		 "ecmaVersion":"latest",
-		 "sourceType":"module"
-	},
 	"plugins":[
 		 "@typescript-eslint",
 		 "check-file",
-		 "import"
-	],
-	"rules":{
-		 "linebreak-style":[
-				"error",
-				"unix"
-		 ],
-		 "quotes":[
-				"error",
-				"single"
-		 ],
-		 "semi":[
-				"error",
-				"always"
-		 ],
-		 "check-file/filename-naming-convention":[
-			"error",
-			{
-				"*.spec.{js,ts}":"*",
-				"**/jest.config.ts":"*",
-				 "*.{js,ts}":"KEBAB_CASE"
-			}
-	 ]
-	}
+		 "import",
+		 "mdx"
+	]
 }

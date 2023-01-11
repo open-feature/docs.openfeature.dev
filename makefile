@@ -1,7 +1,9 @@
 
 VOLUMES := -v $(CURDIR):/docusaurus -w /docusaurus
 IMAGE := node:19-bullseye
-DOCKER := docker run --rm $(VOLUMES) -p 3000:3000 $(IMAGE)
+PORT := -p 3000:3000
+DOCKER := docker run --rm $(VOLUMES) $(IMAGE)
+DOCKER_I := docker run -ti --rm $(VOLUMES) $(PORT) $(IMAGE)
 
 .PHONY: all build serve clean test lint
 
@@ -20,11 +22,8 @@ build: yarn.lock
 version: yarn.lock
 	$(DOCKER) npx docusaurus --version
 
-serve: yarn.lock
-	$(DOCKER) yarn run serve
-
 start: yarn.lock
-	$(DOCKER) yarn run start -- --poll --host 0.0.0.0
+	$(DOCKER_I) yarn run start -- --poll --host 0.0.0.0
 
 lint: yarn.lock
 	$(DOCKER) yarn run lint
@@ -34,3 +33,4 @@ clean:
 
 test: build
 	docker run -v $(CURDIR):/test --rm wjdp/htmltest -s -c .htmltest.yml build
+
