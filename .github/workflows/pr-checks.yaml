@@ -17,11 +17,11 @@ jobs:
 
       - uses: actions/setup-node@v3
 
-      - name: Install
-        run: yarn install --immutable
-
       - name: Lint
-        run: yarn lint
+        run: make lint
 
       - name: Build
-        run: yarn build
+        run: make build
+      
+      - name: Test
+        run: make test
