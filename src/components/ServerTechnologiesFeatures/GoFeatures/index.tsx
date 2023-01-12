@@ -7,6 +7,7 @@ import SplitSvg from '@site/static/img/split-no-fill.svg';
 import OpenTelemetry from '@site/static/img/otel-no-fill.svg';
 import CheckCircle from '@site/static/img/check-circle-no-fill.svg';
 import FliptSvg from '@site/static/img/flipt-no-fill.svg';
+import GoFeatureFlagNoFillSvg from '@site/static/img/goff-no-fill.svg';
 
 export class GoFeatures extends React.Component {
   override render() {
@@ -44,6 +45,12 @@ export class GoFeatures extends React.Component {
             href: 'https://github.com/flipt-io/flipt-openfeature-provider-go',
             svg: FliptSvg,
             vendorOfficial: true,
+          },
+          {
+            title: 'GO Feature Flag Provider',
+            description: 'A provider for GO Feature Flag',
+            href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/providers/go-feature-flag',
+            svg: GoFeatureFlagNoFillSvg,
           },
           {
             title: 'Split Provider',
