@@ -34,7 +34,7 @@ This walk-through assumes that:
 ### Step 1: Create a Spring Boot Web application
 
 To get started, visit [Spring Initializer](https://start.spring.io/). This website allows you to download a pre-configured
-Spring boot application. 
+Spring boot application.
 
 For our use case, add **Spring Web** from the dependencies section and set the following **project metadata** values,
 
@@ -47,7 +47,7 @@ Extract the archive and open it in your favorite editor.
 ### Step 2: Add dependencies
 
 Based on the selected build system for Spring Boot application, add OpenFeature Java SDK and flagd provider dependencies
-to existing dependency management configuration. 
+to existing dependency management configuration.
 
 Given below are dependencies for Maven and Gradle with the latest dependency versions at the time of writing this walk-through.
 
@@ -74,6 +74,7 @@ Given below are dependencies for Maven and Gradle with the latest dependency ver
 implementation 'dev.openfeature:sdk:1.0.0'
 implementation 'dev.openfeature.contrib.providers:flagd:0.5.2'
 ```
+
 </TabItem>
 </Tabs>
 
@@ -83,6 +84,7 @@ The `OpenFeatureAPI` class is the main access point to OpenFeature SDK. This cla
 a simple bean configuration class called `OpenFeatureBeans`, that allows us to inject the `OpenFeatureAPI` singleton into desired Spring components.
 
 Create the Java class `OpenFeatureBeans.java` inside the package `com.demo` and add the following code,
+
 ```java
 package com.demo;
 
@@ -105,6 +107,7 @@ public class OpenFeatureBeans {
 Then we can add the REST endpoint definition of `/hello` endpoint, along with dependency injection for `OpenFeatureAPI` instance.
 
 Create the Java class `RestHello.java` inside the package `com.demo` and add the following code.
+
 ```java
 package com.demo;
 
@@ -150,6 +153,7 @@ Let's compile and run the application.
 mvn clean install
 java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
+
 </TabItem>
 <TabItem value="gradle" label="Gradle">
 
@@ -157,6 +161,7 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 ./gradlew clean build
 java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 ```
+
 </TabItem>
 </Tabs>
 
@@ -204,6 +209,7 @@ Let's rerun our Java Spring Boot application.
 mvn clean install
 java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
+
 </TabItem>
 <TabItem value="gradle" label="Gradle">
 
@@ -211,6 +217,7 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 ./gradlew clean build
 java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 ```
+
 </TabItem>
 </Tabs>
 
@@ -223,5 +230,5 @@ Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) 
 ## Conclusion
 
 This walk-through introduced you to the OpenFeature Java SDK and how it can be easily integrated into well-known frameworks
-such as Spring Boot. It covered how a provider can be configured to perform the flag evaluation and introduced basic feature 
+such as Spring Boot. It covered how a provider can be configured to perform the flag evaluation and introduced basic feature
 flagging concepts. It also showcased how feature flags can be updated at runtime, without requiring a code change and a redeployment.

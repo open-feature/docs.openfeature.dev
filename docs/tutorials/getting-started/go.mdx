@@ -49,24 +49,24 @@ First, create the file `main.go` and include the following code.
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"net/http"
+    "github.com/gin-gonic/gin"
+    "net/http"
 )
 
 const defaultMessage = "Hello!"
 
 func main() {
-	// Initialize Go Gin
-	engine := gin.Default()
+    // Initialize Go Gin
+    engine := gin.Default()
 
-	// Setup a simple endpoint
-	engine.GET("/hello", func(c *gin.Context) {
-		c.JSON(http.StatusOK, defaultMessage)
-		return
+    // Setup a simple endpoint
+    engine.GET("/hello", func(c *gin.Context) {
+        c.JSON(http.StatusOK, defaultMessage)
+        return
 
-	})
+    })
 
-	engine.Run()
+    engine.Run()
 }
 ```
 
@@ -178,44 +178,44 @@ The complete `main.go` file is given below:
 package main
 
 import (
-	"context"
-	"github.com/gin-gonic/gin"
-	flagd "github.com/open-feature/go-sdk-contrib/providers/flagd/pkg"
-	"github.com/open-feature/go-sdk/pkg/openfeature"
-	"net/http"
+    "context"
+    "github.com/gin-gonic/gin"
+    flagd "github.com/open-feature/go-sdk-contrib/providers/flagd/pkg"
+    "github.com/open-feature/go-sdk/pkg/openfeature"
+    "net/http"
 )
 
 const defaultMessage = "Hello!"
 const newWelcomeMessage = "Hello, welcome to this OpenFeature-enabled website!"
 
 func main() {
-	// Use flagd as the OpenFeature provider
-	openfeature.SetProvider(flagd.NewProvider())
+    // Use flagd as the OpenFeature provider
+    openfeature.SetProvider(flagd.NewProvider())
 
-	// Initialize OpenFeature client
-	client := openfeature.NewClient("GoStartApp")
+    // Initialize OpenFeature client
+    client := openfeature.NewClient("GoStartApp")
 
-	// Initialize Go Gin
-	engine := gin.Default()
+    // Initialize Go Gin
+    engine := gin.Default()
 
-	// Setup a simple endpoint
-	engine.GET("/hello", func(c *gin.Context) {
+    // Setup a simple endpoint
+    engine.GET("/hello", func(c *gin.Context) {
 
-		// Evaluate welcome-message feature flag
-		welcomeMessage, _ := client.BooleanValue(
-			context.Background(), "welcome-message", false, openfeature.EvaluationContext{},
-		)
+        // Evaluate welcome-message feature flag
+        welcomeMessage, _ := client.BooleanValue(
+            context.Background(), "welcome-message", false, openfeature.EvaluationContext{},
+        )
 
-		if welcomeMessage {
-			c.JSON(http.StatusOK, newWelcomeMessage)
-			return
-		} else {
-			c.JSON(http.StatusOK, defaultMessage)
-			return
-		}
-	})
+        if welcomeMessage {
+            c.JSON(http.StatusOK, newWelcomeMessage)
+            return
+        } else {
+            c.JSON(http.StatusOK, defaultMessage)
+            return
+        }
+    })
 
-	engine.Run()
+    engine.Run()
 }
 ```
 
@@ -238,6 +238,5 @@ Revisit the endpoint [http://localhost:8080/hello](http://localhost:8080/hello) 
 This walk-through introduced you to the OpenFeature Go SDK and how it can be easily integrated into well-known frameworks
 such as Go Gin. It covered how a provider can be configured to perform the flag evaluation and introduced basic feature
 flagging concepts. It also showcased how feature flags can be updated at runtime, without requiring a code change and a redeployment.
-
 
 [flag-key]: https://docs.openfeature.dev/docs/specification/glossary#flag-key

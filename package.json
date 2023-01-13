@@ -101,7 +101,7 @@
       "output": []
     },
     "lint:md": {
-      "command": "markdownlint --ignore node_modules/ - \"**/*.md\"",
+      "command": "markdownlint --ignore node_modules/ \"**/*.md*\"",
       "files": [
         "**/*.md"
       ],

@@ -1,5 +1,5 @@
 
-VOLUMES := -v $(CURDIR):/docusaurus -w /docusaurus
+VOLUMES := -v $(CURDIR):$(CURDIR) -w $(CURDIR)
 IMAGE := node:19-bullseye
 PORT := -p 3000:3000
 DOCKER := docker run --rm $(VOLUMES) $(IMAGE)

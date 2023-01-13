@@ -64,8 +64,8 @@ client.SetContext(new EvaluationContextBuilder().Set("myClientKey", "myClientVal
 
 // add a value to the invocation context
 var context = new EvaluationContext()
-	.Set("myInvocationKey", "myInvocationValue")
-	.Build();
+    .Set("myInvocationKey", "myInvocationValue")
+    .Build();
 
 var boolValue = await client.GetBooleanValue("boolFlag", false, context);
 ```
@@ -77,27 +77,27 @@ var boolValue = await client.GetBooleanValue("boolFlag", false, context);
 
 // add a value to the global context
 openfeature.SetEvaluationContext(openfeature.NewEvaluationContext(
-	"",
-	map[string]interface{}{
-		"myGlobalKey":  "myGlobalValue",
-	},
+    "",
+    map[string]interface{}{
+        "myGlobalKey":  "myGlobalValue",
+    },
 ))
 
 // add a value to the client context
 client := openfeature.NewClient("my-app")
 client.SetEvaluationContext(openfeature.NewEvaluationContext(
-	"", 
-	map[string]interface{}{
-		"myGlobalKey":  "myGlobalValue",
-	},
+    "", 
+    map[string]interface{}{
+        "myGlobalKey":  "myGlobalValue",
+    },
 ))
 
 // add a value to the invocation context
 evalCtx := openfeature.NewEvaluationContext(
-	"",
-	map[string]interface{}{
-		"myInvocationKey": "myInvocationValue",
-	},
+    "",
+    map[string]interface{}{
+        "myInvocationKey": "myInvocationValue",
+    },
 )
 boolValue, err := client.BooleanValue("boolFlag", false, evalCtx)
 ```

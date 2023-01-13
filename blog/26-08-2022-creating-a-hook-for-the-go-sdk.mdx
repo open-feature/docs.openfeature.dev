@@ -27,7 +27,8 @@ lifecycle events (before/after/error/finally) to perform the same action at that
 The following commands can be used to setup the `go-sdk-contrib` repository,
 this clones the repository and sets up your hook specific go module under `/hooks/MY-NEW-HOOK-NAME`
 adding a `go.mod` and `README.md` file. The module will then be referenced in the top level `go.work` file.
-```
+
+```bash
 git clone https://github.com/open-feature/go-sdk-contrib.git
 cd go-sdk-contrib
 make HOOK=MY-NEW-HOOK-NAME new-hook
@@ -41,10 +42,10 @@ For the `go-sdk` this means that it will need to conform to the following interf
 
 ```go
 type Hook interface {
-	Before(hookContext HookContext, hookHints HookHints) (*EvaluationContext, error)
-	After(hookContext HookContext, flagEvaluationDetails InterfaceEvaluationDetails, hookHints HookHints) error
-	Error(hookContext HookContext, err error, hookHints HookHints)
-	Finally(hookContext HookContext, hookHints HookHints)
+    Before(hookContext HookContext, hookHints HookHints) (*EvaluationContext, error)
+    After(hookContext HookContext, flagEvaluationDetails InterfaceEvaluationDetails, hookHints HookHints) error
+    Error(hookContext HookContext, err error, hookHints HookHints)
+    Finally(hookContext HookContext, hookHints HookHints)
 }
 ```
 
@@ -54,20 +55,20 @@ the `After` lifecycle event. Let's leave the other functions empty to achieve th
 ```go
 // Hook validates the flag evaluation details After flag resolution
 type Hook struct {
-	Validator validator
+    Validator validator
 }
 
 func (h Hook) Before(hookContext of.HookContext, hookHints of.HookHints) (*of.EvaluationContext, error) {
-	return nil, nil
+    return nil, nil
 }
 
 func (h Hook) After(hookContext of.HookContext, flagEvaluationDetails of.InterfaceEvaluationDetails, hookHints of.HookHints) error {
-	err := h.Validator.IsValid(flagEvaluationDetails)
-	if err != nil {
-		return err
-	}
+    err := h.Validator.IsValid(flagEvaluationDetails)
+    if err != nil {
+        return err
+    }
 
-	return nil
+    return nil
 }
 
 func (h Hook) Error(hookContext of.HookContext, err error, hookHints of.HookHints) {}
@@ -79,7 +80,7 @@ Notice the `Validator` field of type `validator` in the `Hook` struct. This is d
 
 ```go
 type validator interface {
-	IsValid(flagEvaluationDetails of.InterfaceEvaluationDetails) error
+    IsValid(flagEvaluationDetails of.InterfaceEvaluationDetails) error
 }
 ```
 
@@ -90,66 +91,72 @@ This tutorial uses the existing [hex regex validator](https://github.com/open-fe
 ## Integrating the hook
 
 1. Install dependencies
-```shell
-go get github.com/open-feature/go-sdk
-go get github.com/open-feature/go-sdk-contrib/hooks/validator
-```
+
+    ```shell
+    go get github.com/open-feature/go-sdk
+    go get github.com/open-feature/go-sdk-contrib/hooks/validator
+    ```
 
 2. Import the dependencies
-```go
-package main
 
-import (
-	"context"
-    "fmt"
-    "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex"
-    "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/validator"
-    "github.com/open-feature/go-sdk/pkg/openfeature"
-    "log"
-)
-```
+    ```go
+    package main
+
+    import (
+        "context"
+        "fmt"
+        "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex"
+        "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/validator"
+        "github.com/open-feature/go-sdk/pkg/openfeature"
+        "log"
+    )
+    ```
 
 3. Create an instance of the `validator hook` struct using the regex hex validator
-```go
-func main() {
-	hexValidator, err := regex.Hex()
-    if err != nil {
-        log.Fatal(err)
+
+    ```go
+    func main() {
+        hexValidator, err := regex.Hex()
+        if err != nil {
+            log.Fatal(err)
+        }
+        v := validator.Hook{Validator: hexValidator}
     }
-    v := validator.Hook{Validator: hexValidator}
-}
-```
+    ```
 
 4. Register the `NoopProvider`, this simply returns the given default value on flag evaluation.
-This step is optional, the sdk uses the `NoopProvider` by default but we're explicitly setting it for completeness
-```go
-openfeature.SetProvider(openfeature.NoopProvider{})
-```
+
+    This step is optional, the sdk uses the `NoopProvider` by default but we're explicitly setting it for completeness
+
+    ```go
+    openfeature.SetProvider(openfeature.NoopProvider{})
+    ```
 
 5. Create the client, call the flag evaluation using the `validator hook` at the point of invocation
 
-```go
-client := openfeature.NewClient("foo")
+    ```go
+    client := openfeature.NewClient("foo")
 
-result, err := client.
-    StringValueDetails(
-		context.Background(),
-		"blue",
-		"invalidhex",
-		openfeature.EvaluationContext{},
-        openfeature.WithHooks(v),
-	)
-if err != nil {
-    fmt.Println("err:", err)
-}
-fmt.Println("result:", result)
-```
+    result, err := client.
+        StringValueDetails(
+            context.Background(),
+            "blue",
+            "invalidhex",
+            openfeature.EvaluationContext{},
+            openfeature.WithHooks(v),
+        )
+    if err != nil {
+        fmt.Println("err:", err)
+    }
+    fmt.Println("result:", result)
+    ```
 
 6. Check that the flag evaluation returns an error as `invalidhex` is not a valid hex color
 
-```shell
-go run main.go
-err: execute after hook: regex doesn't match on flag value
-result {blue 1 {invalidhex   }}
-```
-Note that despite getting an error we still get a result.
+    ```shell
+    go run main.go
+    err: execute after hook: regex doesn't match on flag value
+    result {blue 1 {invalidhex   }}
+    ```
+
+    Note that despite getting an error we still get a result.

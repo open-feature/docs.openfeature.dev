@@ -214,37 +214,37 @@ type MyFeatureProvider struct{}
 
 // Metadata returns the metadata of the provider
 func (e MyFeatureProvider) Metadata() Metadata {
-	return Metadata{Name: "MyFeatureProvider"}
+    return Metadata{Name: "MyFeatureProvider"}
 }
 
 // BooleanEvaluation returns a boolean flag
 func (e MyFeatureProvider) BooleanEvaluation(flag string, defaultValue bool, evalCtx EvaluationContext) BoolResolutionDetail {
-	// code to evaluate boolean
+    // code to evaluate boolean
 }
 
 // StringEvaluation returns a string flag
 func (e MyFeatureProvider) StringEvaluation(flag string, defaultValue string, evalCtx EvaluationContext) StringResolutionDetail {
-	// code to evaluate string
+    // code to evaluate string
 }
 
 // FloatEvaluation returns a float flag
 func (e MyFeatureProvider) FloatEvaluation(flag string, defaultValue float64, evalCtx EvaluationContext) FloatResolutionDetail {
-	// code to evaluate float
+    // code to evaluate float
 }
 
 // IntEvaluation returns an int flag
 func (e MyFeatureProvider) IntEvaluation(flag string, defaultValue int64, evalCtx EvaluationContext) IntResolutionDetail {
-	// code to evaluate int
+    // code to evaluate int
 }
 
 // ObjectEvaluation returns an object flag
 func (e MyFeatureProvider) ObjectEvaluation(flag string, defaultValue interface{}, evalCtx EvaluationContext) ResolutionDetail {
-	// code to evaluate object
+    // code to evaluate object
 }
 
 // Hooks returns hooks
 func (e MyFeatureProvider) Hooks() []Hook {
-	// code to retrieve hooks
+    // code to retrieve hooks
 }
 ```
 
