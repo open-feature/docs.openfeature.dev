@@ -5,6 +5,7 @@ import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 import SplitSvg from '@site/static/img/split-no-fill.svg';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
 import GoFeatureFlagSvg from '@site/static/img/goff-no-fill.svg';
+import FlagsmithNoFill from '@site/static/img/flagsmith-no-fill.svg';
 import OtelNoFillSvg from '@site/static/img/otel-no-fill.svg';
 
 export class JavaFeatures extends React.Component {
@@ -55,6 +56,12 @@ export class JavaFeatures extends React.Component {
             description: 'A provider for GO Feature Flag',
             href: 'https://github.com/open-feature/java-sdk-contrib/tree/main/providers/go-feature-flag',
             svg: GoFeatureFlagSvg,
+          },
+          {
+            title: 'Flagsmith Provider',
+            description: 'A provider for Flagsmith',
+            href: 'https://github.com/open-feature/java-sdk-contrib/tree/main/providers/flagsmith',
+            svg: FlagsmithNoFill,
           },
         ]}
         hooks={[
