@@ -3,11 +3,11 @@ sidebar_position: 1
 id: provider
 ---
 
+# Providers
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { CopyChecklist } from '@site/src/components/custom/CopyChecklist';
-
-# Providers
 
 _Providers_ are responsible for performing flag evaluations. They provide an abstraction between the underlying flag management system and the OpenFeature SDK. Providers can wrap a vendor SDK, call a bespoke flag evaluation REST API, or even parse some locally stored file to resolve flag values. This allows the underlying flag evaluation logic to be changed without requiring a major code refactor.
 
