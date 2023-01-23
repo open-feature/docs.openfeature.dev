@@ -3,10 +3,10 @@ sidebar_position: 1
 id: hooks
 ---
 
+# Hooks
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Hooks
 
 _Hooks_ are a mechanism that allow for the addition of arbitrary behavior at well-defined points of the _flag evaluation life-cycle_. Use cases include validation of the resolved flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
 
@@ -108,7 +108,7 @@ The flag evaluation life-cycle consists of four stages: _Before_, _After_, _Erro
 
 ### Before
 
-<!-- TODO: add a link to the evaluation context doc when it's done -->
+{/*TODO: add a link to the evaluation context doc when it's done*/}
 
 The _Before_ stage is evaluated before flag evaluation takes place. Hooks implementing the Before stage may alter the _evaluation context_ or perform other side effects. Note that Before hooks run before flag evaluation has succeeded. Consider this when using Before hooks. You may want to use [After hooks](#after) for use cases where you want to perform some side effect with an assurance that flag evaluation proceeded normally.
 
@@ -234,19 +234,19 @@ MyHook : Hook
 type myHook struct{}
 
 func (h myHook) Before(hookContext openfeature.HookContext, hookHints openfeature.HookHints) (*openfeature.EvaluationContext, error) {
-	// code to run before flag evaluation
+    // code to run before flag evaluation
 }
 
 func (h myHook) After(hookContext openfeature.HookContext, flagEvaluationDetails openfeature.EvaluationDetails, hookHints openfeature.HookHints) error {
-	// code to run after successful flag evaluation
+    // code to run after successful flag evaluation
 }
 
 func (h myHook) Error(hookContext openfeature.HookContext, err error, hookHints openfeature.HookHints) {
-	// code to run if there's an error during before hooks or during flag evaluation
+    // code to run if there's an error during before hooks or during flag evaluation
 }
 
 func (h myHook) Finally(hookContext openfeature.HookContext, hookHints openfeature.HookHints) {
-	// code to run after all other stages, regardless of success/failure
+    // code to run after all other stages, regardless of success/failure
 }
 ```
 

@@ -8,7 +8,7 @@ title: Cloud native flags with the OpenFeature Operator
 
 In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy". Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere. It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes). The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads. It parses Kubernetes spec files and adds flagd and associated objects to the workloads based on annotations and custom resource definitions it understands.
 
-## Let's do it!
+## Let's do it
 
 ### Prerequisites
 
@@ -18,11 +18,12 @@ In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [k9s](https://k9scli.io/) (optional, if you'd like to inspect your cluster visually)
 
-### Show me the commands!
+### Show me the commands
 
 #### Downloading assets
 
 Download the file defining our demo deployment, service, and CRD, `end-to-end.yaml`:
+
 ```shell
 curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/playground/main/config/k8s/end-to-end.yaml > end-to-end.yaml
 ```
@@ -40,9 +41,11 @@ curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/docs.openfeat
 ```
 
 Then, create our cluster using the `kind-cluster.yaml` file:
+
 ```shell
 kind create cluster --config kind-cluster.yaml
 ```
+
 This might take a minute or two.
 
 #### Install cert-manager
@@ -50,7 +53,8 @@ This might take a minute or two.
 Great! Next, because our operator makes use of webhooks, we need some certificate infrastructure in our cluster.
 If your cluster already has cert manager, or you're using another solution for certificate management, you can skip to [Create Namespace](#create-namespace).
 
-Install cert-manager, and wait for it to be ready: 
+Install cert-manager, and wait for it to be ready:
+
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml && \
 kubectl wait --timeout=60s --for condition=Available=True deploy --all -n 'cert-manager'
@@ -58,7 +62,8 @@ kubectl wait --timeout=60s --for condition=Available=True deploy --all -n 'cert-
 
 #### Create namespace
 
-Next, we need to create a namespace for the operator and our workload: 
+Next, we need to create a namespace for the operator and our workload:
+
 ```shell
 kubectl create namespace open-feature-operator-system
 ```
@@ -66,6 +71,7 @@ kubectl create namespace open-feature-operator-system
 #### Install OpenFeature operator
 
 And finally, let's install the operator itself:
+
 ```shell
 kubectl apply -f https://github.com/open-feature/open-feature-operator/releases/download/v0.2.20/release.yaml && \
 kubectl wait --timeout=60s --for condition=Available=True deploy --all -n 'open-feature-operator-system'
@@ -89,13 +95,14 @@ If you're using `k9s` or some other means of visualization, your cluster should 
 If you're using the supplied `kind` config, you can skip to [Experiment with OpenFeature](#experiment-with-openfeature), this port is already forwarded.
 
 Forward the service port:
+
 ```shell
 kubectl port-forward svc/open-feature-demo-service -n default 30000:30000
 ```
 
 ### Experiment with OpenFeature
 
-Now you should see our fictional app at http://localhost:30000
+Now you should see our fictional app at <http://localhost:30000>
 
 For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`). The resource type is `FeatureFlagconfiguration` and is called `end-to-end` within the `default` namespace.
 You can modify the flag values in the `featureFlagSpec` and reapply the CRD to see the changes.
@@ -120,6 +127,7 @@ Flag evaluations can take into account contextual information about the user, ap
 ### Cleaning up
 
 If you used a kind cluster, you can clean everything up by running:
+
 ```shell
 kind delete cluster
 ```

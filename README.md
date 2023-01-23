@@ -2,7 +2,7 @@
 
 This repository provides the documentation for OpenFeature; including the SDK, flagd and the operator.
 
-### Documentation Structure
+## Documentation Structure
 
 We are following a slightly modified version of the [diataxis framework](https://diataxis.fr/) for our documentation:
 
