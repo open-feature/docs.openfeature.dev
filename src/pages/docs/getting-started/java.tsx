@@ -1,6 +1,6 @@
+import React from 'react';
 import {Redirect} from '@docusaurus/router';
 
-{/* redirect from old doc URL */}
-const Home = () => {
+export default function Home() {
   return <Redirect to="/docs/tutorials/getting-started/java" />;
 };
