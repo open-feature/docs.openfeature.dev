@@ -108,9 +108,7 @@ The flag evaluation life-cycle consists of four stages: _Before_, _After_, _Erro
 
 ### Before
 
-{/*TODO: add a link to the evaluation context doc when it's done*/}
-
-The _Before_ stage is evaluated before flag evaluation takes place. Hooks implementing the Before stage may alter the _evaluation context_ or perform other side effects. Note that Before hooks run before flag evaluation has succeeded. Consider this when using Before hooks. You may want to use [After hooks](#after) for use cases where you want to perform some side effect with an assurance that flag evaluation proceeded normally.
+The _Before_ stage is evaluated before flag evaluation takes place. Hooks implementing the Before stage may alter the [evaluation context](./evaluation-context) or perform other side effects. Note that Before hooks run before flag evaluation has succeeded. Consider this when using Before hooks. You may want to use [After hooks](#after) for use cases where you want to perform some side effect with an assurance that flag evaluation proceeded normally.
 
 ### After
 
