@@ -33,6 +33,30 @@ So client-side flag evaluation is slow, but we've also seen that the inputs into
 
 How do we handle an expensive operation with fairly static results? We add caching! And that's what most client-side feature flagging frameworks do. Specifically, they do an optimistic pre-evaluation of all the feature flagging decisions that might be needed and then cache those decisions. Then whenever client-side code needs to make a flagging decision the framework simply returns the pre-evaluated result from its local cache. 
 
+```mermaid
+sequenceDiagram
+  actor app
+  participant client as feature flagging logic
+  participant cache as in-memory cache
+  participant provider as flag service
+  app->>+client: userLoggedIn(userId)
+  client->>+provider: evaluateFlags(evaluationContext)
+  provider-->>-client: flag values
+  client->>+cache: store(flag values)
+  cache->>-client: .
+  %% deactivate cache
+  client->>-app: .
+  %% deactivate client
+  note right of app: some time later..
+  app->>+client: operation that needs a flagging decision
+  client->>+cache: getFlagValue(flagKey)
+  note right of cache: no call to flagging service needed
+  cache->>-client: previously evaluated value
+  client->>-app: .
+
+
+```
+
 Put another way, we seperate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
 
 ## Client-side support in OpenFeature
