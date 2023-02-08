@@ -17,7 +17,7 @@ In this post I'll summarize those changes, but to understand them in context we'
 
 The biggest difference between the client- and server-side feature flagging is the relative frequency of evaluation context changes within those two paradigms. In the typical server-side scenario - a service responding to http requests - the context for a feature flagging decision changes with every request. Every new request is coming from a new user, and a lot of the evaluation context which affects a feature flagging decision is based on the user making the request.
 
-In contrast, with a client-side app all feature flagging decisions are made in the context of the same user - the user interacting with the client-side app - and so the evaluation context is quite static. There are cases where evaluation context will change within a client-side app - when a user logs in, for example - but by and large with client-side code we can treat feature flag evaluation context as something that is fixed (while still providing mechanisms to update it).
+In contrast, with a client-side app all feature flagging decisions are made in the context of the same user - the user interacting with the client-side app - and so the evaluation context is relatively static. There are cases where evaluation context will change within a client-side app - when a user logs in, for example - but by and large with client-side code we can treat feature flag evaluation context as something that is fixed (while still providing mechanisms to update it).
 
 ### Flag evaluation is slow
 
