@@ -107,7 +107,7 @@ public void onAuthenticated(userId:String){
 }
 ```
 
-This call to update the evalution context can prompt the configured flagging provider to update any cached feature flag values using the new evaluation context. The provider will be notified that the evaluation context has changed via a new `onContextSet` handler which is being added to the OpenFeature provider interface:
+This call to update the evaluation context can prompt the configured flagging provider to update any cached feature flag values using the new evaluation context. The provider will be notified that the evaluation context has changed via a new `onContextSet` handler which is being added to the OpenFeature provider interface:
 
 ``` java
 class MyFlaggingProvider implements Provider {
