@@ -57,7 +57,7 @@ sequenceDiagram
 
 ```
 
-Put another way, we seperate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
+Put another way, we separate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
 
 ## Client-side support in OpenFeature
 
