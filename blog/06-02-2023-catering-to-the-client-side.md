@@ -103,7 +103,7 @@ But our flagging framework needs to get flag evaluation context from somewhere. 
 // called whenever a user logs in (or out)
 public void onAuthenticated(userId:String){
   OpenFeatureAPI api = OpenFeatureAPI.getInstance();
-  api.setEvaluationContext(new MutableContext().add("targettingKey", userId));
+  api.setEvaluationContext(new MutableContext().add("targetingKey", userId));
 }
 ```
 
