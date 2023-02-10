@@ -29,7 +29,7 @@ This means that a client-side flag evalution requires a backend call. Unfortunat
 
 ### Pre-evaluation
 
-So client-side flag evaluation is slow, but we've also seen that the inputs into that flag evaluation - the evaluation context - are fairly static for client-side apps, and that means the *results* of flag evalution are fairly static too.
+So client-side flag evaluation is slow, but we've also seen that the inputs into that flag evaluation - the evaluation context - are fairly static for client-side apps, and that means the *results* of flag evaluation are fairly static too.
 
 How do we handle an expensive operation with fairly static results? We add caching! And that's what most client-side feature flagging frameworks do. Specifically, they do an optimistic pre-evaluation of all the feature flagging decisions that might be needed and then cache those decisions. Then whenever client-side code needs to make a flagging decision the framework simply returns the pre-evaluated result from its local cache. 
 
