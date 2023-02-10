@@ -71,7 +71,7 @@ Let's compare and contrast. A typical server-side flagging decision using OpenFe
 @GetMapping("/hello")
 public String getSalutation() {
     final Client client = openFeatureAPI.getClient();
-    final evalContext:EvaluationContext = evalContextForCurentRequest();
+    final evalContext:EvaluationContext = evalContextForCurrentRequest();
 
     if (client.getBooleanValue("use-formal-salutation", false, evalContext)) {
       return "Good day to you!";
