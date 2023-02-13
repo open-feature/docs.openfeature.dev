@@ -1,5 +1,6 @@
 import CSharpNoFillSvg from '@site/static/img/c-sharp-no-fill.svg';
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
+import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 import GoFeatureFlagNoFillSvg from '@site/static/img/goff-no-fill.svg';
 import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
 import SplitSvg from '@site/static/img/split-no-fill.svg';
@@ -49,6 +50,12 @@ export class DotnetFeatures extends React.Component {
             href: 'https://github.com/splitio/split-openfeature-provider-dotnet',
             svg: SplitSvg,
             vendorOfficial: true
+          },
+          {
+            title: 'flagd Provider',
+            description: 'A provider for flagd',
+            href: 'https://github.com/open-feature/dotnet-sdk-contrib/tree/main/src/OpenFeature.Contrib.Providers.Flagd',
+            svg: FlagdSvg,
           },
         ]}
         hooks={[]}
