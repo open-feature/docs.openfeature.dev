@@ -12,8 +12,6 @@ By the way, if you're working on a feature flagging framework, whether it's comm
 
 In this post I'll summarize those changes, but to understand them in context we'll first talk about what makes client-side feature flagging different before diving into how that will impact the OpenFeature APIs.
 
-If you're involved in a feature flagging framework, whether it's commercial, open-source, or internal product, the folks at OpenFeature would love to hear more about how you're
-
 ## Context is King: why client-side flagging is different
 
 ### Static evaluation context
