@@ -1,7 +1,7 @@
 ---
 slug: 'catering-to-the-client-side'
 title: 'Catering to the client-side'
-date: 2023-02-06
+date: 2023-02-13
 authors: [petehodgson]
 description: "Client-side vs server-side feature flagging can be seen as two distinct paradigms. We'll explore what defines those two paradigms, and how OpenFeature is planning to support them via two different flavors of API"
 tags: [client, spec, specification, web, mobile, sdk]
