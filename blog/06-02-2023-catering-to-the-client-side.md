@@ -8,7 +8,7 @@ draft: false
 ---
 
 While OpenFeature initially focused on support for server-side feature flagging, we know that a lot of feature-flagging (likely the majority) happens on the client - mobile apps and frontend web apps. As such, we're currently finalizing [a proposal](https://github.com/open-feature/spec/issues/167) which extends the OpenFeature spec to support client-side use cases.
-By the way, if you're working on a feature flagging framework, whether it's commercial, open-source, or internal product, the folks at OpenFeature would love to [hear more](https://github.com/open-feature/vendor-survey/) about how you approach client-side flagging.
+By the way, if you're working on a feature flagging framework, whether it's commercial, open-source, or internal product, the folks at OpenFeature would love to [hear more](https://forms.gle/TD4gAYKNgPiiwPrd6) about how you approach client-side flagging.
 
 In this post I'll summarize those changes, but to understand them in context we'll first talk about what makes client-side feature flagging different before diving into how that will impact the OpenFeature APIs.
 
