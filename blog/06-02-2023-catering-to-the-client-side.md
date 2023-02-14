@@ -25,9 +25,9 @@ In contrast, with a client-side app all feature flagging decisions are made in t
 
 With server-side flags, we can assume that evaluating a feature flag is a _relatively_ fast operation. In some scenarios a flagging decision can be made in-process (a very fast operation). If that's not possible then flag evaluation is typically a quick service call - akin to making a DB query or calling a remote cache.
 
-This situation is quite different with client-side flags. It's typically not possible to evaluate a flagging decision locally. Local evaluation would require the full feature flagging ruleset to be exposed to the client, something many organizations are not comfortable with. Additionally, flag evaluation may require additional context that's simply not available on the client at the time of evalution.
+This situation is quite different with client-side flags. It's typically not possible to evaluate a flagging decision locally. Local evaluation would require the full feature flagging ruleset to be exposed to the client, something many organizations are not comfortable with. Additionally, flag evaluation may require additional context that's simply not available on the client at the time of evaluation.
 
-This means that a client-side flag evalution requires a backend call. Unfortunately we should also anticipate the latency for such a call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client.
+This means that a client-side flag evaluation requires a backend call. Unfortunately we should also anticipate the latency for such a call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client.
 
 ### Pre-evaluation
 
@@ -142,7 +142,7 @@ sequenceDiagram
   app->>of: setEvaluationContext({targetingKey:userId})
   of->>+provider: onContextSet(oldContext,newContext)
   deactivate app
-  provider->>+backend: evaluateFlags(newConext)
+  provider->>+backend: evaluateFlags(newContext)
   backend->>-provider: flag values
   provider->>provider: update cache with new values
   deactivate provider
@@ -150,7 +150,7 @@ sequenceDiagram
 
 ### Javascript niceties
 
-JavaScript is the most common runtime for client-side flagging, and it comes with some peculiarities which we wanted to acommodate as we designed the OpenFeature API.
+JavaScript is the most common runtime for client-side flagging, and it comes with some peculiarities which we wanted to accommodate as we designed the OpenFeature API.
 
 In order to align the OpenFeature API with most existing feature flagging providers and to play nicely with frontend frameworks, the static context flavor of the JavaScript Evaluation API will be a synchronous call:
 
@@ -181,7 +181,7 @@ app.get('/hello', async (req, res) => {
 });
 ```
 
-Note that `getBooleanValue` is async - it returns a promise. That's pretty much unavoidable. This dynamic flavor of the evaluation API epts a different evaluation context every time it's called, and that means it can't be synchronous, because some feature flagging implementations will need to use asynchronous mechanisms such as networks calls in order to perform a flag evaluation with that new context.
+Note that `getBooleanValue` is async - it returns a promise. That's pretty much unavoidable. This dynamic flavor of the evaluation API expects a different evaluation context every time it's called, and that means it can't be synchronous, because some feature flagging implementations will need to use asynchronous mechanisms such as networks calls in order to perform a flag evaluation with that new context.
 
 However in the earlier client-side example we are in the static context paradigm which means that the evaluation context has been provided ahead of time, so we can pretty safely assume that the flagging decision can be made synchronously by pulling from a local cache.
 
@@ -201,7 +201,7 @@ const result = client.getBooleanValue('some-flag', true);
 
 This potential for stale or non-authoritative results is the price we pay for using a synchronous API.
 
-When we have received a non-authoritative answer we can pass it on to our rendering logic, but we also need some way to know when an authoritative value is availalbe, so that we can trigger a re-render using that new value. OpenFeature will provide a mechanism for that in the form of Provider Events. Here's how you might use provider events as part of a React hook:
+When we have received a non-authoritative answer we can pass it on to our rendering logic, but we also need some way to know when an authoritative value is available, so that we can trigger a re-render using that new value. OpenFeature will provide a mechanism for that in the form of Provider Events. Here's how you might use provider events as part of a React hook:
 
 ```javascript
 client.addHandler(ProviderEvents.FlagValuesChanged, () => {
