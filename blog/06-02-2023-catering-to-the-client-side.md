@@ -57,8 +57,6 @@ sequenceDiagram
   note right of cache: no call to flagging service needed
   cache->>-client: previously evaluated value
   client->>-app: .
-
-
 ```
 
 Put another way, with client-side feature flagging we can separate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.

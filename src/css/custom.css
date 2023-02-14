@@ -45,3 +45,14 @@
 .footer__title {
   text-align: center;
 }
+
+/* add some padding around mermaid diagrams */
+.mermaid svg {
+  padding: 8px;
+}
+
+/* make mermaid diagram backgrounds white in dark mode */
+[data-theme='dark'] .mermaid svg {
+  background-color: white !important;
+  border-radius: var(--ifm-global-radius);
+}
