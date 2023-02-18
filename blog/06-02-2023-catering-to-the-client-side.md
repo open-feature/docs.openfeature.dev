@@ -27,13 +27,13 @@ With server-side flags, we can assume that evaluating a feature flag is a _relat
 
 [^1]: by "rulesets" I mean the set of feature flagging rule configurations that define how flagging decisions should be made for each feature flag: "enable red_checkout_button flag for 50% of users", "only enable new_reco_algorithm for users in the 'internal_testers' group", etc. Rulesets plus evaluation context are the two inputs that fully define the output for any flagging decision.
 
-This situation is quite different with client-side flags. Remote flag evaluation now requires a trip across the internet, and we have to anticipate such a service call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client. Even with the local evalution model, we still have to deal with our fact that the source of truth for our flagging ruleset is on the other side of a potentially high-latency network.
+This situation is quite different with client-side flags. Remote flag evaluation now requires a trip across the internet, and we have to anticipate such a service call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client. Even with the local evaluation model, we still have to deal with the fact that the source of truth for our flagging ruleset is on the other side of a potentially high-latency network.
 
 ### Eager evaluation for remote-evaluated systems
 
 We can see that the network presents challenges for client-side apps using a remote evaluation model for flagging decisions. But we've also seen that the inputs into that flag evaluation - the evaluation context - are fairly static for client-side apps, and that means the _results_ of flag evaluation are fairly static too.
 
-How do we handle an expensive operation with fairly static results? We add caching! And that's what most client-side feature flagging frameworks do.
+How do we handle an expensive operation with fairly static results? We add caching! And that's what many client-side feature flagging frameworks do.
 
 Specifically, when the app starts the flagging framework requests an eager evaluation of all the feature flagging decisions that might be needed, and then caches those decisions. Then whenever client-side code needs to make a flagging decision the framework simply returns the pre-evaluated result from its local cache.
 
@@ -63,7 +63,7 @@ Put another way, with client-side feature flagging we can separate flag [**evalu
 
 ### Keeping rulesets in sync for local-evaluated systems
 
-Flagging frameworks that use a local evaluation model don't have to contend with network calls for every evaluation, but they still need to keep their local rulesets up to date and allow the client-side app to respond to changes in those ruleset. Again, this means using caches to keep the most recent ruleset available. It also means that the flagging framework needs some eventing or callback mechanism to inform application code that the ruleset has changed and flagging decision needs to be re-evaluated.
+Flagging frameworks that use a local evaluation model don't have to contend with network calls for every evaluation, but they still need to keep their local rulesets up to date and allow the client-side app to respond to changes in those ruleset. Again, this means using caches to keep the most recent ruleset available. It also means that the flagging framework may have an eventing or callback mechanism to inform application code that the ruleset has changed and that current flag values may be stale.
 
 ```mermaid
 sequenceDiagram
