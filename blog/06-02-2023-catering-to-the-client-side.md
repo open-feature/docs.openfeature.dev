@@ -27,7 +27,7 @@ With server-side flags, we can assume that evaluating a feature flag is a _relat
 
 [^1]: by "rulesets" I mean the set of feature flagging rule configurations that define how flagging decisions should be made for each feature flag: "enable red_checkout_button flag for 50% of users", "only enable new_reco_algorithm for users in the 'internal_testers' group", etc. Rulesets plus evaluation context are the two inputs that fully define the output for any flagging decision.
 
-This situation is quite different with client-side flags. Remote flag evaluation now requires a trip across the internet, and we have to anticipate such a service call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client. Even with the local evalution model, we still have to deal with our fact that the source of truth for our flagging ruleset is on the other side of a potentially high-latency network.
+This situation is quite different with client-side flags. Remote flag evaluation now requires a trip across the internet, and we have to anticipate such a service call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client. Even with the local evaluation model, we still have to deal with the fact that the source of truth for our flagging ruleset is on the other side of a potentially high-latency network.
 
 ### Eager evaluation for remote-evaluated systems
 
