@@ -41,7 +41,7 @@ Specifically, when the app starts the flagging framework requests an eager evalu
 sequenceDiagram
   actor app
   participant client as feature flagging logic
-  participant cache as in-memory cache
+  participant cache
   participant provider as flag service
   app->>+client: userLoggedIn(userId)
   client->>+provider: evaluateFlags(evaluationContext)
@@ -61,9 +61,38 @@ sequenceDiagram
 
 Put another way, with client-side feature flagging we can separate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
 
-## Keeping rulesets in sync for local-evaluated systems 
+### Keeping rulesets in sync for local-evaluated systems 
 
 Flagging frameworks that use a local evaluation model don't have to contend with network calls for every evaluation, but they still need to keep their local rulesets up to date and allow the client-side app to respond to changes in those ruleset. Again, this means using caches to keep the most recent ruleset available. It also means that the flagging framework needs some eventing or callback mechanism to inform application code that the ruleset has changed and flagging decision needs to be re-evaluated. 
+
+```mermaid
+sequenceDiagram
+  actor app
+  participant sdk as feature flag SDK
+  participant cache as local ruleset
+  participant provider as flag service
+  app->>+sdk: boot
+  sdk->>+provider: get ruleset from last known state
+  provider-->>-sdk: ruleset
+  sdk->>+cache: Store ruleset
+  cache->>-sdk: .
+  sdk->>-app: .
+  app->>+sdk: operation that needs a flagging decision
+  sdk->>+cache: flag evaluation
+  cache->>-sdk: locally evaluated flag value
+  sdk->>-app: flag value 
+  note right of app: some time later, flagging rules have been updated
+  provider->>+sdk: updated ruleset
+  sdk->>+cache: Store ruleset
+  cache->>-sdk: .
+  sdk-->>+app: flags may have changed
+  deactivate sdk
+  app->>+sdk: re-evaluate flag
+  sdk->>+cache: flag evaluation
+  cache->>-sdk: new flag value
+  sdk->>-app: new flag value 
+  deactivate app
+```
 
 ## Client-side support in OpenFeature
 
