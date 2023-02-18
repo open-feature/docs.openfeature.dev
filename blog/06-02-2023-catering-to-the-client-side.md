@@ -256,3 +256,11 @@ We've seen that the difference between feature flagging on the client vs on the 
 Getting better support in OpenFeature for client-side flags comes down to supporting both of these paradigms, and when you lay it all out adding that support doesn't have too huge an impact on the OpenFeature API. As we just discussed, it means adding a different flavor of the Evaluation API. In addition a few extra points of contact are added to the API surface so an app can tell the framework that the evaluation context has changed, and so the framework can in turn tell the app once new flag values are available.
 
 With these additions in place, OpenFeature should have everything needed to bring client-side apps an open, vendor-agnostic standard for feature flagging.
+
+
+## Revisions
+
+Initally published **Feburary 13 2023**.
+
+Updated **Feburary 18 2023** to include discussion of local vs remote flag evaluation models.
+
