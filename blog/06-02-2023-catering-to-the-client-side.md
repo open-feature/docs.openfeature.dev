@@ -21,17 +21,24 @@ The key distinction between the client- and server-side feature flagging is the 
 
 In contrast, with a client-side app all feature flagging decisions are made in the context of the same user - the user interacting with the client-side app - and so the evaluation context is relatively static. There are cases where evaluation context will change within a client-side app - when a user logs in, for example - but by and large with client-side code we can treat feature flag evaluation context as something that is fixed (while still providing mechanisms to update it).
 
-### Flag evaluation is slow
+### Network calls are slow
 
-With server-side flags, we can assume that evaluating a feature flag is a _relatively_ fast operation. In some scenarios a flagging decision can be made in-process (a very fast operation). If that's not possible then flag evaluation is typically a quick service call - akin to making a DB query or calling a remote cache.
+In the server, client processes might pull rule-sets for evaluating flags and use those as the basis for local flag evaluation.
+In other cases, flags might be evaluated out-of-process (by a remote service or some co-located process) and the results of the evaluation sent back to the client.
+Regardless, with  server-side flags we can assume that evaluating a feature flag is a _relatively_ fast operation, even in cases where evaluations take place out-of-process.
 
-This situation is quite different with client-side flags. It's typically not possible to evaluate a flagging decision locally. Local evaluation would require the full feature flagging ruleset to be exposed to the client, something many organizations are not comfortable with. Additionally, flag evaluation may require additional context that's simply not available on the client at the time of evaluation.
+This situation is quite different with client-side flags.
+In cases of local evaluation, a ruleset (or a collection of them) must be sent to the client, in bulk or piecemeal. In cases of remote evaluation, the client must contact a remote server with the relevant context and receive an evaluated result. 
 
-This means that a client-side flag evaluation requires a backend call. Unfortunately we should also anticipate the latency for such a call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client.
+This means that a client-side systems require network calls. Unfortunately we should also anticipate the latency for such a call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client.
 
-### Pre-evaluation
+### Locally-evaluated systems and initialization
 
-So client-side flag evaluation is slow, but we've also seen that the inputs into that flag evaluation - the evaluation context - are fairly static for client-side apps, and that means the _results_ of flag evaluation are fairly static too.
+For systems wherein flags are evaluated locally, signalling readiness to the consuming application can be of particular importance. Until the ruleset governing flag evaluation is fetched, we can't guarantee accurate flag values for the given context. We need an API that supports events or other asynchronous mechanisms to communicate the state of the underlying system. 
+
+### Remotely-evaluated systems and eager evaluation
+
+Remote evaluation presupposes network calls for flag evaluation, but we've also seen that the inputs into that flag evaluation - the evaluation context - are fairly static for client-side apps, and that means the _results_ of flag evaluation are fairly static too.
 
 How do we handle an expensive operation with fairly static results? We add caching! And that's what most client-side feature flagging frameworks do.
 
@@ -101,7 +108,7 @@ public string generateSalutation(){
 }
 ```
 
-Note that we are no longer passing evaluation context when requesting a flagging decision.
+Note that we are no longer passing evaluation context when requesting a flagging decision; this happened when the SDK and provider were initialized.
 
 However OpenFeature does still need to take evaluation context into account, and our app still needs to make sure that OpenFeature has an accurate view of the current context. What does that look like?
 
@@ -115,7 +122,7 @@ public void onAuthenticated(userId:String){
 }
 ```
 
-This call to update the evaluation context can prompt OpenFeature's underlying flagging provider to update any cached feature flag values using the new evaluation context. The provider will be notified that the evaluation context has changed via a new `onContextSet` handler which is being added to the OpenFeature provider interface:
+This call to update the evaluation context can prompt OpenFeature's underlying flagging provider to update any cached feature flag values using the new evaluation context, or update its ruleset if the ruleset is context-sensitive. The provider will be notified that the evaluation context has changed via a new `onContextSet` handler which is being added to the OpenFeature provider interface:
 
 ```java
 class MyFlaggingProvider implements Provider {
