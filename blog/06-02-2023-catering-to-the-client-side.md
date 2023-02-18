@@ -81,7 +81,7 @@ sequenceDiagram
   sdk->>+cache: flag evaluation
   cache->>-sdk: locally evaluated flag value
   sdk->>-app: flag value 
-  note right of app: some time later, flagging rules have been updated
+  note left of provider: some time later, flagging rules have been updated
   provider->>+sdk: updated ruleset
   sdk->>+cache: Store ruleset
   cache->>-sdk: .
