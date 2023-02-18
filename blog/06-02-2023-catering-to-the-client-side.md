@@ -61,9 +61,9 @@ sequenceDiagram
 
 Put another way, with client-side feature flagging we can separate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
 
-### Keeping rulesets in sync for local-evaluated systems 
+### Keeping rulesets in sync for local-evaluated systems
 
-Flagging frameworks that use a local evaluation model don't have to contend with network calls for every evaluation, but they still need to keep their local rulesets up to date and allow the client-side app to respond to changes in those ruleset. Again, this means using caches to keep the most recent ruleset available. It also means that the flagging framework needs some eventing or callback mechanism to inform application code that the ruleset has changed and flagging decision needs to be re-evaluated. 
+Flagging frameworks that use a local evaluation model don't have to contend with network calls for every evaluation, but they still need to keep their local rulesets up to date and allow the client-side app to respond to changes in those ruleset. Again, this means using caches to keep the most recent ruleset available. It also means that the flagging framework needs some eventing or callback mechanism to inform application code that the ruleset has changed and flagging decision needs to be re-evaluated.
 
 ```mermaid
 sequenceDiagram
