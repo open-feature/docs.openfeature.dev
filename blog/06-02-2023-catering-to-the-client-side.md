@@ -33,7 +33,7 @@ This situation is quite different with client-side flags. Remote flag evaluation
 
 We can see that the network presents challenges for client-side apps using a remote evaluation model for flagging decisions. But we've also seen that the inputs into that flag evaluation - the evaluation context - are fairly static for client-side apps, and that means the _results_ of flag evaluation are fairly static too.
 
-How do we handle an expensive operation with fairly static results? We add caching! And that's what most client-side feature flagging frameworks do.
+How do we handle an expensive operation with fairly static results? We add caching! And that's what many client-side feature flagging frameworks do.
 
 Specifically, when the app starts the flagging framework requests an eager evaluation of all the feature flagging decisions that might be needed, and then caches those decisions. Then whenever client-side code needs to make a flagging decision the framework simply returns the pre-evaluated result from its local cache.
 
