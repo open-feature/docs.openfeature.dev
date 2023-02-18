@@ -129,7 +129,7 @@ class MyFlaggingProvider implements Provider {
   // triggered when `setEvaluationContext` is called
   onContextSet(EvaluationContext oldContext, EvaluationContext newContext): void {
     // here the provider can re-evaluate flags using the next evaluation context, updating any
-    // previously cached flag values
+    // previously cached flag values or updating rulesets
   }
   //...
 }
