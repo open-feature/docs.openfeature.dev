@@ -25,7 +25,7 @@ In contrast, with a client-side app all feature flagging decisions are made in t
 
 In the server, client processes might pull rule-sets for evaluating flags and use those as the basis for local flag evaluation.
 In other cases, flags might be evaluated out-of-process (by a remote service or some co-located process) and the results of the evaluation sent back to the client.
-Regardless, with  server-side flags we can assume that evaluating a feature flag is a _relatively_ fast operation, even in cases where evaluations take place out-of-process.
+Regardless, with server-side flags we can assume that evaluating a feature flag is a _relatively_ fast operation, even in cases where evaluations take place out-of-process.
 
 This situation is quite different with client-side flags.
 In cases of local evaluation, a ruleset (or a collection of them) must be sent to the client, in bulk or piecemeal. In cases of remote evaluation, the client must contact a remote server with the relevant context and receive an evaluated result.
@@ -35,6 +35,28 @@ This means that a client-side systems require network calls. Unfortunately we sh
 ### Locally-evaluated systems and initialization
 
 For systems wherein flags are evaluated locally, signalling readiness to the consuming application can be of particular importance. Until the ruleset governing flag evaluation is fetched, we can't guarantee accurate flag values for the given context. We need an API that supports events or other asynchronous mechanisms to communicate the state of the underlying system.
+
+```mermaid
+sequenceDiagram
+  actor app
+  participant client as feature flagging logic
+  participant cache
+  participant provider as flag service
+  app->>+client: user visits page
+  client->>+cache: get last known state
+  cache->>-client: .
+  client->>+provider: get ruleset from last known state
+  provider-->>-client: ruleset
+  client->>+cache: Store ruleset
+  cache->>-client: .
+  %% deactivate cache
+  client->>-app: .
+  %% deactivate client
+  note right of app: some time later..
+  app->>+client: operation that needs a flagging decision
+  client->>client: flag evaluation
+  client->>-app: locally evaluated value returned
+```
 
 ### Remotely-evaluated systems and eager evaluation
 
@@ -48,7 +70,7 @@ Specifically, they do an optimistic pre-evaluation of all the feature flagging d
 sequenceDiagram
   actor app
   participant client as feature flagging logic
-  participant cache as in-memory cache
+  participant cache
   participant provider as flag service
   app->>+client: userLoggedIn(userId)
   client->>+provider: evaluateFlags(evaluationContext)
