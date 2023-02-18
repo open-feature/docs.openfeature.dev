@@ -28,13 +28,13 @@ In other cases, flags might be evaluated out-of-process (by a remote service or 
 Regardless, with  server-side flags we can assume that evaluating a feature flag is a _relatively_ fast operation, even in cases where evaluations take place out-of-process.
 
 This situation is quite different with client-side flags.
-In cases of local evaluation, a ruleset (or a collection of them) must be sent to the client, in bulk or piecemeal. In cases of remote evaluation, the client must contact a remote server with the relevant context and receive an evaluated result. 
+In cases of local evaluation, a ruleset (or a collection of them) must be sent to the client, in bulk or piecemeal. In cases of remote evaluation, the client must contact a remote server with the relevant context and receive an evaluated result.
 
 This means that a client-side systems require network calls. Unfortunately we should also anticipate the latency for such a call to be slow, particularly if our users are behind a spotty internet connection. In fact, with a native mobile app we have to handle a fully disconnected client.
 
 ### Locally-evaluated systems and initialization
 
-For systems wherein flags are evaluated locally, signalling readiness to the consuming application can be of particular importance. Until the ruleset governing flag evaluation is fetched, we can't guarantee accurate flag values for the given context. We need an API that supports events or other asynchronous mechanisms to communicate the state of the underlying system. 
+For systems wherein flags are evaluated locally, signalling readiness to the consuming application can be of particular importance. Until the ruleset governing flag evaluation is fetched, we can't guarantee accurate flag values for the given context. We need an API that supports events or other asynchronous mechanisms to communicate the state of the underlying system.
 
 ### Remotely-evaluated systems and eager evaluation
 
