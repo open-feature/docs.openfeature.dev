@@ -247,10 +247,8 @@ Getting better support in OpenFeature for client-side flags comes down to suppor
 
 With these additions in place, OpenFeature should have everything needed to bring client-side apps an open, vendor-agnostic standard for feature flagging.
 
-
 ## Revisions
 
 Initally published **Feburary 13 2023**.
 
 Updated **Feburary 18 2023** to include discussion of local vs remote flag evaluation models.
-
