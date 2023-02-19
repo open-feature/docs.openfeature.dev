@@ -42,7 +42,7 @@ sequenceDiagram
   actor app
   participant client as feature flagging logic
   participant cache
-  participant provider as flag service
+  participant provider as remote flag service
   app->>+client: userLoggedIn(userId)
   client->>+provider: evaluateFlags(evaluationContext)
   provider-->>-client: flag values
@@ -70,7 +70,7 @@ sequenceDiagram
   actor app
   participant sdk as feature flag SDK
   participant cache as local ruleset
-  participant provider as flag service
+  participant provider as remote flag service
   app->>+sdk: boot
   sdk->>+provider: get ruleset from last known state
   provider-->>-sdk: ruleset
@@ -80,18 +80,8 @@ sequenceDiagram
   app->>+sdk: operation that needs a flagging decision
   sdk->>+cache: flag evaluation
   cache->>-sdk: locally evaluated flag value
+  note right of cache: no call to flagging service needed
   sdk->>-app: flag value 
-  note left of provider: some time later, flagging rules have been updated
-  provider->>+sdk: updated ruleset
-  sdk->>+cache: Store ruleset
-  cache->>-sdk: .
-  sdk-->>+app: flags may have changed
-  deactivate sdk
-  app->>+sdk: re-evaluate flag
-  sdk->>+cache: flag evaluation
-  cache->>-sdk: new flag value
-  sdk->>-app: new flag value 
-  deactivate app
 ```
 
 ## Client-side support in OpenFeature
