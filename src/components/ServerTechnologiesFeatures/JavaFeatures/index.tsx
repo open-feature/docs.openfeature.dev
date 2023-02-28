@@ -7,6 +7,7 @@ import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
 import GoFeatureFlagSvg from '@site/static/img/goff-no-fill.svg';
 import FlagsmithNoFill from '@site/static/img/flagsmith-no-fill.svg';
 import OtelNoFillSvg from '@site/static/img/otel-no-fill.svg';
+import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
 
 export class JavaFeatures extends React.Component {
   override render() {
@@ -36,7 +37,7 @@ export class JavaFeatures extends React.Component {
             description: 'The official CloudBees provider for OpenFeature',
             href: 'https://github.com/rollout/cloudbees-openfeature-provider-java',
             svg: CloudbeesSvg,
-            vendorOfficial: true
+            vendorOfficial: true,
           },
           {
             title: 'flagd Provider',
@@ -45,11 +46,18 @@ export class JavaFeatures extends React.Component {
             svg: FlagdSvg,
           },
           {
+            title: 'LaunchDarkly Provider',
+            description: 'The official LaunchDarkly provider for OpenFeature',
+            href: 'https://github.com/launchdarkly/openfeature-java-server',
+            svg: LaunchDarklySvg,
+            vendorOfficial: true,
+          },
+          {
             title: 'Split Provider',
             description: 'The official Split provider for OpenFeature',
             href: 'https://github.com/splitio/split-openfeature-provider-java',
             svg: SplitSvg,
-            vendorOfficial: true
+            vendorOfficial: true,
           },
           {
             title: 'GO Feature Flag Provider',
