@@ -231,19 +231,19 @@ MyHook : Hook
 ```go
 type myHook struct{}
 
-func (h myHook) Before(hookContext openfeature.HookContext, hookHints openfeature.HookHints) (*openfeature.EvaluationContext, error) {
+func (h myHook) Before(ctx context.Context, hookContext openfeature.HookContext, hookHints openfeature.HookHints) (*openfeature.EvaluationContext, error) {
     // code to run before flag evaluation
 }
 
-func (h myHook) After(hookContext openfeature.HookContext, flagEvaluationDetails openfeature.EvaluationDetails, hookHints openfeature.HookHints) error {
+func (h myHook) After(ctx context.Context, hookContext openfeature.HookContext, flagEvaluationDetails openfeature.EvaluationDetails, hookHints openfeature.HookHints) error {
     // code to run after successful flag evaluation
 }
 
-func (h myHook) Error(hookContext openfeature.HookContext, err error, hookHints openfeature.HookHints) {
+func (h myHook) Error(ctx context.Context, hookContext openfeature.HookContext, err error, hookHints openfeature.HookHints) {
     // code to run if there's an error during before hooks or during flag evaluation
 }
 
-func (h myHook) Finally(hookContext openfeature.HookContext, hookHints openfeature.HookHints) {
+func (h myHook) Finally(ctx context.Context, hookContext openfeature.HookContext, hookHints openfeature.HookHints) {
     // code to run after all other stages, regardless of success/failure
 }
 ```

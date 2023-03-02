@@ -42,27 +42,24 @@ For the `go-sdk` this means that it will need to conform to the following interf
 
 ```go
 type Hook interface {
-    Before(hookContext HookContext, hookHints HookHints) (*EvaluationContext, error)
-    After(hookContext HookContext, flagEvaluationDetails InterfaceEvaluationDetails, hookHints HookHints) error
-    Error(hookContext HookContext, err error, hookHints HookHints)
-    Finally(hookContext HookContext, hookHints HookHints)
+    Before(ctx context.Context, hookContext HookContext, hookHints HookHints) (*EvaluationContext, error)
+    After(ctx context.Context, hookContext HookContext, flagEvaluationDetails InterfaceEvaluationDetails, hookHints HookHints) error
+    Error(ctx context.Context, hookContext HookContext, err error, hookHints HookHints)
+    Finally(ctx context.Context, hookContext HookContext, hookHints HookHints)
 }
 ```
 
-In order to conform to the interface we are forced to implement all of these functions, despite only wanting to tap into
-the `After` lifecycle event. Let's leave the other functions empty to achieve this:
+In order to avoid implementing all the required functions to conform to the interface, embed the `of.UnimplementedHook` struct in the Hook struct.
+Then define the `After` lifecycle event, overriding `of.UnimplementedHook`'s null implementation.
 
 ```go
 // Hook validates the flag evaluation details After flag resolution
 type Hook struct {
+    of.UnimplementedHook
     Validator validator
 }
 
-func (h Hook) Before(hookContext of.HookContext, hookHints of.HookHints) (*of.EvaluationContext, error) {
-    return nil, nil
-}
-
-func (h Hook) After(hookContext of.HookContext, flagEvaluationDetails of.InterfaceEvaluationDetails, hookHints of.HookHints) error {
+func (h Hook) After(ctx context.Context, hookContext of.HookContext, flagEvaluationDetails of.InterfaceEvaluationDetails, hookHints of.HookHints) error {
     err := h.Validator.IsValid(flagEvaluationDetails)
     if err != nil {
         return err
@@ -70,10 +67,6 @@ func (h Hook) After(hookContext of.HookContext, flagEvaluationDetails of.Interfa
 
     return nil
 }
-
-func (h Hook) Error(hookContext of.HookContext, err error, hookHints of.HookHints) {}
-
-func (h Hook) Finally(hookContext of.HookContext, hookHints of.HookHints) {}
 ```
 
 Notice the `Validator` field of type `validator` in the `Hook` struct. This is defined as such:

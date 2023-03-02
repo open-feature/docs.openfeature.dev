@@ -235,14 +235,16 @@ class MyHook implements Hook {
 type MyHook struct {}
 //...
 func (h MyHook) Before(
-  ctx openfeature.HookContext,
+  ctx context.Context,
+  hookContext openfeature.HookContext,
   hints openfeature.HookHints,
 ) (*EvaluationContext, error) {
     // do something before flag evaluation
 }
 
 func (h MyHook) After(
-  ctx openfeature.HookContext,
+  ctx context.Context,
+  hookContext openfeature.HookContext,
   details openfeature.EvaluationDetails,
   hints openfeature.HookHints,
 ) error {
