@@ -140,6 +140,20 @@ const config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'community',
+        path: 'external-content/community',
+        routeBasePath: 'community',
+        exclude: [
+          ".github/**/*",
+          "ISSUE_TEMPLATE/**"
+        ]
+       // sidebarPath: require.resolve('./sidebarsCommunity.js'),
+        // ... other options
+      },
+    ],
+    [
       externalContentPlugin,
       {
         name: 'spec',
@@ -172,6 +186,13 @@ const config = {
             docId: 'specification/intro',
             position: 'left',
             label: 'Specification',
+          },
+          {
+            type: 'doc',
+            docId: 'README',
+            position: 'left',
+            docsPluginId: "community",
+            label: 'Community',
           },
           {
             type: 'doc',
