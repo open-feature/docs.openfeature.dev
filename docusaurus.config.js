@@ -146,7 +146,7 @@ const config = {
         path: 'external-content/community',
         routeBasePath: 'community',
         exclude: ['.github/**/*', 'ISSUE_TEMPLATE/**'],
-        sidebarPath: require.resolve('./sidebar-community.js'),
+        sidebarPath: require.resolve('./external-content/community/docusaurus-sidebar.js'),
         editUrl: (params) => {
           return `https://github.com/open-feature/community/edit/main/${params.docPath}`;
         },
