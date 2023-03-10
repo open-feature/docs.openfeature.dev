@@ -34,74 +34,74 @@ const config = {
 
   headTags: [
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "apple-touch-icon",
-        sizes: "180x180",
-        href: "/favicons/apple-touch-icon.png",
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/favicons/apple-touch-icon.png',
       },
     },
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "apple-touch-icon",
-        sizes: "180x180",
-        href: "/favicons/apple-touch-icon-precomposed.png",
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/favicons/apple-touch-icon-precomposed.png',
       },
     },
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "icon",
-        type: "image/png",
-        sizes: "32x32",
-        href: "/favicons/favicon-32x32.png",
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicons/favicon-32x32.png',
       },
     },
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "icon",
-        type: "image/png",
-        sizes: "16x16",
-        href: "/favicons/favicon-16x16.png",
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicons/favicon-16x16.png',
       },
     },
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "icon",
-        type: "image/svg+xml",
-        href: "/favicons/favicon-light.svg",
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/favicons/favicon-light.svg',
       },
     },
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "shortcut icon",
-        type: "image/x-icon",
-        href: "/favicons/favicon.ico",
+        rel: 'shortcut icon',
+        type: 'image/x-icon',
+        href: '/favicons/favicon.ico',
       },
     },
     {
-      tagName: "link",
+      tagName: 'link',
       attributes: {
-        rel: "manifest",
-        href: "/favicons/site.webmanifest",
+        rel: 'manifest',
+        href: '/favicons/site.webmanifest',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "theme-color",
-        content: "#ffffff",
+        name: 'theme-color',
+        content: '#ffffff',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "msapplication-config",
-        content: "/favicons/browserconfig.xml",
+        name: 'msapplication-config',
+        content: '/favicons/browserconfig.xml',
       },
     },
   ],
@@ -140,6 +140,20 @@ const config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'community',
+        path: 'external-content/community',
+        routeBasePath: 'community',
+        exclude: ['.github/**/*', 'ISSUE_TEMPLATE/**'],
+        sidebarPath: require.resolve('./external-content/community/docusaurus-sidebar.js'),
+        editUrl: (params) => {
+          return `https://github.com/open-feature/community/edit/main/${params.docPath}`;
+        },
+        // ... other options
+      },
+    ],
+    [
       externalContentPlugin,
       {
         name: 'spec',
@@ -175,6 +189,13 @@ const config = {
           },
           {
             type: 'doc',
+            docId: 'README',
+            position: 'left',
+            docsPluginId: 'community',
+            label: 'Community',
+          },
+          {
+            type: 'doc',
             docId: '/category/getting-started',
             position: 'left',
             label: 'Tutorials',
@@ -203,6 +224,10 @@ const config = {
                 to: 'docs/specification',
               },
               {
+                label: 'Community',
+                to: 'community',
+              },
+              {
                 label: 'Tutorials',
                 to: 'docs/category/getting-started',
               },
@@ -220,9 +245,9 @@ const config = {
                 href: 'https://www.linkedin.com/company/openfeature/',
               },
               {
-                label: 'Join the Community',
-                href: 'https://github.com/open-feature/community/'
-              }
+                label: 'Join us on Slack',
+                href: 'https://cloud-native.slack.com/archives/C0344AANLA1',
+              },
             ],
           },
           {
@@ -238,7 +263,7 @@ const config = {
               },
               {
                 label: 'Website',
-                href: 'https://openfeature.dev/'
+                href: 'https://openfeature.dev/',
               },
               {
                 html: `
