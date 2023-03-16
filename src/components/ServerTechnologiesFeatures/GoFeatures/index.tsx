@@ -42,7 +42,8 @@ export class GoFeatures extends React.Component {
           },
           {
             title: 'Flagsmith Provider',
-            description: 'A provider for Flagsmith',
+            description: 'The official Flagsmith provider for OpenFeature',
+            vendorOfficial: true,
             href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/providers/flagsmith',
             svg: FlagsmithNoFill,
           },
