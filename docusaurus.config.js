@@ -2,7 +2,6 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
-const externalContentPlugin = require('./src/plugins/external-content');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -154,13 +153,16 @@ const config = {
         },
         // ... other options
       },
-    ],
-    [
-      externalContentPlugin,
+    ],[
+      '@docusaurus/plugin-content-docs',
       {
-        name: 'spec',
-        sourcePath: 'specification/specification',
-        destinationPath: 'specification',
+        id: 'specification',
+        path: 'external-content/specification/specification',
+        routeBasePath: 'specification',
+        editUrl: (params) => {
+          return `https://github.com/open-feature/specification/edit/main/${params.docPath}`;
+        },
+        // ... other options
       },
     ],
     'docusaurus-plugin-sass',
@@ -185,9 +187,10 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'specification/intro',
+            docId: 'intro',
             position: 'left',
             label: 'Specification',
+            docsPluginId: 'specification',
           },
           {
             type: 'doc',
