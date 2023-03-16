@@ -226,7 +226,7 @@ const config = {
               },
               {
                 label: 'Specification',
-                to: 'docs/specification',
+                to: 'specification',
               },
               {
                 label: 'Community',
