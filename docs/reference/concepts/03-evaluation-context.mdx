@@ -8,7 +8,9 @@ id: evaluation-context
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The [_evaluation context_](/docs/specification/glossary#evaluation-context) is a container for arbitrary contextual data that can be used as a basis for dynamic evaluation. Static data such as the host or an identifier for the application can be configured globally. Dynamic evaluation context, such as the IP address of the client in a web application, can be implicitly propagated or explicitly passed to during flag evaluation, and can be merged with static values.
+The [_evaluation context_](/docs/specification/glossary#evaluation-context) is a container for arbitrary contextual data that can be used as a basis for dynamic evaluation.
+Static data such as the host or an identifier for the application can be configured globally.
+Dynamic evaluation context, such as the IP address of the client in a web application, can be implicitly propagated or explicitly passed to during flag evaluation, and can be merged with static values.
 
 ## Providing Evaluation Context
 
@@ -129,12 +131,20 @@ At the point of flag evaluation, the evaluation context is merged, and duplicate
 
 ### Circular structures in Evaluation Context
 
-Many providers serialize the evaluation context as part of their operation. Be careful not to include circular structures in the evaluation context to avoid serialization issues.
+Many providers serialize the evaluation context as part of their operation.
+Be careful not to include circular structures in the evaluation context to avoid serialization issues.
 
 ## Targeting Key
 
-Many feature flag management systems require an identifier for the subject of flag evaluation. For many feature flag systems this is required in order to perform fractional evaluation or percentage-based rollouts deterministically. In the case of web applications or mobile apps, the subject is frequently an end user, but in other cases it could be a service or client application. The `evaluation context` includes an optional `targeting key` field for this purpose. The targeting key should contain a string uniquely identifying the subject (i.e.: a UUID, a hash of some user attribute such as an email, or the hostname of an application or service). Some [providers](/docs/reference/concepts/provider) may require this field to be set to function correctly.
+Many feature flag management systems require an identifier for the subject of flag evaluation.
+For many feature flag systems this is required in order to perform fractional evaluation or percentage-based rollouts deterministically.
+In the case of web applications or mobile apps, the subject is frequently an end user, but in other cases it could be a service or client application.
+The `evaluation context` includes an optional `targeting key` field for this purpose.
+The targeting key should contain a string uniquely identifying the subject (i.e.: a UUID, a hash of some user attribute such as an email, or the hostname of an application or service).
+Some [providers](/docs/reference/concepts/provider) may require this field to be set to function correctly.
 
 ## Personally Identifiable Information (PII) Considerations
 
-Be thoughtful in your inclusion of personal data in the `evaluation context`. Such data is useful for targeting and dynamic evaluation, but you should consider how the [provider](/docs/reference/concepts/provider) in use may handle or persist this data. Hooks (specifically hooks implementing the _before_ stage) can be useful to restrict, filter or anonymize data in the `evaluation context`.
+Be thoughtful in your inclusion of personal data in the `evaluation context`.
+Such data is useful for targeting and dynamic evaluation, but you should consider how the [provider](/docs/reference/concepts/provider) in use may handle or persist this data.
+Hooks (specifically hooks implementing the _before_ stage) can be useful to restrict, filter or anonymize data in the `evaluation context`.

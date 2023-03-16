@@ -8,11 +8,13 @@ id: evaluation-api
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Evaluation API is the primary component of OpenFeature that _application authors_ interact with. The Evaluation API allows developers to evaluate feature flags to alter control flow and application characteristics.
+The Evaluation API is the primary component of OpenFeature that _application authors_ interact with.
+The Evaluation API allows developers to evaluate feature flags to alter control flow and application characteristics.
 
 ## Setting a Provider
 
-Before you can start evaluating flags, you must set a [_provider_](./provider). The provider is the translation layer between the evaluation API and the flag system you use.
+Before you can start evaluating flags, you must set a [_provider_](./provider).
+The provider is the translation layer between the evaluation API and the flag system you use.
 
 <Tabs groupId="code">
 <TabItem value="js" label="TypeScript">
@@ -64,8 +66,10 @@ OpenFeatureAPI::getInstance()->setProvider(new YourProviderOfChoice());
 ## Creating a client
 
 The OpenFeature client is a lightweight abstraction used to evaluate feature flags.
-If your application is small, you may use a single client for your whole application. In larger applications, it may be helpful to create multiple clients,
-each with different configuration to fit the needs of different sub-modules. Clients may also be created dynamically, per each HTTP request, for instance.
+If your application is small, you may use a single client for your whole application.
+In larger applications, it may be helpful to create multiple clients,
+each with different configuration to fit the needs of different sub-modules.
+Clients may also be created dynamically, per each HTTP request, for instance.
 
 <Tabs groupId="code">
 <TabItem value="js" label="TypeScript">
@@ -109,7 +113,8 @@ $client = OpenFeatureAPI::getInstance()->getClient("my-app");
 
 ### Basic Evaluation
 
-The client can be used to do basic flag evaluation, which simply returns flag values of a particular type. The default value must also be specified.
+The client can be used to do basic flag evaluation, which simply returns flag values of a particular type.
+The default value must also be specified.
 In the case of any error during flag evaluation, the default value will be returned, so give consideration to your default values!
 
 <Tabs groupId="code">
@@ -214,7 +219,8 @@ $objectValue = $client->getObjectValue("objectFlag", $myObjectInstance, null, nu
 
 ### Detailed Evaluation
 
-In addition to [basic evaluation](#basic-evaluation), _detailed evaluation_ methods are available. These return the value, as well as additional metadata about the flag evaluation in the _Evaluation Details_ structure.
+In addition to [basic evaluation](#basic-evaluation), _detailed evaluation_ methods are available.
+These return the value, as well as additional metadata about the flag evaluation in the _Evaluation Details_ structure.
 
 #### Evaluation Details Structure Fields
 
