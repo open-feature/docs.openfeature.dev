@@ -67,7 +67,8 @@ export class JavaFeatures extends React.Component {
           },
           {
             title: 'Flagsmith Provider',
-            description: 'The official provider for Flagsmith',
+            description: 'The official Flagsmith provider for OpenFeature',
+            vendorOfficial: true,
             href: 'https://github.com/open-feature/java-sdk-contrib/tree/main/providers/flagsmith',
             svg: FlagsmithNoFill,
             vendorOfficial: true,
