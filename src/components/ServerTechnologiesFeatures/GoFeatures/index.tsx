@@ -8,6 +8,7 @@ import OpenTelemetry from '@site/static/img/otel-no-fill.svg';
 import CheckCircle from '@site/static/img/check-circle-no-fill.svg';
 import FliptSvg from '@site/static/img/flipt-no-fill.svg';
 import GoFeatureFlagNoFillSvg from '@site/static/img/goff-no-fill.svg';
+import FlagsmithNoFill from '@site/static/img/flagsmith-no-fill.svg';
 
 export class GoFeatures extends React.Component {
   override render() {
@@ -38,6 +39,13 @@ export class GoFeatures extends React.Component {
             description: 'A provider for flagd',
             href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/providers/flagd',
             svg: FlagdSvg,
+          },
+          {
+            title: 'Flagsmith Provider',
+            description: 'The official Flagsmith provider for OpenFeature',
+            vendorOfficial: true,
+            href: 'https://github.com/open-feature/go-sdk-contrib/tree/main/providers/flagsmith',
+            svg: FlagsmithNoFill,
           },
           {
             title: 'Flipt Provider',
