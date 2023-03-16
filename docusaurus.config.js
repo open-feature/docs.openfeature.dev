@@ -156,6 +156,19 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'flagd',
+        path: 'external-content/flagd/docs',
+        routeBasePath: 'tools/flagd',
+        editUrl: (params) => {
+          return `https://github.com/open-feature/flagd/edit/main/${params.docPath}`;
+        },
+       // sidebarPath: require.resolve('./sidebarsCommunity.js'),
+        // ... other options
+      },
+    ],
+    [
       externalContentPlugin,
       {
         name: 'spec',
@@ -178,10 +191,24 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
+            type: 'dropdown',
+            label: 'Documentation',
             docId: 'reference/intro',
             position: 'left',
-            label: 'Docs',
+            items: [
+              {
+                type: 'doc',
+                docId: 'reference/intro',
+                label: 'General',
+              },
+              {
+                type: 'doc',
+                label: 'flagd',
+                docId: 'README',
+                docsPluginId: "flagd",
+              },
+              // ... more items
+            ],
           },
           {
             type: 'doc',
