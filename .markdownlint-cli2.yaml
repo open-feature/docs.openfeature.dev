@@ -1,0 +1,26 @@
+config:
+    default: true,
+    MD010:
+        spaces_per_tab: 4
+
+    MD013: false,
+    MD024:
+        siblings_only: true
+
+    MD025:
+        front_matter_title: ""
+    MD033: false,
+    MD049: false,
+    max-one-sentence-per-line: true
+
+customRules:
+    - markdownlint-rule-max-one-sentence-per-line
+
+globs:
+    - "**/*.md*"
+
+ignores:
+    - node_modules
+    - external-content
+
+fix: true
