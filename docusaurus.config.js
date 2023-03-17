@@ -114,9 +114,6 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           remarkPlugins: [require('mdx-mermaid')],
           editUrl: (params) => {
-            if (params.docPath.startsWith('specification/')) {
-              return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
-            }
             return `https://github.com/open-feature/docs.openfeature.dev/edit/main/docs/${params.docPath}`;
           },
         },
@@ -160,9 +157,23 @@ const config = {
         path: 'external-content/specification/specification',
         routeBasePath: 'specification',
         editUrl: (params) => {
-          return `https://github.com/open-feature/specification/edit/main/${params.docPath}`;
+          return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
         },
         // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        createRedirects(existingPath) {
+          if (existingPath.includes('/docs/specification')) {
+            return [
+              existingPath.replace('/docs/specification', '/specification'),
+              existingPath.replace('/docs/specification', '/specification'),
+            ];
+          }
+          return undefined; // Return a falsy value: no redirect created
+        },
       },
     ],
     'docusaurus-plugin-sass',
