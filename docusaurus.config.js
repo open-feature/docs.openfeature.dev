@@ -199,11 +199,11 @@ const config = {
               {
                 type: 'doc',
                 docId: 'reference/intro',
-                label: 'General',
+                label: 'open feature: vendor agnostic flag sdk',
               },
               {
                 type: 'doc',
-                label: 'flagd',
+                label: 'flagD: the cloud-native flag provider',
                 docId: 'README',
                 docsPluginId: "flagd",
               },
