@@ -19,6 +19,8 @@ When I talk to people about adopting feature flags, I often describe feature fla
 
 Organizations that begin using feature flags at any sort of scale quickly learn that they need some of that functionality lurking under the surface. This is why flag management platforms like LaunchDarkly and Split.io exist. Their value is not in providing a fancy if statement, it's in all those extra features lurking below the surface - a web-based management interface, the ability to perform controlled incremental rollout, permissions and audit trails, integration into analytics systems, and so on.
 
+<!--truncate-->
+
 ## Everybody needs an SDK
 
 While most of the value of a flag management platform lies beneath the surface, each platform still has to provide that surface-level capability - the ability to evaluate a flag at runtime. And that ability needs to be available in each tech stack. So every flag management vendor ends up maintaining a small flock of feature flagging SDKs in various tech stacks. Even when we're just talking about glorified if statements, this is actually a lot of work, and it's work that is duplicated by each feature management platform.

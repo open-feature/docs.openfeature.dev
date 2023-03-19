@@ -12,6 +12,8 @@ Early this year, OpenFeature announced its intent to bring a standard to the rap
 In June it was accepted as a Cloud Native Computing Foundation Sandbox project.
 Now, we're pleased to announce a new milestone: OpenFeature has released 1.0 versions of its [.NET](https://github.com/open-feature/dotnet-sdk), [Go](https://github.com/open-feature/go-sdk), [Java](https://github.com/open-feature/java-sdk), and [JavaScript](https://github.com/open-feature/js-sdk) SDKs!
 
+<!--truncate-->
+
 The release includes stable versions the following features:
 
 - the Evaluation API, providing application authors with consistent, vendor neutral, feature flag evaluation

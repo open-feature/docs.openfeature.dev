@@ -21,6 +21,8 @@ The key distinction between the client- and server-side feature flagging is the 
 
 In contrast, with a client-side app all feature flagging decisions are made in the context of the same user - the user interacting with the client-side app - and so the evaluation context is relatively static. There are cases where evaluation context will change within a client-side app - when a user logs in, for example - but by and large with client-side code we can treat feature flag evaluation context as something that is fixed (while still providing mechanisms to update it).
 
+<!--truncate-->
+
 ### The network is slow
 
 With server-side flags, we can assume that evaluating a feature flag is a _relatively_ fast operation. With some systems the flagging rulesets[^1] live right next to where a flagging decision is needed, with flag evaluation happening either within the same process or in some sort of sidecar process. In this *local evaluation* model every flagging decision is a very fast operation. For frameworks that use a *remote evaluation* model, a flagging decision is still just a quick service call - akin to making a DB query or calling a remote cache.
