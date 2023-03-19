@@ -8,7 +8,8 @@ id: hooks
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-_Hooks_ are a mechanism that allow for the addition of arbitrary behavior at well-defined points of the _flag evaluation life-cycle_. Use cases include validation of the resolved flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
+_Hooks_ are a mechanism that allow for the addition of arbitrary behavior at well-defined points of the _flag evaluation life-cycle_.
+Use cases include validation of the resolved flag value, modifying or adding data to the evaluation context, logging, telemetry, and tracking.
 
 ## Adding Hooks to Flag Evaluation
 
@@ -102,21 +103,30 @@ $value = $client->getBooleanValue("boolFlag", false, $context, new EvaluationOpt
 
 ## Flag Evaluation Life-Cycle
 
-The flag evaluation life-cycle consists of four stages: _Before_, _After_, _Error_ and _Finally_. A Hook will implement one or more of these stages, performing activities related to their specific role.
+The flag evaluation life-cycle consists of four stages: _Before_, _After_, _Error_ and _Finally_.
+A Hook will implement one or more of these stages, performing activities related to their specific role.
 
-> Note: "finally" is a reserved word in some languages. In such cases, an alternate name is used, such as _finallyAfter_.
+> Note: "finally" is a reserved word in some languages.
+> In such cases, an alternate name is used, such as _finallyAfter_.
 
 ### Before
 
-The _Before_ stage is evaluated before flag evaluation takes place. Hooks implementing the Before stage may alter the [evaluation context](./evaluation-context) or perform other side effects. Note that Before hooks run before flag evaluation has succeeded. Consider this when using Before hooks. You may want to use [After hooks](#after) for use cases where you want to perform some side effect with an assurance that flag evaluation proceeded normally.
+The _Before_ stage is evaluated before flag evaluation takes place.
+Hooks implementing the Before stage may alter the [evaluation context](./evaluation-context) or perform other side effects.
+Note that Before hooks run before flag evaluation has succeeded.
+Consider this when using Before hooks.
+You may want to use [After hooks](#after) for use cases where you want to perform some side effect with an assurance that flag evaluation proceeded normally.
 
 ### After
 
-The _After_ stage is evaluated after **successful** flag evaluation. Hooks implementing the After stage may validate the resolved flag value (throwing or returning errors) or perform other side effects. After hooks are an ideal mechanism for publishing records in other services for the purposes of telemetry relating to flag evaluation or for user tracking.
+The _After_ stage is evaluated after **successful** flag evaluation.
+Hooks implementing the After stage may validate the resolved flag value (throwing or returning errors) or perform other side effects.
+After hooks are an ideal mechanism for publishing records in other services for the purposes of telemetry relating to flag evaluation or for user tracking.
 
 ### Error
 
-The _Error_ stage runs only in the case that flag evaluation has proceeded abnormally. Some reasons for abnormal execution include:
+The _Error_ stage runs only in the case that flag evaluation has proceeded abnormally.
+Some reasons for abnormal execution include:
 
 - the flag control plane could not be reached
 - the flag referenced by the flag key does not exist
@@ -127,7 +137,8 @@ The Error stage is ideal for logging error messages or adding error records to a
 
 ### Finally
 
-The _Finally_ stage runs unconditionally, no matter if flag resolution succeeded or failed. Hooks implementing this stage might use it to release resources or finalize records.
+The _Finally_ stage runs unconditionally, no matter if flag resolution succeeded or failed.
+Hooks implementing this stage might use it to release resources or finalize records.
 
 ### Ordering
 
