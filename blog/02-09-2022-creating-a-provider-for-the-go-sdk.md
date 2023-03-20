@@ -10,7 +10,7 @@
 A [Provider](https://docs.openfeature.dev/docs/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as an interface for a key value store, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](https://docs.openfeature.dev/docs/specification/).  
 In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.
 
-The following section describes how the flag evaluator portion of this project has been constructed, to skip to the `Provider` specific implementations, [click here](#creating-a-compliant-provider).
+The following section describes how the flag evaluator portion of this project has been constructed, to skip to the `Provider` specific implementations, [click here](/blog/creating-a-provider-for-the-go-sdk#creating-a-compliant-provider).
 
 <!--truncate-->
 
