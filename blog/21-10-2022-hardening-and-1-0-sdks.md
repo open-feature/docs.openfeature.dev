@@ -1,16 +1,19 @@
 ---
-slug: "hardening-and-1-0-sdks"
-title: "Specification hardening and 1.0 SDKs"
+slug: 'hardening-and-1-0-sdks'
+title: 'Specification hardening and 1.0 SDKs'
 date: 2022-10-24
 authors: [toddbaert]
-description: "OpenFeature is ready for primetime: stabilizing the specification and 1.0 SDK releases"
-keywords: [release, "1.0", sdk, openFeature, java, go, ".net", dotnet, js, javascript, specification, spec]
+description: 'OpenFeature is ready for primetime: stabilizing the specification and 1.0 SDK releases'
+keywords: [release, '1.0', sdk, openFeature, java, go, '.net', dotnet, js, javascript, specification, spec]
+tags: [spec, specification, sdk]
 draft: false
 ---
 
 Early this year, OpenFeature announced its intent to bring a standard to the rapidly growing development practice of feature flagging.
 In June it was accepted as a Cloud Native Computing Foundation Sandbox project.
 Now, we're pleased to announce a new milestone: OpenFeature has released 1.0 versions of its [.NET](https://github.com/open-feature/dotnet-sdk), [Go](https://github.com/open-feature/go-sdk), [Java](https://github.com/open-feature/java-sdk), and [JavaScript](https://github.com/open-feature/js-sdk) SDKs!
+
+<!--truncate-->
 
 The release includes stable versions the following features:
 
