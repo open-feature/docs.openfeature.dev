@@ -13,6 +13,8 @@ By the way, if you're working on a feature flagging framework, whether it's comm
 
 In this post I'll summarize those changes, but to understand them in context we'll first talk about what makes client-side feature flagging different before diving into how that will impact the OpenFeature APIs.
 
+<!--truncate-->
+
 ## Context is King: why client-side flagging is different
 
 ### Static evaluation context
@@ -23,7 +25,7 @@ In contrast, with a client-side app all feature flagging decisions are made in t
 
 ### The network is slow
 
-With server-side flags, we can assume that evaluating a feature flag is a _relatively_ fast operation. With some systems the flagging rulesets[^1] live right next to where a flagging decision is needed, with flag evaluation happening either within the same process or in some sort of sidecar process. In this *local evaluation* model every flagging decision is a very fast operation. For frameworks that use a *remote evaluation* model, a flagging decision is still just a quick service call - akin to making a DB query or calling a remote cache.
+With server-side flags, we can assume that evaluating a feature flag is a _relatively_ fast operation. With some systems the flagging rulesets[^1] live right next to where a flagging decision is needed, with flag evaluation happening either within the same process or in some sort of sidecar process. In this _local evaluation_ model every flagging decision is a very fast operation. For frameworks that use a _remote evaluation_ model, a flagging decision is still just a quick service call - akin to making a DB query or calling a remote cache.
 
 [^1]: by "rulesets" I mean the set of feature flagging rule configurations that define how flagging decisions should be made for each feature flag: "enable red_checkout_button flag for 50% of users", "only enable new_reco_algorithm for users in the 'internal_testers' group", etc. Rulesets plus evaluation context are the two inputs that fully define the output for any flagging decision.
 
@@ -81,7 +83,7 @@ sequenceDiagram
   sdk->>+cache: flag evaluation
   cache->>-sdk: locally evaluated flag value
   note right of cache: no call to flagging service needed
-  sdk->>-app: flag value 
+  sdk->>-app: flag value
 ```
 
 ## Client-side support in OpenFeature
