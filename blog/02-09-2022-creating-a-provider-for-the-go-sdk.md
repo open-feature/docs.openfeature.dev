@@ -7,14 +7,10 @@
  draft: false
 ---
 
-# Creating a Provider For The go-sdk
-
-## Providers
-
 A [Provider](https://docs.openfeature.dev/docs/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as an interface for a key value store, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](https://docs.openfeature.dev/docs/specification/).  
-In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.  
+In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.
 
-The following section describes how the flag evaluator portion of this project has been constructed, to skip to the `Provider` specific implementations, [click here](#creating-a-compliant-provider).  
+The following section describes how the flag evaluator portion of this project has been constructed, to skip to the `Provider` specific implementations, [click here](#creating-a-compliant-provider).
 
 <!--truncate-->
 
@@ -46,35 +42,35 @@ example JSON:
 
 ```json
 {
-    "defaultVariant":"not-yellow",
-    "variants": [
+  "defaultVariant": "not-yellow",
+  "variants": [
+    {
+      "name": "yellow-with-key",
+      "targetingKey": "user",
+      "criteria": [
         {
-            "name": "yellow-with-key",
-            "targetingKey":"user",
-            "criteria": [
-                {
-                    "color":"yellow"
-                }
-            ],
-            "value":true
-        },
-        {
-            "name": "yellow",
-            "targetingKey":"",
-            "criteria": [
-                {
-                    "color":"yellow"
-                }
-            ],
-            "value":true
-        },
-        {
-            "name": "not-yellow",
-            "targetingKey":"",
-            "criteria": [],
-            "value":false
+          "color": "yellow"
         }
-    ]
+      ],
+      "value": true
+    },
+    {
+      "name": "yellow",
+      "targetingKey": "",
+      "criteria": [
+        {
+          "color": "yellow"
+        }
+      ],
+      "value": true
+    },
+    {
+      "name": "not-yellow",
+      "targetingKey": "",
+      "criteria": [],
+      "value": false
+    }
+  ]
 }
 ```
 
@@ -119,7 +115,7 @@ func (f *StoredFlag) Evaluate(evalCtx map[string]interface{}) (string, openfeatu
 ```
 
 The above function demonstrates how this basic evaluator will work in this example, of course in other providers these can be far more complex, and the logic does not need to sit within the application.  
-This JSON evaluator can then be paired with a simple function for reading and parsing the `StoredFlag` values from environment variables (as seen in the example below), leaving only the integration with the `go-sdk` to go. (and some testing!)  
+This JSON evaluator can then be paired with a simple function for reading and parsing the `StoredFlag` values from environment variables (as seen in the example below), leaving only the integration with the `go-sdk` to go. (and some testing!)
 
 ```go
 func FetchStoredFlag(key string) (StoredFlag, error) {
@@ -134,9 +130,9 @@ func FetchStoredFlag(key string) (StoredFlag, error) {
 }
 ```
 
-## Creating a Compliant Provider  
+## Creating a Compliant Provider
 
-### Repository Setup  
+### Repository Setup
 
 `Providers` written for the [`go-sdk`](https://github.com/open-feature/go-sdk) are all maintained in the [`go-sdk-contrib`](https://github.com/open-feature/go-sdk-contrib.git) repository, containing both `hooks` and `providers`.  
 The following commands can be used to setup the `go-sdk-contrib` repository, they will clone the repository and set up your provider specific go module under `/providers/MY-NEW-PROVIDER-NAME` adding a `go.mod` and `README.md` file. Your module will them be referenced in the top level `go.work` file.
@@ -164,13 +160,13 @@ type FeatureProvider interface {
 }
 ```
 
-Argument  | Description
-------------- | -------------
-`flagKey`  | A string key representing the flag configuration used in this evaluation
-`defaultValue`  | The default response to be returned in the case of an error
-`evalCtx`  | The underlying type of `FlattenedContext` is `map[string]interface{}`, this provides ambient information for the purposes of flag evaluation. Effectively acting as `metadata` for a request
-`ProviderResolutionDetail`  | The provider response object from a flag evaluation, it contains the following fields: Variant (`string`), Reason (`openfeature.Reason`), ResolutionError (`openfeature.ResolutionError`)
-`XxxResolutionDetail`  | The type specific wrapper for the `ProviderResolutionDetail` struct. Contains two attributes: Value (type specific), ProviderResolutionDetail (`ProviderResolutionDetail`)
+| Argument                   | Description                                                                                                                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `flagKey`                  | A string key representing the flag configuration used in this evaluation                                                                                                                     |
+| `defaultValue`             | The default response to be returned in the case of an error                                                                                                                                  |
+| `evalCtx`                  | The underlying type of `FlattenedContext` is `map[string]interface{}`, this provides ambient information for the purposes of flag evaluation. Effectively acting as `metadata` for a request |
+| `ProviderResolutionDetail` | The provider response object from a flag evaluation, it contains the following fields: Variant (`string`), Reason (`openfeature.Reason`), ResolutionError (`openfeature.ResolutionError`)    |
+| `XxxResolutionDetail`      | The type specific wrapper for the `ProviderResolutionDetail` struct. Contains two attributes: Value (type specific), ProviderResolutionDetail (`ProviderResolutionDetail`)                   |
 
 We can use our previously defined logic to build the `Evaluation` methods with ease, in the below example the core logic has been refactored into a separate function (`resolveFlag()`) to reduce code repetition, returning the `ResolutionDetail` structure directly. This means that the only type specific code required is a type cast the returned `interface{}` value, and for the type specific `ResolutionDetail` to be returned, e.g. `BoolResolutionDetail`.
 
@@ -263,7 +259,7 @@ func (p *Provider) Hooks() []openfeature.Hook {
 }
 ```
 
-Now that the `Provider` conforms to the OpenFeature spec, it can be registered to the OpenFeature `go-sdk` and used for flag evaluation.  
+Now that the `Provider` conforms to the OpenFeature spec, it can be registered to the OpenFeature `go-sdk` and used for flag evaluation.
 
 ## Example usage
 

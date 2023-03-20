@@ -7,10 +7,9 @@ tags: [golang, blog, tutorial, go-sdk, hooks]
 unlisted: false
 ---
 
-## Hooks
-
 A [Hook](https://docs.openfeature.dev/docs/specification/sections/hooks) taps into one or more of the flag evaluation's
 lifecycle events (before/after/error/finally) to perform the same action at that point for every evaluation.
+In this blog post, we'll look into what it takes to create an OpenFeature hook in Go that verifies that the return value is a valid hex color.
 
 <!--truncate-->
 
@@ -87,71 +86,71 @@ This tutorial uses the existing [hex regex validator](https://github.com/open-fe
 
 1. Install dependencies
 
-    ```shell
-    go get github.com/open-feature/go-sdk
-    go get github.com/open-feature/go-sdk-contrib/hooks/validator
-    ```
+   ```shell
+   go get github.com/open-feature/go-sdk
+   go get github.com/open-feature/go-sdk-contrib/hooks/validator
+   ```
 
 2. Import the dependencies
 
-    ```go
-    package main
+   ```go
+   package main
 
-    import (
-        "context"
-        "fmt"
-        "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex"
-        "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/validator"
-        "github.com/open-feature/go-sdk/pkg/openfeature"
-        "log"
-    )
-    ```
+   import (
+       "context"
+       "fmt"
+       "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/regex"
+       "github.com/open-feature/go-sdk-contrib/hooks/validator/pkg/validator"
+       "github.com/open-feature/go-sdk/pkg/openfeature"
+       "log"
+   )
+   ```
 
 3. Create an instance of the `validator hook` struct using the regex hex validator
 
-    ```go
-    func main() {
-        hexValidator, err := regex.Hex()
-        if err != nil {
-            log.Fatal(err)
-        }
-        v := validator.Hook{Validator: hexValidator}
-    }
-    ```
+   ```go
+   func main() {
+       hexValidator, err := regex.Hex()
+       if err != nil {
+           log.Fatal(err)
+       }
+       v := validator.Hook{Validator: hexValidator}
+   }
+   ```
 
 4. Register the `NoopProvider`, this simply returns the given default value on flag evaluation.
 
-    This step is optional, the sdk uses the `NoopProvider` by default but we're explicitly setting it for completeness
+   This step is optional, the sdk uses the `NoopProvider` by default but we're explicitly setting it for completeness
 
-    ```go
-    openfeature.SetProvider(openfeature.NoopProvider{})
-    ```
+   ```go
+   openfeature.SetProvider(openfeature.NoopProvider{})
+   ```
 
 5. Create the client, call the flag evaluation using the `validator hook` at the point of invocation
 
-    ```go
-    client := openfeature.NewClient("foo")
+   ```go
+   client := openfeature.NewClient("foo")
 
-    result, err := client.
-        StringValueDetails(
-            context.Background(),
-            "blue",
-            "invalidhex",
-            openfeature.EvaluationContext{},
-            openfeature.WithHooks(v),
-        )
-    if err != nil {
-        fmt.Println("err:", err)
-    }
-    fmt.Println("result:", result)
-    ```
+   result, err := client.
+       StringValueDetails(
+           context.Background(),
+           "blue",
+           "invalidhex",
+           openfeature.EvaluationContext{},
+           openfeature.WithHooks(v),
+       )
+   if err != nil {
+       fmt.Println("err:", err)
+   }
+   fmt.Println("result:", result)
+   ```
 
 6. Check that the flag evaluation returns an error as `invalidhex` is not a valid hex color
 
-    ```shell
-    go run main.go
-    err: execute after hook: regex doesn't match on flag value
-    result {blue 1 {invalidhex   }}
-    ```
+   ```shell
+   go run main.go
+   err: execute after hook: regex doesn't match on flag value
+   result {blue 1 {invalidhex   }}
+   ```
 
-    Note that despite getting an error we still get a result.
+   Note that despite getting an error we still get a result.
