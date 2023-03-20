@@ -169,7 +169,6 @@ const config = {
           if (existingPath.includes('/docs/specification')) {
             return [
               existingPath.replace('/docs/specification', '/specification'),
-              existingPath.replace('/docs/specification', '/specification'),
             ];
           }
           return undefined; // Return a falsy value: no redirect created
