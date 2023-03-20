@@ -9,11 +9,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { CopyChecklist } from '@site/src/components/custom/CopyChecklist';
 
-_Providers_ are responsible for performing flag evaluations. They provide an abstraction between the underlying flag management system and the OpenFeature SDK. Providers can wrap a vendor SDK, call a bespoke flag evaluation REST API, or even parse some locally stored file to resolve flag values. This allows the underlying flag evaluation logic to be changed without requiring a major code refactor.
+_Providers_ are responsible for performing flag evaluations.
+They provide an abstraction between the underlying flag management system and the OpenFeature SDK.
+Providers can wrap a vendor SDK, call a bespoke flag evaluation REST API, or even parse some locally stored file to resolve flag values.
+This allows the underlying flag evaluation logic to be changed without requiring a major code refactor.
 
-An [application integrator](../../specification/glossary#application-integrator) can register one provider at a time. Registering an additional provider will override any previously configured providers. If no provider is set, OpenFeature will [no-op](<https://en.wikipedia.org/wiki/NOP_(code)>) and return the default value passed to the evaluation API.
+An [application integrator](../../specification/glossary#application-integrator) can register one provider at a time.
+Registering an additional provider will override any previously configured providers.
+If no provider is set, OpenFeature will [no-op](<https://en.wikipedia.org/wiki/NOP_(code)>) and return the default value passed to the evaluation API.
 
-Providers are set through the [evaluation API](./evaluation-api#setting-a-provider). They're globally registered and a change affects both new and existing OpenFeature clients.
+Providers are set through the [evaluation API](./evaluation-api#setting-a-provider).
+They're globally registered and a change affects both new and existing OpenFeature clients.
 
 <figure>
   <img src={require('@site/static/img/docs/reference/of-architecture.png').default} />
@@ -26,7 +32,11 @@ Providers are set through the [evaluation API](./evaluation-api#setting-a-provid
 
 ### Getting started
 
-To develop a provider, start by confirming that an OpenFeature SDK is available in the language you're interested in. Next, you need to create a new project and include the OpenFeature SDK as a dependency. This can be a new repository or included in an [existing contrib repository](https://github.com/open-feature?q=contrib&type=all&language=&sort=) available under the OpenFeature organization. Finally, you’ll then need to write the provider itself. In most languages, this can be accomplished by implementing the provider interface exported by the OpenFeature SDK.
+To develop a provider, start by confirming that an OpenFeature SDK is available in the language you're interested in.
+Next, you need to create a new project and include the OpenFeature SDK as a dependency.
+This can be a new repository or included in an [existing contrib repository](https://github.com/open-feature?q=contrib&type=all&language=&sort=) available under the OpenFeature organization.
+Finally, you’ll then need to write the provider itself.
+In most languages, this can be accomplished by implementing the provider interface exported by the OpenFeature SDK.
 
 ### Naming recommendations
 
@@ -47,7 +57,9 @@ It is **not** required that a provider be open source, but it's highly recommend
 
 #### Artifact name
 
-The name of the artifact will vary based on the package manager. Ultimately, it's up to the publisher to decide what name makes the most sense. However, the following items should be used in the package name:
+The name of the artifact will vary based on the package manager.
+Ultimately, it's up to the publisher to decide what name makes the most sense.
+However, the following items should be used in the package name:
 
 - OpenFeature (can also be stylized as openfeature or open-feature)
 - Vender/tool name
@@ -333,11 +345,13 @@ Here is a checklist of important considerations when implementing a provider.
 
 #### Does my provider's version need to match the spec version to which it complies?
 
-No. You should document the version of the OpenFeature specification your provider complies to, and otherwise use [semantic versioning](https://semver.org/) in your artifact numbers.
+No.
+You should document the version of the OpenFeature specification your provider complies to, and otherwise use [semantic versioning](https://semver.org/) in your artifact numbers.
 
 #### My backend needs a targeting key (or other user identifier), how can I ensure one exists?
 
-Targeting keys are not required by the Evaluation API. If your backend requires one, you have a couple options:
+Targeting keys are not required by the Evaluation API.
+If your backend requires one, you have a couple options:
 
 - Indicate an error in your provider (this will result in the default value being returned).
 - Generate one automatically.
@@ -346,7 +360,8 @@ Be sure to document this behavior.
 
 #### How should I handle error conditions?
 
-If an error condition is encountered in your provider, an error should be [indicated](/docs/specification/types#error-code) by throwing or returning an error, as language idioms dictate. The SDK will ensure the default value is returned and expose the relevant error data.
+If an error condition is encountered in your provider, an error should be [indicated](/docs/specification/types#error-code) by throwing or returning an error, as language idioms dictate.
+The SDK will ensure the default value is returned and expose the relevant error data.
 
 #### My flag system doesn't support flags of a particular type. What should I do?
 
@@ -361,8 +376,11 @@ Please add your provider to the [documentation](https://github.com/open-feature/
 
 #### Where should I put my provider source code?
 
-If you are a vendor and you want to maintain full control over your provider, you should host the provider in your organization's SCM. If you would like your provider to be maintained as a community project, please take a look at our various [contrib repositories](https://github.com/orgs/open-feature/repositories?q=contrib&type=all&language=&sort=). We encourage you to make your code open source, but obviously it's your decision.
+If you are a vendor and you want to maintain full control over your provider, you should host the provider in your organization's SCM.
+If you would like your provider to be maintained as a community project, please take a look at our various [contrib repositories](https://github.com/orgs/open-feature/repositories?q=contrib&type=all&language=&sort=).
+We encourage you to make your code open source, but obviously it's your decision.
 
 #### Where should I publish my provider artifact?
 
-You should publish your provider on the appropriate package management repository for your language, keeping in mind the [naming conventions](https://docs.openfeature.dev/docs/reference/concepts/provider#naming-recommendations). Our [contrib repositories](https://github.com/orgs/open-feature/repositories?q=contrib&type=all&language=&sort=) publish all their artifacts as part of their release processes.
+You should publish your provider on the appropriate package management repository for your language, keeping in mind the [naming conventions](https://docs.openfeature.dev/docs/reference/concepts/provider#naming-recommendations).
+Our [contrib repositories](https://github.com/orgs/open-feature/repositories?q=contrib&type=all&language=&sort=) publish all their artifacts as part of their release processes.

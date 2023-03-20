@@ -6,15 +6,22 @@ title: Cloud native flags with the OpenFeature Operator
 
 # Cloud native feature-flagging with the OpenFeature Operator
 
-In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy". Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere. It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes). The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads. It parses Kubernetes spec files and adds flagd and associated objects to the workloads based on annotations and custom resource definitions it understands.
+In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy".
+Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere.
+It can be deployed in a central location serving multiple clients or embedded into a unit of deployment (such as a pod in Kubernetes).
+The [OpenFeature Operator](https://github.com/open-feature/open-feature-operator) is a K8s-flavored solution for easily adding flagd to any relevant workloads.
+It parses Kubernetes spec files and adds flagd and associated objects to the workloads based on annotations and custom resource definitions it understands.
 
 ## Let's do it
 
 ### Prerequisites
 
 - If you don't have access to an existing K8s cluster, you have a few options:
-  - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience. If using kind, this tutorial provides a 3-node cluster definition with a forwarded containerPort for you (more on that later).
-  - [MicroK8s](https://microk8s.io/) and [K3s](https://k3s.io/) are easily installable Kubernetes clusters you can use locally. The benefit of these is that they are the basically identical to a production environment. Configuration of `MicroK8s` and `K3s` is out of the scope of this tutorial.
+  - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) is similar to minikube (another solution for running a cluster locally you may be familiar with) but supports more than one node, so it makes for a slightly more realistic experience.
+    If using kind, this tutorial provides a 3-node cluster definition with a forwarded containerPort for you (more on that later).
+  - [MicroK8s](https://microk8s.io/) and [K3s](https://k3s.io/) are easily installable Kubernetes clusters you can use locally.
+    The benefit of these is that they are the basically identical to a production environment.
+    Configuration of `MicroK8s` and `K3s` is out of the scope of this tutorial.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [k9s](https://k9scli.io/) (optional, if you'd like to inspect your cluster visually)
 
@@ -30,7 +37,8 @@ curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/playground/ma
 
 #### Building our cluster
 
-OK, let's get our cluster up and running! If you already have a K8s cluster, you can skip to [Install cert-manager](#install-cert-manager).
+OK, let's get our cluster up and running!
+If you already have a K8s cluster, you can skip to [Install cert-manager](#install-cert-manager).
 
 ##### Using Kind
 
@@ -50,7 +58,8 @@ This might take a minute or two.
 
 #### Install cert-manager
 
-Great! Next, because our operator makes use of webhooks, we need some certificate infrastructure in our cluster.
+Great!
+Next, because our operator makes use of webhooks, we need some certificate infrastructure in our cluster.
 If your cluster already has cert manager, or you're using another solution for certificate management, you can skip to [Create Namespace](#create-namespace).
 
 Install cert-manager, and wait for it to be ready:
@@ -104,7 +113,8 @@ kubectl port-forward svc/open-feature-demo-service -n default 30000:30000
 
 Now you should see our fictional app at <http://localhost:30000>
 
-For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`). The resource type is `FeatureFlagconfiguration` and is called `end-to-end` within the `default` namespace.
+For this demo, we get flag definitions from the custom resource definition you applied to K8s above (`end-to-end.yaml`).
+The resource type is `FeatureFlagconfiguration` and is called `end-to-end` within the `default` namespace.
 You can modify the flag values in the `featureFlagSpec` and reapply the CRD to see the changes.
 This file also contains service and deployment definitions, but these need not be modified as part of this demo.
 You may be interested in the `openfeature.dev*` annotations though, which the OpenFeature operator uses to detect which workloads require flagd.
@@ -119,10 +129,17 @@ Change the `"defaultVariant"` of the feature flag `new-welcome-message"` to `"on
 kubectl apply -n default -f end-to-end.yaml
 ```
 
-Great! Now let's help the design team experiment with new color palette. Let's change our landing page's color.
+Great!
+Now let's help the design team experiment with new color palette.
+Let's change our landing page's color.
 Change the `"defaultVariant"` of the `"hex-color"` within the `end-to-end.yaml` file and use `kubectl` to apply the change again.
 
-Flag evaluations can take into account contextual information about the user, application, or action. The `"fib-algo"` flag returns a different result if our email ends with `"@faas.com"`. Let's run the fibonacci calculator once as a customer (without being logged in). Then login (use any email ending in `...@faas.com`) and observe the impact. This effect is driven by the rule defined in the `featureFlagSpec`. Feel free to experiment with your own flag values and rules!
+Flag evaluations can take into account contextual information about the user, application, or action.
+The `"fib-algo"` flag returns a different result if our email ends with `"@faas.com"`.
+Let's run the fibonacci calculator once as a customer (without being logged in).
+Then login (use any email ending in `...@faas.com`) and observe the impact.
+This effect is driven by the rule defined in the `featureFlagSpec`.
+Feel free to experiment with your own flag values and rules!
 
 ### Cleaning up
 

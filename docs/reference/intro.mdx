@@ -17,11 +17,13 @@ This capability serves a variety of purposes.
 You can reduce the need for long-running feature branches.
 You can hide work-in-progress functionality from end users, while still exposing it for internal testing.
 You can perform canary releases - rolling out a new feature to an initially small subset of users.
-You can perform A/B testing. You can safely degrade parts of a production system that are experiencing an outage.
+You can perform A/B testing.
+You can safely degrade parts of a production system that are experiencing an outage.
 You can restrict access to specific product functionality based on user-characteristics such as geography or IP address, for usability, compliance or licensing reasons.
 
 Feature flags are _dynamic_; they are evaluated at runtime.
-Many of the use cases just described also require feature flags to be _context-aware_ - a flagging decision must take into account things like which user is making a web request. What's more, the configuration behind flagging decisions also needs to be dynamic to support use cases like canary releases where you gradually roll a feature out to more users without having to redeploy or restart anything.
+Many of the use cases just described also require feature flags to be _context-aware_ - a flagging decision must take into account things like which user is making a web request.
+What's more, the configuration behind flagging decisions also needs to be dynamic to support use cases like canary releases where you gradually roll a feature out to more users without having to redeploy or restart anything.
 
 Given all these requirements (along with others such as an admin UI, audit trails, environment management, and more) it's clear that full use of feature flags requires a feature flagging system - typically a stand-alone feature-flagging service along with a client library which interacts with that service.
 

@@ -115,7 +115,7 @@ class MyFlagProvider implements Provider {
         <TabItem value="java" label="Java">
           {/* prettier-ignore */}
           <CodeBlock className="language-java">{`
-class MyFlagProvider implements Provider {
+class MyFlagProvider implements FeatureProvider {
   //...
   @Override
   public ProviderEvaluation<Boolean> getBooleanEvaluation(
