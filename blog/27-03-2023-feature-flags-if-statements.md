@@ -6,7 +6,7 @@ authors: [agardnerit]
 description: 'Feature Flags are Just if Statements, Right?'
 keywords: [feature flags, openfeature]
 tags: [feature flags]
-draft: true
+draft: false
 ---
 
 Most feature flag explainers begin by explaining that feature flags are glorified if statements.
