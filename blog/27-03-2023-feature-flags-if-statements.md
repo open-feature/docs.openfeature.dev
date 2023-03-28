@@ -1,6 +1,6 @@
 ---
 slug: 'feature-flags-if-statements'
-title: 'Feature Flags are Just if Statements, Right?'
+title: 'Feature Flags are just if Statements, Right?'
 date: 2023-03-27
 authors: [agardnerit]
 description: 'Feature Flags are Just if Statements, Right?'
@@ -46,7 +46,7 @@ The real power of feature flags:
 
 ## So, are Feature Flags if Statements?
 
-No, feature flagging is so much more powerful and dynamic that environment variables or if statements. But if you’re already using if statements, you already have enough knowledge to take your environment variables and if statements to the next level with feature flags.
+No, feature flagging is so much more powerful and dynamic than environment variables or if statements. But if you’re already using if statements, you already have enough knowledge to take your environment variables and if statements to the next level with feature flags.
 
 If you’re stuck on the environment variable + if statement metaphor, feature flags are a very complex if statement that you can **target**, **update**, **toggle** and **gain observability over**, in **real time** without a **re-deployment**.
 
@@ -74,14 +74,13 @@ Choose a vendor or code your own?
 
 ### 3. Instrument Your Application
 
-Whether flagd, vendor solution, or in-house developed, by now your backend flag evaluation infrastructure is running.
+Whether you've chosen to use flagd, gone with a vendor solution, or developed a custom OpenFeature-compliant in-house solution, by now your backend flag evaluation infrastructure is running.
 It is time to instrument your application!
 
 The [Five minutes to feature flags](https://bit.ly/openfeature5mins) tutorial walks through how to instrument an application in an OpenFeature-compliant way.
 
 ### 4: Feature Flags on Kubernetes?
 
-If you are Kubernetes-native and want to manage and use feature flags entirely on Kubernetes?
+Are you Kubernetes-native and want to manage and use feature flags entirely on Kubernetes?
 
-The [OpenFeature Operator tutorial](https://bit.ly/openfeatureopdemo) demonstrates how to leverage Custom Resources to manage feature flags via GitOps and make feature flags available to your pods via annotations.
-
+The [Operator tutorial](https://bit.ly/openfeatureopdemo) demonstrates how to leverage Custom Resources to manage feature flags via GitOps and make feature flags available to your pods via annotations.
