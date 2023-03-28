@@ -40,6 +40,14 @@ When adding a diagram to the documentation, it's recommended to use one of the f
 yarn
 ```
 
+If you get `env: node: No such file or directory`. Try installing `nodeJS` first:
+
+```sh
+brew install node
+```
+
+then re-run `yarn`.
+
 ### Local Development
 
 ```sh
