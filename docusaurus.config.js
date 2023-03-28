@@ -160,11 +160,10 @@ const config = {
       {
         id: 'flagd',
         path: 'external-content/flagd/docs',
-        routeBasePath: 'tools/flagd',
+        routeBasePath: '/cloud-native/flagd',
         editUrl: (params) => {
           return `https://github.com/open-feature/flagd/edit/main/${params.docPath}`;
-        },
-       // sidebarPath: require.resolve('./sidebarsCommunity.js'),
+        }
         // ... other options
       },
     ],
@@ -191,30 +190,55 @@ const config = {
         },
         items: [
           {
-            type: 'dropdown',
-            label: 'Documentation',
+            type: 'doc',
             docId: 'reference/intro',
             position: 'left',
-            items: [
-              {
-                type: 'doc',
-                docId: 'reference/intro',
-                label: 'open feature: vendor agnostic flag sdk',
-              },
-              {
-                type: 'doc',
-                label: 'flagD: the cloud-native flag provider',
-                docId: 'README',
-                docsPluginId: "flagd",
-              },
-              // ... more items
-            ],
+            label: 'Docs',
           },
           {
             type: 'doc',
             docId: 'specification/intro',
             position: 'left',
             label: 'Specification',
+          },
+          {
+            type: 'dropdown',
+            label: 'Cloud-Native',
+            docId: 'reference/intro',
+            position: 'left',
+            items: [
+              {
+                type: 'doc',
+                docId: 'reference/intro',
+                label: 'OFO',
+              },
+              {
+                type: 'doc',
+                label: 'flagD',
+                docId: 'README',
+                docsPluginId: "flagd",
+              },
+              // ... more items
+            ],
+          },{
+            type: 'dropdown',
+            label: 'Vendors',
+            docId: 'reference/intro',
+            position: 'left',
+            items: [
+              {
+                type: 'doc',
+                docId: 'reference/intro',
+                label: 'vendorA',
+              },
+              {
+                type: 'doc',
+                label: 'vendorB',
+                docId: 'README',
+                docsPluginId: "flagd",
+              },
+              // ... more items
+            ],
           },
           {
             type: 'doc',
