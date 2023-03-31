@@ -137,6 +137,17 @@ const config = {
   ],
 
   plugins: [
+    async function myPlugin(context, options) {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require('tailwindcss'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          return postcssOptions;
+        },
+      };
+    },
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -150,7 +161,8 @@ const config = {
         },
         // ... other options
       },
-    ],[
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'specification',
@@ -167,9 +179,7 @@ const config = {
       {
         createRedirects(existingPath) {
           if (existingPath.includes('/docs/specification')) {
-            return [
-              existingPath.replace('/docs/specification', '/specification'),
-            ];
+            return [existingPath.replace('/docs/specification', '/specification')];
           }
           return undefined; // Return a falsy value: no redirect created
         },
