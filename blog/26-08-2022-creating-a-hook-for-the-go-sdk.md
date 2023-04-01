@@ -7,7 +7,7 @@ tags: [golang, blog, tutorial, go-sdk, hooks]
 unlisted: false
 ---
 
-A [Hook](https://docs.openfeature.dev/docs/specification/sections/hooks) taps into one or more of the flag evaluation's
+A [Hook](/specification/sections/hooks) taps into one or more of the flag evaluation's
 lifecycle events (before/after/error/finally) to perform the same action at that point for every evaluation.
 In this blog post, we'll look into what it takes to create an OpenFeature hook in Go that verifies that the return value is a valid hex color.
 

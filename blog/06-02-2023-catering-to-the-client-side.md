@@ -61,7 +61,7 @@ sequenceDiagram
   client->>-app: .
 ```
 
-Put another way, with client-side feature flagging we can separate flag [**evaluation**](/docs/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/docs/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
+Put another way, with client-side feature flagging we can separate flag [**evaluation**](/specification/glossary#evaluating-flag-values) - passing an evaluation context through a set of rules in order to determine a flagging decision - from flag [**resolution**](/specification/glossary#resolving-flag-values) - getting the flagging decision for a specific feature flag.
 
 ### Keeping rulesets in sync for local-evaluated systems
 
@@ -239,7 +239,7 @@ To recap, OpenFeature is planning to support client-side feature flagging by int
 
 This raises a question around distribution - how will we distribute these two flavors of API for languages such as JavaScript and Java which support both paradigms. Our intention in those situations is to distribute two distinct packages - for example with JavaScript we will likely have a `@openfeature/js-node-sdk` package and a `@openfeature/js-browser-sdk` package. We are opting for this approach rather that distributing a single "universal", multi-paradigm package contain both APIs because we think this will be less confusing for developers getting started with OpenFeature. But under the covers the two OpenFeature packages will share a lot of common code.
 
-If a feature flagging provider wants to provide support for both paradigms they will need to provide two distinct implementations of the [Provider API](/docs/specification/sections/providers). These implementations could be shipped as part of a "universal" multi-paradigm, or as separate packages - that's a choice for a provider to make.
+If a feature flagging provider wants to provide support for both paradigms they will need to provide two distinct implementations of the [Provider API](/specification/sections/providers). These implementations could be shipped as part of a "universal" multi-paradigm, or as separate packages - that's a choice for a provider to make.
 
 ## In summary
 

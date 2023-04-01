@@ -7,8 +7,8 @@
  draft: false
 ---
 
-A [Provider](https://docs.openfeature.dev/docs/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as an interface for a key value store, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](https://docs.openfeature.dev/docs/specification/).  
-In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.
+A [Provider](/specification/sections/providers) is responsible for performing flag evaluation, they can be as simple as an interface for a key value store, or act as an abstraction layer for a more complex evaluation system. Only one `Provider` can be registered at a time, and OpenFeature will no-op if one has not been defined. Before writing your own `Provider`, it is strongly recommended to familiarize yourself with the [OpenFeature spec](/specification/).  
+In this tutorial I will demonstrate the steps taken to create a new `Provider` whilst conforming to the OpenFeature spec using a simple flag implementation. The flag evaluation will be handled by a simple JSON evaluator and flag configurations will be stored as environment variables.  
 
 The following section describes how the flag evaluator portion of this project has been constructed, to skip to the `Provider` specific implementations, [click here](/blog/creating-a-provider-for-the-go-sdk#creating-a-compliant-provider).
 
@@ -16,7 +16,7 @@ The following section describes how the flag evaluator portion of this project h
 
 ## Creating the flag evaluator
 
-The core of any flag `Provider` is the evaluation logic used to provide the flag values from the provided metadata (referred to as the [Evaluation Context](https://docs.openfeature.dev/docs/specification/sections/evaluation-context)). For this example I have put together a very simple json evaluator.
+The core of any flag `Provider` is the evaluation logic used to provide the flag values from the provided metadata (referred to as the [Evaluation Context](/specification/sections/evaluation-context)). For this example I have put together a very simple json evaluator.
 Flags are configured using the structs described below, and are stored as environment variables:
 
 ```go
@@ -74,7 +74,7 @@ example JSON:
 }
 ```
 
-Each flag value contains an array of [`Variants`](https://docs.openfeature.dev/docs/specification/glossary#variant), each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `FlattenedContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
+Each flag value contains an array of [`Variants`](/specification/glossary#variant), each with their own array of `Criteria`. When a flag request needs to be evaluated, the `Variants` slice is iterated over, if the `FlattenedContext` matches all required `Criteria` for a specific `Variant`, the associated flag value will be returned from the evaluator. If a matching `Variant` is not found the `DefaultVariant` is returned in the response.
 The response also includes the the variant name, the reason for the resulting value (such as `ERROR`, `STATIC` or `TARGETING_MATCH`) and any associated error (such as `PARSE_ERROR`).
 These values form the type naive `ResolutionDetails` structure, which is then wrapped in a type specific parent for each response type, such as `BoolResolutionDetail`. This will be discussed in the [Creating a Compliant Provider](#creating-a-compliant-provider) section.
 
@@ -241,7 +241,7 @@ func (p *Provider) BooleanEvaluation(flagKey string, defaultValue bool, evalCtx 
 
 Based upon this `BooleanEvaluation` method, the remaining `Evaluation` methods are simple to populate, leaving only 2 more methods, `Metadata` and `Hooks`.
 
-the `Metadata()` method is very simple to implement, it simply needs to return a [`Metadata` object](https://docs.openfeature.dev/docs/specification/sections/providers#requirement-21), currently this object only requires one field - `Name`
+the `Metadata()` method is very simple to implement, it simply needs to return a [`Metadata` object](/specification/sections/providers#requirement-211), currently this object only requires one field - `Name`
 
 ```go
 func (p *Provider) Metadata() openfeature.Metadata {
@@ -251,7 +251,7 @@ func (p *Provider) Metadata() openfeature.Metadata {
 }
 ```
 
-The `Hooks()` method gives the `go-sdk` access to `Provider` hooks, this sits outside the scope of this tutorial, so for now we will just return an empty slice of hooks. [Link to spec.](https://docs.openfeature.dev/docs/specification/sections/providers#requirement-210)
+The `Hooks()` method gives the `go-sdk` access to `Provider` hooks, this sits outside the scope of this tutorial, so for now we will just return an empty slice of hooks. [Link to spec.](/specification/sections/providers#23-provider-hooks)
 
 ```go
 func (p *Provider) Hooks() []openfeature.Hook {

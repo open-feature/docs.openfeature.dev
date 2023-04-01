@@ -2,7 +2,6 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
-const externalContentPlugin = require('./src/plugins/external-content');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -115,9 +114,6 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           remarkPlugins: [require('mdx-mermaid')],
           editUrl: (params) => {
-            if (params.docPath.startsWith('specification/')) {
-              return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
-            }
             return `https://github.com/open-feature/docs.openfeature.dev/edit/main/docs/${params.docPath}`;
           },
         },
@@ -154,13 +150,29 @@ const config = {
         },
         // ... other options
       },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'specification',
+        path: 'external-content/specification/specification',
+        routeBasePath: 'specification',
+        editUrl: (params) => {
+          return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
+        },
+        // ... other options
+      },
     ],
     [
-      externalContentPlugin,
+      '@docusaurus/plugin-client-redirects',
       {
-        name: 'spec',
-        sourcePath: 'specification/specification',
-        destinationPath: 'specification',
+        createRedirects(existingPath) {
+          if (existingPath.includes('/docs/specification')) {
+            return [
+              existingPath.replace('/docs/specification', '/specification'),
+            ];
+          }
+          return undefined; // Return a falsy value: no redirect created
+        },
       },
     ],
     'docusaurus-plugin-sass',
@@ -185,9 +197,10 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'specification/intro',
+            docId: 'intro',
             position: 'left',
             label: 'Specification',
+            docsPluginId: 'specification',
           },
           {
             type: 'doc',
@@ -223,7 +236,7 @@ const config = {
               },
               {
                 label: 'Specification',
-                to: 'docs/specification',
+                to: 'specification',
               },
               {
                 label: 'Community',
