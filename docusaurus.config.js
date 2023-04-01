@@ -20,17 +20,6 @@ const config = {
     locales: ['en'],
   },
 
-  themes: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        // ... Your options.
-        // `hashed` is recommended as long-term-cache of index file is possible.
-        hashed: true,
-      },
-    ],
-  ],
-
   headTags: [
     {
       tagName: 'link',
@@ -296,7 +285,14 @@ const config = {
         theme: lightCodeTheme,
         additionalLanguages: ['typescript', 'go', 'java', 'csharp', 'powershell', 'php'],
       },
+      algolia: {
+        appId: 'PH0VDWFP7Q',
+        apiKey: '521034bef1ace79ba73f75d02324f83b',
+        indexName: 'openfeature',
+        contextualSearch: true,
+      },
     }),
+
 };
 
 module.exports = config;

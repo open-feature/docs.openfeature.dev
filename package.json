@@ -22,7 +22,6 @@
     "@docusaurus/core": "^2.4.0",
     "@docusaurus/plugin-client-redirects": "^2.4.0",
     "@docusaurus/preset-classic": "^2.4.0",
-    "@easyops-cn/docusaurus-search-local": "0.35.0",
     "@fortawesome/fontawesome-svg-core": "6.4.0",
     "@fortawesome/free-brands-svg-icons": "6.4.0",
     "@fortawesome/free-regular-svg-icons": "6.4.0",
