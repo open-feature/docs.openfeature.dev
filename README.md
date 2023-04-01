@@ -34,19 +34,15 @@ When adding a diagram to the documentation, it's recommended to use one of the f
 
 ![Excalidraw Embed Scene](./static/img/excalidraw-embed-scene.png)
 
+
+### Installation Prerequisites
+You will need [Node.js](https://nodejs.org/en/download) installed. Node.js >= 16.10 comes with `corepack` which can be used to access `yarn`. Instructions for using yarn on all versions of node can be found [here](https://yarnpkg.com/getting-started/install).
+
 ### Installation
 
 ```sh
 yarn
 ```
-
-If you get `env: node: No such file or directory`. Try installing `nodeJS` first:
-
-```sh
-brew install node
-```
-
-then re-run `yarn`.
 
 ### Local Development
 
