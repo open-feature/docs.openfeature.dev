@@ -4,10 +4,10 @@ function FeaturesBlocks() {
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="py-12 md:py-20">
+        <div className="pt-20 pb-12">
           {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-10 md:pb-10" data-aos="fade-up">
-            <h2 className="h2 mb-4 text-purple-400">Our Key Features</h2>
+          <div className="max-w-3xl mx-auto text-center pb-10 md:pb-10">
+            <h2 className="h2 mb-4 text-white">Our Key Features</h2>
           </div>
 
           {/* Items */}
@@ -16,10 +16,10 @@ function FeaturesBlocks() {
             <div
               className="max-w-3xl mx-auto relative flex flex-col items-center text-center pb-12 border-b-2 border-b-purple-400 border-b-solid"
               data-aos="fade-up"
-              data-aos-delay="400"
+              data-aos-delay="100"
             >
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-green-600" width="64" height="64" rx="32" />
+                <rect className="fill-current text-purple-600" width="64" height="64" rx="32" />
                 <path
                   className="stroke-current text-green-100"
                   d="M30 39.313l-4.18 2.197L27 34.628l-5-4.874 6.91-1.004L32 22.49l3.09 6.26L42 29.754l-3 2.924"
@@ -35,16 +35,16 @@ function FeaturesBlocks() {
                   strokeWidth="2"
                 />
               </svg>
-              <h4 className="h4 mb-4 text-green-500">Vendor Neutral</h4>
+              <h4 className="h4 mb-4 text-green-300">Vendor Neutral</h4>
               <p className="text-xl text-gray-200 mb-8">
                 OpenFeature can work with any feature flag management tool or in-house solution. This enables you to
                 switch between platforms or consolidate multiple platforms with ease.
               </p>
               <div className="mt-4 mb-8 max-w-2xl text-lg font-bold">
-                <p className="pt-3 pb-3 rounded-t-lg font-bold text-xl text-center bg-green-600 text-white">
+                <p className="bg-purple-600 text-white pt-3 pb-3 rounded-t-lg font-bold text-xl text-center">
                   This means you can...
                 </p>
-                <ol className="text-white font-extrabold rounded-b-lg border-l-2 border-r-2 border-b-2 border-green-600 divide-green-600 pl-8 pr-8 divide-y-2 divide-dotted divide-y">
+                <ol className="text-white font-extrabold rounded-b-lg border-l-2 border-r-2 border-b-2 border-purple-600 divide-green-600 pl-8 pr-8 divide-y-2 divide-dotted divide-y">
                   <li className="pt-6 pb-6 font-medium">Continue to use your current solution</li>
                   <li className="pt-6 pb-6 font-medium">
                     Combine multiple solutions together behind a single interface
@@ -58,10 +58,10 @@ function FeaturesBlocks() {
             <div
               className="max-w-3xl mx-auto relative flex flex-col items-center text-center pt-20 pb-12 border-b-2 border-b-purple-400 border-b-solid"
               data-aos="fade-up"
-              data-aos-delay="500"
+              data-aos-delay="100"
             >
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <circle className="fill-current text-green-600" cx="32" cy="32" r="32" />
+                <circle className="fill-current text-purple-600" cx="32" cy="32" r="32" />
                 <path
                   className="stroke-current text-green-100"
                   strokeWidth="2"
@@ -77,21 +77,21 @@ function FeaturesBlocks() {
                   strokeLinecap="square"
                 />
               </svg>
-              <h4 className="h4 mb-4 text-green-500">Open Source</h4>
+              <h4 className="h4 mb-4 text-green-300">Open Source</h4>
               <p className="text-xl text-gray-200 mb-8">
                 OpenFeature is an open source CNCF sandbox project under the Apache&nbsp;2&nbsp;license.
               </p>
               <p className="text-xl text-gray-200 mb-8">
                 Check out the project on{' '}
                 <a
-                  className="text-green-600 hover:text-green-400 hover:no-underline font-bold"
+                  className="text-purple-400 hover:text-purple-500 hover:no-underline"
                   href="https://github.com/open-feature"
                 >
                   GitHub
                 </a>{' '}
                 and consider joining the{' '}
                 <a
-                  className="text-green-600 hover:text-green-400 hover:no-underline font-bold"
+                  className="text-purple-400 hover:text-purple-500 hover:no-underline"
                   href="https://docs.openfeature.dev/community/"
                 >
                   OpenFeature&nbsp;community
@@ -104,17 +104,17 @@ function FeaturesBlocks() {
             <div
               className="max-w-5xl w-full mx-auto relative flex flex-col items-center text-center pt-20 pb-12 border-b-2 border-b-purple-400 border-b-solid"
               data-aos="fade-up"
-              data-aos-delay="600"
+              data-aos-delay="100"
             >
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-green-600" width="64" height="64" rx="32" />
+                <rect className="fill-current text-purple-600" width="64" height="64" rx="32" />
                 <g transform="translate(21 21)" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
                   <ellipse className="stroke-current text-green-300" cx="11" cy="11" rx="5.5" ry="11" />
                   <path className="stroke-current text-green-100" d="M11 0v22M0 11h22" />
                   <circle className="stroke-current text-green-100" cx="11" cy="11" r="11" />
                 </g>
               </svg>
-              <h4 className="h4 mb-4 text-green-500">Supports your favorite tools</h4>
+              <h4 className="h4 mb-4 text-green-300">Supports your favorite tools</h4>
               {/* 3rd item sub items */}
               <div className="p-10 w-full mx-auto grid gap-8 md:grid-cols-2 md:max-w-3xl lg:max-w-5xl lg:grid-cols-3 lg:gap-14 items-start">
                 {/* Split */}
@@ -286,10 +286,10 @@ function FeaturesBlocks() {
             <div
               className="max-w-5xl w-full mx-auto relative flex flex-col items-center text-center pt-20 pb-20 border-b-2 border-b-purple-400 border-b-solid"
               data-aos="fade-up"
-              data-aos-delay="700"
+              data-aos-delay="100"
             >
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-green-600" width="64" height="64" rx="32" />
+                <rect className="fill-current text-purple-600" width="64" height="64" rx="32" />
                 <g transform="translate(22 21)" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
                   <path
                     className="stroke-current text-green-100"
@@ -298,7 +298,7 @@ function FeaturesBlocks() {
                   <circle className="stroke-current text-green-300" cx="13" cy="9" r="3" />
                 </g>
               </svg>
-              <h4 className="h4 mb-10 text-green-500">Speaks your language</h4>
+              <h4 className="h4 mb-10 text-green-300">Speaks your language</h4>
               <p className="text-xl text-gray-200 mb-8">
                 OpenFeature supports many of the top programming languages, with more on the way.
               </p>
@@ -333,10 +333,10 @@ function FeaturesBlocks() {
             <div
               className="max-w-3xl mx-auto relative flex flex-col items-center text-center pt-20 pb-12"
               data-aos="fade-up"
-              data-aos-delay="800"
+              data-aos-delay="100"
             >
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-green-600" width="64" height="64" rx="32" />
+                <rect className="fill-current text-purple-600" width="64" height="64" rx="32" />
                 <g transform="translate(21 22)" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
                   <path
                     className="stroke-current text-green-300"
@@ -349,7 +349,7 @@ function FeaturesBlocks() {
                   />
                 </g>
               </svg>
-              <h4 className="h4 mb-4 text-green-500">Extensible, Flexible, Observable</h4>
+              <h4 className="h4 mb-4 text-green-300">Extensible, Flexible, Observable</h4>
               <p className="text-xl text-gray-200 mb-8">
                 OpenFeature SDKs can be easily extended by leveraging lifecycle hooks. These hooks provide a flexible
                 way to customize your experience. For example, an OpenTelemetry hook can be configured to automatically

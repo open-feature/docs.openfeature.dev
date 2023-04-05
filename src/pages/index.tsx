@@ -29,20 +29,24 @@ export default function Home(): JSX.Element {
   }, [location.pathname]);
 
   return (
-    <div className="font-inter antialiased bg-purple-900 text-white tracking-tight">
+    <div className="font-inter antialiased bg-purple-100 text-white tracking-tight">
       <Layout description="The official documentation of the OpenFeature project.">
         <div className="flex flex-col min-h-screen overflow-hidden">
           <main className="grow">
-            <div className="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
+            <div className="relative h-0 pointer-events-none" aria-hidden="true">
               <PageIllustration />
             </div>
             <HeroHome />
-            <WhatIsIt />
-            <WhyUse />
-            <FeaturesBlocks />
-            {/* <FeaturesZigZag /> */}
-            {/* <Testimonials /> */}
-            {/* <Newsletter /> */}
+            <div className="flex justify-center">
+              <section className="bg-purple-900 w-full border-solid border-8 border-purple-400 max-w-[1550px] rounded-[250px] mb-20 pt-10 px-20 sm:mx-5 md:mx-20">
+                <WhatIsIt />
+                <WhyUse />
+                <FeaturesBlocks />
+                {/* <FeaturesZigZag /> */}
+                {/* <Testimonials /> */}
+                {/* <Newsletter /> */}
+              </section>
+            </div>
           </main>
           {/* <Footer /> */}
         </div>
