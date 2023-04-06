@@ -134,17 +134,20 @@ const config = {
         routeBasePath: 'community',
         exclude: ['.github/**/*', 'ISSUE_TEMPLATE/**'],
         sidebarPath: require.resolve('./external-content/community/docusaurus-sidebar.js'),
+        remarkPlugins: [require('mdx-mermaid')],
         editUrl: (params) => {
           return `https://github.com/open-feature/community/edit/main/${params.docPath}`;
         },
         // ... other options
       },
-    ],[
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'specification',
         path: 'external-content/specification/specification',
         routeBasePath: 'specification',
+        remarkPlugins: [require('mdx-mermaid')],
         editUrl: (params) => {
           return `https://github.com/open-feature/spec/edit/main/${params.docPath}`;
         },
@@ -156,9 +159,7 @@ const config = {
       {
         createRedirects(existingPath) {
           if (existingPath.includes('/docs/specification')) {
-            return [
-              existingPath.replace('/docs/specification', '/specification'),
-            ];
+            return [existingPath.replace('/docs/specification', '/specification')];
           }
           return undefined; // Return a falsy value: no redirect created
         },
