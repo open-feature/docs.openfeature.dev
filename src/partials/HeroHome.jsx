@@ -13,7 +13,7 @@ function HeroHome() {
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
         {/* Illustration behind hero content */}
-        <div
+        {/* <div
           className="absolute left-0 bottom-20 -ml-10 hidden lg:block pointer-events-none"
           aria-hidden="true"
           data-aos="fade-up"
@@ -47,12 +47,12 @@ function HeroHome() {
               fill="url(#illustration-02)"
             />
           </svg>
-        </div>
+        </div> */}
 
         {/* Hero content */}
-        <div className="relative pt-32 pb-10 md:pt-40 md:pb-10">
+        <div className="relative pt-32 pb-8 md:pt-40 md:pb-10">
           {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-10">
             {/* Logo */}
             <h1
               className="flex justify-center h1 mb-10"
@@ -76,12 +76,12 @@ function HeroHome() {
               </svg>
             </h1>
             <p className="text-xl text-gray-700 mb-8" data-aos="fade-up" data-aos-delay="200">
-              Standardizing Feature Flagging for Everyone
+              Standardizing feature flagging for everyone.
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
                 <a
-                  className="btn text-white hover:text-white bg-purple-700 hover:bg-purple-800 hover:no-underline w-full mb-4 sm:w-auto sm:mb-0"
+                  className="btn rounded-lg text-white hover:text-white bg-purple-700 hover:bg-purple-800 hover:no-underline w-full mb-4 sm:w-auto sm:mb-0"
                   href="https://docs.openfeature.dev/docs/category/concepts"
                   target="_blank"
                 >
@@ -90,7 +90,7 @@ function HeroHome() {
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
                 <a
-                  className="btn text-gray-800 bg-gray-300 hover:text-gray-800 hover:bg-gray-400 hover:no-underline w-full sm:w-auto sm:ml-4"
+                  className="btn rounded-lg text-gray-800 bg-gray-300 hover:text-gray-800 hover:bg-gray-400 hover:no-underline w-full sm:w-auto sm:ml-4"
                   href="https://killercoda.com/open-feature/scenario/five-minutes-to-feature-flags"
                   target="_blank"
                 >

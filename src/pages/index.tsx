@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import '../css/style.css';
 import FeaturesBlocks from '../partials/FeaturesBlocks';
 import HeroHome from '../partials/HeroHome';
-import PageIllustration from '../partials/PageIllustration';
+import PageIllustrationLines from '../partials/PageIllustrationLines';
 import WhatIsIt from '../partials/WhatIsIt';
 import WhyUse from '../partials/WhyUse';
 
@@ -33,14 +33,39 @@ export default function Home(): JSX.Element {
       <Layout description="The official documentation of the OpenFeature project.">
         <div className="flex flex-col min-h-screen overflow-hidden">
           <main className="grow">
-            <div className="relative h-0 pointer-events-none" aria-hidden="true">
-              <PageIllustration />
+            <div className="relative h-0 pointer-events-none opacity-40" aria-hidden="true">
+              <PageIllustrationLines />
             </div>
             <HeroHome />
             <div className="flex justify-center">
-              <section className="bg-purple-900 w-full border-solid border-8 border-purple-400 max-w-[1550px] rounded-[250px] mb-20 pt-10 px-20 sm:mx-5 md:mx-20">
-                <WhatIsIt />
-                <WhyUse />
+              <section
+                className="
+                  relative 
+                  content-container 
+                  bg-purple-900 
+                  border-solid 
+                  border-t-[10px] 
+                  border-purple-500 
+                  w-full 
+                  max-w-[1350px] 
+                  pt-0 
+                  pb-20 
+                  px-3 
+                  mb-0 
+                  sm:rounded-none 
+                  md:rounded-[250px] 
+                  md:border-[10px] 
+                  md:pt-10 
+                  md:pb-10 
+                  md:px-20 
+                  md:mb-20
+                  sm:mx-0 
+                  md:mx-10"
+              >
+                <div>
+                  <WhatIsIt />
+                  <WhyUse />
+                </div>
                 <FeaturesBlocks />
                 {/* <FeaturesZigZag /> */}
                 {/* <Testimonials /> */}
