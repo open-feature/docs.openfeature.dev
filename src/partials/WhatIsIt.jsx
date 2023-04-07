@@ -12,7 +12,7 @@ function WhatIsIt() {
           >
             What is OpenFeature?
           </h2>
-          <p className="text-xl text-purple-200">
+          <p className="text-xl text-purple-200" data-aos="fade-up" data-aos-delay="600">
             OpenFeature is an open standard that provides a vendor-agnostic, community-driven API for feature flagging
             that works with your favorite feature flag management tool.
           </p>

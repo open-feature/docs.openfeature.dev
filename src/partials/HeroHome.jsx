@@ -54,12 +54,7 @@ function HeroHome() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-10">
             {/* Logo */}
-            <h1
-              className="flex justify-center h1 mb-10"
-              data-aos="fade-up"
-              data-aos-delay="400"
-              aria-label="Open Feature"
-            >
+            <h1 className="flex justify-center h1 mb-10" data-aos="fade-up" aria-label="Open Feature">
               <span className="visually-hidden">Open Feature</span>
               <svg width="522" height="77" viewBox="0 0 522 77" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_53_2)">
