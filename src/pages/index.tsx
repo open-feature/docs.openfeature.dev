@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import React, { useEffect } from 'react';
 import '../css/style.css';
-import FeaturesBlocks from '../partials/FeaturesBlocks';
+import FeaturesZigZag from '../partials/FeaturesZigZag';
 import HeroHome from '../partials/HeroHome';
 import WhatIsIt from '../partials/WhatIsIt';
 import WhyUse from '../partials/WhyUse';
@@ -30,9 +30,9 @@ export default function Home(): JSX.Element {
   return (
     <div className="font-inter antialiased bg-purple-100 text-white tracking-tight">
       <Layout description="The official documentation of the OpenFeature project.">
-        <div className="flex flex-col min-h-screen overflow-hidden">
-          <main className="grow">
-            <div className="relative h-0 pointer-events-none opacity-40" aria-hidden="true">
+        <div className="flex min-h-screen overflow-hidden justify-center ">
+          <main className="grow max-w-[1380px] mx-0 md:mx-[1rem]">
+            {/* <div className="relative h-0 pointer-events-none opacity-40" aria-hidden="true">
               <svg
                 preserveAspectRatio="none"
                 className="w-screen h-screen fixed"
@@ -44,39 +44,40 @@ export default function Home(): JSX.Element {
                   fill="#CBCCFF"
                 ></path>
               </svg>
-            </div>
+            </div> */}
             <HeroHome />
-            <div className="flex justify-center">
+            <div className="flex flex-col">
+              <div className="flex mt-[4rem] mb-[6rem]">
+                <WhatIsIt />
+                <div
+                  data-aos="fade-up"
+                  data-aos-delay="1000"
+                  className="w-1 bg-purple-800 items-stretch mx-[5rem]"
+                ></div>
+                <WhyUse data-aos="fade-up" data-aos-delay="800" />
+              </div>
               <section
+                data-aos="fade-up"
+                data-aos-delay="1400"
                 className="
                   relative 
                   content-container 
                   bg-purple-900 
-                  border-solid 
-                  border-t-[10px] 
-                  border-purple-500 
                   w-full 
-                  max-w-[1350px] 
-                  pt-0 
+                  pt-20 
                   pb-20 
                   px-3 
                   mb-0 
+                  justify-center
                   sm:rounded-none 
-                  md:rounded-[250px] 
-                  md:border-[30px] 
-                  md:pt-10 
+                  md:rounded-[100px] 
                   md:pb-30 
                   md:px-20 
                   md:mb-20
-                  sm:mx-0 
-                  md:mx-10"
+                  sm:mx-0"
               >
-                <div>
-                  <WhatIsIt />
-                  <WhyUse />
-                </div>
-                <FeaturesBlocks />
-                {/* <FeaturesZigZag /> */}
+                {/* <FeaturesBlocks /> */}
+                <FeaturesZigZag />
                 {/* <Testimonials /> */}
                 {/* <Newsletter /> */}
               </section>

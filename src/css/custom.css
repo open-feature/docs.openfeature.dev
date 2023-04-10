@@ -37,6 +37,10 @@
   text-align: left;
 }
 
+.headline {
+  align-items: center;
+}
+
 /* center the footer items' content */
 .footer__item {
   text-align: center;
