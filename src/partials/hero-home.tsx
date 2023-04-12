@@ -44,7 +44,6 @@ function HeroHome() {
             />
           </svg>
         </div>
-        color: rgb(197 210 220 / var(--tw-text-opacity));
         {/* Hero content */}
         <div className="relative pt-32 pb-10 md:pt-40 md:pb-16">
           {/* Section header */}

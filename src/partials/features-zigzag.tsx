@@ -1,9 +1,9 @@
 import React from 'react';
-import Link from '@docusaurus/Link';
-import { useColorMode } from '@docusaurus/theme-common';
+// import Link from '@docusaurus/Link';
+// import { useColorMode } from '@docusaurus/theme-common';
 
-import CncfIconWhite from '@site/static/img/cncf-color-whitetext.svg';
-import CncfIconBlack from '@site/static/img/cncf-color.svg';
+// import CncfIconWhite from '@site/static/img/cncf-color-whitetext.svg';
+// import CncfIconBlack from '@site/static/img/cncf-color.svg';
 
 // https://carbon.now.sh/?bg=rgba%28171%2C184%2C195%2C0%29&t=dracula-pro&wt=none&l=application%2Ftypescript&width=763.5&ds=true&dsyoff=5px&dsblur=11px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%252F%252F%2520Providers%2520are%2520backend%2520%250AOpenFeature.setProvider%28new%2520MyProvider%28%29%29%253B%250A%250Aconst%2520featureFlags%2520%253D%2520OpenFeature.getClient%28%29%253B%250A%250Aconst%2520withCows%2520%253D%2520await%2520featureFlags.getBooleanValue%28%2522with-cows%2522%252C%2520false%29%253B%250Aif%2520%28withCows%29%2520%257B%250A%2520%2520res.send%28cowsay.say%28%257B%2520text%253A%2520%2522Hello%252C%2520world%21%2522%2520%257D%29%29%253B%250A%257D%2520else%2520%257B%250A%2520%2520res.send%28%2522Hello%252C%2520world%21%2522%29%253B%250A%257D
 import CodeSnippet from '@site/static/img/code-snippet.png';
@@ -21,23 +21,21 @@ import { faGolang } from '@fortawesome/free-brands-svg-icons';
 import { faJava } from '@fortawesome/free-brands-svg-icons';
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import { faPhp } from '@fortawesome/free-brands-svg-icons';
+import CheckboxIcon from './checkbox-icon';
 
 function FeaturesZigZag() {
-  const { isDarkTheme } = useColorMode();
+  // const { isDarkTheme } = useColorMode();
 
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20 border-t border-gray-800">
           {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+          {/* <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
               Open source
-            </div> */}
+            </div>
             <h1 className="h2 mb-4">Community driven feature flagging</h1>
-            {/* <p className="text-xl text-gray-500 dark:text-gray-300">
-              OpenFeature is an open source CNCF sandbox project under the Apache 2 license.
-            </p> */}
             <p className="text-xl text-gray-500 dark:text-gray-300 mb-4">
               OpenFeature is an open source CNCF sandbox project under the Apache 2 license.
             </p>
@@ -46,7 +44,7 @@ function FeaturesZigZag() {
               <Link to="/community/">OpenFeature community!</Link>
             </p>
             <div>{isDarkTheme ? <CncfIconWhite /> : <CncfIconBlack />}</div>
-          </div>
+          </div> */}
           {/* Items */}
           <div className="grid gap-20">
             {/* 1st item */}
@@ -78,34 +76,13 @@ function FeaturesZigZag() {
                   </p>
                   <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2">
                     <li className="flex items-center mb-2">
-                      <svg
-                        className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                      </svg>
-                      <span>Continue to use your current solution</span>
+                      <CheckboxIcon text="Continue to use your current solution" />
                     </li>
                     <li className="flex items-center mb-2">
-                      <svg
-                        className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                      </svg>
-                      <span>Combine multiple solutions behind a single interface</span>
+                      <CheckboxIcon text="Combine multiple solutions behind a single interface" />
                     </li>
                     <li className="flex items-center">
-                      <svg
-                        className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                      </svg>
-                      <span>Try a new solution without a code refactor</span>
+                      <CheckboxIcon text="Try a new solution without a code refactor" />
                     </li>
                   </ul>
                 </div>
@@ -119,7 +96,7 @@ function FeaturesZigZag() {
                 className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl"
                 data-aos="fade-up"
               >
-                <div className="max-w-full mx-auto md:max-w-none h-auto bg-grey">
+                <div className="max-w-full mx-auto md:max-w-none h-auto bg-grey flex flex-row">
                   <CloudbeesSvg style={{ height: '64px', width: '64px ' }} />
                   <SplitSvg style={{ height: '64px', width: '64px ' }} />
                   <FliptSvg style={{ height: '64px', width: '64px ' }} />
@@ -144,34 +121,13 @@ function FeaturesZigZag() {
                   </p>
                   <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2">
                     <li className="flex items-center mb-2">
-                      <svg
-                        className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                      </svg>
-                      <span>Works with your favorite vendor</span>
+                      <CheckboxIcon text="Works with your favorite vendor" />
                     </li>
                     <li className="flex items-center mb-2">
-                      <svg
-                        className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                      </svg>
-                      <span>Integrates with popular open source projects</span>
+                      <CheckboxIcon text="Integrates with popular open source projects" />
                     </li>
                     <li className="flex items-center">
-                      <svg
-                        className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0"
-                        viewBox="0 0 12 12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                      </svg>
-                      <span>Add support to your home grown solution</span>
+                      <CheckboxIcon text="Add support to your home grown solution" />
                     </li>
                   </ul>
                 </div>
@@ -204,6 +160,23 @@ function FeaturesZigZag() {
                   <p className="text-xl text-gray-500 dark:text-gray-300 mb-4">
                     OpenFeature supports many of the top programming languages, with more on the way.
                   </p>
+                  {/* <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2">
+                    <li className="flex items-center mb-2">
+                      <CheckboxIcon text="C#" />
+                    </li>
+                    <li className="flex items-center mb-2">
+                      <CheckboxIcon text="Go" />
+                    </li>
+                    <li className="flex items-center mb-2">
+                      <CheckboxIcon text="Java" />
+                    </li>
+                    <li className="flex items-center mb-2">
+                      <CheckboxIcon text="JavaScript" />
+                    </li>
+                    <li className="flex items-center">
+                      <CheckboxIcon text="PHP" />
+                    </li>
+                  </ul> */}
                 </div>
               </div>
             </div>
