@@ -63,7 +63,7 @@ function HeroHome() {
               </svg>
             </h1>
             <p
-              className="text-xl text-semibold text-gray-500 dark:text-gray-300 mb-8"
+              className="text-xl text-semibold dark:fill-white fill-black mb-8"
               data-aos="fade-up"
               data-aos-delay="200"
             >

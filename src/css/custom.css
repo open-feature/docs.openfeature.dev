@@ -8,13 +8,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
-  --ifm-color-primary: #008fff;
+  --ifm-color-primary: #5D5DFF;
+}
+
+.footer {
+  background-color: #33363A;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #44adff;
+  --ifm-color-primary: #8D8DFF;
+    --ifm-navbar-background-color: #33363A;
 }
 
 .header-github-link:hover {
