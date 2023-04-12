@@ -3,7 +3,7 @@ import React from 'react';
 import CncfIconWhite from '../../../../static/img/cncf-white.svg';
 
 /**
- * Swizzled FooterLayout component to include CNCf logo
+ * Swizzled FooterLayout component to include CNCF logo
  * See: https://docusaurus.io/docs/swizzling#swizzling-process
  */
 export default function FooterLayout({ style, links, logo, copyright }) {
