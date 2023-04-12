@@ -5,7 +5,13 @@ import React from 'react';
 // import CncfIconWhite from '@site/static/img/cncf-color-whitetext.svg';
 // import CncfIconBlack from '@site/static/img/cncf-color.svg';
 
-// https://carbon.now.sh/?bg=rgba%28171%2C184%2C195%2C0%29&t=dracula-pro&wt=none&l=application%2Ftypescript&width=763.5&ds=true&dsyoff=5px&dsblur=11px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%252F%252F%2520Providers%2520are%2520backend%2520%250AOpenFeature.setProvider%28new%2520MyProvider%28%29%29%253B%250A%250Aconst%2520featureFlags%2520%253D%2520OpenFeature.getClient%28%29%253B%250A%250Aconst%2520withCows%2520%253D%2520await%2520featureFlags.getBooleanValue%28%2522with-cows%2522%252C%2520false%29%253B%250Aif%2520%28withCows%29%2520%257B%250A%2520%2520res.send%28cowsay.say%28%257B%2520text%253A%2520%2522Hello%252C%2520world%21%2522%2520%257D%29%29%253B%250A%257D%2520else%2520%257B%250A%2520%2520res.send%28%2522Hello%252C%2520world%21%2522%29%253B%250A%257D
+/**
+ * The code snippet was created on Carbon.now using the dracula pro theme.
+ * 
+ * @link https://carbon.now.sh/?bg=rgba%28171%2C184%2C195%2C0%29&t=dracula-pro&wt=none&l=application%2Ftypescript&width=763.5&ds=true&dsyoff=5px&dsblur=11px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%252F%252F%2520Providers%2520are%2520backend%2520%250AOpenFeature.setProvider%28new%2520MyProvider%28%29%29%253B%250A%250Aconst%2520featureFlags%2520%253D%2520OpenFeature.getClient%28%29%253B%250A%250Aconst%2520withCows%2520%253D%2520await%2520featureFlags.getBooleanValue%28%2522with-cows%2522%252C%2520false%29%253B%250Aif%2520%28withCows%29%2520%257B%250A%2520%2520res.send%28cowsay.say%28%257B%2520text%253A%2520%2522Hello%252C%2520world%21%2522%2520%257D%29%29%253B%250A%257D%2520else%2520%257B%250A%2520%2520res.send%28%2522Hello%252C%2520world%21%2522%29%253B%250A%257D
+ * 
+ * NOTE: Please update the link if the image is changed.
+ */
 import CodeSnippet from '@site/static/img/code-snippet.png';
 
 import CloudbeesSvg from '@site/static/img/cloudbees-no-fill.svg';
@@ -14,6 +20,7 @@ import FliptSvg from '@site/static/img/flipt-no-fill.svg';
 import GoFeatureFlagSvg from '@site/static/img/goff-no-fill.svg';
 import FlagsmithSvg from '@site/static/img/flagsmith-no-fill.svg';
 import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
+import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 
 import CSharpNoFillSvg from '@site/static/img/c-sharp-no-fill.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -96,13 +103,14 @@ function FeaturesZigZag() {
                 className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl"
                 data-aos="fade-up"
               >
-                <div className="max-w-full mx-auto md:max-w-none h-auto bg-grey flex flex-row">
-                  <CloudbeesSvg style={{ height: '64px', width: '64px ' }} />
-                  <SplitSvg style={{ height: '64px', width: '64px ' }} />
-                  <FliptSvg style={{ height: '64px', width: '64px ' }} />
-                  <GoFeatureFlagSvg style={{ height: '64px', width: '64px ' }} />
-                  <FlagsmithSvg style={{ height: '64px', width: '64px ' }} />
-                  <LaunchDarklySvg style={{ height: '64px', width: '64px ' }} />
+                <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap">
+                  <CloudbeesSvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
+                  <SplitSvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
+                  <FliptSvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
+                  <GoFeatureFlagSvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
+                  <FlagsmithSvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
+                  <LaunchDarklySvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
+                  <FlagdSvg className="flex-auto h-24 w-24 m-4 fill-black dark:fill-white" />
                 </div>
               </div>
               {/* Content */}
@@ -141,12 +149,12 @@ function FeaturesZigZag() {
                 className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1"
                 data-aos="fade-up"
               >
-                <div className="max-w-full mx-auto md:max-w-none h-auto bg-grey">
-                  <CSharpNoFillSvg style={{ height: '64px', width: '64px ' }} />
-                  <FontAwesomeIcon className="h-[64px] w-[64px]" icon={faGolang} />
-                  <FontAwesomeIcon className="h-[64px] w-[64px]" icon={faJava} />
-                  <FontAwesomeIcon className="h-[64px] w-[64px]" icon={faSquareJs} />
-                  <FontAwesomeIcon className="h-[64px] w-[64px]" icon={faPhp} />
+                <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap">
+                  <CSharpNoFillSvg className="flex-auto h-32 w-32 m-4 fill-black dark:fill-white" />
+                  <FontAwesomeIcon className="flex-auto h-32 w-32 m-4" icon={faGolang} />
+                  <FontAwesomeIcon className="flex-auto h-32 w-32 m-4" icon={faJava} />
+                  <FontAwesomeIcon className="flex-auto h-32 w-32 m-4" icon={faSquareJs} />
+                  <FontAwesomeIcon className="flex-auto h-32 w-32 m-4" icon={faPhp} />
                 </div>
               </div>
               {/* Content */}

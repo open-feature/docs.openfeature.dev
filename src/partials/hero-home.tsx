@@ -9,8 +9,8 @@ function HeroHome() {
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
         {/* Illustration behind hero content */}
-        <div
-          className="absolute left-0 bottom-0 -ml-20 hidden lg:block pointer-events-none"
+        {/* <div
+          className="absolute left-0 bottom-0 -ml-96 -mb-10 hidden lg:block pointer-events-none"
           aria-hidden="true"
           data-aos="fade-up"
           data-aos-delay="400"
@@ -43,7 +43,7 @@ function HeroHome() {
               fill="url(#illustration-02)"
             />
           </svg>
-        </div>
+        </div> */}
         {/* Hero content */}
         <div className="relative pt-32 pb-10 md:pt-40 md:pb-16">
           {/* Section header */}
