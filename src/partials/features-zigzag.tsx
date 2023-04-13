@@ -29,6 +29,7 @@ import { faJava } from '@fortawesome/free-brands-svg-icons';
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import { faPhp } from '@fortawesome/free-brands-svg-icons';
 import CheckboxIcon from './checkbox-icon';
+import Link from '@docusaurus/Link';
 
 function FeaturesZigZag() {
   const { isDarkTheme } = useColorMode();
@@ -38,7 +39,7 @@ function FeaturesZigZag() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20 border-t border-gray-800">
           {/* Section header */}
-          {/* <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
               Open source
             </div>
@@ -50,8 +51,7 @@ function FeaturesZigZag() {
               Check out the project on <Link to="https://github.com/open-feature">GitHub</Link> and consider joining the{' '}
               <Link to="/community/">OpenFeature community!</Link>
             </p>
-            <div>{isDarkTheme ? <CncfIconWhite /> : <CncfIconBlack />}</div>
-          </div> */}
+          </div>
           {/* Items */}
           <div className="grid gap-20">
             {/* 1st item */}
@@ -81,7 +81,7 @@ function FeaturesZigZag() {
                     OpenFeature is designed to work with any feature flag management tool or in-house solution. This
                     enables you to switch between platforms or consolidate multiple platforms much more easily.
                   </p>
-                  <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2">
+                  <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2 pl-0">
                     <li className="flex items-center mb-2">
                       <CheckboxIcon text="Continue to use your current solution" />
                     </li>
@@ -104,13 +104,13 @@ function FeaturesZigZag() {
                 data-aos="fade-up"
               >
                 <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap">
-                  <CloudbeesSvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <SplitSvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FliptSvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <GoFeatureFlagSvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FlagsmithSvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <LaunchDarklySvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FlagdSvg className="flex-auto h-24 w-24 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <CloudbeesSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <SplitSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <FliptSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <GoFeatureFlagSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <FlagsmithSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <LaunchDarklySvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <FlagdSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
                 </div>
               </div>
               {/* Content */}
@@ -127,7 +127,7 @@ function FeaturesZigZag() {
                     OpenFeature has broad industry support, and many of the top open source and commercial tools have
                     created officially-supported providers.
                   </p>
-                  <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2">
+                  <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2 pl-0">
                     <li className="flex items-center mb-2">
                       <CheckboxIcon text="Works with your favorite vendor" />
                     </li>
@@ -150,21 +150,21 @@ function FeaturesZigZag() {
                 data-aos="fade-up"
               >
                 <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap">
-                  <CSharpNoFillSvg className="flex-auto h-32 w-32 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                  <CSharpNoFillSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
                   <FontAwesomeIcon
-                    className={`flex-auto h-32 w-32 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
+                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
                     icon={faGolang}
                   />
                   <FontAwesomeIcon
-                    className={`flex-auto h-32 w-32 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
+                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
                     icon={faJava}
                   />
                   <FontAwesomeIcon
-                    className={`flex-auto h-32 w-32 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
+                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
                     icon={faSquareJs}
                   />
                   <FontAwesomeIcon
-                    className={`flex-auto h-32 w-32 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
+                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
                     icon={faPhp}
                   />
                 </div>
@@ -180,23 +180,6 @@ function FeaturesZigZag() {
                   <p className="text-xl text-gray-500 dark:text-gray-300 mb-4">
                     OpenFeature supports many of the top programming languages, with more on the way.
                   </p>
-                  {/* <ul className="text-lg text-gray-500 dark:text-gray-300 -mb-2">
-                    <li className="flex items-center mb-2">
-                      <CheckboxIcon text="C#" />
-                    </li>
-                    <li className="flex items-center mb-2">
-                      <CheckboxIcon text="Go" />
-                    </li>
-                    <li className="flex items-center mb-2">
-                      <CheckboxIcon text="Java" />
-                    </li>
-                    <li className="flex items-center mb-2">
-                      <CheckboxIcon text="JavaScript" />
-                    </li>
-                    <li className="flex items-center">
-                      <CheckboxIcon text="PHP" />
-                    </li>
-                  </ul> */}
                 </div>
               </div>
             </div>
