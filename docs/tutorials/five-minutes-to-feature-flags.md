@@ -12,8 +12,8 @@ We’ll be working with a simple [express][express] server, but if you're famili
 Before we jump into the tutorial, let's quickly get everything setup. You'll need [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org/) version 16 or newer. After that, run the following commands from your favorite terminal.
 
 ```bash
-git clone https://github.com/open-feature/five-minutes-to-feature-flags.git &&
-  cd five-minutes-to-feature-flags &&
+git clone https://github.com/open-feature/five-minutes-to-feature-flags.git && \
+  cd five-minutes-to-feature-flags && \
   npm install
 ```
 
