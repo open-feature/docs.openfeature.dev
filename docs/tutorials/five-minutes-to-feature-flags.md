@@ -103,7 +103,7 @@ Connecting OpenFeature to one of these backends is very straightforward, but it 
 https://github.com/open-feature/five-minutes-to-feature-flags/blob/main/04_openfeature_with_provider.js
 ```
 
-This minimalist provider is exactly that - you give it a hard-coded set of feature flag values, and it provides those values via the OpenFeature SDK.
+This minimal provider is exactly that - you give it a hard-coded set of feature flag values, and it provides those values via the OpenFeature SDK.
 
 In our `FLAG_CONFIGURATION` above we’ve hard-coded that `with-cows` feature flag to true, which means that conditional predicate in our express app will now evaluate to true, which means that our service will now start providing bovine output. Start the server with `node 04_openfeature_with_provider.js` and test it out.
 
