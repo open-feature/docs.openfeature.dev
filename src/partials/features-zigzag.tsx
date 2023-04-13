@@ -1,9 +1,8 @@
 import React from 'react';
-// import Link from '@docusaurus/Link';
 import { useColorMode } from '@docusaurus/theme-common';
-
-// import CncfIconWhite from '@site/static/img/cncf-color-whitetext.svg';
-// import CncfIconBlack from '@site/static/img/cncf-color.svg';
+import CheckboxIcon from './checkbox-icon';
+import Link from '@docusaurus/Link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
  * The code snippet was created on Carbon.now using the dracula pro theme.
@@ -23,13 +22,10 @@ import LaunchDarklySvg from '@site/static/img/launchdarkly-no-fill.svg';
 import FlagdSvg from '@site/static/img/flagd-no-fill.svg';
 
 import CSharpNoFillSvg from '@site/static/img/c-sharp-no-fill.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGolang } from '@fortawesome/free-brands-svg-icons';
 import { faJava } from '@fortawesome/free-brands-svg-icons';
 import { faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import { faPhp } from '@fortawesome/free-brands-svg-icons';
-import CheckboxIcon from './checkbox-icon';
-import Link from '@docusaurus/Link';
 
 function FeaturesZigZag() {
   const { isDarkTheme } = useColorMode();
@@ -103,14 +99,14 @@ function FeaturesZigZag() {
                 className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl"
                 data-aos="fade-up"
               >
-                <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap">
-                  <CloudbeesSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <SplitSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FliptSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <GoFeatureFlagSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FlagsmithSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <LaunchDarklySvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FlagdSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
+                <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap fill-[#1c1e21] dark:fill-[#e3e3e3]">
+                  <CloudbeesSvg className="flex-auto h-20 w-20 m-4" />
+                  <SplitSvg className="flex-auto h-20 w-20 m-4" />
+                  <FliptSvg className="flex-auto h-20 w-20 m-4" />
+                  <GoFeatureFlagSvg className="flex-auto h-20 w-20 m-4" />
+                  <FlagsmithSvg className="flex-auto h-20 w-20 m-4" />
+                  <LaunchDarklySvg className="flex-auto h-20 w-20 m-4" />
+                  <FlagdSvg className="flex-auto h-20 w-20 m-4" />
                 </div>
               </div>
               {/* Content */}
@@ -149,24 +145,16 @@ function FeaturesZigZag() {
                 className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1"
                 data-aos="fade-up"
               >
-                <div className="max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap">
-                  <CSharpNoFillSvg className="flex-auto h-20 w-20 m-4 fill-[#1c1e21] dark:fill-[#e3e3e3]" />
-                  <FontAwesomeIcon
-                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
-                    icon={faGolang}
-                  />
-                  <FontAwesomeIcon
-                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
-                    icon={faJava}
-                  />
-                  <FontAwesomeIcon
-                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
-                    icon={faSquareJs}
-                  />
-                  <FontAwesomeIcon
-                    className={`flex-auto h-20 w-20 m-4 [color:${isDarkTheme ? '#e3e3e3' : '#1c1e21'}]`}
-                    icon={faPhp}
-                  />
+                <div
+                  className={`max-w-full mx-auto md:max-w-none h-auto flex flex-row flex-wrap fill-[#1c1e21] dark:fill-[#e3e3e3] [color:${
+                    isDarkTheme ? '#e3e3e3' : '#1c1e21'
+                  }]`}
+                >
+                  <CSharpNoFillSvg className="flex-auto h-20 w-20 m-4 " />
+                  <FontAwesomeIcon className="flex-auto h-20 w-20 m-4" icon={faGolang} />
+                  <FontAwesomeIcon className="flex-auto h-20 w-20 m-4" icon={faJava} />
+                  <FontAwesomeIcon className="flex-auto h-20 w-20 m-4" icon={faSquareJs} />
+                  <FontAwesomeIcon className="flex-auto h-20 w-20 m-4" icon={faPhp} />
                 </div>
               </div>
               {/* Content */}
