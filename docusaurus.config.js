@@ -178,7 +178,6 @@ const config = {
         },
       },
     ],
-    // TODO see if this can be replaced
     'docusaurus-plugin-sass',
   ],
   themes: ['docusaurus-theme-github-codeblock'],
