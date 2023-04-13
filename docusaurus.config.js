@@ -1,7 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
-const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
+const oceanicCodeTheme = require('prism-react-renderer/themes/oceanicNext');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -167,6 +166,7 @@ const config = {
     ],
     'docusaurus-plugin-sass',
   ],
+  themes: ['docusaurus-theme-github-codeblock'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -201,7 +201,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: '/category/getting-started',
+            docId: 'tutorials/five-minutes-to-feature-flags',
             position: 'left',
             label: 'Tutorials',
           },
@@ -234,7 +234,7 @@ const config = {
               },
               {
                 label: 'Tutorials',
-                to: 'docs/category/getting-started',
+                to: 'docs/tutorials/five-minutes-to-feature-flags',
               },
             ],
           },
@@ -283,8 +283,14 @@ const config = {
         copyright: `© ${new Date().getFullYear()} OpenFeature is a Cloud Native Computing Foundation sandbox project | Documentation Distributed under CC BY 4.0 | All Rights Reserved`,
       },
       prism: {
-        theme: lightCodeTheme,
-        additionalLanguages: ['typescript', 'go', 'java', 'csharp', 'powershell', 'php'],
+        theme: oceanicCodeTheme,
+        additionalLanguages: ['java', 'csharp', 'powershell', 'php'],
+      },
+      codeblock: {
+        showGithubLink: true,
+        githubLinkLabel: 'View on GitHub',
+        showRunmeLink: false,
+        runmeLinkLabel: 'Checkout via Runme',
       },
       algolia: {
         appId: 'PH0VDWFP7Q',
@@ -293,7 +299,6 @@ const config = {
         contextualSearch: true,
       },
     }),
-
 };
 
 module.exports = config;

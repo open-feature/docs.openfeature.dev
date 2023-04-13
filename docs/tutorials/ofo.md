@@ -1,10 +1,10 @@
 ---
 sidebar_position: 2
 id: ofo
-title: Cloud native flags with the OpenFeature Operator
+title: Cloud Native Flags with the OpenFeature Operator
 ---
 
-# Cloud native feature-flagging with the OpenFeature Operator
+# Cloud Native Feature-Flagging with the OpenFeature Operator
 
 In the following tutorial, we'll see how to leverage _flagd_ and the OpenFeature Operator to enable cloud-native, self-hosted feature flags in your Kubernetes cluster. [flagd](https://github.com/open-feature/flagd) is a "feature flag daemon with a Unix philosophy".
 Put another way, it's a small, self-contained binary that evaluates feature flags, uses standard interfaces, and runs just about anywhere.
@@ -43,7 +43,9 @@ If you already have a K8s cluster, you can skip to [Install cert-manager](#insta
 ##### Using Kind
 
 Download the cluster definition file, `kind-cluster.yaml`:
+
 <!-- TODO: update this before merge to point to asset in main -->
+
 ```shell
 curl -sfL curl -sfL https://raw.githubusercontent.com/open-feature/docs.openfeature.dev/main/static/samples/kind-cluster.yaml > kind-cluster.yaml
 ```
