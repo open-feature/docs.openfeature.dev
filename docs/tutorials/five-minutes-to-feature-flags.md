@@ -34,7 +34,7 @@ $> curl http://localhost:3333
 Hello, world!
 ```
 
-Yep, looks good! Go ahead and stop the server using `Ctrl` + `C` on Windows or `⌘` + `C` on a Mac.
+Yep, looks good! Go ahead and stop the server using `Ctrl` + `C`.
 
 ## With cows, please
 
@@ -181,7 +181,7 @@ We can get started with feature flags with low investment and low risk, and once
 
 To learn more about OpenFeature, check out the documentation [here](/docs/reference/intro). Specifically, you can read more about how the [evaluation API works](/docs/reference/concepts/evaluation-api/), what [tech stacks are supported](/docs/reference/technologies/), or read [more tutorials](/docs/category/getting-started/) about using OpenFeature in a variety of tech stacks.
 
-We strive to provide a welcoming, open community. If you have any questions - or just want to nerd out about feature flags - the `#OpenFeature` channel in the [CNCF Slack](cncf-slack) is the place for you.
+We strive to provide a welcoming, open community. If you have any questions - or just want to nerd out about feature flags - the `#OpenFeature` channel in the [CNCF Slack][cncf-slack] is the place for you.
 
 [express]: https://expressjs.com/
 [cowsay]: https://www.npmjs.com/package/cowsay
