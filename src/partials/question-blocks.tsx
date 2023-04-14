@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faClipboard } from '@fortawesome/free-regular-svg-icons';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
-function FeaturesBlocks() {
+function QuestionBlocks() {
   const { siteConfig } = useDocusaurusContext();
 
   return (
@@ -29,8 +29,8 @@ function FeaturesBlocks() {
 
               <h4 className="h4 mb-2">What's a Feature Flag?</h4>
               <p className="text-lg text-gray-500 dark:text-gray-300 text-center">
-                Feature flags are a software development concept that allow you to enable, disable or change the
-                behavior of a feature without modifying the source code or requiring a redeploy.
+                Feature flags are a software development technique that allows teams to enable, disable or change the
+                behavior of certain features or code paths in a product or service, without modifying the source code.
               </p>
             </div>
 
@@ -73,4 +73,4 @@ function FeaturesBlocks() {
   );
 }
 
-export default FeaturesBlocks;
+export default QuestionBlocks;

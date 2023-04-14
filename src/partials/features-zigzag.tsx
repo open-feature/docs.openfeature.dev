@@ -70,7 +70,7 @@ function FeaturesZigZag() {
               >
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl text-purple-600 mb-2">Avoid code-level lock-in</div>
-                  <h3 className="h3 mb-3">Vendor neutral</h3>
+                  <h3 className="h3 mb-3">One SDK, any backend</h3>
                   <p className="text-xl text-gray-500 dark:text-gray-300 mb-4">
                     OpenFeature is designed to work with any feature flag management tool or in-house solution. This
                     enables you to switch between platforms or consolidate multiple platforms much more easily.

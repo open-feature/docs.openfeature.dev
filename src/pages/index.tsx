@@ -2,7 +2,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import AOS from 'aos';
 import React, { useEffect } from 'react';
-import FeaturesBlocks from '../partials/features-blocks';
+import QuestionBlocks from '../partials/question-blocks';
 import FeaturesZigZag from '../partials/features-zigzag';
 import HeroHome from '../partials/hero-home';
 import PageIllustration from '../partials/page-illustration';
@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
 
           {/*  Page sections */}
           <HeroHome />
-          <FeaturesBlocks />
+          <QuestionBlocks />
           <FeaturesZigZag />
         </main>
       </div>
