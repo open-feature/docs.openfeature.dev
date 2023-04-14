@@ -44,14 +44,25 @@ app.listen(3333, () => {
 
 Pretty much the most basic express server you can imagine - a single endpoint at `/` that returns a plaintext “Hello, world!” response.
 
-Let's start the service by running `node 01_vanilla.js`. Now you can test to make sure it works:
+Let's start the service by running:
 
 ```bash
-$> curl http://localhost:3333
+node 01_vanilla.js
+```
+
+Now you can test to make sure it works by entering the following command into the terminal:
+
+```bash
+curl http://localhost:3333
+```
+
+The output should look like this:
+
+```disable-copy-button
 Hello, world!
 ```
 
-Yep, looks good! Go ahead and stop the server using `Ctrl` + `C`.
+Looks good! Go ahead and stop the server using `Ctrl` + `C`.
 
 ## With cows, please
 
@@ -87,17 +98,22 @@ app.listen(3333, () => {
 });
 ```
 
-Now let's start the server with our basic flag configuration by running `node 02_basic_flags.js`. By default, the service continues to work exactly as it did before, but if we change `withCow` to `true` then the response comes in an exciting new format:
-
-:::tip
-
-A server restart is required for any changes to be applied.
-
-:::
+Now let's start the server with our basic flag configuration by running:
 
 ```bash
-$> curl http://localhost:3333
- _______________
+node 02_basic_flags.js
+```
+
+By default, the service continues to work exactly as it did before, but if we change `withCow` to `true` then the response comes in an exciting new format. To try it out, enter the following command into the terminal:
+
+```bash
+curl http://localhost:3333
+```
+
+The output should look like this:
+
+```disable-copy-button
+_______________
 < Hello, world! >
  ---------------
         \   ^__^
@@ -152,10 +168,21 @@ app.listen(3333, () => {
 
 We’ve imported the `@openfeature/js-sdk` NPM module, and used it to create an OpenFeature client called `featureFlags`. We then call `getBooleanValue` on that client to find out if the `with-cows` feature flag is true or false. Depending on what we get back we either show the new cow-based output, or the traditional plaintext format.
 
-Start the server with `node 03_openfeature.js`.
+Start the server with:
 
 ```bash
-$> curl http://localhost:3333
+node 03_openfeature.js
+```
+
+Enter the following command into the terminal:
+
+```bash
+curl http://localhost:3333
+```
+
+The output should look like this:
+
+```disable-copy-button
 Hello, world!
 ```
 
@@ -211,10 +238,23 @@ app.listen(3333, () => {
 
 This minimalist provider is exactly that; you give it a hard-coded set of feature flag values, and it provides those values via the OpenFeature SDK.
 
-In our `FLAG_CONFIGURATION` above we’ve hard-coded that `with-cows` feature flag to true, which means that conditional predicate in our express app will now evaluate to true, which means that our service will now start providing bovine output. Start the server with `node 04_openfeature_with_provider.js` and test it out.
+In our `FLAG_CONFIGURATION` above we’ve hard-coded that `with-cows` feature flag to true, which means that conditional predicate in our express app will now evaluate to true, which means that our service will now start providing bovine output.
+
+Start the server with:
 
 ```bash
-$> curl http://localhost:3333
+node 04_openfeature_with_provider.js
+```
+
+Test it out by entering the following command into the terminal:
+
+```bash
+curl http://localhost:3333
+```
+
+The output should look like this:
+
+```disable-copy-button
  _______________
 < Hello, world! >
  ---------------
@@ -227,8 +267,15 @@ $> curl http://localhost:3333
 
 If we changed that `with-cows` value to false, we’d see the more boring response:
 
+Enter the following command into the terminal:
+
 ```bash
-$> curl http://localhost:3333
+curl http://localhost:3333
+```
+
+The output should look like this:
+
+```disable-copy-button
 Hello, world!
 ```
 

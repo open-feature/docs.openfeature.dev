@@ -56,3 +56,12 @@
   background-color: white !important;
   border-radius: var(--ifm-global-radius);
 }
+/**
+* Disables the copy button on a code block if the language is
+* set to 'disable-copy-button'.
+* 
+* @link https://stackoverflow.com/questions/70739852/docosaurus-how-can-you-hide-copy-button-next-to-the-code-example
+*/
+.language-disable-copy-button button {
+  display: none !important;
+}
