@@ -1,6 +1,8 @@
 # OpenFeature Documentation
 
-This repository provides the documentation for OpenFeature; including the SDK, flagd and the operator.
+This repository provides the documentation for OpenFeature.
+
+> :warning: **The docs have moved!**: You can find the new docs [here](https://github.com/open-feature/openfeature.dev).
 
 ## Documentation Structure
 
