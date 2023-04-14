@@ -3,13 +3,14 @@ sidebar_position: 1
 id: five-minutes-to-feature-flags
 title: Five Minutes to Feature Flags
 ---
+
 We’re going to add feature flagging to a Node service in under five minutes using OpenFeature, the open, vendor-agnostic feature flagging SDK.
 
-We’ll be working with a simple [express][express] server, but if you're familiar with JavaScript and Node you should be able to follow along.
+This tutorial uses a simple [express][express] server, but if you're familiar with JavaScript and Node you should be able to follow along.
 
 ## Setup
 
-Before we jump into the tutorial, let's quickly get everything setup. You'll need [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org/) version 16 or newer. After that, run the following commands from your favorite terminal.
+Before we jump into the tutorial, let's quickly get everything setup. You'll need [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org/) version 16 or newer. After that, run the following command from your favorite terminal.
 
 ```bash
 git clone https://github.com/open-feature/five-minutes-to-feature-flags.git && \
@@ -21,8 +22,24 @@ git clone https://github.com/open-feature/five-minutes-to-feature-flags.git && \
 
 Here’s the service we’ll be working on:
 
-```js reference title="01_vanilla.js"
-https://github.com/open-feature/five-minutes-to-feature-flags/blob/main/01_vanilla.js
+```js title="01_vanilla.js"
+import express from 'express';
+import Router from 'express-promise-router';
+
+const app = express();
+const routes = Router();
+app.use((_, res, next) => {
+  res.setHeader('content-type', 'text/plain');
+  next();
+}, routes);
+
+routes.get('/', async (_, res) => {
+  res.send('Hello, world!');
+});
+
+app.listen(3333, () => {
+  console.log('Server running at http://localhost:3333');
+});
 ```
 
 Pretty much the most basic express server you can imagine - a single endpoint at `/` that returns a plaintext “Hello, world!” response.
@@ -40,10 +57,34 @@ Yep, looks good! Go ahead and stop the server using `Ctrl` + `C`.
 
 Let’s imagine that we’re adding a new, experimental feature to this hello world service. We’re going to upgrade the format of the server’s response, using [cowsay][cowsay]!
 
-However, we’re not 100% sure that this cowsay formatting is going to work out, so for now we’ll protect it behind a conditional:
+We are, however, not 100% sure that this cowsay formatting is going to work out, so for now we’ll protect it behind a conditional:
 
-```js reference title="02_basic_flags.js"
-https://github.com/open-feature/five-minutes-to-feature-flags/blob/main/02_basic_flags.js
+```js {3,13-20} title="02_basic_flags.js"
+import express from 'express';
+import Router from 'express-promise-router';
+import cowsay from 'cowsay';
+
+const app = express();
+const routes = Router();
+app.use((_, res, next) => {
+  res.setHeader('content-type', 'text/plain');
+  next();
+}, routes);
+
+routes.get('/', async (_, res) => {
+  // set this to true to test our new
+  // cow-based greeting system
+  const withCow = false;
+  if (withCow) {
+    res.send(cowsay.say({ text: 'Hello, world!' }));
+  } else {
+    res.send('Hello, world!');
+  }
+});
+
+app.listen(3333, () => {
+  console.log('Server running at http://localhost:3333');
+});
 ```
 
 Now let's start the server with our basic flag configuration by running `node 02_basic_flags.js`. By default, the service continues to work exactly as it did before, but if we change `withCow` to `true` then the response comes in an exciting new format:
@@ -66,6 +107,12 @@ $> curl http://localhost:3333
                 ||     ||
 ```
 
+:::tip
+
+A server restart is required for any changes to be applied.
+
+:::
+
 ## The crudest flag
 
 That `withCow` boolean and its accompanying conditional check are a very basic feature flag - they let us hide an experimental or unfinished feature, but also easily switch the feature on while we’re building and testing it.
@@ -74,8 +121,33 @@ That `withCow` boolean and its accompanying conditional check are a very basic f
 
 Managing these flags by changing hardcoded constants gets old fast though. A team that uses feature flags in any significant way soon reaches for a feature flagging framework. Let’s move in that direction by updating the service to use OpenFeature.
 
-```js reference title="03_openfeature.js"
-https://github.com/open-feature/five-minutes-to-feature-flags/blob/main/03_openfeature.js
+```js {4,13,16} title="03_openfeature.js"
+import express from 'express';
+import Router from 'express-promise-router';
+import cowsay from 'cowsay';
+import { OpenFeature } from '@openfeature/js-sdk';
+
+const app = express();
+const routes = Router();
+app.use((_, res, next) => {
+  res.setHeader('content-type', 'text/plain');
+  next();
+}, routes);
+
+const featureFlags = OpenFeature.getClient();
+
+routes.get('/', async (_, res) => {
+  const withCows = await featureFlags.getBooleanValue('with-cows', false);
+  if (withCows) {
+    res.send(cowsay.say({ text: 'Hello, world!' }));
+  } else {
+    res.send('Hello, world!');
+  }
+});
+
+app.listen(3333, () => {
+  console.log('Server running at http://localhost:3333');
+});
 ```
 
 We’ve imported the `@openfeature/js-sdk` NPM module, and used it to create an OpenFeature client called `featureFlags`. We then call `getBooleanValue` on that client to find out if the `with-cows` feature flag is true or false. Depending on what we get back we either show the new cow-based output, or the traditional plaintext format.
@@ -95,15 +167,49 @@ When we call `getBooleanValue` we also provide a default value of false. Since w
 
 ## Configuring an OpenFeature Provider
 
-Without a feature flagging provider OpenFeature is pretty pointless - it’ll just return default values. Instead we want to connect our OpenFeature SDK to a full-fledged feature flagging system - a commercial product, an open-source system, or perhaps a custom internal system - so that it can provide flagging decisions from that system.
+OpenFeature becomes useful when we connect our OpenFeature SDK to a full-fledged feature flagging system - a commercial product, an open-source offering, or perhaps a custom internal tool - so that it can provide flagging decisions from that system.
 
 Connecting OpenFeature to one of these backends is very straightforward, but it does require that we have an actual flagging framework set up. For now, let’s just configure a really, really simple provider that doesn’t need a backend:
 
-```js reference title="04_openfeature_with_provider.js"
-https://github.com/open-feature/five-minutes-to-feature-flags/blob/main/04_openfeature_with_provider.js
+```js {5,16-22} title="04_openfeature_with_provider.js"
+import express from 'express';
+import Router from 'express-promise-router';
+import cowsay from 'cowsay';
+import { OpenFeature } from '@openfeature/js-sdk';
+import { InMemoryProvider } from '@openfeature/in-memory-provider';
+
+const app = express();
+const routes = Router();
+app.use((_, res, next) => {
+  res.setHeader('content-type', 'text/plain');
+  next();
+}, routes);
+
+const featureFlags = OpenFeature.getClient();
+
+const FLAG_CONFIGURATION = {
+  'with-cows': true,
+};
+
+const featureFlagProvider = new InMemoryProvider(FLAG_CONFIGURATION);
+
+OpenFeature.setProvider(featureFlagProvider);
+
+routes.get('/', async (_, res) => {
+  const withCows = await featureFlags.getBooleanValue('with-cows', false);
+  if (withCows) {
+    res.send(cowsay.say({ text: 'Hello, world!' }));
+  } else {
+    res.send('Hello, world!');
+  }
+});
+
+app.listen(3333, () => {
+  console.log('Server running at http://localhost:3333');
+});
 ```
 
-This minimal provider is exactly that - you give it a hard-coded set of feature flag values, and it provides those values via the OpenFeature SDK.
+This minimalist provider is exactly that; you give it a hard-coded set of feature flag values, and it provides those values via the OpenFeature SDK.
 
 In our `FLAG_CONFIGURATION` above we’ve hard-coded that `with-cows` feature flag to true, which means that conditional predicate in our express app will now evaluate to true, which means that our service will now start providing bovine output. Start the server with `node 04_openfeature_with_provider.js` and test it out.
 
@@ -132,7 +238,8 @@ We’ve gotten started with OpenFeature using a very simple but extremely limite
 
 **For example:**
 
-### CloudBees
+<details>
+  <summary>CloudBees</summary>
 
 ```js
 import { CloudbeesProvider } from 'cloudbees-openfeature-provider-node';
@@ -141,7 +248,10 @@ const appKey = '[YOUR_APP_KEY]';
 OpenFeature.setProvider(await CloudbeesProvider.build(appKey));
 ```
 
-### flagd
+</details>
+
+<details>
+  <summary>flagd</summary>
 
 ```js
 import { FlagdProvider } from '@openfeature/flagd-provider';
@@ -154,7 +264,10 @@ OpenFeature.setProvider(
 );
 ```
 
-### LaunchDarkly
+</details>
+
+<details>
+  <summary>LaunchDarkly</summary>
 
 ```js
 import { init } from 'launchdarkly-node-server-sdk';
@@ -165,7 +278,10 @@ await ldClient.waitForInitialization();
 OpenFeature.setProvider(new LaunchDarklyProvider(ldClient));
 ```
 
-### Split
+</details>
+
+<details>
+  <summary>Split</summary>
 
 ```js
 import { SplitFactory } from '@splitsoftware/splitio';
@@ -174,6 +290,8 @@ import { OpenFeatureSplitProvider } from '@splitsoftware/openfeature-js-split-pr
 const splitClient = SplitFactory({ core: { authorizationKey: '[YOUR_AUTH_KEY]' } }).client();
 OpenFeature.setProvider(new OpenFeatureSplitProvider({ splitClient }));
 ```
+
+</details>
 
 We can get started with feature flags with low investment and low risk, and once we’re ready, it’s just a few lines of code to transition to a full-featured, scalable backend.
 
