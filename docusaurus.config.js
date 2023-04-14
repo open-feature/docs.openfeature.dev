@@ -5,12 +5,15 @@ const oceanicCodeTheme = require('prism-react-renderer/themes/oceanicNext');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'OpenFeature',
-  tagline: 'An open standard for feature flags',
+  tagline: 'Standardizing Feature Flagging for Everyone',
+  customFields: {
+    description:
+      'OpenFeature is an open standard that provides a vendor-agnostic, community-driven API for feature flagging that works with your favorite feature flag management tool.',
+  },
   url: 'https://docs.openfeature.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -125,6 +128,17 @@ const config = {
   ],
 
   plugins: [
+    async function tailwind() {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require('tailwindcss'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          return postcssOptions;
+        },
+      };
+    },
     [
       '@docusaurus/plugin-content-docs',
       {
