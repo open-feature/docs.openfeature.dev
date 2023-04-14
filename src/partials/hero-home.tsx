@@ -45,8 +45,7 @@ function HeroHome() {
               <div data-aos="fade-up" data-aos-delay="600">
                 <Link
                   className="btn text-white hover:text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4"
-                  // TODO change once the Five Minutes to Feature Flags tutorial is ready
-                  to="/docs/category/getting-started"
+                  to="/docs/tutorials/five-minutes-to-feature-flags"
                 >
                   Get started
                 </Link>
