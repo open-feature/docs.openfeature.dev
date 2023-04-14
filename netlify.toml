@@ -1,3 +1,11 @@
 [[redirects]]
-from = "/docs/specification/*"
-to = "/specification/:splat"
+  from = "http://docs.openfeature.dev/*"
+  to = "https://openfeature.dev/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://docs.openfeature.dev/*"
+  to = "https://openfeature.dev/:splat"
+  status = 301
+  force = true
