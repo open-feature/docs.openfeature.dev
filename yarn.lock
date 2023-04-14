@@ -1575,7 +1575,7 @@
     fs-extra "^10.1.0"
     tslib "^2.4.0"
 
-"@docusaurus/types@2.4.0":
+"@docusaurus/types@2.4.0", "@docusaurus/types@^2.3.1":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/types/-/types-2.4.0.tgz#f94f89a0253778b617c5d40ac6f16b17ec55ce41"
   integrity sha512-xaBXr+KIPDkIaef06c+i2HeTqVNixB7yFut5fBXPGI2f1rrmEV2vLMznNGsFwvZ5XmA3Quuefd4OGRkdo97Dhw==
@@ -4121,6 +4121,13 @@ docusaurus-plugin-sass@^0.2.3:
   integrity sha512-FbaE06K8NF8SPUYTwiG+83/jkXrwHJ/Afjqz3SUIGon6QvFwSSoKOcoxGQmUBnjTOk+deUONDx8jNWsegFJcBQ==
   dependencies:
     sass-loader "^10.1.1"
+
+docusaurus-theme-github-codeblock@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/docusaurus-theme-github-codeblock/-/docusaurus-theme-github-codeblock-1.1.4.tgz#98ff4f27603da25169c9b60c8fe3124d9a002841"
+  integrity sha512-a8sBUHTpbXBg8qS8H43VogRusOrY4aqpVYs6RiA08lQqI5FxYjAVGMArHQD/Rz0mYm3h/iiqgsVc3K4lTaIt3A==
+  dependencies:
+    "@docusaurus/types" "^2.3.1"
 
 dom-converter@^0.2.0:
   version "0.2.0"
