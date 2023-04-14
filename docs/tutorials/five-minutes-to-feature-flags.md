@@ -50,7 +50,7 @@ Let's start the service by running:
 node 01_vanilla.js
 ```
 
-Now you can test to make sure it works by entering the following command into the terminal:
+Now you can test to make sure it works by entering the following command into a second terminal:
 
 ```bash
 curl http://localhost:3333
@@ -104,7 +104,9 @@ Now let's start the server with our basic flag configuration by running:
 node 02_basic_flags.js
 ```
 
-By default, the service continues to work exactly as it did before, but if we change `withCow` to `true` then the response comes in an exciting new format. To try it out, enter the following command into the terminal:
+By default, the service continues to work exactly as it did before.
+
+Next change `withCow` to `true` using your favorite text editor and restart the node server. Now the response comes in an exciting new format. To try it out, enter the following command into the terminal:
 
 ```bash
 curl http://localhost:3333
@@ -265,9 +267,7 @@ The output should look like this:
                 ||     ||
 ```
 
-If we changed that `with-cows` value to false, we’d see the more boring response:
-
-Enter the following command into the terminal:
+Next change the `with-cows` value to false and restart the node server. We will now see the more boring response when entering the following command into the terminal:
 
 ```bash
 curl http://localhost:3333
